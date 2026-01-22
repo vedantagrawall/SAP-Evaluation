@@ -1,0 +1,12 @@
+{
+  "trial_id": "NCT03676192",
+  "cache_name": "cachedContents/6see5hkpzdovncssqtt1u48kkfhqr99naocqtiar",
+  "created": "2026-01-22T21:23:03",
+  "expires": "2026-01-22T22:23:03",
+  "tokens_cached": 98539,
+  "documents": {
+    "protocol": "data/processed_files/NCT03676192_protocol.md",
+    "original_sap": "data/processed_files/NCT03676192_original_sap.md",
+    "generated_sap": "data/processed_files/NCT03676192_generated_sap.md"
+  }
+}
