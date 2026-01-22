@@ -1,0 +1,2001 @@
+
+CELLTRION, Inc. Statistical Analysis Plan – Version 3.0 Final
+CT-P16 3.1 Date Issued: December 15, 2023
+
+# CELLTRION Inc.
+
+# CT-P16 3.1
+
+# A Double-Blind, Randomized, Active-Controlled, Parallel-Group, Phase 3 Study to Compare Efficacy and Safety of CT-P16 and EU-Approved Avastin as First-Line Treatment for Metastatic or Recurrent Non-Squamous Non-Small Cell Lung Cancer
+
+# Statistical Analysis Plan
+
+# Version 3.0 Final
+
+# December 15, 2023
+
+# Prepared by:
+
+CELLTRION, Inc.
+
+20F, IBS Building, 263, Central-ro, Yeonsu-gu, Incheon
+
+22006
+
+Republic of Korea
+
+Prepared by: 开开开开开开开开开开开开开开开开开开开开开开开开开开开开 Date: 开开开开/开开开开/开开开开
+
+开开开开开开开开开开开开开开开开开开开开开开开开开开开开 Date: 开开开开/开开开开/开开开开
+
+Upon review of this document, including table, listing and figure shells, the undersigned approves the final statistical analysis plan. The analysis methods and data presentation are acceptable, and the table, listing and figure production can begin.
+
+Approved by: 开开开开开开开开开开开开开开开开开开开开开开开开开开开开 Date: 开开开开/开开开开/开开开开
+
+I Confidential
+
+
+
+
+
+CELLTRION, Inc. Statistical Analysis Plan – Version 3.0 Final CT-P16 3.1 Date Issued: December 15, 2023
+
+# TABLE OF CONTENTS
+
+- 1. INTRODUCTION.........................................................................................................6
+- 1.1. Data Cut-off for Analysis.........................................................................................6
+- 2. STUDY OBJECTIVES.................................................................................................7
+- 2.1. Primary Objective ....................................................................................................7
+- 2.2. Secondary Objective ............................................................................................7
+- 3. OVERALL STUDY DESIGN AND PLAN ................................................................7
+- 4. GENERAL STATISTICAL CONSIDERATIONS ...................................................9
+- 4.1. Software .................................................................................................................10
+- 4.2. Sample Size............................................................................................................10
+- 4.3. Randomization, Stratification, and Blinding..........................................................10
+- 4.4. Population of Analysis ...........................................................................................11
+- 4.4.1. Intent-to-Treat Population ........................................................................11
+- 4.4.2. Per-Protocol Population ..............................................................................11
+- 4.4.3. Pharmacokinetic Population........................................................................11
+- 4.4.4. Pharmacokinetic Population – Maintenance Period Subset............................12
+- 4.4.5. Safety Population ............................................................................................12
+- 4.5. Definition of Baseline and Post-Baseline ..............................................................12
+- 4.6. Protocol Deviations........................................................................................12
+- 4.7. General Comments.................................................................................................13
+- 4.8. Outliers...................................................................................................................13
+- 4.9. Missing Values.......................................................................................................13
+- 5. PATIENT DISPOSITION .........................................................................................13
+- 6. DEMOGRAPHICS, BASELINE, AND BACKGROUND CHARACTERISTICS ........................................14
+- 6.1. Demographics and Stratification Details ...............................................................14
+- 6.2. Gene Screening ......................................................................................................15
+- 6.3. Hepatitis B and C and Human Immunodeficiency Virus 1 and 2..........................15
+- 6.4. Medical History ..................................................................................................16
+- 6.5. Disease Characteristic ..................................................................................16
+- 6.6. Previous Treatment for NSCLC.............................................................................16
+- 6.7. Inclusion and Exclusion Criteria.................................................................16
+- 7. MEDICATIONS AND TREATMENTS...................................................................16
+- 7.1. Prior and Concomitant Medications ..........................................................16
+- 7.2. Exposure to Study Drug..................................................................................18
+- 8. EFFICACY ANALYSIS.............................................................................................19
+- 8.1. Primary Efficacy Endpoint...........................................................................19
+- 8.2. Secondary Efficacy Endpoint....................................................................21
+- 8.2.1. Objective Response Rate during the Whole Study Period..............................21
+- 8.2.2. Time-To-Event Analysis..............................................................................21
+- 8.2.2.1. Response Duration..................................................................................22
+
+II Confidential
+
+
+
+CELLTRION, Inc. Statistical Analysis Plan – Version 3.0 Final CT-P16 3.1 Date Issued: December 15, 2023
+
+# 8.2.2.2. Time to Progression
+
+# 8.2.2.3. Progression-free Survival
+
+# 8.2.2.4. Overall Survival
+
+# 8.2.2.5. Capture logic for event or censoring with incomplete date of new anticancer therapy
+
+# 8.3. Salvage Treatment
+
+# 8.4. Effusion Drainage
+
+# 9. PHARMACOKINETIC ANALYSIS
+
+# 9.1. Serum Concentration
+
+# 9.2. Pharmacokinetic Parameter
+
+# 10. SAFETY ANALYSIS
+
+# 10.1. Adverse Events
+
+# 10.1.1. Treatment-Emergent Adverse Events
+
+# 10.1.2. Serious Adverse Events
+
+# 10.1.3. Treatment-Emergent Adverse Events Leading to Study Drug Discontinuation
+
+# 10.1.4. Treatment-Emergent Adverse Event Leading to Deaths
+
+# 10.1.5. Treatment-Emergent Adverse Events of Special Interest
+
+# 10.2. Clinical Laboratory Evaluations
+
+# 10.3. Vital Signs, Weight and Body Surface Area
+
+# 10.4. Electrocardiograms
+
+# 10.5. Hypersensitivity Monitoring
+
+# 10.6. Physical Examination
+
+# 10.7. Pregnancy Test
+
+# 10.8. ECOG Performance Status
+
+# 10.9. Immunogenicity
+
+# 11. QUALITY OF LIFE ANALYSES
+
+# 12. CHANGES FROM PROTOCOL
+
+# 13. REFERENCE LIST
+
+# 14. APPENDICES
+
+# 14.1. Schedule of Events
+
+# 14.2. Table of CTCAE Terms and Grades
+
+# 14.3. TEAE of Special Interest
+
+# 14.4. Date Imputation
+
+# 14.4.1. Medication
+
+# 14.4.2. Adverse Events
+
+# 14.4.3. Death
+
+# 14.5. Best Overall Response Confirmation
+
+III Confidential
+
+
+
+
+# CELLTRION, Inc.    Statistical Analysis Plan – Version 3.0 Final
+
+# CT-P16 3.1         Date Issued: December 15, 2023
+
+# List of Abbreviations
+
+| Abbreviation | Definition                                                                               |
+| ------------ | ---------------------------------------------------------------------------------------- |
+| ADA          | Anti-Drug Antibody                                                                       |
+| ADR          | Adverse Drug Reaction                                                                    |
+| AE           | Adverse Event                                                                            |
+| ALT          | Alanine Aminotransferase                                                                 |
+| AST          | Aspartate Aminotransferase                                                               |
+| ATC          | Anatomical Therapeutic Chemical                                                          |
+| ATE          | Arterial Thromboembolism                                                                 |
+| BOR          | Best Overall Response                                                                    |
+| BP           | Blood Pressure                                                                           |
+| BSA          | Body Surface Area                                                                        |
+| CHF          | Congestive Heart Failure                                                                 |
+| CI           | Confidence Interval                                                                      |
+| CNS          | Central Nervous System                                                                   |
+| CPK          | Creatine Phosphokinase                                                                   |
+| CR           | Complete Response                                                                        |
+| CRF          | Case Report Form                                                                         |
+| CSR          | Clinical Study Report                                                                    |
+| CT           | Computerized Tomography                                                                  |
+| CTCAE        | Common Terminology Criteria for Adverse Events                                           |
+| Ctrough      | Trough Serum Concentration                                                               |
+| CV           | Coefficient of Variation                                                                 |
+| DRM          | Data Review Meeting                                                                      |
+| ECG          | Electrocardiogram                                                                        |
+| ECOG         | Eastern Cooperative Oncology Group                                                       |
+| eCRF         | Electronic Case Report Form                                                              |
+| EORTC QLQ    | European Organization for Research and Treatment of Cancer Qualify of Life Questionnaire |
+| EOT          | End of Treatment                                                                         |
+| GCP          | Good Clinical Practice                                                                   |
+| HBcAb        | Hepatitis B Core Antibody                                                                |
+| HBsAb        | Hepatitis B Surface Antibody                                                             |
+| HBsAg        | Hepatitis B Surface Antigen                                                              |
+| HBV          | Hepatitis B virus                                                                        |
+| HIV          | Human Immunodeficiency Virus                                                             |
+| IRR          | Infusion-Related Reaction                                                                |
+| ITT          | Intent-to-Treat                                                                          |
+| IV           | Intravenous                                                                              |
+| IWRS         | Interactive Web Response System                                                          |
+| LLN          | Lower Limit of Normal                                                                    |
+| LLOQ         | Lower Limit of Quantification                                                            |
+| MedDRA       | Medical Dictionary for Regulatory Activities                                             |
+| MNAR         | Missing Not at Random                                                                    |
+| N/A          | Not Applicable                                                                           |
+| NAb          | Neutralizing Antibody                                                                    |
+| NE           | Inevaluable                                                                              |
+| NSCLC        | Non-Small Cell Lung Cancer                                                               |
+
+Confidential
+
+
+
+
+
+
+CELLTRION, Inc.    Statistical Analysis Plan – Version 3.0 Final
+CT-P16 3.1         Date Issued: December 15, 2023
+
+# Abbreviations
+
+| nsNSCLC  | Non-Squamous Non-Small Cell Lung Cancer      |
+| -------- | -------------------------------------------- |
+| ORR      | Objective Response Rate                      |
+| OS       | Overall Survival                             |
+| PD       | Progressive Disease                          |
+| PFS      | Progression-Free Survival                    |
+| PK       | Pharmacokinetic                              |
+| PP       | Per-Protocol                                 |
+| PR       | Partial Response                             |
+| PRES     | Posterior Reversible Encephalopathy Syndrome |
+| PT       | Preferred Term                               |
+| QLQ-C30  | Quality of Life core 30                      |
+| QLQ-LC13 | Quality of Life lung cancer-specific module  |
+| QoL      | Quality of Life                              |
+| RECIST   | Response Evaluation Criteria In Solid Tumors |
+| RS       | Raw Score                                    |
+| SAE      | Serious Adverse Event                        |
+| SAP      | Statistical Analysis Plan                    |
+| SD       | Stable Disease                               |
+| SMQ      | Standardised MedDRA Queries                  |
+| SOC      | System Organ Class                           |
+| TEAE     | Treatment-Emergent Adverse Event             |
+| TESAE    | Treatment-Emergent Serious Adverse Event     |
+| TLF      | Table, Listing and Figure                    |
+| TTP      | Time To Progression                          |
+| ULN      | Upper Limit of Normal                        |
+| VTE      | Venous Thromboembolism                       |
+| WHO      | World Health Organization                    |
+
+V
+Confidential
+
+
+
+
+CELLTRION, Inc.    Statistical Analysis Plan – Version 3.0 Final
+CT-P16 3.1         Date Issued: December 15, 2023
+
+# 1. INTRODUCTION
+
+This statistical analysis plan (SAP) defines the statistical methods and data presentations to be used by CELLTRION Clinical Statistics team in the analysis and presentation of data from CELLTRION study number CT-P16 3.1, entitled: A Double-Blind, Randomized, Active-Controlled, Parallel-Group, Phase 3 Study to Compare Efficacy and Safety of CT-P16 and EU-Approved Avastin as First-Line Treatment for Metastatic or Recurrent Non-Squamous Non-Small Cell Lung Cancer.
+
+There are three clinical study reports (CSRs) planned:
+
+- To report data after completion of the Induction Study Period (1ˢᵗ CSR)
+- To report data up to 1-year completion of the last patient (2ⁿᵈ CSR)
+- To report all data until the end of study (3ʳᵈ CSR)
+
+This SAP covers data analysis for the final CSR (3ʳᵈ CSR). The protocol-specified primary analysis was completed and reported in the 1ˢᵗ CSR, published on September 13, 2021. This SAP for the final CSR is based on the following documents:
+
+- Study Protocol Version 2.0 – 14th June 2019
+- Unique Case Report Form (CRF) Version 7.0 – 21 July 2021
+
+Table, Listing and Figure (TLF) mock shells will be presented as an addendum to this document.
+
+# 1.1. Data Cut-off for Analysis
+
+The 1ˢᵗ CSR will contain the data as below:
+
+- Tumor assessment and effusion data obtained up to end of Maintenance Cycle 3 date prior to cut-off date (22APR2021). For early discontinued patients withdrawn prior to end of Maintenance Cycle 3, data obtained up to the End of Treatment (EOT).
+- European Organization for Research and Treatment of Cancer Qualify of Life Questionnaire (EORTC-QLQ) and PK data obtained up to end of Induction Cycle 6. For early discontinued patients withdrawn prior to Maintenance Study Period, data obtained up to the EOT.
+- Other (safety, immunogenicity and etc.) data and non-visit based data (e.g ‘Adverse Event’ or ‘Concomitant Medication’) obtained up to cut-off date (22APR2021).
+
+The 2ⁿᵈ CSR will contain the data as below:
+
+6
+
+Confidential
+
+
+
+CELLTRION, Inc.    Statistical Analysis Plan – Version 3.0 Final
+CT-P16 3.1         Date Issued: December 15, 2023
+
+- Visit based data: All data included in a visit of which the visit date is on or prior to cut-off date (21SEP2021) which was 1-year completion of the last patient.
+- Non-visit based data: All data up to cut-off date (21SEP2021).
+
+The final CSR will contain all data obtained up to the end of study.
+
+# 2. STUDY OBJECTIVES
+
+# 2.1. Primary Objective
+
+The primary objective of the study is:
+
+- To demonstrate CT-P16 is similar to EU-Approved Avastin in terms of efficacy as determined by objective response rate (ORR) during the Induction Study Period
+
+# 2.2. Secondary Objective
+
+The secondary objectives of the study are:
+
+- To evaluate additional efficacy profiles including ORR during the Whole Study Period, response duration, time to progression (TTP), progression-free survival (PFS), and overall survival (OS)
+- To evaluate the Pharmacokinetic (PK) parameter of trough serum concentration (Ctrough)
+- To evaluate safety profile including immunogenicity
+- To evaluate quality of life (QoL)
+
+# 3. OVERALL STUDY DESIGN AND PLAN
+
+This study is a double-blind, randomized, active-controlled, parallel-group, Phase 3 study to compare efficacy, PK, and overall safety of CT-P16 (15 mg/kg) and EU-Approved Avastin (15 mg/kg) when co-administered with paclitaxel and carboplatin in patients with metastatic or recurrent non-squamous non-small cell lung cancer (nsNSCLC) as first-line treatment.
+
+A total of 678 male and female patients with metastatic or recurrent nsNSCLC will be enrolled and randomly assigned in a 1:1 ratio (approximately 339 patients per treatment group) to CT-P16 or EU-Approved Avastin.
+
+This study will comprise 4 study periods (including Screening Period, Induction Study Period, Maintenance Study Period and Follow-Up Period) and be completed at approximately 3 years from the enrollment of last patient.
+
+An EOT visit will occur 3 weeks after the last dose of the Induction Study Period or Maintenance Study Period regardless of the reason of discontinuation.
+
+Confidential
+
+
+
+
+# CELLTRION, Inc. Statistical Analysis Plan – Version 3.0 Final
+
+# CT-P16 3.1
+
+Date Issued: December 15, 2023
+
+# Screening Period
+
+Screening evaluations will be completed within 28 days prior to randomization. However, screening period can be extended to 8 weeks exclusively for treating patients who have central nervous system (CNS) metastases before starting the study treatment and all other assessments including chest and abdomen computerized tomography (CT) scan should be completed as specified in Appendix 14.1. Approximately 678 patients will be randomly assigned in a 1:1 ratio to CT-P16 or EU-Approved Avastin treatment groups.
+
+# Induction Study Period
+
+During the Induction Study Period, patients will receive 15 mg/kg intravenous (IV) of either CT-P16 or EU-Approved Avastin every 3 weeks up to 6 cycles. Patients will receive paclitaxel 200 mg/m² IV and carboplatin area under the curve 6 IV every 3 weeks up to 6 cycles (at least 4 cycles). Study drug administration will be started on the same day as randomization. If a patient has progressive disease (PD) during or after the completion of the Induction Study Period (assessed at the end of Cycle 6) or does not enter the Maintenance Study Period due to any reason, this patient will complete the EOT visit, then will directly enter the Follow-Up Period.
+
+# Maintenance Study Period
+
+After the completion of 6 cycles during the Induction Study Period, patients with controlled disease (complete response (CR), partial response (PR), or stable disease (SD), assessed at the end of Cycle 6) will enter the Maintenance Study Period. Patients will receive monotherapy of 15 mg/kg of CT-P16 or EU-Approved Avastin every 3 weeks until PD or intolerable toxicity, whichever occurs first. Then, the patients will perform the EOT visit and then will enter the Follow-Up Period.
+
+# Follow-Up Period
+
+All patients who enter the Follow-Up Period due to any reason will be followed every 9 weeks until death or the end of study, whichever occurs first. If PD is not confirmed during the Induction Study Period or Maintenance Study Period, tumor response evaluation will be performed every 9 weeks during the Follow-Up Period.
+
+Confidential
+
+
+
+
+CELLTRION, Inc.    Statistical Analysis Plan – Version 3.0 Final
+CT-P16 3.1         Date Issued: December 15, 2023
+
+# 1. Study Design and Patient Assessment Overview
+
+The study design and patient assessment overview is presented in Figure 1.
+
+# Figure 1 Study Design Overview
+
+| CT-P16 + Paclitaxel + | CT-P16              |   |                     |
+| --------------------- | ------------------- | - | ------------------- |
+|                       | Carboplatin         |   |                     |
+| Random (1:1)          | EU-Approved Avastin |   |                     |
+|                       | Paclitaxel +        |   | EU-Approved Avastin |
+|                       | Carboplatin         |   |                     |
+
+CT-P16 or EU-Approved Avastin: 15 mg/kg every 3 weeks IV
+
+Paclitaxel: 200 mg/m2 every 3 weeks IV
+
+Carboplatin: Area under the curve 6 every 3 weeks IV
+
+Induction Study Period: maximum 6 cycles
+
+Maintenance Study Period: until disease progression, or intolerable toxicity, whichever occurs first
+
+Follow-Up Period: up to approximately 3 years from the last patient enrolled
+
+Randomization will be stratified by country, sex (female vs. male), disease status (recurrence vs. metastatic), and ECOG performance score (0 vs. 1).
+
+Abbreviations: ECOG, Eastern Cooperative Oncology Group; IV, intravenous; PD, progressive disease.
+
+# 4. General Statistical Considerations
+
+Continuous data will be summarized using descriptive statistics: the number of observations (n), mean, standard deviation, minimum, median and maximum unless otherwise indicated. Minimum and maximum will be presented to the same number of decimal places as the raw data, mean and median will be presented to one more decimal place than the raw data, and standard deviation will be presented to two more decimal places than the raw data. If the geometric mean is to be presented, it will be set to the same precision as the mean. Percent coefficient of variation (CV) will be presented to two more decimal places than the raw data.
+
+Categorical data will be summarized using numbers and percentages of patients. Percentages will be presented to one decimal place and will be suppressed when the count is zero. A row denoted “Not Done” will be included in count tabulations where necessary to account for cases of no assessment or missing values. The denominator for all percentages will be the number of patients within the treatment group for the population of interest, unless otherwise indicated.
+
+EOT and unscheduled visit will not be summarized in visit-based tables, unless otherwise indicated. But, all data will be displayed in listings. Listings will be sorted by the treatment group and then patient number, which is the unique subject identifier and visit, if applicable. In cases where more additional sorting is required, other variables will be included in sorting as applicable.
+
+For the purpose of summarization, any numeric values recorded below the lower limit or above the upper limit of quantification will be set to the respective limit for all related
+
+9 Confidential
+
+
+
+
+
+CELLTRION, Inc.    Statistical Analysis Plan – Version 3.0 Final
+
+CT-P16 3.1         Date Issued: December 15, 2023
+
+summaries unless otherwise indicated. In listings, original results containing inequality sign will be displayed, unless otherwise specified.
+
+When combining data from eCRF and analytical facilities discrepancy will be handled as following:
+
+1. Recorded as collected sample in eCRF but no corresponding results from analytical facility – listing will display only sample collection visit/date/time from eCRF.
+2. No corresponding records in eCRF for results from analytical facility – listing will display only specimen collection visit/date and results from analytical facility.
+3. Discrepancy in sample collection date from eCRF and analytical facility – listing will display results from analytical facility and visit/date/time from eCRF if not missing; if sample collection date/time is missing in eCRF then use specimen collection visit/date from analytical facility.
+
+# 4.1. Software
+
+# 4.2. Sample Size
+
+A sample size of 305 patients per group will provide 80% power to show similarity in efficacy between CT-P16 and EU-Approved Avastin based on the expected ORR of 38% with an equivalence margin of -12.5 to 12.5 using a 95% CI (two one-sided alpha 0.025) of the difference in ORR.
+
+Approximately 678 patients (339 in each group) will need to be enrolled for the anticipated drop-out rate of 10%.
+
+# 4.3. Randomization, Stratification, and Blinding
+
+An Interactive Web Response System (IWRS) will be used for the randomization and an unblinded statistician will generate a computer-generated randomization schedule for IWRS, which will link sequential patient randomization numbers to treatment codes.
+
+Patients who qualify for randomization will be randomly assigned on Day 1 of Cycle 1 in the Induction Study Period in a 1:1 ratio to receive CT-P16 or EU-Approved Avastin. The randomization will be balanced by using permuted blocks and will be stratified by country, sex (female vs. male), disease status (recurrence vs. metastatic), Eastern Cooperative Oncology Group (ECOG) performance status (0 vs. 1).
+
+10
+
+Confidential
+
+
+
+
+# CELLTRION, Inc. Statistical Analysis Plan – Version 3.0 Final
+
+# CT-P16 3.1
+
+Date Issued: December 15, 2023
+
+This study will be double-blinded during both the Induction Study Period and the Maintenance Study Period. The randomization code will not be revealed to study patients, investigators, or study site personnel, until all final clinical data have been entered onto the database and the database is locked and released for analysis.
+
+The database will be unblinded for the 1st CSR for a reporting purpose. However, the study will remain blinded to the investigators and patients until study termination.
+
+# 4.4. Population of Analysis
+
+Population to be used in analysis will be specified in related sections. The following patient populations are defined: Intent-to-Treat (ITT) population, Per-Protocol (PP) population, PK population, PK population – Maintenance Period Subset and Safety population.
+
+The number of patients in each population will be tabulated by treatment group for the ITT population. A listing will also be provided displaying this data.
+
+# 4.4.1. Intent-to-Treat Population
+
+The ITT population will consist of all randomized patients who are randomly assigned to study drug regardless of whether or not any study treatment dosing is completed and successfully screened based on the ‘Screening Pass/Fail’ eCRF page. Patients will be assigned to treatment groups based on randomization. The primary population for the primary efficacy analysis will be the ITT population.
+
+# 4.4.2. Per-Protocol Population
+
+The PP population will consist of all randomly assigned patients who have at least one response evaluation after receiving at least one full dose of study drug (CT-P16 or EU-Approved Avastin) in the Induction Study Period and who do not have any major protocol deviations that may affect the interpretation of the primary endpoint. A patient will be considered as receiving full dose if the planned dose is recorded as ‘15mg/kg’ and the action taken is recorded as ‘Dose Not Changed’ on ‘Study Treatment Administration’ eCRF page. Final determination of the PP population was made at the Data Review Meeting (DRM) before unblinding. Patients will be assigned to treatment groups based on randomization. A supportive efficacy analysis will be repeated using the PP population.
+
+# 4.4.3. Pharmacokinetic Population
+
+The PK population will consist of all randomly assigned patients who receive at least one full dose (as defined in Section 4.4.2) of study drug (CT-P16 or EU-Approved Avastin) and who have at least one post treatment PK result. Patients who received incorrect treatment during the Induction Study Period will be excluded from the PK population. If a patient does not receive full dose, the patient will be discussed during the DRM to confirm whether the patient can be considered as receiving full dose or not. Patients will be assigned to treatment groups based on treatment they actually received during the Induction Study Period.
+
+Confidential
+
+
+
+
+
+CELLTRION, Inc.    Statistical Analysis Plan – Version 3.0 Final
+# CT-P16 3.1
+
+Date Issued: December 15, 2023
+
+# 4.4.4. Pharmacokinetic Population – Maintenance Period Subset
+
+The PK population – Maintenance Period Subset will consist of all patients in PK population who received at least 1 dose (full) of either of the study drugs and have at least one post treatment PK result during the Maintenance Study Period. Patients who received incorrect treatment during the Maintenance Study Period will be excluded from the PK population – Maintenance Period Subset. If a patient does not receive full dose, the patient will be discussed during the DRM to confirm whether the patient can be considered as receiving full dose or not. Patients will be assigned to treatment groups based on treatment they actually received.
+
+# 4.4.5. Safety Population
+
+The safety population will consist of all randomly assigned patients who receive at least one dose (partial or full) of study drug (CT-P16 or EU-Approved Avastin). A patient will be considered to have received study drug if the patient is recorded as having study drug administered on the ‘Study Treatment Administration’ eCRF page. Patients will be assigned to treatment groups based on treatment they actually received.
+
+Treatment patients actually received will be based on the kit number recorded on the ‘Study Treatment Administration’ eCRF page. Patients receiving at least one dose of CT-P16 will be analyzed under the CT-P16 treatment group. All other patients will be analyzed under the EU-Approved Avastin treatment group.
+
+# 4.5. Definition of Baseline and Post-Baseline
+
+The baseline value for all analyses will be the last non-missing value prior to the first infusion unless otherwise specified. Post-baseline visits will be considered to be all visits after the first infusion.
+
+# 4.6. Protocol Deviations
+
+A major protocol deviation is one that may affect the interpretation of primary endpoint or the patient’s rights, safety or welfare. A major protocol deviation occurs when there is non-adherence to the protocol by the patient, investigator, or sub-investigator that results in a significant and additional risk to the patient or to the integrity of the study data. Major protocol deviations include the following:
+
+- Mis-randomizations (defined as patients who received the opposite treatment to which they were assigned)
+- Non-compliance of Inclusion or Exclusion criteria
+- Significant Good Clinical Practice (GCP) non-compliance (to be identified by as sites which have been closed due to scientific misconduct and/or serious GCP non-compliance)
+- Receiving any prohibited therapies (Section 5.10 of protocol)
+
+12
+
+
+
+
+CELLTRION, Inc.    Statistical Analysis Plan – Version 3.0 Final
+
+CT-P16 3.1         Date Issued: December 15, 2023
+
+•    Missing primary efficacy assessment
+
+Major protocol deviations will be identified during the DRM. Patients with major protocol deviation could be excluded from PP population to minimize the potential impact of the deviations. The major protocol deviations will be summarized by treatment group for the ITT population and will also be presented in a listing.
+
+Additionally, if any case of major protocol deviation related to COVID-19 is identified during the DRM, primary analysis will be performed excluding patients with major protocol deviation related to COVID-19 in ITT population as supportive analysis and the patients will be flagged in listing.
+
+# 4.7. General Comments
+
+Data collected on the ‘General Comments’ eCRF page will be presented in a listing for the ITT population.
+
+# 4.8. Outliers
+
+Any outliers that are detected during the review of the data will be investigated and discussed during the DRM. In general, outliers will not be excluded unless they are considered to be erroneous values. Sensitivity analyses and exploratory analyses may be conducted using imputation or excluding outliers to ensure robustness of study conclusions.
+
+# 4.9. Missing Values
+
+Missing values in ORR will be considered as ‘Non-responder’ to analyze primary efficacy endpoint.
+
+In order to evaluate the impact of missing data on the primary efficacy endpoint results, additional analyses with tipping point analyses will be conducted for the primary efficacy endpoint (central review data) for ITT population.
+
+Tipping point analyses will be conducted under Missing Not at Random (MNAR) scenarios. Imputation will be done by gradually shifting the number of responders by treatment group to make MNAR scenarios. 95% CI of the difference between two proportions (CT-P16 and EU-Approved Avastin group) will be estimated by exact binomial approach, and scenarios will be displayed by shift table. No response evaluation result or inevaluable (NE) result evaluated in best overall response (BOR) will be considered as missing case. All the scenarios will be also provided using 2-dimensional plot.
+
+# 5. PATIENT DISPOSITION
+
+The total number of patients who were screened will be displayed. The number of screening failures and the primary reason for screening failure will also be summarized.
+
+13
+
+Confidential
+
+
+
+
+CELLTRION, Inc.    Statistical Analysis Plan – Version 3.0 Final
+# CT-P16 3.1
+
+Date Issued: December 15, 2023
+
+The number of patients who have been randomized and the number and percentage of patients who have initiated the study period, have completed the Induction study period, and have discontinued the study period will also be displayed for study periods respectively, using the following categories for ITT population.
+
+- A patient will be considered to have failed the screening if the screening failure date is recorded on the ‘Screening Pass/Fail’ eCRF page.
+- A patient will be considered to be randomized if the randomization date is recorded on the ‘Randomization’ eCRF page and the response of ‘Is the patient eligible to participate in this study?’ on ‘Screening Pass/Fail’ eCRF page is ‘Yes’.
+- A patient will be considered to have initiated the Induction Study Period and the Maintenance Study Period if the administration date is recorded on the ‘Study Treatment Administration’ eCRF page for Induction Study Period and Maintenance Study Period, respectively. If the Follow-Up visit date is recorded on ‘Survival Status’ eCRF page and its ‘Patient Status’ is ‘Alive’, then the patient will be considered to have initiated Follow-Up Period.
+- A patient will be considered to have completed Induction Study Period if the patient administered up to Induction Cycle 6 and performed tumor assessment (i.e. ‘Response Evaluation’ eCRF page) after the administration date at Induction Cycle 6.
+- A patient will be considered to have discontinued the study period if the discontinuation reason is recorded on the ‘Study Treatment Termination’ eCRF page.
+
+The number and percentage of patients who initiated but discontinued study treatment will also be displayed by discontinuation reasons in each study period. Time on the study drug prior to discontinuation in each study period will be calculated as (Last dose date – First dose date + 1) and will also be summarized with descriptive statistics.
+
+Reason for ending participation in the study will be summarized by reasons on the ‘End of Study Participation’ eCRF page. Deaths will be summarized by reasons using the data reported on ‘Study Treatment Termination’ or ‘Survival Status’ eCRF page.
+
+Patient disposition data will be listed for the ITT population. A listing of patients reported as screening failure will also be provided with reasons for screening failure.
+
+# 6. DEMOGRAPHICS, BASELINE, AND BACKGROUND CHARACTERISTICS
+
+# 6.1. Demographics and Stratification Details
+
+The following demographic measures will be summarized by treatment group for the ITT population: Age (years); Fertility status for female patient only (Pre-Menarche, Surgically Sterilized (>= 24 weeks prior to the date of informed consent), Post-Menopausal (last
+
+Confidential
+
+
+
+
+# CELLTRION, Inc. Statistical Analysis Plan – Version 3.0 Final
+
+# CT-P16 3.1
+
+Date Issued: December 15, 2023
+
+# 6.1. Demographics
+
+menstrual period > 1 year prior to the date of informed consent), Potentially Able to Bear Children); Race (American Indian or Alaska Native, Asian, Black or African American, Native Hawaiian or Other Pacific Islander, White or Caucasian, Not Allowed by Investigator Country Regulations, Other); Ethnicity (Hispanic or Latino, Non-Hispanic or Non-Latino, Not Allowed by Investigator Country Regulations, Unknown); Smoking History (Current Smoker, Former Smoker, Never Smoker); Height (cm) and Weight (kg) as recorded at the screening visit.
+
+Age will be automatically calculated in the eCRF system based on the informed consent signed date, the year of birth and information on whether the date of birth has passed or not.
+
+The following stratification details will also be presented: Country (as recorded in the clinical database), Sex (Female vs. Male), disease status (Recurrence vs. Metastatic), and ECOG performance status (0 vs. 1). The stratification factors collected on the eCRF will be used for statistical analysis.
+
+A table and listing will be produced by treatment group for the ITT population.
+
+# 6.2. Gene Screening
+
+Gene screening is captured at the screening visit on the ‘Gene Screening’ eCRF page. A table and listing of gene screening will be provided by treatment group for the ITT population.
+
+# 6.3. Hepatitis B and C and Human Immunodeficiency Virus 1 and 2
+
+At scheduled visit, the following assessments will be performed:
+
+- Hepatitis B Surface Antigen (HBsAg)
+- Hepatitis B Surface Antibody (HBsAb)
+- Hepatitis B Core Antibody (HBcAb)
+- Hepatitis C Antibody
+- Human Immunodeficiency Virus (HIV) 1&#x26;2
+- Hepatitis B virus (HBV) DNA (if a patient is HBsAg negative and HBcAb positive)
+
+Viral serology will be summarized by treatment group, parameter and visit (including EOT). For HIV 1&#x26;2, summarization will be combined as following: ‘Positive (at least one positive)’, ‘Negative (all negative with no positive)’, and ‘Not Done’. A listing of viral serology will be produced by treatment group for ITT population.
+
+Confidential
+
+
+
+
+
+CELLTRION, Inc.    Statistical Analysis Plan – Version 3.0 Final
+CT-P16 3.1         Date Issued: December 15, 2023
+
+# 6.4. Medical History
+
+Medical history is captured at the screening visit and will be coded using Medical Dictionary for Regulatory Activities (MedDRA) version 24.0 or higher. Medical history will be summarized by treatment group, system organ class (SOC) and preferred term (PT) for the ITT population. The number and percentage of patients with at least one medical history will also be presented in the table by treatment group. A listing of medical history will be provided for the ITT population by treatment group.
+
+# 6.5. Disease Characteristic
+
+Disease characteristic is captured at the screening visit on the ‘Disease Characteristic’ eCRF page. Disease characteristic will be displayed in a summary table, including: disease status, final pathological diagnosis based on immunohistochemistry or hematoxylin and eosin staining, current histologic grade, current clinical stage and current TNM stage. A listing of Disease characteristic will be provided by treatment group for the ITT population.
+
+# 6.6. Previous Treatment for NSCLC
+
+Previous treatment for NSCLC is captured at the screening visit on the ‘Previous Surgical Procedure for NSCLC’, ‘Previous Radiotherapy for NSCLC’ and ‘Previous Anti-Cancer Systemic Therapy for NSCLC’ eCRF pages.
+
+Previous surgical procedure for NSCLC will be coded using MedDRA version 24.0 or higher. Previous anti-cancer systemic therapy for NSCLC will be coded using World Health Organization (WHO) Drug Dictionary version March, 2021 or later. Previous treatment for NSCLC will be summarized by treatment group and, if possible, medical term displaying the number and percentage of patients for the ITT population. Previous anti-cancer systemic therapy for NSCLC data will also be presented by drug class (using Anatomical Therapeutic Chemical (ATC) level 2). Listings for each previous treatment will also be provided by treatment group for the ITT population.
+
+# 6.7. Inclusion and Exclusion Criteria
+
+Details of inclusion and exclusion criteria can be found in Sections 4.1.1 and 4.1.2 of the protocol. A listing of the inclusion and exclusion criteria along with the corresponding protocol version used to assess the eligibility will be presented by treatment group for the ITT population.
+
+# 7. MEDICATIONS AND TREATMENTS
+
+Medications and treatments data will be presented for the safety population by treatment group.
+
+# 7.1. Prior and Concomitant Medications
+
+All medications used during the study, as well as all medications taken within 30 days prior to Day 1 of Cycle 1 in the Induction Study Period and until 28 days after the last dose
+
+Confidential
+
+
+
+
+CELLTRION, Inc.    Statistical Analysis Plan – Version 3.0 Final
+
+CT-P16 3.1         Date Issued: December 15, 2023
+
+of study treatment will be collected. Concomitant medications relevant to serious adverse drug reactions (ADRs) that occur after the EOT visit will also be collected. For patients who do not enter the Follow-Up Period, the last assessed concomitant medication will be collected. All medications will be coded using WHO Drug Dictionary version March, 2021 or later.
+
+A prior medication is defined as any medication where both the start and stop dates are before the date of first infusion. A concomitant medication is defined as any medication that has a stop date that is on or after the date of first infusion or missing. The start date of a concomitant medication can be before or after the date of first infusion.
+
+The total number of prior and concomitant medications and the number and percentage of patients with at least one prior or concomitant medication will be tabulated for the safety population. Prior and concomitant medication data will be presented by drug class (using ATC level 2), PT, and treatment group.
+
+Summaries of concomitant medications will be presented by Whole Study Period, Induction Study Period, Maintenance Study period and Follow-up period defined as follows:
+
+- Concomitant medications will be summarized in the Induction Study Period if patients:
+- did not enter the Maintenance Study Period and have a medication start date on or prior to the last date of EOT (or the last dose date + 28 if the last date of EOT is missing).
+- entered the Maintenance Study Period and have a medication start date prior to the date of the first infusion in the Maintenance Study Period.
+- Concomitant medications will be summarized in the Maintenance Study Period if patients:
+- have a medication start date on or after the first infusion in the Maintenance Study Period and on or prior to the last date of EOT (or the last dose date + 28 if the last date of EOT is missing) when the discontinuation reason is recorded on ‘Study Treatment Termination’ eCRF page.
+- have a medication start date on or after the first infusion in the Maintenance Study Period when the discontinuation reason is not recorded on ‘Study Treatment Termination’ eCRF page.
+- Concomitant medications will be summarized in Follow-Up Period if patients:
+- have the last date of EOT and have a medication start date after the last date of EOT (or the last dose date + 28 if the last date of EOT is missing) when the discontinuation reason is recorded on ‘Study Treatment Termination’ eCRF page.
+
+17
+
+Confidential
+
+
+
+
+CELLTRION, Inc.    Statistical Analysis Plan – Version 3.0 Final
+
+CT-P16 3.1         Date Issued: December 15, 2023
+
+For the purpose of inclusion in prior or concomitant medication tables, incomplete medication start and stop dates will be imputed respectively as described in Appendix 14.4.1.
+
+Prior and concomitant medications will be listed separately by treatment group.
+
+# 7.2. Exposure to Study Drug
+
+The number and percentage of patients with dose administered at each treatment cycle will be summarized by treatment group. For those patients who were not administered study drug, the number and percentage of patients with each reason why the study drug (CT-P16 or EU-Approved Avastin) was not administered in ‘Study Treatment Termination’ or ‘Study Treatment Administration’ eCRF page will be displayed by visit. Information on dose delay with the reason and action taken with the reason in ‘Study Treatment Administration’ eCRF page will also be presented in the table by visit and treatment group.
+
+The summary table will also present descriptive statistics for those patients receiving study drug: planned dose (mg/kg), weight-adjusted prescribed dose (mg/kg), weight-adjusted administered dose (mg/kg), administered dose intensity (weight-adjusted administered dose / actual duration of dose) (mg/kg/week) and relative dose intensity (administered dose intensity / planned dose intensity * 100) (%) which are based on data collected on the ‘Study Treatment Administration’ page of the eCRF. The weight-adjusted prescribed dose and weight-adjusted administered dose are calculated by dividing the corresponding dose recorded on the eCRF, by the patient’s weight at the same visit.
+
+Actual duration of dose is given by the following formula:
+
+Actual duration of dose (weeks) = (Start Date of Next Cycle – Start Date of Current Cycle) / 7
+
+In order to calculate dose intensity, for the last cycle, the duration of dose is assumed to be 3 weeks.
+
+In addition, a listing will be provided by treatment group showing the details of study drug exposure.
+
+Furthermore, a table and listing for exposure of Paclitaxel and Carboplatin will be provided in the same manner as the study drug (CT-P16 or EU-Approved Avastin) exposure. Paclitaxel will be adjusted by BSA (m²) and carboplatin will be adjusted by CrCl (mL/min) instead of weight. Adjusted Carboplatin dose is calculated based on Calvert equation:
+
+Adjusted Carboplatin Dose (AUC) = Carboplatin Dose (mg)/(CrCl+25). If BSA or CrCl is missing at the applicable visit, then the value at the nearest visit to the visit will be used.
+
+A separate table for overall study drug exposure in each period and a table for overall paclitaxel and carboplatin exposure will also be produced, including descriptive statistics of the total amount of planned dose, total amount of adjusted prescribed dose, total amount of adjusted actual administered dose, administered dose intensity, relative dose intensity.
+
+Confidential
+
+
+
+
+CELLTRION, Inc. Statistical Analysis Plan – Version 3.0 Final CT-P16 3.1 Date Issued: December 15, 2023
+
+(%). Dose intensity in this instance will be calculated as the total sum of adjusted dose during each period, divided by duration of dose for that period.
+
+Actual duration of dose in each period is given by the following formula:
+
+Actual duration of dose (weeks) = (Start Date of Last Cycle + 21 – Start Date of First Cycle) / 7
+
+For patients who have initiated Maintenance Study Period,
+
+Actual duration of dose for Induction Study Period = (Start Date of Maintenance Cycle 1 – Start Date of First Cycle) / 7
+
+# 8. EFFICACY ANALYSIS
+
+Efficacy analyses for the final CSR focus on secondary efficacy endpoints (Section 8.2) based on patients’ long-term follow-up data. It is noted that the primary efficacy analysis (Section 8.1) was completed in the 1ˢᵗ CSR. In the final CSR, the analysis for the primary efficacy endpoint will be performed as a sensitivity analysis using the same method as 1ˢᵗ CSR.
+
+Efficacy will be assessed by response evaluation and time-to-event analyses.
+
+Response evaluation will be based on tumor responses measured and recorded by using Response Evaluation Criteria In Solid Tumors (RECIST) version 1.1. The primary endpoint, ORR during the Induction Study Period, and the secondary endpoint, ORR during the Whole Study Period, will be determined by the BOR. For CR or PR, BOR must be confirmed by the subsequent assessment.
+
+Categorization of BOR will use the following response categories: CR, PR, SD, PD and NE.
+
+Images for tumor assessment will be reviewed separately by central and local, and both image review results from central (central independent reviewer) and local (eCRF) will be analyzed and listed separately.
+
+Time-to-event analysis for the study drug (CT-P16 or EU-Approved Avastin) will be undertaken for each of the response duration, TTP, PFS, and OS.
+
+Primary analysis population for the efficacy analysis is the ITT population. A supportive analysis will be repeated using the PP population.
+
+All efficacy data will be listed for the ITT population by treatment group unless otherwise specified.
+
+# 8.1. Primary Efficacy Endpoint
+
+In the final CSR, the analysis for the protocol-specified primary efficacy endpoint will be performed as a sensitivity analysis using method described in this section.
+
+19 Confidential
+
+
+
+CELLTRION, Inc.    Statistical Analysis Plan – Version 3.0 Final
+# CT-P16 3.1
+
+Date Issued: December 15, 2023
+
+The primary efficacy endpoint is ORR based on BOR during the Induction Study Period by RECIST version 1.1 (Appendix 14.5).
+
+The ORR is defined as the proportion of patients with a confirmed BOR of CR or PR (the ‘responder’). All other patients in the ITT or PP population except responders will be considered as non-responder including patients without post-baseline tumor assessment.
+
+The similarity criterion has been set such that the confidence limits of the 95% CI of the difference in ORR from each treatment group will be entirely bounded by the interval (-12.5, 12.5). The primary analysis for the primary endpoint will be performed utilizing a logistic regression model considering country, sex (female vs. male), disease status at baseline (recurrence vs. metastatic), and ECOG performance status at baseline (0 vs. 1) as covariates with treatment groups (CT-P16 and EU-Approved Avastin) as a fixed effect. Country can be pooled into region (EMEA vs. America vs. Asia) for statistical analysis when there are not enough patients within each country. Use of region instead of country in statistical analyses was discussed at the blinded DRM.
+
+A table presenting ORR during the Induction Study Period with the analysis result will be produced. The ORR and its corresponding 95% CI for each treatment group will also be presented. A point estimate and 95% CI of the risk difference of ORR between CT-P16 group and EU-Approved Avastin group will be produced. The number and percentage of patients in each response category will also be presented by treatment group separately. The primary analysis will be conducted in the ITT population. A supportive analysis will be conducted in the PP population and also be provided in the table. For the primary analysis, central review results will be used. Local review results will be used for a sensitivity analysis. Tipping point analysis will also be conducted using central review data based on exact binomial approach in the ITT population for a sensitivity analysis.
+
+The Delta Method for estimating difference of proportion is explained in the following process.
+
+1. The individual odds and standard errors (SEs) for both treatments will be obtained from the model. For the purposes of this algorithm, let the estimate of the odds of being a responder in the CT-P16 group be denoted by θₐ and the estimate of the odds of being a responder in the EU-Approved Avastin group be denoted by θb.
+2. Calculate the variances of these estimates, Var(θₐ) and Var(θb) respectively from the SEs obtained from the model.
+3. Calculate the estimates of the corresponding proportions, denoted pa and pb respectively, for each of the randomized treatment groups, from the estimated odds θₐ and θb using the following formula:
+p = 1 / (1 + θ)
+
+and hence calculate the estimate of the difference of proportions pₐ - pb.
+
+20
+
+Confidential
+
+
+
+CELLTRION, Inc.    Statistical Analysis Plan – Version 3.0 Final
+CT-P16 3.1         Date Issued: December 15, 2023
+
+(4) Using Taylor expansions and the Delta method, the following formula for approximation can be obtained:
+
+Var嬀 f ( 堀 )崀 ≈ ( f ' (E嬀 堀 崀))²Var嬀 堀 崀
+
+Applying this approximation specifically to this case, and using the formula specified in step (3) we obtain the formula
+
+Var( p) = Var(θ )
+
+(1 + θ )⁴
+
+which should be used to calculate Var(pₐ) and Var(pb).
+
+(5) Calculate the variance of the difference in proportions Var(pₐ - pb) as the sum of Var(pₐ) and Var(pb). Use this to obtain the SE of the difference, and hence calculate the 95% CI using the formula:
+
+95% Confidence Interval = (pₐ - pb) +/- 1.96(SE(pₐ - pb))
+
+Note: this method assumes that the estimate ORR of CT-P16 group is independent of the estimate of EU-Approved Avastin group.
+
+# 8.2. Secondary Efficacy Endpoint
+
+# 8.2.1. Objective Response Rate during the Whole Study Period
+
+For the secondary efficacy endpoint, ORR based on BOR during the Whole Study Period by RECIST version 1.1 will be analyzed.
+
+A table will be produced using both central review data and local review data from all treatment periods including Induction Study Period, Maintenance Study Period and EOT visit in the ITT and PP population. The ORR and its corresponding 95% CI for each treatment group will also be presented. The number and percentage of patients within each response category will be summarized by treatment group.
+
+The ORR based on BOR during the Whole Study Period will be analyzed only for the final CSR.
+
+# 8.2.2. Time-To-Event Analysis
+
+A time-to-event analysis will be undertaken for each of the response duration, TTP, PFS, and OS in the ITT and PP population.
+
+The number of patients experiencing events and the number of censored patients will be summarized by treatment group with reasons for an event/censoring.
+
+The median survival time and its corresponding 95% CI for each treatment group will be estimated using the Kaplan-Meier method. The 25ᵗʰ percentile and 75ᵗʰ percentile for the
+
+
+
+CELLTRION, Inc.    Statistical Analysis Plan – Version 3.0 Final
+# CT-P16 3.1
+
+Date Issued: December 15, 2023
+
+Survival times along with the corresponding 95% CI for the percentiles will also be displayed. The Brookmeyer-Crowley methodology will be used to construct the 95% CI for each percentile. Survival times and their corresponding 95% CIs will be presented to one decimal place. In addition, the estimate of survival rates (at 6, 12, 24, 36 months for response duration, TTP, PFS and at 12, 24, 36 months for OS) will be displayed along with their corresponding 95% CI. The estimates of survival rates and their corresponding 95% CIs will be presented to two decimal places. All time-to-event data will be reported in months with reasons for an event/censoring and summarized by treatment group. Time-to-event in days will be converted to months by dividing the number of days by 30.4 (365.25 days/12 months).
+
+For the purposes of inclusion in the survival analysis, incomplete death dates will be imputed as described in Appendix 14.4.3.
+
+To determine ‘event’ or ‘censoring’ for response duration, TTP and PFS, initiation of new anticancer therapy will be considered. For missing or incomplete start date of new anticancer therapy, the capture logic of event or censoring will be followed in Section 8.2.2.5.
+
+A Kaplan-Meier plot will be presented for each of the time-to-event analyses.
+
+In PFS and OS analyses, an adjusted stratified cox regression model will be used to estimate the hazard ratio and its 95% CI for receiving CT-P16 compared with receiving EU-Approved Avastin using country, sex (female vs. male), disease status at baseline (recurrence vs. metastatic), and ECOG performance score at baseline (0 vs. 1) as stratification factors. Country can be pooled into region (EMEA vs. America vs. Asia) for statistical analysis when there are not enough patients within each country.
+
+All time-to-event analyses will be conducted for 2ⁿᵈ CSR and final CSR.
+
+All time-to-event analyses related to response duration, TTP and PFS will be performed based on the central and local review in terms of PD/recurrence, CR and PR.
+
+Records on ‘Randomization’, ‘Survival Status’, ‘Response Evaluation’, ‘Salvage Treatment’ or ‘Study Treatment Termination’ eCRF pages will be used.
+
+# 8.2.2.1. Response Duration
+
+Response duration is defined as the time between initial response (CR or PR) that is confirmed by the subsequent assessment after study treatment administration and PD/recurrence or death from any cause (whichever occurs first). Time-to-event analysis for response duration will be performed for patients who have confirmed BOR of CR or PR.
+
+PD/recurrence or death that occurred on or before beginning another new anticancer therapy will be regarded as an event. Censoring will be defined as following:
+
+| Reason for Censoring | Censoring Date |
+| -------------------- | -------------- |
+
+Confidential
+
+
+
+CELLTRION, Inc.    Statistical Analysis Plan – Version 3.0 Final
+# CT-P16 3.1
+
+Date Issued: December 15, 2023
+
+# 8.2.2.1. Response Duration
+
+Response duration will be calculated as follow:
+
+Response duration (months) = (Date of Event/Censoring – Date of First known CR/PR that is confirmed by the subsequent assessment +1)/30.4
+
+# 8.2.2.2. Time to Progression
+
+TTP is defined as time from randomization to determined PD/recurrence.
+
+PD/recurrence that occurred on or before beginning another new anticancer therapy will be regarded as an event. Censoring will be defined as following:
+
+| Reason for Censoring                               | Censoring Date                                       |
+| -------------------------------------------------- | ---------------------------------------------------- |
+| No tumor assessment                                | The date of randomization                            |
+| No event and no anticancer therapy                 | Last tumor assessment date                           |
+| Initiation of New anticancer therapy               | Last tumor assessment date before anticancer therapy |
+| Event after missing two or more tumor assessment\* | Last tumor assessment date before event              |
+
+The last tumor assessment date on which tumor assessment’s is neither ‘missing’ nor ‘NE’ will be used for censoring date.
+
+* If there is only one missing tumor assessment before an event, then it will be considered as an event case. Otherwise, it will be considered as a censoring case.
+
+TTP will be calculated as follow:
+
+TTP (months) = (Date of Event/Censoring – Date of Randomization +1)/30.4
+
+# 8.2.2.3. Progression-free Survival
+
+PFS is defined as time from randomization to determined PD/recurrence or death from any cause (whichever occurs first).
+
+PD/recurrence or death that occurred on or before beginning another new anticancer therapy will be regarded as an event. Censoring will be defined as following:
+
+| Reason for Censoring | Censoring Date            |
+| -------------------- | ------------------------- |
+| No tumor assessment  | The date of randomization |
+
+Confidential
+
+
+
+
+CELLTRION, Inc.    Statistical Analysis Plan – Version 3.0 Final
+CT-P16 3.1         Date Issued: December 15, 2023
+
+No event and no anticancer therapy        Last tumor assessment date
+
+Initiation of New anticancer therapy      Last tumor assessment date before anticancer therapy
+
+Event after missing two or more tumor     Last tumor assessment date before event
+
+*The last tumor assessment date on which tumor assessment’s is neither ‘missing’ nor ‘NE’ will be used for censoring date.
+
+* If there is only one missing tumor assessment before an event, then it will be considered as an event case. Otherwise, it will be considered as a censoring case.
+
+PFS will be calculated as follow:
+
+PFS (months) = (Date of Event/Censoring – Date of Randomization +1)/30.4
+
+# 8.2.2.4. Overall Survival
+
+OS is defined as time from randomization to death from any cause.
+
+Death will be regarded as an event. Censoring will be defined as following:
+
+| Reason for Censoring | Censoring Date        |
+| -------------------- | --------------------- |
+| Non-death            | Last known alive date |
+
+OS will be calculated as follow:
+
+OS (months) = (Date of Event/Censoring – Date of Randomization +1)/30.4
+
+# 8.2.2.5. Capture logic for event or censoring with incomplete date of new anticancer therapy
+
+A patient will be considered as taking a new anticancer therapy (other than study treatments) when there is any record on ‘Salvage treatment’ eCRF pages or a record of receiving anticancer therapy on ‘Survival Status’ eCRF page.
+
+When there is no PD/recurrence (or death) and the start date of new anticancer therapy is incomplete, censoring date will be determined as following:
+
+1. If the last tumor assessment is performed during treatment periods (including EOT visit), the censoring date will be the last tumor assessment date during treatment periods.
+2. If the last tumor assessment is performed during Follow-Up Period, censoring date will be determined as following:
+1. If the day of the start date of new anticancer therapy is missing, then the censoring date will be the last tumor assessment date, provided tumor assessment date &#x3C; the partial start date of new anticancer therapy.
+
+24
+Confidential
+
+
+
+
+
+CELLTRION, Inc.    Statistical Analysis Plan – Version 3.0 Final
+CT-P16 3.1         Date Issued: December 15, 2023
+
+b. If the day and month of the start date of new anticancer therapy are missing, censoring date will be determined as following:
+
+- If all dates of tumor assessments during Follow-Up Period >= the partial start date of new anticancer therapy, the censoring date will be the last tumor assessment during treatment periods.
+- If at least one of tumor assessment during Follow-Up Period &#x3C; the partial start date of new anticancer therapy, the censoring date will be the last tumor assessment, provided tumor assessment date &#x3C; the partial start date of new anticancer therapy.
+
+c. If the start date of new anticancer therapy is completely missing, censoring date will be the last tumor assessment date during treatment periods.
+
+When PD/recurrence (or death) is occurred and the start of new anticancer therapy is incomplete, event will be determined as following:
+
+1. If the first PD/recurrence (or death) is occurred during treatment periods, it will be regarded as ‘event’.
+2. If the first PD/recurrence (or death) is occurred during Follow-Up Period, and
+
+- a. If the day of the start date of new anticancer therapy is missing, and
+- 1. i. If the first PD/recurrence (or death) date &#x3C; the partial start date of new anticancer therapy, it will be regarded as ‘event’.
+2. ii. If the first PD/recurrence (or death) date >= the partial start date of new anticancer therapy, it will be censored. The censoring date will be the last tumor assessment, provided the tumor assessment date &#x3C; the partial start date of new anticancer therapy.
+
+b. If the day and month of start date of new anticancer therapy is missing, and
+
+25
+Confidential
+
+
+
+
+CELLTRION, Inc.    Statistical Analysis Plan – Version 3.0 Final
+# CT-P16 3.1
+
+Date Issued: December 15, 2023
+
+the last tumor assessment, provided tumor assessment date &#x3C; the partial start date of new anticancer therapy.
+
+c. If the start date of new anticancer therapy is completely missing, censoring date will be the last tumor assessment date during treatment periods.
+
+# 8.3. Salvage Treatment
+
+Salvage treatment during the Follow-Up Period will be recorded in ‘Salvage Treatment’ eCRF pages and details will be listed and tabulated by salvage treatment category and treatment group in the ITT population. Medications used for chemotherapy/immunotherapy/targeted therapy will be coded using the WHO Drug Dictionary version March, 2021 or later and surgery will be coded using MedDRA version 24.0 or higher. Chemotherapy/immunotherapy/targeted therapy data will also be presented by drug class (using ATC level 2).
+
+Salvage treatment will be summarized for 2ⁿᵈ CSR and final CSR.
+
+# 8.4. Effusion Drainage
+
+Effusion drainage information will be listed by treatment group for ITT population.
+
+# 9. PHARMACOKINETIC ANALYSIS
+
+All PK analysis will be performed in the PK population for the Induction Study Period and in the PK population – Maintenance Period subset for the Maintenance Study Period. Blood samples for PK analysis will be obtained according to Appendix 14.1.
+
+# 9.1. Serum Concentration
+
+Serum concentration of bevacizumab will be summarized by treatment group at each scheduled visit using descriptive statistics: n, mean, standard deviation, geometric mean, CV%, minimum, median and maximum. Serum concentration below the lower limit of quantification (LLOQ) prior to the first dose will be set to 0, and all other below the LLOQ will be set to the LLOQ in the serum concentration descriptive statistics summaries. Missing concentrations or post-dose serum concentration will be excluded from the serum concentration descriptive statistics summaries.
+
+Serum concentrations of bevacizumab will be presented in a listing by treatment group. All concentrations below the LLOQ will be indicated in the listing.
+
+# 9.2. Pharmacokinetic Parameter
+
+PK parameter is the observed Ctrough following drug administration; calculated from the pre-dose concentration of the next dose. The order of samples will be determined based on the sampling dates then the scheduled visit order. The samples in following cases are excluded from calculation of Ctrough; i) Post-dose concentration in the Induction Study Period, ii) interval between the last dose date and sampling date at EOT &#x3C; 18 days, or iii)
+
+Confidential
+
+
+
+CELLTRION, Inc.    Statistical Analysis Plan – Version 3.0 Final
+# CT-P16 3.1
+
+Date Issued: December 15, 2023
+
+Duplicated samples at same visit/date/time. Serum concentration below the LLOQ will be set to LLOQ in the PK parameter estimation. The Ctrough at each cycle during the Induction Study Period, and Ctrough during the Maintenance Study Period will be analyzed. PK parameter will also be summarized by treatment and study visit using descriptive statistics: n, mean, standard deviation, geometric mean, CV%, minimum, median and maximum.
+
+PK parameter will be presented in a listing by treatment group.
+
+# 10. SAFETY ANALYSIS
+
+All safety analyses will be performed in the safety population and displayed by treatment group.
+
+# 10.1. Adverse Events
+
+An adverse event (AE) is defined as any untoward medical occurrence in a patient enrolled into this study (i.e., when the ‘Informed Consent’ eCRF page is signed), regardless of its causal relationship to study drug.
+
+A Treatment-Emergent Adverse Event (TEAE) is defined as any event not present before exposure to study drug or any event already present that worsens in either severity or frequency after exposure to study drug.
+
+All AEs will be classified by SOC and PT according to the MedDRA version 24.0 or higher. AEs will be graded for severity according to the Common Terminology Criteria for Adverse Events (CTCAE) version 5.0.
+
+Listings for AEs will include the following information: Study period, SOC, PT and reported term; start and stop date; duration of AE in days (Duration = Stop Date – Start Date + 1); days from last dose on or before AE onset (Date of AE onset – Date of last dose on or before AE onset + 1); TEAE flag; infusion-related reactions (IRR) flag; severity (CTCAE Grade 1 to 5); frequency (continuous, intermittent, transient); any treatment required (none, medication, Non-drug therapy, Medication and Non-drug therapy); outcome (recovered/resolved, recovering/resolving, recovered/resolved with sequelae, not recovered/not resolved, fatal, unknown); action taken with study treatment (dose not changed, drug interrupted, dose reduced, drug withdrawn, not applicable); relationship to study treatment (unrelated, possible, probable, definite); whether the event was serious (no, yes) and whether a patient terminated from study due to this AE (no, yes). All AEs will be listed.
+
+In summaries, AEs will be considered to be related if the relationship is possible, probable or definite for study treatment. If relationship or severity is missing, it will be summarized separately under a missing category.
+
+Summaries of TEAEs will be presented by Whole Study Period, Induction Study Period, Maintenance Study period and Follow-up period defined as follows:
+
+- TEAEs will be summarized in the Induction Study Period if patients:
+
+27
+
+Confidential
+
+
+
+
+# CELLTRION, Inc.    Statistical Analysis Plan – Version 3.0 Final
+
+# CT-P16 3.1
+
+Date Issued: December 15, 2023
+
+did not enter the Maintenance Study Period and have an AE onset date on or prior to the last date of EOT (or the last dose date + 28 if the last date of EOT is missing).
+
+entered the Maintenance Study Period and have an AE onset date prior to the date of the first infusion in the Maintenance Study Period.
+
+- TEAEs will be summarized in the Maintenance Study Period if patients:
+
+- have an AE onset date on or after the first infusion in the Maintenance Study Period and on or prior to the last date of EOT (or the last dose date + 28 if the last date of EOT is missing) when the discontinuation reason is recorded on ‘Study Treatment Termination’ eCRF page.
+- have an AE onset date on or after the first infusion in the Maintenance Study Period when the discontinuation reason is not recorded on ‘Study Treatment Termination’ eCRF page.
+
+- TEAEs will be summarized in Follow-Up Period if patients:
+
+- have the last date of EOT and have an AE onset after the last date of EOT (or the last dose date + 28 if the last date of EOT is missing) when the discontinuation reason is recorded on ‘Study Treatment Termination’ eCRF page.
+
+For the purpose of inclusion in TEAE tables, incomplete AE start and stop date will be imputed as described in Appendix 14.4.2.
+
+# 10.1.1. Treatment-Emergent Adverse Events
+
+Summaries of TEAEs will be presented by Whole Study Period and each study period. The total number of TEAEs will be displayed. The number and percentage of patients with at least one TEAE will be presented by relationship, severity and treatment group. Additionally, the number and percentage of patients will be presented by SOC and PT, and by relationship and severity within SOC and PT. At each level of summarization for the number of patients with an event, a patient is counted only once if they reported one or more events and only the worst severity will be counted at each level of summarization. In addition, TEAEs with PT reported at least 5% of patients in either treatment group for each period will be summarized. For TEAEs reported for severity of grade 3 or higher, it will be summarized regardless of relationship and severity and by relationship, respectively. Percentages will be calculated out of the number of patients in the safety population.
+
+The summary of TEAEs will be presented in alphabetical order of SOC. Within each SOC, the PTs will be also presented in alphabetical order.
+
+28
+
+Confidential
+
+
+
+CELLTRION, Inc.    Statistical Analysis Plan – Version 3.0 Final
+CT-P16 3.1         Date Issued: December 15, 2023
+
+# 10.1.2. Serious Adverse Events
+
+A serious adverse event (SAE) is defined as any event that is immediately life threatening, requires inpatient hospitalization or prolongation of existing hospitalization, results in persistent or significant disability/incapacity, is a congenital anomaly/birth defect or results in death. Important medical events that may not result in death, be life threatening, or require hospitalization may be considered SAEs when, based upon appropriate medical judgment, they may jeopardize the patient and may require medical or surgical intervention to prevent one of the outcomes listed in this definition.
+
+TESAEs will be presented in a table in a same manner as the table of TEAEs described in Section 10.1.1.
+
+All SAEs will be listed including the variables detailed in Section 10.1. Serious criteria and SAE description in the ‘Serious Adverse Event’ eCRF page will be presented in an additional information listing.
+
+# 10.1.3. Treatment-Emergent Adverse Events Leading to Study Drug Discontinuation
+
+TEAEs for which an action taken with study drug is ‘Drug Withdrawn’ will be considered TEAEs leading to study drug discontinuation.
+
+TEAEs leading to study drug discontinuation will be presented in a table in a same manner as the TEAEs table described in Section 10.1.1.
+
+All TEAEs leading to study drug discontinuation will be listed including the variables detailed in Section 10.1.
+
+# 10.1.4. Treatment-Emergent Adverse Event Leading to Deaths
+
+All patients who have an TESAE with serious criteria of ‘Death’ will be listed including the following information: study period, date of first/last dose, date of last visit, date of death, days on study, days from date of last dose to date of AE onset, SOC/PT/reported term, whether an autopsy was performed (yes, no), whether a death certificate was completed (yes, no) and relationship to study drug.
+
+# 10.1.5. Treatment-Emergent Adverse Events of Special Interest
+
+The following TEAEs will be considered as TEAEs of special interest: Hypersensitivity/IRR, Gastrointestinal perforations and fistulae, Wound healing complications, Hypertension, posterior reversible encephalopathy syndrome (PRES), Proteinuria, arterial thromboembolism (ATE), venous thromboembolism (VTE), Hemorrhages, congestive heart failure (CHF), or Ovarian failure/fertility.
+
+TEAEs of special interest will be captured using Standardised MedDRA Queries (SMQs) and additional PT terms in Appendix 14.3.
+
+Event of Interest Searching Strategy
+
+Confidential
+
+
+
+CELLTRION, Inc.    Statistical Analysis Plan – Version 3.0 Final
+# CT-P16 3.1
+
+Date Issued: December 15, 2023
+
+| Name                                         | Category     |
+| -------------------------------------------- | ------------ |
+| Hypersensitivity/infusion-related reactions  | N/A          |
+| Gastrointestinal perforations and fistulae   | SMQ (Narrow) |
+| Wound healing complications                  | N/A          |
+| Hypertension                                 | SMQ (Narrow) |
+| Posterior reversible encephalopathy syndrome | PT           |
+| Proteinuria                                  | SMQ (Narrow) |
+| Arterial thromboembolism                     | SMQ (Narrow) |
+| Venous thromboembolism                       | SMQ (Narrow) |
+| Hemorrhages (Bleeding)                       | SMQ (Narrow) |
+| Congestive heart failure                     | SMQ (Narrow) |
+| Ovarian failure/fertility                    | PT           |
+
+TEAEs of special interest will be presented in a table in a same manner as the TEAEs table described in Section 10.1.1.
+
+All TEAEs of special interest will be listed including the variable detailed in Section 10.1.1 and information recorded on the ‘Adverse Event’ and ‘Hypersensitivity/Infusion Related Reactions’ on eCRF page: start date/time and stop date/time of IRR; category; SOC/PT/signs and symptoms; severity; systolic blood pressure (BP) 嬀mmHg崀; diastolic BP; date/time of BP assessment; comments on IRR.
+
+# 10.2. Clinical Laboratory Evaluations
+
+Clinical laboratory test samples will be analyzed at the local laboratory. Reported units and normal ranges are various among sites. Reported units will be converted to standard units, if applicable. Reported parameters with units that cannot be converted to standard units will be summarized separately using the original units.
+
+Actual result and change from baseline of all numeric laboratory parameters including clinical chemistry, hematology, numeric urinalysis and coagulation will be summarized using descriptive statistics by treatment group, laboratory category, test parameter and visit.
+
+The results for all non-numeric urinalysis parameters including microscopic urinalysis collected as qualitative format will be categorized into normal and abnormal using the local laboratory normal ranges by study site and will be summarized in a shift table. The number and percentage of patients within each category will be displayed for baseline and each post-baseline visit.
+
+Clinical laboratory parameters for clinical chemistry, hematology and urinalysis will be labeled with a CTCAE term and grading will be applied to baseline values and post-baseline values for the parameters according to CTCAE version 5.0. Grades that require clinical input only will not be assigned to these parameters. Grades which are part numeric
+
+30
+
+
+
+
+# CELLTRION, Inc.    Statistical Analysis Plan – Version 3.0 Final
+
+# CT-P16 3.1
+
+Date Issued: December 15, 2023
+
+and part clinical input will be assigned based on the numeric portion only. The CTCAE terms and ranges for applicable parameters are listed in Appendix 14.2. The CTCAE grades for this analysis will be Grade 1 (Mild), Grade 2 (Moderate), Grade 3 (Severe) and Grade 4 (Life-threatening). The CTCAE Grade 5 (Death) will not be applied in this analysis since death cannot be determined from a laboratory result. If the post-baseline result for a patient does not satisfy any CTCAE grade, it will be classified as ‘No grade’.
+
+The number and percentage of patients with a result for each grade will be summarized by laboratory category, CTCAE term, visit and CTCAE grade. A shift table will be also produced by the Whole Study Period and each study period. Only the most severe case during unscheduled and scheduled visits will be included for the post-baseline result in the shift table.
+
+If visit names are ‘Unscheduled’ or ‘EOT’, the post-baseline result of laboratory data will be presented by period, defined as follows.
+
+- Laboratory data will be summarized in the Induction Study Period if patients:
+- entered the Maintenance Study Period and have an assessment date prior to the date of the first infusion in the Maintenance Study Period.
+- did not enter the Maintenance Study Period, entered the Follow-Up Period, and have an assessment date prior to the first visit date of Follow-Up Period.
+- did not enter the Maintenance Study Period, did not enter the Follow-Up Period, and have an assessment at any time point.
+- Laboratory data will be summarized in the Maintenance Study Period if patients:
+- entered the Follow-Up Period and have an assessment date on or after the first infusion in the Maintenance Study Period and prior to the first visit date of Follow-Up Period.
+- did not enter the Follow-Up Period and have an assessment date on or after the first infusion in the Maintenance Study Period.
+- Laboratory data will be summarized in Follow-Up Period if patients:
+- have an assessment date on or after the first visit date of Follow-Up Period.
+
+Clinical chemistry, hematology, urinalysis and coagulation data will be presented in separate listings along with high or low flags for numeric parameter, if applicable, to show if a value was outside the normal range, and CTCAE results for applicable parameters will be presented.
+
+31
+
+Confidential
+
+
+
+
+
+
+CELLTRION, Inc.    Statistical Analysis Plan – Version 3.0 Final
+CT-P16 3.1         Date Issued: December 15, 2023
+
+# 10.3. Vital Signs, Weight and Body Surface Area
+
+Vital signs (including systolic and diastolic blood pressure, heart rate, respiratory rate, and body temperature) and weight will be measured at the time points specified in the Appendix 14.1. Height will be collected once at the screening visit and will be listed with demographics as specified in Section 6.1. Body surface area (BSA) will be calculated in eCRF by using height collected at the screening visit and weight collected at each scheduled visit.
+
+Weight at Induction cycle 1 will be considered as the baseline value since weight is collected for kit number dispensation prior to the infusion, if study drug is administered at Induction cycle 1.
+
+Descriptive statistics for actual values and changes from baseline of vital signs, weight and BSA will be presented by treatment group, parameter and visit.
+
+All vital signs, weight and BSA will be listed for each patient by treatment group and visit.
+
+# 10.4. Electrocardiograms
+
+A 12-lead Electrocardiograms (ECG) will be performed at the time points specified in the Appendix 14.1.
+
+Findings will be classified as ‘Normal’, ‘Abnormal, not clinically significant’, ‘Abnormal, clinically significant’ or ‘Not Done’. The number and percentage of patients will be presented by treatment group and visit in the form of a shift table to detect changes from baseline.
+
+All ECG data will be listed for each patient by treatment group and visit.
+
+# 10.5. Hypersensitivity Monitoring
+
+Hypersensitivity will be assessed by vital sign monitoring (including systolic and diastolic blood pressure, respiratory rate, heart rate, and body temperature) within 15 minutes before the beginning of the study drug infusion, within 15 minutes after the end of the study drug infusion and 60 minutes (± 15 minutes) after the end of the study drug infusion at each visit. The criteria for clinically notable results are defined as follows:
+
+| Parameter                             | Low   | High  |
+| ------------------------------------- | ----- | ----- |
+| Systolic blood pressure (mmHg)        | ≤90   | ≥160  |
+| Diastolic blood pressure (mmHg)       | ≤50   | ≥90   |
+| Heart rate (beats per minute)         | ≤50   | ≥100  |
+| Respiratory rate (breaths per minute) | ≤12   | ≥20   |
+| Body temperature (°C)                 | ≤35.0 | ≥38.0 |
+
+Confidential
+
+
+
+
+CELLTRION, Inc.    Statistical Analysis Plan – Version 3.0 Final
+# CT-P16 3.1
+
+Date Issued: December 15, 2023
+
+The number and percentage of patients who have a clinically notable vital sign hypersensitivity result will be presented by treatment group, visit, time point and parameter.
+
+In addition, hypersensitivity should be monitored by routine continuous clinical monitoring including ECG monitoring at 60 minutes (± 15 minutes) after the end of the study drug infusion. Findings will be classified as ‘Normal’, ‘Abnormal, not clinically significant’, ‘Abnormal, clinically significant’ or ‘Not Done’. The number and percentage of patients within each hypersensitivity finding classes will be presented by treatment group, visit and time point in the form of a shift table to detect changes from baseline.
+
+All hypersensitivity data will be listed for each patient by treatment group, visit and time point.
+
+# 10.6. Physical Examination
+
+Physical examinations will be performed at the time points specified in the Appendix 14.1.
+
+Findings will be classified as ‘Normal’, ‘Abnormal, not clinically significant’ and ‘Abnormal, clinically significant’ or ‘Not Done’. The number and percentage of patients within each class will be presented by treatment group, body system and visit in the form of a shift table to detect changes from baseline. All physical examination data will be listed for each patient by treatment group, visit and body system.
+
+# 10.7. Pregnancy Test
+
+Pregnancy tests of urine and serum in women of childbearing potential will be performed at the time points specified in the Appendix 14.1.
+
+Urine pregnancy results will be classified as ‘Positive’, ‘Negative’ or ‘Equivocal’, and serum pregnancy results will be classified as ‘Positive’ or ‘Negative’. The number and percentage within each class will be presented by treatment group, type of pregnancy test and visit (including EOT). All pregnancy testing result will be listed for each patient by treatment, visit and type of pregnancy test.
+
+# 10.8. ECOG Performance Status
+
+ECOG performance status is to assess health of oncology patients with score running from 0 to 5.
+
+Grade of performance status is as follows:
+
+| Grade | Performance Status                                                                                                                                      |
+| ----- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 0     | Fully active, able to carry on all pre-disease performance without restriction                                                                          |
+| 1     | Restricted in physically strenuous activity but ambulatory and able to carry out work of light or sedentary nature, e.g., light house work, office work |
+| 2     | Ambulatory and capable of all self-care but unable to carry out any work activities; up and about more than 50% of waking hours                         |
+
+Confidential
+
+
+
+
+
+CELLTRION, Inc.    Statistical Analysis Plan – Version 3.0 Final
+CT-P16 3.1         Date Issued: December 15, 2023
+
+# 10.9. Immunogenicity
+
+Blood samples for assessment of immunogenicity will be collected at the time points specified in the Appendix 14.1. Immunogenicity assessment consists of both anti-drug antibody (ADA) and neutralizing antibody (NAb) assays.
+
+The ADA assay will follow a three-tiered approach consisting of screening assay, confirmatory assay, and titration. The test outcome for the screening assay will be reported as ‘Potential Positive’ or ‘Negative’. Samples that are ‘Potential Positive’ in the screening assay will be undergone further testing in the confirmatory assay to determine if patients are a true positive. The test outcome for the confirmatory assay will be ‘Positive’, ‘Negative’, and ‘Not applicable (N/A)’. ‘Positive’ indicates a true positive test outcome and will be labeled as ‘Positive’ in outputs. ‘Negative’ is considered negative, and ‘N/A’ indicates the assay was negative at the screening phase of the process. Patients with a ‘Negative’ test outcome for either screening or confirmatory assays will be considered negative for the overall ADA assessment. Any samples not available for analysis will be reported as ‘No Recorded Result (NRR)’. Samples with a ‘NRR’ test outcome for the screening assay and ‘N/A’ for the confirmatory assay will be considered ‘N/A’ for the overall ADA assessment. For further characterization, the antibody level will be assessed by titration in confirmed positive samples.
+
+The ADA value tagged assay will be transformed using a log transformation. Transformed ADA value can be obtained using 嬀log₃(X/42)崀 + 1 transformation.
+
+Samples that are positive in the ADA confirmatory assay will be analyzed further to conduct a NAb assessment. The test outcome for the screening assay will be ‘Positive’ or ‘Negative’. For further characterization, the antibody level will be assessed by titration in NAb positive samples.
+
+Transformed NAb value can be obtained using 嬀log₂(X/5)崀 + 1 transformation.
+
+The results of the final ADA and NAb incidence will be summarized. The total number of patients with at least one result in timepoints (anytime during the study period, baseline and after the first infusion) will be presented. The number and percentage of patient in each result will be presented by treatment group, timepoints, visits and test. Additionally, the transformed ADA/NAb titer will be summarized by treatment and visits.
+
+Confidential
+
+
+
+CELLTRION, Inc.    Statistical Analysis Plan – Version 3.0 Final
+# CT-P16 3.1
+
+Date Issued: December 15, 2023
+
+Immunogenicity test results including actual and transformed ADA and NAb titer will be listed for each patient by treatment group and visit.
+
+# 11. QUALITY OF LIFE ANALYSES
+
+QoL will be assessed at the time points specified in the Appendix 14.1 using EORTC QLQ. The QLQ core 30 (QLQ-C30) and QLQ lung cancer-specific module (QLQ-LC13) will be used.
+
+Each score for scales will be calculated as per following logic:
+
+| Categories               | QLQ-C30      | Item range\* |
+| ------------------------ | ------------ | ------------ |
+| Scales                   | Item numbers |              |
+| Global health status/QoL | 29, 30       | 6            |
+| Functional scales        |              |              |
+| Physical functioning     | 1 to 5       | 3            |
+| Role functioning         | 6, 7         | 3            |
+| Emotional functioning    | 21 to 24     | 3            |
+| Cognitive functioning    | 20, 25       | 3            |
+| Social functioning       | 26, 27       | 3            |
+| Symptom scales/items     |              |              |
+| Fatigue                  | 10, 12, 18   | 3            |
+| Nausea and vomiting      | 14, 15       | 3            |
+| Pain                     | 9, 19        | 3            |
+| Dyspnoea                 | 8            | 3            |
+| Insomnia                 | 11           | 3            |
+| Appetite loss            | 13           | 3            |
+| Constipation             | 16           | 3            |
+| Diarrhea                 | 17           | 3            |
+| Financial difficulties   | 28           | 3            |
+
+*Item range is the difference between the possible maximum and the minimum response to individual items; most items take values from 1 to 4, giving range=3.
+
+| Categories            | QLQ-LC13     | Item range\* |
+| --------------------- | ------------ | ------------ |
+| Scales                | Item numbers |              |
+| Symptom scales/items  |              |              |
+| Dyspnoea\*\*          | 3, 4, 5      | 3            |
+| Coughing              | 1            | 3            |
+| Haemoptysis           | 2            | 3            |
+| Sore mouth            | 6            | 3            |
+| Dysphagia             | 7            | 3            |
+| Peripheral neuropathy | 8            | 3            |
+| Alopecia              | 9            | 3            |
+
+Confidential
+
+
+
+
+
+
+CELLTRION, Inc. Statistical Analysis Plan – Version 3.0 Final
+CT-P16 3.1 Date Issued: December 15, 2023
+
+# 12. CHANGES FROM PROTOCOL
+
+1. The definition of response duration was updated: from ‘Response duration (or
+duration of response) should be defined as the time between the initial response
+(CR or PR) after study treatment administration and PD/recurrence’ to ‘Response
+duration (or duration of response) should be defined as the time between the initial
+response (CR or PR) that is confirmed by the subsequent assessment after study
+treatment administration and PD/recurrence or death from any cause (whichever
+occurs first).
+
+# 13. REFERENCE LIST
+
+Protocol: A Double-Blind, Randomized, Active-Controlled, Parallel-Group, Phase 3
+Study to Compare Efficacy and Safety of CT-P16 and EU-Approved Avastin as First-Line
+Treatment for Metastatic or Recurrent Non-Squamous Non-Small Cell Lung Cancer,
+Version 2.0, 14 June 2019
+
+| Pain in chest           | 10 | 3 |
+| ----------------------- | -- | - |
+| Pain in arm or shoulder | 11 | 3 |
+| Pain in other parts     | 12 | 3 |
+
+* Item range is the difference between the possible maximum and the minimum response
+to individual items; most items take values from 1 to 4, giving range=3.
+
+** The dyspnea scale should only be used if all three items have been answered.
+
+For all scales, the Raw Score (RS), is the mean of the component items:
+
+RS = (𝐼𝐼1 + 𝐼𝐼2 + ⋯ + 𝐼𝐼𝑛𝑛)/𝑛𝑛
+
+Then for Functional scales:
+
+Score =  −1 − (𝑅𝑅𝑅𝑅−1)− × 100
+
+𝑟𝑟𝑟𝑟𝑛𝑛𝑟𝑟𝑟𝑟
+
+And for Symptom scales/items and Global health status/QoL:
+
+Score =  𝑅𝑅𝑅𝑅−1 × 100
+
+𝑟𝑟𝑟𝑟𝑛𝑛𝑟𝑟𝑟𝑟
+
+For missing items from multi-item scales, if at least half of the items from the scale have
+been answered, the scale score will be calculated using all the items that were completed
+and apply the logic, otherwise set to missing. For missing single-item, set to missing.
+
+The scores for each scale will be displayed to two decimal places. Descriptive analysis
+will be performed on actual score and change from baseline at each visit by treatment
+group and scales in the ITT population. The answer for each item will be listed for each
+patient by treatment group and visit in the ITT population.
+
+36 Confidential
+
+
+
+
+
+CELLTRION, Inc.
+Statistical Analysis Plan – Version 3.0 Final
+CT-P16 3.1
+Date Issued: December 15, 2023
+
+# Unique CRF
+
+# A Double-Blind, Randomized, Active-Controlled, Parallel-Group, Phase 3 Study to Compare Efficacy and Safety of CT-P16 and EU-Approved Avastin as First-Line Treatment for Metastatic or Recurrent Non-Squamous Non-Small Cell Lung Cancer
+
+# Version 7.0, 21 July 2021
+
+37
+
+Confidential
+
+
+
+
+
+CELLTRION, Inc. Statistical Analysis Plan – Version 3.0 Final
+# 14. APPENDICES
+
+# 14.1. Schedule of Events
+
+| Procedure                                                              | Screening¹                 | Induction Study Period | Maintenance Study Period²   | EOT³                  | Follow-Up Period⁴ |
+| ---------------------------------------------------------------------- | -------------------------- | ---------------------- | --------------------------- | --------------------- | ----------------- |
+| Cycle Visit window (days)                                              | (Day -28 to Randomization) | Cycle 1 Day 1          | Each Cycle (except Cycle 1) | End of Cycles 2 and 4 | End of Cycle 6    |
+| Informed consent                                                       | X                          |                        |                             |                       |                   |
+| Demographics and disease-related information                           | X                          |                        |                             |                       |                   |
+| Medical history                                                        | X                          |                        |                             |                       |                   |
+| Gene screening⁵                                                        | X                          |                        |                             |                       |                   |
+| Inclusion and exclusion criteria⁶                                      | X                          | X                      |                             |                       |                   |
+| Randomization                                                          |                            | X                      |                             |                       |                   |
+| Pathological diagnosis⁷                                                | X                          |                        |                             |                       |                   |
+| Clinical laboratory tests: hematology, clinical chemistry, urinalysis⁸ | X                          | X                      | X                           | X                     | X                 |
+| Hepatitis B, C, HIV tests                                              | X                          |                        | (Cycle 1 only)              | (X)                   |                   |
+| Pregnancy test⁹                                                        | X                          |                        | Cycle 1 only                | X                     |                   |
+| 12-lead ECG¹⁰                                                          | X                          |                        | Cycle 1 only                | X                     |                   |
+| Physical examination                                                   | X                          | X¹¹                    | X¹¹                         | X¹¹                   | X                 |
+| ECOG performance status                                                | X                          | X¹¹                    | X¹¹                         | X¹¹                   | X                 |
+| Vital signs, weight and height¹²                                       | X                          | X¹¹                    | X¹¹                         | X¹¹                   | X                 |
+| Study drug administration                                              | X                          |                        | X                           |                       |                   |
+| Concurrent chemotherapy¹³                                              | X                          |                        | X                           |                       |                   |
+| Hypersensitivity monitoring                                            | X                          | X                      | X                           |                       |                   |
+
+Confidential
+
+
+
+
+CELLTRION, Inc. Statistical Analysis Plan – Version 3.0 Final
+
+CT-P16 3.1 Date Issued: December 15, 2023
+
+# Statistical Analysis Plan
+
+| Procedure                                | Screening¹                 | Induction Study Period | Maintenance Study Period²         | EOT³                  | Follow-Up Period⁴    |
+| ---------------------------------------- | -------------------------- | ---------------------- | --------------------------------- | --------------------- | -------------------- |
+| Cycle Visit window (days)                | (Day -28 to Randomization) | Cycle 1 Day 1          | Each Cycle Day 1 (except Cycle 1) | End of Cycles 2 and 4 | End of Cycle 6 Day 1 |
+| Pharmacokinetic blood sampling¹⁴         | X                          | X                      | X                                 | X                     | X                    |
+| Tumor Evaluation¹⁵                       | - CT (chest and abdomen)   | X¹⁶                    |                                   | X                     | X                    |
+|                                          | - CT or MRI (brain)¹⁷      | X¹⁶                    | (X)                               | (X)                   | (X)                  |
+|                                          | - Bone scan.18             | X¹⁶                    | (X)                               | (X)                   | (X)                  |
+| Immunogenicity¹⁹                         | X¹¹                        | X                      | X                                 | X                     | FU1 only             |
+| Quality of Life²⁰                        | X                          |                        | X                                 | X                     | X                    |
+| Survival and further anti-cancer therapy |                            |                        |                                   |                       | X                    |
+| Prior/concomitant medications²¹          |                            | X                      |                                   |                       | X                    |
+| AEs monitoring²²                         |                            | X                      |                                   |                       | X²³                  |
+
+Abbreviations: AE, adverse event; CT, computed tomography; ECOG, Eastern Cooperative Oncology Group; ECG, electrocardiogram; EOT, end of treatment; FU1, follow-up 1; HIV, human immunodeficiency virus; MRI, magnetic resonance imaging.
+
+1. Screening evaluations will be completed within 28 days prior to randomization. However, screening period can be extended to 8 weeks exclusively for treating patients who have CNS metastases before starting the study treatment and all other assessments including chest and abdomen CT scan should be completed as specified in the protocol.
+2. Cycle 1 of Maintenance Study Period will occur 3 weeks after Cycle 6 of Induction Study Period. Study drug will be administered every 3 weeks until disease progression (PD) or intolerable toxicity occurrence.
+3. An end of treatment (EOT) visit will occur 3 weeks after the last dose of the Induction Study Period or Maintenance Study Period regardless of the reason of discontinuation.
+4. All patients will be followed every 9 weeks until death or until 36 months from Day 1 of Cycle 1 of the Induction Study Period for the last patient, whichever occurs first.
+5. Gene screening results will be used for epidermal growth factor receptor (EGFR) mutation and anaplastic lymphoma kinase (ALK) rearrangement.
+6. The inclusion and exclusion criteria need to be confirmed prior to randomization.
+7. A pathological diagnosis results will be used to confirm that the patient has non-squamous cell type.
+8. Clinical laboratory tests for Cycle 1 of Induction Study Period will be performed within 14 days prior to Day 1 of Cycle 1 of the Induction Study Period. For all other cycles, clinical laboratory tests will be performed within 3 days prior to Day 1 of each cycle. Coagulation (prothrombin time, prothrombin time international normalized ratio) test will be performed at Screening, Day 1 of Cycle 1 and Cycle 2 of Induction Study Period and when clinically indicated for the patient who has been administered aspirin. Clinical laboratory test samples will be analyzed at the local laboratory.
+9. Urine pregnancy test should be performed at the Screening visit (within 3 days before Day 1 of Cycle 1), within 3 days before Day 1 of Cycle 1 of the Maintenance Study Period and EOT visit, or at any time if pregnancy is suspected in females of childbearing potential only. If the urine pregnancy test gives equivocal results, a serum pregnancy test will be performed to exclude pregnant women in this study. For the Screening visit, only patients who have confirmed negative pregnancy test results will be included in this study. Pregnancy test samples will be analyzed at the local laboratory.
+
+39 Confidential
+
+
+
+
+
+CELLTRION, Inc.                                                                                                  Statistical Analysis Plan – Version 3.0 Final
+CT-P16 3.1                                                                                                       Date Issued: December 15, 2023
+
+1. 12-lead ECG at the Screening visit will be performed within 14 days prior to Day 1 of Cycle 1 of the Induction Study Period. For all other cycles, 12-lead ECG will be performed within 3 days prior to Day 1 of each cycle.
+2. These assessments should be performed prior to study treatment administration.
+3. Vital signs (including blood pressure, heart and respiratory rates, and temperature) will be assessed prior to study drug administration and be measured after 5 minutes of rest (sitting). Height will be assessed at Screening only as a baseline measurement.
+4. Paclitaxel and carboplatin will be administered on Day 1 of each cycle in Induction Study Period.
+5. Pharmacokinetic samples will be collected on Day 1 of each cycle (prior to the beginning of the study drug administration -3 days as window are allowed) in the Induction Study Period, on Day 1 (-3 days as window are allowed) of Cycle 1 and every 3 cycles (end of Cycle 3, Cycle 6, and Cycle 9...) in the Maintenance Study Period, and EOT visit. In patients whose dose is delayed from the planned schedule, serum samples will be obtained on Day 22 of the last cycle (-3 days as window are allowed). Pharmacokinetic samples will be analyzed at the central laboratory.
+6. Tumor evaluation will be assessed at Screening and every 2 cycles during the Induction Study Period and every 3 cycles during the Maintenance Study Period, and at the EOT visit. During the Follow-Up Period, it will be performed every 9 weeks until PD, death, withdrawal or start of new anti-cancer therapy if PD is not confirmed during the Induction or Maintenance Study Periods.
+7. Tumor assessment will be performed within 4 weeks before the start of study treatment.
+8. Brain CT or MRI will be assessed at Screening as mandatory to assess brain metastasis. During the study, imaging will be performed for patients with brain metastasis at baseline or for any suspected new lesions.
+9. Bone scans will be assessed at Screening as mandatory. During the study, scans will be performed for patients with bone metastasis at baseline or for any suspected new lesions.
+10. Immunogenicity will be assessed on Day 1 of Cycle 1 (predose), every 2 cycles during the Induction Study Period, every 3 cycles during the Maintenance Study Period and EOT visit. In the Follow-Up period, immunogenicity will be assessed once at the first visit of Follow-Up Period (9ᵗʰ week). A window of -3 days before Day 1 of the next cycle are allowed. In patients whose dose is delayed from the planned schedule, serum samples will be obtained on Day 22 of the last cycle (-3 days as window are allowed).
+11. Quality of life should be assessed within 7 days before Day 1 of the next cycle, except screening assessment.
+12. All medications used during the study, as well as all medications taken within 30 days of Day 1 of Cycle 1 in the Induction Study Period and until 28 days after the last dose of study treatment. Concomitant medications relevant to serious adverse drug reactions (ADRs) occurred after the EOT visit will also be collected. For patients who do not enter the Follow-Up Period, the last assessed concomitant medications will be collected.
+13. Adverse events will be assessed from the date the informed consent form is signed until up to 28 days after the last dose of study drug, regardless of the relationship to the study drug. Where an ADR is ongoing at the EOT visit, the ADR will be followed until one of the following: resolution or improvement from baseline, relationship reassessed as unrelated, start of new anti-cancer therapy, confirmation from the investigator that no further improvement can be expected, end of collection of clinical or safety data, or final database closure. For patients who do not enter the Follow-Up Period, the last assessed status of AEs will be collected.
+14. Serious ADRs occurring during the Follow-Up Period will be reported and followed up.
+
+40
+Confidential
+
+
+
+
+CELLTRION, Inc. Statistical Analysis Plan – Version 3.0 Final CT-P16 3.1 Date Issued: December 15, 2023
+
+# 14.2. Table of CTCAE Terms and Grades
+
+| CTCAE Term                 | Laboratory Parameter | Grade 1                                                                                | Grade 2                                                                                 | Grade 3                                                                                   | Grade 4                                           |
+| -------------------------- | -------------------- | -------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ------------------------------------------------- |
+| Anemia                     | Hemoglobin           | \<LLN - 10.0 g/dL;                                                                     | <10.0 - 8.0 g/dL; <6.2 - 4.9 mmol/L; <80 g/L                                            | <8.0 g/dL; <4.9 mmol/L;                                                                   | -                                                 |
+| Alanine aminotransferase   | (ALT)                | >ULN - 3.0 x ULN if baseline was normal; 1.5 - 3.0 x baseline if baseline was abnormal | >3.0 - 5.0 x ULN if baseline was normal; >3.0 - 5.0 x baseline if baseline was abnormal | >5.0 - 20.0 x ULN if baseline was normal; >5.0 - 20.0 x baseline if baseline was abnormal | >20.0 x ULN if baseline was abnormal              |
+| Alkaline phosphatase       | High                 | >ULN - 3.0 x ULN if baseline was normal; 2.0 - 2.5 x baseline if baseline was abnormal | >2.5 - 5.0 x ULN if baseline was normal; >2.5 - 5.0 x baseline if baseline was abnormal | >5.0 - 20.0 x ULN if baseline was normal; >5.0 - 20.0 x baseline if baseline was abnormal | >20.0 x ULN if baseline was abnormal              |
+| Aspartate aminotransferase | (AST)                | >ULN - 1.5 x ULN if baseline was normal; 1.5 - 3.0 x baseline if baseline was abnormal | >1.5 - 3.0 x ULN if baseline was normal; >3.0 - 5.0 x baseline if baseline was abnormal | >3.0 - 10.0 x ULN if baseline was normal; >5.0 - 20.0 x baseline if baseline was abnormal | >10.0 x ULN if baseline was abnormal              |
+| Blood bilirubin            | Total Bilirubin      | > 1.0 - 1.5 x baseline if baseline was abnormal                                        | baseline was normal; >1.5 - 3.0 x baseline if baseline was abnormal                     | >3.0 - 10.0 x baseline if baseline was normal; baseline was abnormal                      | normal; >10.0 x baseline if baseline was abnormal |
+
+41 Confidential
+
+
+
+
+CELLTRION, Inc. Statistical Analysis Plan – Version 3.0 Final
+CT-P16 3.1 Date Issued: December 15, 2023
+
+# CTCAE Term
+
+| Laboratory Parameter                       | Grade 1                                                                    | Grade 2                                                                                      | Grade 3                                                                                        | Grade 4                                   |
+| ------------------------------------------ | -------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ----------------------------------------- |
+| CPK increased Creatine Phosphokinase (CPK) | High >ULN - 2.5 x ULN                                                      | >2.5 x ULN - 5 x ULN                                                                         | >5 x ULN - 10 x ULN                                                                            | >10 x ULN                                 |
+| Creatinine increased¹                      | High >ULN - 1.5 x ULN                                                      | >1.5 - 3.0 x baseline; >1.5 - 3.0 x ULN                                                      | >3.0 x baseline; >3.0 - 6.0 x ULN                                                              | >6.0 x ULN                                |
+| GGT increased Gamma Glutamyl Transferase   | High if baseline was normal; 2.0 - 2.5 x baseline if baseline was abnormal | >2.5 - 5.0 x baseline if baseline was normal; >2.5 - 5.0 x baseline if baseline was abnormal | >5.0 - 20.0 x baseline if baseline was normal; >5.0 - 20.0 x baseline if baseline was abnormal | >20.0 x baseline if baseline was abnormal |
+| Hemoglobin increased                       | High Increase in >0 - 2 g/dL                                               | Increase in >2 - 4 g/dL                                                                      | Increase in >4 g/dL                                                                            | -                                         |
+| Hypercalcemia Calcium                      | High >ULN - 11.5 mg/dL; >ULN - 2.9 mmol/L                                  | >11.5 - 12.5 mg/dL; >2.9 - 3.1 mmol/L                                                        | >12.5 - 13.5 mg/dL; >3.1 - 3.4 mmol/L                                                          | >13.5 mg/dL; >3.4 mmol/L                  |
+| Hyperkalemia Potassium                     | High >ULN - 5.5 mmol/L                                                     | >5.5 - 6.0 mmol/L                                                                            | >6.0 - 7.0 mmol/L                                                                              | >7.0 mmol/L                               |
+| Hypernatremia Sodium                       | High >ULN - 150 mmol/L                                                     | >150 - 155 mmol/L                                                                            | >155 - 160 mmol/L                                                                              | >160 mmol/L                               |
+| Hypoalbuminemia Albumin                    | Low                                                                        | <3 - 2 g/dL; <30 - 20 g/L                                                                    | <2 g/dL;                                                                                       | -                                         |
+
+42 Confidential
+
+
+
+
+
+CELLTRION, Inc.    Statistical Analysis Plan – Version 3.0 Final
+CT-P16 3.1         Date Issued: December 15, 2023
+
+# Statistical Analysis Plan
+
+| CTCAE Term                 | Laboratory Parameter      | Level | Grade 1                                 | Grade 2                                      | Grade 3                                      | Grade 4                      |
+| -------------------------- | ------------------------- | ----- | --------------------------------------- | -------------------------------------------- | -------------------------------------------- | ---------------------------- |
+| Hypocalcemia               | Calcium                   | Low   | \<LLN - 8.0 mg/dL;                      | <8.0 - 7.0 mg/dL; <2.0 - 1.75 mmol/L         | <7.0 - 6.0 mg/dL; <1.75 - 1.5 mmol/L         | <6.0 mg/dL; <1.5 mmol/L      |
+| Hypoglycemia               | Glucose                   | Low   | \<LLN - 55 mg/dL;                       | <55 - 40 mg/dL; <3.0 - 2.2 mmol/L            | <40 - 30 mg/dL; <2.2 - 1.7 mmol/L            | <30 mg/dL; <1.7 mmol/L       |
+| Hypokalemia                | Potassium                 | Low   | \<LLN - 3.0 mmol/L                      | -                                            | <3.0 - 2.5 mmol/L                            | <2.5 mmol/L                  |
+| Hyponatremia               | Sodium                    | Low   | \<LLN - 130 mmol/L                      | <130 - <124 mmol/L                           | <=124 - 120 mmol/L                           | <120 mmol/L                  |
+| Neutrophil count decreased | Absolute neutrophil count | Low   | \<LLN - 1500/mm³; \<LLN - 1.5 x 10e⁹ /L | <1500 - 1000/mm³; <1.5 - 1.0 x 10e⁹ /L       | <1000 - 500/mm³; <1.0 - 0.5 x 10e⁹ /L        | <500/mm³; <0.5 x 10e⁹ /L     |
+| Platelet count decreased   | Platelets                 | Low   | \<LLN - 75,000/mm³;                     | <75,000 - 50,000/mm³; <75.0 - 50.0 x 10e⁹ /L | <50,000 - 25,000/mm³; <50.0 - 25.0 x 10e⁹ /L | <25,000/mm³; <25.0 x 10e⁹ /L |
+| White blood cell decreased | White blood cell count    | Low   | \<LLN - 3000/mm³;                       | <3000 - 2000/mm³; <3.0 - 2.0 x 10e⁹ /L       | <2000 - 1000/mm³; <2.0 - 1.0 x 10e⁹ /L       | <1000/mm³; <1.0 x 10e⁹ /L    |
+| Cholesterol high           | Total cholesterol         | High  | >ULN - 300 mg/dL; >ULN - 7.75 mmol/L    | >300 - 400 mg/dL; >7.75 - 10.34 mmol/L       | >400 - 500 mg/dL; >10.34 - 12.92 mmol/L      | >500 mg/dL; >12.92 mmol/L    |
+
+43
+Confidential
+
+
+
+
+
+# CELLTRION, Inc.    Statistical Analysis Plan – Version 3.0 Final
+
+# CT-P16 3.1         Date Issued: December 15, 2023
+
+CTCAE Term|                                     |                      |                       |                                     |                                      |                                       |                           |
+| ----------------------------------- | -------------------- | --------------------- | ----------------------------------- | ------------------------------------ | ------------------------------------- | ------------------------- |
+| Laboratory Parameter                | Grade 1              | Grade 2               | Grade 3                             | Grade 4                              |                                       |                           |
+| Proteinuria¹                        | Protein (Urinalysis) | High                  | 1+ proteinuria                      | 2+ and 3+ proteinuria                | 4+ proteinuria                        |                           |
+| 24 hours urine collection (protein) | High                 | ≥ ULN - <1.0 g/24 hrs | 1.0 - <3.5 g/24 hrs                 | ≥ 3.5 g/24 hrs                       | -                                     |                           |
+| Hypertriglyceridemia                | Triglyceride         | High                  | 150 - 300 mg/dL; 1.71 - 3.42 mmol/L | >300 - 500 mg/dL; >3.42 - 5.7 mmol/L | >500 - 1000 mg/dL; >5.7 - 11.4 mmol/L | >1000 mg/dL; >11.4 mmol/L |
+
+Note: LLN: Lower Limit of Normal, ULN: Upper Limit of Normal.
+
+A Semi-colon indicates ‘or’ within the description of the grade.
+
+A single dash (-) indicates a grade is not available.
+
+1 The most severe grade is counted if the CTCAE grade is discrepant by multiple definitions.
+
+Confidential
+
+
+
+
+
+CELLTRION, Inc. Statistical Analysis Plan – Version 3.0 Final
+# CT-P16 3.1
+
+Date Issued: December 15, 2023
+
+# 14.3. TEAE of Special Interest
+
+| Event of Interest                           | SMQ Category/ Capture Logic                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| ------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Hypersensitivity/infusion-related reactions | captured on CRF (recorded as IRR in the AE page)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+|                                             | SMQ Category: Gastrointestinal perforation                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+|                                             | captured by PTs as follows: Abdominal abscess, Abdominal hernia perforation, Abdominal wall abscess, Abscess intestinal, Acquired tracheo-oesophageal fistula, Anal abscess, Anal fistula, Anal fistula infection, Anal fistula repair, Anastomotic ulcer perforation, Anovulvar fistula, Aortoenteric fistula, Aorto-oesophageal fistula, Appendiceal abscess, Appendicitis perforated, Arterioenteric fistula, Atrio-oesophageal fistula, Chemical peritonitis, Colon fistula repair, Colonic abscess, Colonic fistula, Colo-urethral fistula, Diverticular fistula, Diverticular perforation, Diverticulitis intestinal perforated, Douglas' abscess, Duodenal perforation, Duodenal ulcer perforation, Duodenal ulcer perforation, obstructive, Duodenal ulcer repair, Enterocolonic fistula, Enterocutaneous fistula, Enterovesical fistula, Fistula of small intestine, Focal peritonitis, Gastric fistula, Gastric fistula repair, Gastric perforation, Gastric ulcer perforation, Gastric ulcer perforation, obstructive, Gastrointestinal anastomotic leak, Gastrointestinal fistula, Gastrointestinal fistula repair, Gastrointestinal perforation, Gastrointestinal ulcer perforation, Gastropleural fistula, Gastrosplenic fistula, Ileal perforation, Ileal ulcer perforation, Incisional hernia perforation, Inguinal hernia perforation, Intestinal fistula, Intestinal fistula infection, Intestinal fistula repair, Intestinal perforation, Intestinal ulcer perforation, Jejunal perforation, Jejunal ulcer perforation, Large intestinal ulcer perforation, Large intestine perforation, Lower gastrointestinal perforation, Mesenteric abscess, Neonatal intestinal perforation, Oesophageal abscess, Oesophageal fistula, Oesophageal fistula repair, Oesophageal perforation, Oesophageal rupture, Oesophageal ulcer perforation, Oesophageal-pulmonary fistula, Oesophagobronchial fistula, Oesophagomediastinal fistula, Oesophagopleural fistula, Pancreatic fistula, Pancreatic fistula repair, Peptic ulcer perforation, Peptic ulcer perforation, obstructive, Perforated peptic ulcer oversewing, Perforated ulcer, Perineal abscess, Perirectal abscess, Peritoneal abscess, Peritoneocutaneous fistula, Peritonitis, Peritonitis bacterial, Pneumoperitoneum, Pneumoretroperitoneum, Procedural intestinal perforation, Rectal abscess, Rectal fistula repair, Rectal perforation, Rectoprostatic fistula, Rectourethral fistula, Retroperitoneal abscess, Small intestinal perforation, Small intestinal ulcer perforation, Umbilical hernia perforation, Upper gastrointestinal perforation |
+|                                             | captured by PTs as follows: Abdominal Wound Dehiscence, Anastomotic Complication, Anastomotic Leak, Anastomotic Ulcer Perforation, Debridement, Excessive Granulation Tissue, Fungating Wound, Gastrointestinal Stoma Complication, Graft Infection, Impaired Healing, Implant Site Abscess, Incision Site Abscess, Incision Site Cellulitis, Incision Site Complication, Incision Site Erythema, Incision Site Haematoma, Incision Site Haemorrhage, Incision Site Infection, Incision Site Oedema, Incision Site Ulcer, Inflammation Of Wound, Injection Site Ulcer, Intestinal Anastomosis Complication, Necrotising Fasciitis, Necrotising Fasciitis Fungal, Necrotising Fasciitis Staphylococcal, Necrotising Fasciitis Streptococcal, Post Procedural Cellulitis, Post Procedural Persistent Drain Fluid, Postoperative Wound Complication, Postoperative Wound Infection, Reproductive Tract Anastomotic Leak, Skin Graft Detachment, Skin Graft Failure, Urinary Anastomotic Leak, Wound, Wound Abscess, Wound Complication, Wound Decomposition, Wound Dehiscence, Wound Evisceration, Wound Haemorrhage, Wound Haematoma, Wound Infection, Wound Infection Bacterial, Wound Infection Fungal, Wound Infection Helminthic                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+
+Confidential
+
+
+
+
+CELLTRION, Inc. Statistical Analysis Plan – Version 3.0 Final
+CT-P16 3.1 Date Issued: December 15, 2023
+
+# Wound Infection
+
+- Pseudomonas
+- Staphylococcal
+- Viral
+- Necrosis
+- Secretion
+- Sepsis
+
+# SMQ Category: Hypertension
+
+captured by PTs as follows:
+
+- Accelerated hypertension
+- Blood pressure ambulatory increased
+- Blood pressure diastolic increased
+- Blood pressure inadequately controlled
+- Blood pressure increased
+- Blood pressure management
+- Blood pressure orthostatic increased
+- Blood pressure systolic increased
+- Catecholamine crisis
+- Dialysis induced hypertension
+- Diastolic hypertension
+- Eclampsia
+- Endocrine hypertension
+- Essential hypertension
+- Gestational hypertension
+- HELLP syndrome
+- Hyperaldosteronism
+- Hypertension
+- Hypertension neonatal
+- Hypertensive angiopathy
+- Hypertensive cardiomegaly
+- Hypertensive cardiomyopathy
+- Hypertensive cerebrovascular disease
+- Hypertensive crisis
+- Hypertensive emergency
+- Hypertensive encephalopathy
+- Hypertensive end-organ damage
+- Hypertensive heart disease
+- Hypertensive nephropathy
+- Hypertensive urgency
+- Labile hypertension
+- Malignant hypertension
+- Malignant hypertensive heart disease
+- Malignant renal hypertension
+- Maternal hypertension affecting foetus
+- Mean arterial pressure increased
+- Metabolic syndrome
+- Neurogenic hypertension
+- Orthostatic hypertension
+- Page kidney
+- Postoperative hypertension
+- Pre-eclampsia
+- Prehypertension
+- Procedural hypertension
+- Renal hypertension
+- Renal sympathetic nerve ablation
+- Renovascular hypertension
+- Retinopathy hypertensive
+- Secondary aldosteronism
+- Secondary hypertension
+- Superimposed pre-eclampsia
+- Supine hypertension
+- Systolic hypertension
+- Withdrawal hypertension
+
+# Posterior reversible encephalopathy syndrome
+
+captured by PT as follow:
+
+- Posterior reversible encephalopathy syndrome
+
+# SMQ Category: Proteinuria
+
+Proteinuria captured by PTs as follows:
+
+- Albumin globulin ratio increased
+- Albumin urine present
+- Albuminuria
+- Bence Jones protein urine present
+- Bence Jones proteinuria
+- Beta 2 microglobulin urine increased
+- Globulinuria
+- Microalbuminuria
+- Myoglobinuria
+- Orthostatic proteinuria
+- Protein urine
+- Protein urine present
+- Proteinuria
+- Urine albumin/creatinine ratio increased
+- Urine protein/creatinine ratio abnormal
+- Urine protein/creatinine ratio increased
+
+# SMQ Category: Embolic and thrombotic events, arterial
+
+captured by PTs as follows:
+
+- Acute aortic syndrome
+- Acute myocardial infarction
+- Amaurosis
+- Amaurosis fugax
+- Angioplasty
+- Aortic bypass
+- Aortic embolus
+- Aortic surgery
+- Aortic thrombosis
+- Aortogram abnormal
+- Arterectomy
+- Arterectomy with graft replacement
+- Arterial angioplasty
+- Arterial bypass operation
+- Arterial graft
+- Arterial occlusive disease
+- Arterial revascularisation
+- Arterial thromboembolism
+- Arterial stent insertion
+- Arterial therapeutic procedure
+- Arterial thrombosis
+- Arteriogram abnormal
+- Arteriogram carotid abnormal
+- Arteriotomy
+- Atherectomy
+- Atherosclerotic plaque rupture
+- Atrial appendage closure
+- Atrial appendage resection
+- Basal ganglia infarction
+- Basilar artery occlusion
+- Basilar artery thrombosis
+- Blindness transient
+- Brachiocephalic artery occlusion
+- Capsular warning syndrome
+- Carotid angioplasty
+- Carotid arterial embolus
+- Carotid artery bypass
+- Carotid artery occlusion
+- Carotid artery stent insertion
+- Carotid artery thrombosis
+- Carotid endarterectomy
+- Cerebellar artery occlusion
+
+46 Confidential
+
+
+
+
+CELLTRION, Inc. Statistical Analysis Plan – Version 3.0 Final
+# CT-P16 3.1
+
+Date Issued: December 15, 2023
+
+Cerebellar artery thrombosis, Cerebral artery embolism, Cerebral artery occlusion, Cerebral artery stent insertion, Cerebral artery thrombosis, Cerebral hypoperfusion, Cerebrovascular insufficiency, Cerebrovascular stenosis, Coeliac artery occlusion, Coronary angioplasty, Coronary arterial stent insertion, Coronary artery bypass, Coronary artery embolism, Coronary artery occlusion, Coronary artery reocclusion, Coronary artery surgery, Coronary artery thrombosis, Coronary endarterectomy, Coronary revascularisation, Coronary vascular graft occlusion, Embolia cutis medicamentosa, Embolism arterial, Endarterectomy, Femoral artery embolism, Hepatic artery embolism, Hepatic artery occlusion, Hepatic artery thrombosis, Hypothenar hammer syndrome, Iliac artery embolism, Iliac artery occlusion, Internal capsule infarction, Intra-aortic balloon placement, Intraoperative cerebral artery occlusion, Ischaemic cerebral infarction, Ischaemic stroke, Lacunar infarction, Left atrial appendage closure implant, Leriche syndrome, Mesenteric arterial occlusion, Mesenteric arteriosclerosis, Mesenteric artery embolism, Mesenteric artery stenosis, Mesenteric artery stent insertion, Mesenteric artery thrombosis, Myocardial infarction, Myocardial necrosis, Ophthalmic artery thrombosis, Papillary muscle infarction, Penile artery occlusion, Percutaneous coronary intervention, Peripheral arterial occlusive disease, Peripheral arterial reocclusion, Peripheral artery angioplasty, Peripheral artery bypass, Peripheral artery occlusion, Peripheral artery stent insertion, Peripheral artery surgery, Peripheral artery thrombosis, Peripheral embolism, Peripheral endarterectomy, Popliteal artery entrapment syndrome, Post procedural myocardial infarction, Postinfarction angina, Precerebral artery embolism, Precerebral artery occlusion, Precerebral artery thrombosis, Profundaplasty, Pulmonary artery occlusion, Pulmonary artery therapeutic procedure, Pulmonary artery thrombosis, Pulmonary endarterectomy, Pulmonary tumour thrombotic microangiopathy, Renal artery angioplasty, Renal artery occlusion, Renal artery thrombosis, Renal embolism, Renal-limited thrombotic microangiopathy, Retinal artery embolism, Retinal artery occlusion, Retinal artery thrombosis, Silent myocardial infarction, Spinal artery embolism, Spinal artery thrombosis, Splenic artery thrombosis, Splenic embolism, Stress cardiomyopathy, Subclavian artery embolism, Subclavian artery occlusion, Subclavian artery thrombosis, Thromboembolectomy, Thrombotic microangiopathy, Thrombotic thrombocytopenic purpura, Transient ischaemic attack, Truncus coeliacus thrombosis, Vascular pseudoaneurysm thrombosis, Vertebral artery occlusion, Vertebral artery thrombosis, Visual acuity reduced transiently
+
+SMQ Category: Embolic and thrombotic events, venous captured by PTs as follows: Aseptic cavernous sinus thrombosis, Axillary vein thrombosis, Brachiocephalic vein occlusion, Brachiocephalic vein thrombosis, Budd-Chiari syndrome, Catheterisation venous, Cavernous sinus thrombosis, Central venous catheterisation, Cerebral venous sinus thrombosis, Cerebral venous thrombosis, Compression garment application, Deep vein thrombosis, Deep vein thrombosis postoperative, Embolism venous, Hepatic vein embolism, Hepatic vein occlusion, Hepatic vein thrombosis, Homans' sign positive, Iliac vein occlusion, Inferior vena cava syndrome, Inferior vena caval occlusion, Jugular vein embolism, Jugular vein occlusion, Jugular vein thrombosis, Mahler sign, May-Thurner syndrome, Mesenteric vein thrombosis, Mesenteric venous occlusion, Obstetrical pulmonary embolism, Obstructive shock, Ophthalmic vein thrombosis, Ovarian vein thrombosis, Paget-Schroetter syndrome, Pelvic venous thrombosis, Penile vein thrombosis, Peripheral vein occlusion, Peripheral vein thrombus extension, Phlebectomy, Portal vein cavernous transformation, Portal vein embolism, Portal
+
+47 Confidential
+
+
+
+CELLTRION, Inc. Statistical Analysis Plan – Version 3.0 Final
+# CT-P16 3.1
+
+Date Issued: December 15, 2023
+
+vein occlusion, Portal vein thrombosis, Portosplenomesenteric venous thrombosis, Post procedural pulmonary embolism, Post thrombotic syndrome, Postoperative thrombosis, Postpartum venous thrombosis, Pulmonary embolism, Pulmonary infarction, Pulmonary microemboli, Pulmonary thrombosis, Pulmonary vein occlusion, Pulmonary veno-occlusive disease, Pulmonary venous thrombosis, Renal vein embolism, Renal vein occlusion, Renal vein thrombosis, Retinal vein occlusion, Retinal vein thrombosis, Septic pulmonary embolism, SI QIII TIII pattern, Splenic vein occlusion, Splenic vein thrombosis, Subclavian vein occlusion, Subclavian vein thrombosis, Superior sagittal sinus thrombosis, Superior vena cava occlusion, Superior vena cava syndrome, Thrombophlebitis, Thrombophlebitis migrans, Thrombophlebitis neonatal, Thrombophlebitis superficial, Thrombosed varicose vein, Thrombosis corpora cavernosa, Transverse sinus thrombosis, Vena cava embolism, Vena cava filter insertion, Vena cava filter removal, Vena cava thrombosis, Venogram abnormal, Venoocclusive disease, Venoocclusive liver disease, Venous angioplasty, Venous occlusion, Venous operation, Venous recanalisation, Venous repair, Venous stent insertion, Venous thrombosis, Venous thrombosis in pregnancy, Venous thrombosis limb, Venous thrombosis neonatal, Visceral venous thrombosis
+
+# SMQ Category: Haemorrhage terms (excl laboratory terms)
+
+captured by PTs as follows: Abdominal wall haematoma, Abdominal wall haemorrhage, Abnormal uterine bleeding, Abnormal withdrawal bleeding, Achenbach syndrome, Acute haemorrhagic leukoencephalitis, Acute haemorrhagic ulcerative colitis, Administration site bruise, Administration site haematoma, Administration site haemorrhage, Adrenal haematoma, Adrenal haemorrhage, Anal fissure haemorrhage, Anal haemorrhage, Anal ulcer haemorrhage, Anastomotic haemorrhage, Anastomotic ulcer haemorrhage, Aneurysm ruptured, Angina bullosa haemorrhagica, Anorectal varices haemorrhage, Anticoagulant-related nephropathy, Antiplatelet reversal therapy, Aortic aneurysm rupture, Aortic dissection rupture, Aortic intramural haematoma, Aortic perforation, Aortic rupture, Aponeurosis contusion, Application site bruise, Application site haematoma, Application site haemorrhage, Application site purpura, Arterial haemorrhage, Arterial intramural haematoma, Arterial perforation, Arterial rupture, Arteriovenous fistula site haematoma, Arteriovenous fistula site haemorrhage, Arteriovenous graft site haematoma, Arteriovenous graft site haemorrhage, Astringent therapy, Atrial rupture, Auricular haematoma, Basal ganglia haematoma, Basal ganglia haemorrhage, Basilar artery perforation, Bladder tamponade, Bleeding varicose vein, Blood blister, Blood loss anaemia, Blood urine, Blood urine present, Bloody discharge, Bloody peritoneal effluent, Bone contusion, Bone marrow haemorrhage, Brain contusion, Brain stem haematoma, Brain stem haemorrhage, Brain stem microhaemorrhage, Breast haematoma, Breast haemorrhage, Broad ligament haematoma, Bronchial haemorrhage, Bronchial varices haemorrhage, Bullous haemorrhagic dermatosis, Bursal haematoma, Cardiac contusion, Carotid aneurysm rupture, Carotid artery perforation, Catheter site bruise, Catheter site haematoma, Catheter site haemorrhage, Central nervous system haemorrhage, Cephalhaematoma, Cerebellar haematoma, Cerebellar haemorrhage, Cerebellar microhaemorrhage, Cerebral aneurysm perforation, Cerebral aneurysm ruptured syphilitic, Cerebral arteriovenous malformation haemorrhagic, Cerebral artery perforation, Cerebral cyst haemorrhage, Cerebral haematoma, Cerebral haemorrhage, Cerebral haemorrhage foetal, Cerebral haemorrhage neonatal, Cerebral microhaemorrhage, Cervix haematoma uterine, Cervix haemorrhage uterine, Chest wall haematoma, Choroidal haematoma, Choroidal haemorrhage, Chronic gastrointestinal bleeding, Chronic pigmented purpura, Ciliary body haemorrhage, Coital bleeding, Colonic haematoma, Conjunctival haemorrhage, Contusion, Corneal bleeding, Cullen's sign, Cystitis haemorrhagic, Deep dissecting haematoma, Diarrhoea haemorrhagic, Disseminated intravascular coagulation, Diverticulitis intestinal
+
+48 Confidential
+
+
+
+
+# CELLTRION, Inc.
+
+# Statistical Analysis Plan – Version 3.0 Final
+
+# CT-P16 3.1
+
+Date Issued: December 15, 2023
+
+haemorrhagic, Diverticulum intestinal haemorrhagic, Duodenal ulcer haemorrhage, Duodenitis haemorrhagic, Ear haemorrhage, Ecchymosis, Encephalitis haemorrhagic, Enterocolitis haemorrhagic, Epidural haemorrhage, Epistaxis, Exsanguination, Extra-axial haemorrhage, Extradural haematoma, Extradural haematoma evacuation, Extravasation blood, Eye contusion, Eye haematoma, Eye haemorrhage, Eyelid bleeding, Eyelid contusion, Eyelid haematoma, Femoral artery perforation, Femoral vein perforation, Foetal-maternal haemorrhage, Fothergill sign positive, Gastric haemorrhage, Gastric ulcer haemorrhage, Gastric ulcer haemorrhage, obstructive, Gastric varices haemorrhage, Gastritis alcoholic haemorrhagic, Gastritis haemorrhagic, Gastroduodenal haemorrhage, Gastrointestinal haemorrhage, Gastrointestinal polyp haemorrhage, Gastrointestinal ulcer haemorrhage, Gastrointestinal vascular malformation haemorrhagic, Genital contusion, Genital haemorrhage, Gingival bleeding, Graft haemorrhage, Grey Turner's sign, Haemangioma rupture, Haemarthrosis, Haematemesis, Haematochezia, Haematocoele, Haematoma, Haematoma evacuation, Haematoma infection, Haematoma muscle, Haematosalpinx, Haematospermia, Haemotympanum, Haematuria, Haematuria traumatic, Haemobilia, Haemoperitoneum, Haemophilic arthropathy, Haemophilic pseudotumour, Haemoptysis, Haemorrhage, Haemorrhage coronary artery, Haemorrhage foetal, Haemorrhage in pregnancy, Haemorrhage intracranial, Haemorrhage neonatal, Haemorrhage subcutaneous, Haemorrhage subepidermal, Haemorrhage urinary tract, Haemorrhagic adrenal infarction, Haemorrhagic arteriovenous malformation, Haemorrhagic ascites, Haemorrhagic breast cyst, Haemorrhagic cerebral infarction, Haemorrhagic cyst, Haemorrhagic diathesis, Haemorrhagic disease of newborn, Haemorrhagic disorder, Haemorrhagic erosive gastritis, Haemorrhagic gastroenteritis, Haemorrhagic hepatic cyst, Haemorrhagic infarction, Haemorrhagic necrotic pancreatitis, Haemorrhagic occlusive retinal vasculitis, Haemorrhagic ovarian cyst, Haemorrhagic stroke, Haemorrhagic thyroid cyst, Haemorrhagic transformation stroke, Haemorrhagic tumour necrosis, Haemorrhagic urticaria, Haemorrhagic vasculitis, Haemorrhoidal haemorrhage, Haemostasis, Haemothorax, Heavy menstrual bleeding, Henoch-Schonlein purpura, Hepatic haemangioma rupture, Hepatic haematoma, Hepatic haemorrhage, Hereditary haemorrhagic telangiectasia, Hyperfibrinolysis, Hyphaema, Iliac artery perforation, Iliac artery rupture, Iliac vein perforation, Immune thrombocytopenia, Implant site bruising, Implant site haematoma, Implant site haemorrhage, Incision site haematoma, Incision site haemorrhage, Increased tendency to bruise, Induced abortion haemorrhage, Inferior vena cava perforation, Infusion site bruising, Infusion site haematoma, Infusion site haemorrhage, Injection site bruising, Injection site haematoma, Injection site haemorrhage, Instillation site bruise, Instillation site haematoma, Instillation site haemorrhage, Intermenstrual bleeding, Internal haemorrhage, Intestinal haematoma, Intestinal haemorrhage, Intestinal varices haemorrhage, Intra-abdominal haematoma, Intra-abdominal haemorrhage, Intracerebral haematoma evacuation, Intracranial haematoma, Intracranial tumour haemorrhage, Intraocular haematoma, Intrapartum haemorrhage, Intratumoural haematoma, Intraventricular haemorrhage, Intraventricular haemorrhage neonatal, Iris haemorrhage, Joint microhaemorrhage, Jugular vein haemorrhage, Kidney contusion, Lacrimal haemorrhage, Large intestinal haemorrhage, Large intestinal ulcer haemorrhage, Laryngeal haematoma, Laryngeal haemorrhage, Lip haematoma, Lip haemorrhage, Liver contusion, Lower gastrointestinal haemorrhage, Lower limb artery perforation, Lymph node haemorrhage, Mallory-Weiss syndrome, Mediastinal haematoma, Mediastinal haemorrhage, Medical device site bruise, Medical device site haematoma, Medical device site haemorrhage, Melaena, Melaena neonatal, Meningorrhagia, Menometrorrhagia, Mesenteric haematoma, Mesenteric haemorrhage, Mouth haemorrhage, Mucocutaneous haemorrhage, Mucosal haemorrhage, Muscle contusion, Muscle haemorrhage, Myocardial haemorrhage, Myocardial rupture, Naevus haemorrhage, Nail bed bleeding, Nasal septum haematoma, Neonatal gastrointestinal haemorrhage, Nephritis
+
+49
+
+Confidential
+
+
+
+
+
+
+# CELLTRION, Inc. Statistical Analysis Plan – Version 3.0 Final
+
+# CT-P16 3.1
+
+Date Issued: December 15, 2023
+
+haemorrhagic, Nipple exudate bloody, Ocular retrobulbar haemorrhage, Oesophageal haemorrhage, Oesophageal intramural haematoma, Oesophageal ulcer haemorrhage, Oesophageal varices haemorrhage, Oesophagitis haemorrhagic, Omental haemorrhage, Optic disc haemorrhage, Optic nerve sheath haemorrhage, Oral blood blister, Oral contusion, Oral mucosa haematoma, Oral purpura, Orbital haematoma, Orbital haemorrhage, Osteorrhagia, Ovarian haematoma, Ovarian haemorrhage, Palpable purpura, Pancreatic haemorrhage, Pancreatic pseudocyst haemorrhage, Pancreatitis haemorrhagic, Papillary muscle haemorrhage, Paranasal sinus haematoma, Paranasal sinus haemorrhage, Parathyroid haemorrhage, Parotid gland haemorrhage, Pelvic haematoma, Pelvic haematoma obstetric, Pelvic haemorrhage, Penile contusion, Penile haematoma, Penile haemorrhage, Peptic ulcer haemorrhage, Pericardial haemorrhage, Perineal haematoma, Periorbital haematoma, Periorbital haemorrhage, Periosteal haematoma, Peripartum haemorrhage, Peripheral artery aneurysm rupture, Peripheral artery haematoma, Peritoneal haematoma, Periventricular haemorrhage neonatal, Petechiae, Pharyngeal contusion, Pharyngeal haematoma, Pharyngeal haemorrhage, Pituitary apoplexy, Pituitary haemorrhage, Placenta praevia haemorrhage, Polymenorrhagia, Post abortion haemorrhage, Post procedural contusion, Post procedural haematoma, Post procedural haematuria, Post procedural haemorrhage, Post transfusion purpura, Postmenopausal haemorrhage, Postpartum haemorrhage, Post-traumatic punctate intraepidermal haemorrhage, Premature separation of placenta, Procedural haemorrhage, Proctitis haemorrhagic, Prostatic haemorrhage, Pulmonary alveolar haemorrhage, Pulmonary contusion, Pulmonary haematoma, Pulmonary haemorrhage, Pulmonary haemorrhage neonatal, Puncture site bruise, Puncture site haematoma, Puncture site haemorrhage, Purpura, Purpura fulminans, Purpura neonatal, Purpura non-thrombocytopenic, Purpura senile, Putamen haemorrhage, Radiation associated haemorrhage, Rectal haemorrhage, Rectal ulcer haemorrhage, Renal artery perforation, Renal cyst haemorrhage, Renal haematoma, Renal haemorrhage, Respiratory tract haemorrhage, Respiratory tract haemorrhage neonatal, Retinal aneurysm rupture, Retinal haemorrhage, Retinopathy haemorrhagic, Retroperitoneal haematoma, Retroperitoneal haemorrhage, Retroplacental haematoma, Ruptured cerebral aneurysm, Scleral haematoma, Scleral haemorrhage, Scrotal haematocoele, Scrotal haematoma, Scrotal haemorrhage, Shock haemorrhagic, Skin haemorrhage, Skin neoplasm bleeding, Skin ulcer haemorrhage, Small intestinal haemorrhage, Small intestinal ulcer haemorrhage, Soft tissue haemorrhage, Spermatic cord haemorrhage, Spinal cord haematoma, Spinal cord haemorrhage, Spinal epidural haematoma, Spinal epidural haemorrhage, Spinal subarachnoid haemorrhage, Spinal subdural haematoma, Spinal subdural haemorrhage, Spleen contusion, Splenic artery perforation, Splenic haematoma, Splenic haemorrhage, Splenic varices haemorrhage, Splinter haemorrhages, Spontaneous haematoma, Spontaneous haemorrhage, Stoma site haemorrhage, Stomatitis haemorrhagic, Subarachnoid haematoma, Subarachnoid haemorrhage, Subarachnoid haemorrhage neonatal, Subcapsular hepatic haematoma, Subcapsular renal haematoma, Subcapsular splenic haematoma, Subchorionic haematoma, Subchorionic haemorrhage, Subclavian artery perforation, Subclavian vein perforation, Subcutaneous haematoma, Subdural haematoma, Subdural haematoma evacuation, Subdural haemorrhage, Subdural haemorrhage neonatal, Subendocardial haemorrhage, Subgaleal haematoma, Subgaleal haemorrhage, Subretinal haematoma, Superior vena cava perforation, Testicular haemorrhage, Thalamus haemorrhage, Third stage postpartum haemorrhage, Thoracic haemorrhage, Thrombocytopenic purpura, Thrombotic thrombocytopenic purpura, Thyroid haemorrhage, Tongue haematoma, Tongue haemorrhage, Tonsillar haemorrhage, Tooth pulp haemorrhage, Tooth socket haemorrhage, Tracheal haemorrhage, Traumatic haematoma, Traumatic haemorrhage, Traumatic haemothorax, Traumatic intracranial haematoma, Traumatic intracranial haemorrhage, Tumour haemorrhage, Ulcer haemorrhage, Umbilical
+
+50
+
+Confidential
+
+
+
+
+
+
+# CELLTRION, Inc.
+
+# Statistical Analysis Plan – Version 3.0 Final
+
+# CT-P16 3.1
+
+Date Issued: December 15, 2023
+
+cord haemorrhage, Umbilical haematoma, Umbilical haemorrhage, Upper gastrointestinal haemorrhage, Ureteric haemorrhage, Urethral haemorrhage, Urinary bladder haematoma, Urinary bladder haemorrhage, Urinary occult blood, Urinary occult blood positive, Urogenital haemorrhage, Uterine haematoma, Uterine haemorrhage, Vaccination site bruising, Vaccination site haematoma, Vaccination site haemorrhage, Vaginal haematoma, Vaginal haemorrhage, Varicose vein ruptured, Vascular access site bruising, Vascular access site haematoma, Vascular access site haemorrhage, Vascular access site rupture, Vascular anastomotic haemorrhage, Vascular graft haemorrhage, Vascular pseudoaneurysm ruptured, Vascular purpura, Vascular rupture, Vein rupture, Venous haemorrhage, Venous perforation, Ventricle rupture, Vertebral artery perforation, Vessel puncture site bruise, Vessel puncture site haematoma, Vessel puncture site haemorrhage, Vitreous haematoma, Vitreous haemorrhage, Vulval haematoma, Vulval haematoma evacuation, Vulval haemorrhage, Withdrawal bleed, Wound haematoma, Wound haemorrhage
+
+# SMQ Category: Cardiac failure
+
+captured by PTs as follows: Acute left ventricular failure, Acute pulmonary oedema, Acute right ventricular failure, Cardiac asthma, Cardiac failure, Cardiac failure acute, Cardiac failure chronic, Cardiac failure congestive, Cardiac failure high output, Congestive heart failure, Cardiogenic shock, Cardiohepatic syndrome, Cardiopulmonary failure, Cardiorenal syndrome, Chronic left ventricular failure, Chronic right ventricular failure, Congestive hepatopathy, Cor pulmonale, Cor pulmonale acute, Cor pulmonale chronic, Ejection fraction decreased, Hepatojugular reflux, Left ventricular failure, Low cardiac output syndrome, Neonatal cardiac failure, Obstructive shock, Pulmonary oedema, Pulmonary oedema neonatal, Radiation associated cardiac failure, Right ventricular ejection fraction decreased, Right ventricular failure, Ventricular failure
+
+# Ovarian failure/fertility
+
+captured by PT as follow: Ovarian failure
+
+51
+
+Confidential
+
+
+
+
+
+
+CELLTRION, Inc.    Statistical Analysis Plan – Version 3.0 Final
+CT-P16 3.1         Date Issued: December 15, 2023
+
+# 14.4. Date Imputation
+
+# 14.4.1. Medication
+
+Incomplete medications start and stop dates will be imputed as follows:
+
+If the stop date is incomplete the following rules will be applied:
+
+- If ‘Yes’ is recorded for ‘If stop date is unknown, was this drug stopped before the first administration of study drug?’ on ‘Prior &#x26; Concomitant Medications’ eCRF page: Assume the first administration date – 1.
+- If ‘No’ is recorded for ‘If stop date is unknown, was this drug stopped before the first administration of study drug?’ on ‘Prior &#x26; Concomitant Medications’ eCRF page:
+- Missing day: Assume the last day of the month.
+- Missing day and month: Assume December 31st.
+- Missing day, month and year: Leave it as Missing.
+
+In the case of the death of a patient and the imputed end date is after the date of death, the end date will be imputed as the date of death.
+
+If the start date is incomplete the following rules will be applied. If the stop date is incomplete, imputed end date will be used instead of reported end date:
+
+- Missing day (e.g. XXFEB2019): the month and year of the partial date will be compared to the date of the first infusion.
+- If the month and the year are equal for both dates, the start date will be imputed as the earlier date of: (i) the date of the first infusion, or (ii) the recorded/imputed stop date of the medication. If the recorded/imputed stop date is missing, the start date will be imputed as the first infusion.
+- If the month or the year are not equal for both dates, the start date will be imputed as the first day of the month (e.g. 01FEB2019).
+- Missing day and month (e.g. XXXX2019): the year of the partial date will be compared to the date of the first infusion.
+- If the year are equal for both dates, the start date will be imputed as the earlier date of: (i) the date of the first infusion, or (ii) the recorded/imputed stop date of the medication. If the recorded/imputed stop date is missing, the start date will be imputed as the first infusion.
+- If the year are not equal for both dates, the start date will be imputed as the first day of January of the year (e.g. 01JAN2019).
+
+52
+Confidential
+
+
+
+
+CELLTRION, Inc. Statistical Analysis Plan – Version 3.0 Final CT-P16 3.1 Date Issued: December 15, 2023
+
+# 14.4.2. Adverse Events
+
+If the AE stop date is incomplete the following rules will be applied.
+
+- Missing day: Assume the last day of the month.
+- Missing day and month: Assume December 31st.
+- Missing day, month and year: Leave it as Missing.
+
+In the case of the death of a patient and the imputed stop date is after the date of death, the stop date will be imputed as the date of death.
+
+If the start date is incomplete the following rules will be applied.
+
+- Missing day (e.g. XXFEB2019): the month and year of the partial date will be compared to the date of the first infusion.
+- - If the month and the year are equal for both dates, the start date will be imputed as the earlier date of: (i) the date of the first infusion, or (ii) the recorded/imputed stop date of the AE. If the recorded/imputed stop date of the AE is missing, the start date will be imputed as the first infusion.
+- If the month or the year are not equal for both dates, the start date will be imputed as the first day of the month (e.g. 01FEB2019).
+
+Missing day and month (e.g. XXXX2019): the year of the partial date will be compared to the date of the first infusion.
+- - If the year are equal for both dates, the start date will be imputed as the earlier date of: (i) the date of the first infusion, or (ii) the recorded/imputed stop date of the AE. If the recorded/imputed stop date is missing, the start date will be imputed as the first infusion.
+- If the year are not equal for both dates, the start date will be imputed as the first day of January of the year (e.g. 01JAN2019).
+
+Missing day, month and year (e.g. XXXXXXXX): the start date will be imputed as the earlier date of: (i) the date of first infusion, or (ii) the recorded/imputed stop date of the AE. If the recorded/imputed stop date is missing, the start date will be imputed as the date of first infusion.
+
+# 14.4.3. Death
+
+For the purposes of inclusion in the survival analysis, incomplete death dates will be imputed as follow:
+
+53
+
+Confidential
+
+
+
+
+
+CELLTRION, Inc.    Statistical Analysis Plan – Version 3.0 Final
+# CT-P16 3.1
+
+Date Issued: December 15, 2023
+
+# 14.4 End of Study Participation
+
+- If the reason for end of study participation on the ‘End of Study Participation’ eCRF page is ‘Death’ and the death date is incomplete, then death date will be imputed as the date of end of study participation on the ‘End of Study Participation’ eCRF page.
+- If the day of death is missing (e.g. XXFEB2021), the month and year of the partial date will be compared to the last known alive date.
+- If month and year are equal for both dates, then death date will be imputed as the last known alive date + 1.
+- If the month and year are not equal, the death date will be imputed as the first day of the month (e.g. 01FEB2021), provided partial death date > last known alive date. Otherwise, death date will be imputed as the last known alive date + 1.
+- If the day and month of death date is missing (e.g. XXXXX2021), the year of the partial date will be compared to the last known alive date.
+- If year is equal for both dates, then death date will be imputed as the last known alive date + 1.
+- If partial year > year of the last known alive date, then death date will be imputed as 1ˢᵗ January of that year (e.g. 01JAN2021). Otherwise, death date will be imputed as the last known alive date + 1.
+
+# 14.5 Best Overall Response Confirmation
+
+- The main goal of confirmation of objective response is to avoid overestimating the response rate observed. In cases where confirmation of response is not feasible, it should be made clear when reporting the outcome of such studies that the responses are not confirmed.
+- To be assigned a status of PR or CR as BOR, changes in tumor measurements must be confirmed by repeat assessments that should be performed no less than 4 weeks after the criteria for response are first met. Longer intervals can be considered as 12 weeks based on each case.
+- In the case of SD, follow-up measurements must have met the SD criteria at least once after the first study drug administration at a minimum interval of 6 weeks (42 days) considering +/- 6 days, which is equivalent to a minimum time of 36 days.
+- Subsequent documentation of CR may provide confirmation of a previously identified CR for subjects where the second integrated response was NE. Subsequent documentation of PR may provide confirmation of a previously
+
+54
+
+
+
+
+CELLTRION, Inc.    Statistical Analysis Plan – Version 3.0 Final
+
+CT-P16 3.1         Date Issued: December 15, 2023
+
+identified PR for subjects where the second integrated response was NE or SD. If the third time point response confirms the CR (or PR) then the Confirmed Response will be CR (or PR). Only one intervening NE is allowed between CRs/PRs. For example: CR NE CR = CR; PR NE PR = PR. Additionally, one SD is allowed between PRs (e.g., PR SD PR = PR).
+
+The best overall response is the best response recorded from the start of the study treatment to at a subsequent time point as specified in the protocol. The best overall response can be interpreted as below table.
+
+| Overall Response | Overall Response      | Best Overall Response                                           |
+| ---------------- | --------------------- | --------------------------------------------------------------- |
+| First Time Point | Subsequent Time Point |                                                                 |
+| CR               | CR                    | CR                                                              |
+| CR               | PR                    | SD, PD or PRa                                                   |
+| CR               | SD                    | SD provided minimum criteria for SD duration met, otherwise, PD |
+| CR               | PD                    | SD provided minimum criteria for SD duration met, otherwise, PD |
+| CR               | NE                    | SD provided minimum criteria for SD duration met, otherwise, NE |
+| PR               | CR                    | PR                                                              |
+| PR               | PR                    | PR                                                              |
+| PR               | SD                    | SD                                                              |
+| PR               | PD                    | SD provided minimum criteria for SD duration met, otherwise, PD |
+| PR               | NE                    | SD provided minimum criteria for SD duration met, otherwise, NE |
+| NE               | NE                    | NE                                                              |
+
+Source: RECIST v.1.1 (https://ctep.cancer.gov/protocoldevelopment/docs/recist开guideline.pdf)
+
+Abbreviations: CR, complete response; PR, partial response; SD, stable disease; PD, progressive disease; NE, inevaluable.
+
+aIf a CR is truly met at first time point, then any disease seen at a subsequent time point, even disease meeting PR criteria relative to baseline, makes the disease PD at that point (since disease must have reappeared after CR). Best response would depend on whether minimum duration for SD was met. However, sometimes ‘CR’ may be claimed when subsequent scans suggest small lesions were likely still present and in fact the patient had PR, not CR at the first-time point. Under these circumstances, the original CR should be changed to PR and the best response is PR.
+
+The overall response of Non-CR/Non-PD at time point will be considered as SD when the best overall response is determined.
+
+55
+
+Confidential
