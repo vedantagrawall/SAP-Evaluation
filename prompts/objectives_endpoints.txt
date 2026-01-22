@@ -1,0 +1,191 @@
+You are evaluating a Generated SAP against an Original SAP for a clinical trial.
+
+DOCUMENTS PROVIDED
+
+ORIGINAL SAP: Human-written reference SAP (primary comparison)
+GENERATED SAP: Auto-generated SAP being evaluated
+PROTOCOL: Source of truth when discrepancies arise
+
+
+YOUR TASK
+Evaluate the Objectives and Endpoints content in the GENERATED SAP.
+Discover what objectives and endpoints exist across all documents. Do not check against a predefined list of expected items. Instead:
+
+SEARCH the Protocol to find what objectives and endpoints exist
+SEARCH the entire Original SAP to find where this content appears
+SEARCH the entire Generated SAP to find where this content appears
+Compare the CONTENT regardless of location
+Only consult Protocol when Generated SAP differs from Original SAP
+
+
+COMPARISON ORDER
+Step 1: Compare Generated SAP to Original SAP first
+Step 2: If they match → CORRECT, no further investigation needed
+Step 3: If they differ → Go to Protocol as tiebreaker
+Step 4: If Generated SAP matches Protocol → CORRECT, do not penalize even if Original SAP differs
+Step 5: If Generated SAP matches neither Original SAP nor Protocol → PROBLEM
+This order is intentional. Original SAPs sometimes contain conduct-specific adjustments that our auto-generator cannot anticipate. Protocol determines correctness.
+
+LOCATION FLEXIBILITY
+Content may appear in DIFFERENT SECTIONS across all three documents. The same information might be organized completely differently in each document.
+SEARCH the entire document. Section names and locations are irrelevant.
+Only the accuracy of the content matters.
+
+EVALUATION RULES
+Objectives:
+
+Must match Protocol language exactly
+The language should not change at all
+If Generated SAP differs from Original SAP → check Protocol
+If Generated SAP matches Protocol → CORRECT
+
+Endpoints:
+
+Should align with Protocol, but refinement is expected
+Protocols sometimes describe endpoints vaguely rather than as fully specified measurements
+If Protocol is vague and Generated SAP adds specificity → ACCEPTABLE
+If Generated SAP changes what is being measured → PROBLEM
+
+Exploratory Objectives/Endpoints:
+
+If Protocol defines them and Generated SAP omits them → PROBLEM
+If Protocol has NONE and Generated SAP shows none or flags "Gap: no exploratory objectives defined" → NEUTRAL, do not penalize
+
+Estimands:
+
+Estimands are SAP-specific content, typically not in Protocol
+Compare to Original SAP
+
+
+EXTRA INFORMATION HANDLING
+Generated SAP may contain information not present in Original SAP.
+
+Extra information that does NOT contradict → FLAG as extra, but NEUTRAL (do not penalize)
+Extra information that CONTRADICTS Original SAP or Protocol → PROBLEM
+
+
+RATING
+GREAT: Objectives match Protocol language. Endpoints align appropriately. Nothing contradicted.
+DECENT: Minor issues that do not affect trial integrity. Small discrepancies that are easily correctable.
+POOR: Critical issues present:
+
+Objectives differ from Protocol
+Endpoints missing or meaning changed
+Exploratory content defined in Protocol but omitted from Generated SAP
+Extra information that contradicts Protocol or Original SAP
+
+
+OUTPUT FORMAT
+Return BOTH a markdown table AND JSON.
+
+MARKDOWN OUTPUT (for human review):
+## Objectives & Endpoints Evaluation
+
+**Section:** objectives_endpoints
+**Rating:** [GREAT | DECENT | POOR]
+**Status:** [pass | pass_with_notes | fail]
+
+---
+
+### Evaluation Summary Table
+
+| Component | Evaluation Type | Matches Original SAP | Protocol Consulted | Result | Issue Type | Severity |
+|-----------|-----------------|----------------------|--------------------|--------|------------|----------|
+| [name] | exact_match / semantic / judgment | yes/no | yes/no/n/a | correct/problem | none/absence/contradiction/incomplete | none/minor/critical |
+
+---
+
+### Issues Found
+
+| Issue Type | Component | Original SAP Text | Generated SAP Text | Description |
+|------------|-----------|-------------------|-------------------|-------------|
+| [contradiction/absence/incomplete] | [name] | "[quote]" | "[quote]" | [explanation] |
+
+---
+
+### Extra Information Flagged
+
+| Content | Contradicts | Detail |
+|---------|-------------|--------|
+| [description] | yes/no | [explanation if contradicts] |
+
+---
+
+### Reasoning
+[Step-by-step explanation: What did you find in each document? What did you compare first? Where did you find discrepancies? Did you need to consult Protocol? Why did you give this rating?]
+
+---
+
+### Summary
+[2-3 sentence overall assessment]
+
+JSON OUTPUT (for programmatic use):
+```json
+{
+  "section": "objectives_endpoints",
+  "rating": "GREAT | DECENT | POOR",
+  "status": "pass | pass_with_notes | fail",
+
+  "evaluation_table": [
+    {
+      "component": "name of what was evaluated",
+      "evaluation_type": "exact_match | semantic | judgment",
+      "matches_original_sap": "yes | no",
+      "protocol_consulted": "yes | no | n/a",
+      "result": "correct | problem",
+      "issue_type": "none | absence | contradiction | incomplete",
+      "severity": "none | minor | critical"
+    }
+  ],
+
+  "issues": [
+    {
+      "issue_type": "absence | contradiction | incomplete",
+      "component": "name",
+      "original_sap_text": "exact quote",
+      "generated_sap_text": "exact quote",
+      "protocol_text": "exact quote if consulted",
+      "description": "explanation of the issue"
+    }
+  ],
+
+  "extra_information_flagged": [
+    {
+      "content": "description of extra content",
+      "contradicts": "yes | no",
+      "detail": "explanation if contradicts"
+    }
+  ],
+
+  "reasoning": "Step-by-step explanation of evaluation process and why this rating was given",
+
+  "summary": "2-3 sentence overall assessment"
+}
+```
+
+PROCESS
+
+1. Read PROTOCOL - identify all objectives and endpoints present
+2. Read ORIGINAL SAP - identify all objectives, endpoints, estimands present
+3. Read GENERATED SAP - identify all objectives, endpoints, estimands present
+4. For EACH item found:
+   - Compare Generated SAP to Original SAP first
+   - If they differ → consult Protocol as tiebreaker
+   - Determine evaluation type (exact_match for objectives, semantic for endpoints, judgment for estimands)
+   - Record result
+
+5. Check for exploratory content: Does Protocol define any? Does Generated SAP include or flag absence?
+6. Check for estimands: Compare to Original SAP
+7. Identify any extra information in Generated SAP - flag and assess for contradiction only
+8. Document all findings with ACTUAL TEXT QUOTES
+9. Write reasoning explaining your evaluation process
+10. Assign rating
+
+
+IMPORTANT REMINDERS
+
+- Original SAPs may reflect trial conduct decisions that deviate from Protocol for legitimate reasons we cannot know
+- When in doubt, Protocol is the source of truth
+- Do not penalize the Generated SAP for matching Protocol when Original SAP differs
+- Do not penalize explicit "Gap" flags when Protocol lacks that content
+- Do not penalize extra information unless it contradicts

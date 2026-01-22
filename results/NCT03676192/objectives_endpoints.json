@@ -1,0 +1,62 @@
+{
+  "section": "objectives_endpoints",
+  "rating": "GREAT",
+  "status": "pass",
+  "evaluation_table": [
+    {
+      "component": "Primary Objective",
+      "evaluation_type": "exact_match",
+      "matches_original_sap": "no",
+      "protocol_consulted": "yes",
+      "result": "correct",
+      "issue_type": "none",
+      "severity": "none"
+    },
+    {
+      "component": "Secondary Objectives",
+      "evaluation_type": "exact_match",
+      "matches_original_sap": "yes",
+      "protocol_consulted": "n/a",
+      "result": "correct",
+      "issue_type": "none",
+      "severity": "none"
+    },
+    {
+      "component": "Primary Endpoint",
+      "evaluation_type": "semantic",
+      "matches_original_sap": "yes",
+      "protocol_consulted": "n/a",
+      "result": "correct",
+      "issue_type": "none",
+      "severity": "none"
+    },
+    {
+      "component": "Secondary Endpoints",
+      "evaluation_type": "semantic",
+      "matches_original_sap": "yes",
+      "protocol_consulted": "n/a",
+      "result": "correct",
+      "issue_type": "none",
+      "severity": "none"
+    },
+    {
+      "component": "Exploratory Objectives/Endpoints",
+      "evaluation_type": "judgment",
+      "matches_original_sap": "yes",
+      "protocol_consulted": "yes",
+      "result": "correct",
+      "issue_type": "none",
+      "severity": "none"
+    }
+  ],
+  "issues": [],
+  "extra_information_flagged": [
+    {
+      "content": "Estimand Specification (Section 6.1.1.1)",
+      "contradicts": "no",
+      "detail": "The Generated SAP explicitly defines an estimand framework (Population, Variable, Intercurrent Events, Missing Data) which is not present in the Original SAP. However, the strategies defined (Non-responder imputation) align with the statistical methods described in the Original SAP (Section 4.9)."
+    }
+  ],
+  "reasoning": "The Generated SAP accurately captures all objectives and endpoints from the Protocol. Notably, for the Primary Objective, the Generated SAP matches the Protocol exactly by including the phrase 'up to Cycle 6', which was omitted in the Original SAP text. The Generated SAP correctly identifies that there are no exploratory objectives defined in the Protocol. It adds an Estimand specification which is not in the Original SAP, but the content aligns with the analysis methods described in the Original SAP (non-responder imputation).",
+  "summary": "The Generated SAP provides a highly accurate representation of the study objectives and endpoints, matching the Protocol text exactly even where the Original SAP had minor omissions. The inclusion of a formal Estimand section enhances the document without contradicting the planned analysis."
+}
