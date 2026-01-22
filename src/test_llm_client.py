@@ -1,25 +1,40 @@
 """
-Test script to validate Milestone 2 deliverables:
-1. Gemini integration
-2. Prompt caching
-3. Error handling
+Test script to validate LLM client with caching.
 
 Run: python -m src.test_llm_client
 """
 
-import time
-
 
 def test_gemini_integration():
-    """Test 1: Basic Gemini API call works"""
+    """Test 1: Basic Gemini API call works via cache"""
     print("=" * 60)
-    print("TEST 1: GEMINI INTEGRATION")
+    print("TEST 1: GEMINI INTEGRATION (with caching)")
     print("=" * 60)
 
-    from src.llm_client import call_llm_json
+    from src.llm_client import (
+        create_document_cache,
+        evaluate_with_cache,
+        delete_cache
+    )
 
-    result = call_llm_json('What is 2+2? Return JSON with key "answer".')
+    # Create test documents (min 1024 tokens required for caching)
+    test_docs = {
+        "protocol": "This is a test protocol document for clinical trial evaluation. " * 100,
+        "original_sap": "This is a test original SAP document for analysis. " * 100,
+        "generated_sap": "This is a test generated SAP document for comparison. " * 100,
+    }
+
+    print("Creating cache...")
+    cache_name = create_document_cache(test_docs, ttl_minutes=5)
+
+    print("Making cached call...")
+    result = evaluate_with_cache(
+        cache_name,
+        'What is 2+2? Return JSON with key "answer".'
+    )
     print(f"Response: {result}")
+
+    delete_cache(cache_name)
 
     if result.get("answer"):
         print("✓ PASSED: Gemini integration working!")
@@ -38,13 +53,12 @@ def test_prompt_caching():
     from src.llm_client import (
         get_client,
         create_document_cache,
-        evaluate_with_cache,
         delete_cache
     )
     from src.config import GEMINI_MODEL
     from google.genai import types
 
-    # Create a test document (smaller for quick testing)
+    # Create a test document (larger for caching to be visible)
     test_docs = {
         "protocol": "This is a test protocol document. " * 500,
         "original_sap": "This is a test original SAP. " * 500,
@@ -91,15 +105,12 @@ def test_error_handling():
     print("TEST 3: ERROR HANDLING")
     print("=" * 60)
 
-    from src.llm_client import call_llm_json
-
-    # Test with a valid call (error handling is built into the function)
     print("Testing retry mechanism exists in code...")
 
     import inspect
     from src import llm_client
 
-    source = inspect.getsource(llm_client.call_llm_json)
+    source = inspect.getsource(llm_client.evaluate_with_cache)
 
     has_retry = "max_retries" in source and "for attempt" in source
     has_backoff = "2 ** attempt" in source or "wait_time" in source
@@ -119,7 +130,7 @@ def test_error_handling():
 
 def main():
     print("\n" + "=" * 60)
-    print("MILESTONE 2 VALIDATION")
+    print("LLM CLIENT VALIDATION (Cached Functions Only)")
     print("=" * 60 + "\n")
 
     results = []
@@ -143,15 +154,9 @@ def main():
 
     print()
     if all_passed:
-        print("All tests passed! Milestone 2 complete.")
+        print("All tests passed!")
     else:
         print("Some tests failed. Review above.")
-
-    # Note about Claude fallback
-    print("\n" + "-" * 60)
-    print("NOTE: Claude Opus fallback is NOT implemented.")
-    print("Add if needed, or skip to Milestone 3.")
-    print("-" * 60)
 
 
 if __name__ == "__main__":
