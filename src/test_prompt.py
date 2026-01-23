@@ -1,6 +1,7 @@
 """
 Quick test script to validate a prompt against cached documents.
 
+Run: python -m src.test_prompt
 """
 
 import json
