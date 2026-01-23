@@ -8,6 +8,113 @@ import json
 from pathlib import Path
 
 
+def json_to_markdown(result: dict, section_name: str) -> str:
+    """Convert JSON evaluation result to markdown format."""
+    lines = []
+
+    # Header
+    lines.append(f"## {section_name.replace('_', ' ').title()} Evaluation")
+    lines.append("")
+    lines.append(f"**Section:** {result.get('section', section_name)}")
+    lines.append(f"**Rating:** {result.get('rating', 'N/A')}")
+    lines.append(f"**Status:** {result.get('status', 'N/A')}")
+    lines.append("")
+    lines.append("---")
+    lines.append("")
+
+    # Evaluation Summary Table
+    lines.append("### Evaluation Summary Table")
+    lines.append("")
+
+    eval_table = result.get('evaluation_table', [])
+    if eval_table:
+        # Determine columns based on first item
+        first_item = eval_table[0]
+        if 'population' in first_item:
+            # Analysis populations format
+            lines.append("| Population | Component | Matches Original SAP | Matches Protocol | Result | Issue Type | Severity |")
+            lines.append("|------------|-----------|---------------------|------------------|--------|------------|----------|")
+            for row in eval_table:
+                pop = row.get('population', '')
+                comp = row.get('component', '')
+                match_orig = row.get('matches_original_sap', '')
+                match_proto = row.get('matches_protocol', '')
+                res = row.get('result', '')
+                issue = row.get('issue_type', '')
+                sev = row.get('severity', '')
+                lines.append(f"| {pop} | {comp} | {match_orig} | {match_proto} | {res} | {issue} | {sev} |")
+        else:
+            # Objectives/endpoints format
+            lines.append("| Component | Evaluation Type | Matches Original SAP | Protocol Consulted | Result | Issue Type | Severity |")
+            lines.append("|-----------|-----------------|---------------------|-------------------|--------|------------|----------|")
+            for row in eval_table:
+                comp = row.get('component', '')
+                eval_type = row.get('evaluation_type', '')
+                match_orig = row.get('matches_original_sap', '')
+                proto_cons = row.get('protocol_consulted', '')
+                res = row.get('result', '')
+                issue = row.get('issue_type', '')
+                sev = row.get('severity', '')
+                lines.append(f"| {comp} | {eval_type} | {match_orig} | {proto_cons} | {res} | {issue} | {sev} |")
+
+    lines.append("")
+    lines.append("---")
+    lines.append("")
+
+    # Issues Found
+    lines.append("### Issues Found")
+    lines.append("")
+    issues = result.get('issues', [])
+    if issues:
+        lines.append("| Issue Type | Component | Description |")
+        lines.append("|------------|-----------|-------------|")
+        for issue in issues:
+            itype = issue.get('issue_type', '')
+            comp = issue.get('component', '')
+            desc = issue.get('description', '')
+            lines.append(f"| {itype} | {comp} | {desc} |")
+    else:
+        lines.append("*No issues found.*")
+
+    lines.append("")
+    lines.append("---")
+    lines.append("")
+
+    # Extra Information Flagged
+    lines.append("### Extra Information Flagged")
+    lines.append("")
+    extra = result.get('extra_information_flagged', [])
+    if extra:
+        lines.append("| Content | Contradicts | Detail |")
+        lines.append("|---------|-------------|--------|")
+        for item in extra:
+            content = item.get('content', '')
+            contradicts = item.get('contradicts', '')
+            detail = item.get('detail', '')
+            lines.append(f"| {content} | {contradicts} | {detail} |")
+    else:
+        lines.append("*No extra information flagged.*")
+
+    lines.append("")
+    lines.append("---")
+    lines.append("")
+
+    # Reasoning
+    lines.append("### Reasoning")
+    lines.append("")
+    lines.append(result.get('reasoning', '*No reasoning provided.*'))
+    lines.append("")
+    lines.append("---")
+    lines.append("")
+
+    # Summary
+    lines.append("### Summary")
+    lines.append("")
+    lines.append(result.get('summary', '*No summary provided.*'))
+
+    return "\n".join(lines)
+
+
 def load_documents():
     """Load the processed markdown documents."""
     data_dir = Path("data/processed_files")
@@ -61,10 +168,16 @@ def test_prompt(prompt_name: str = "objectives_endpoints"):
         print("=" * 60)
         print(json.dumps(result, indent=2))
 
-        # Save result to file
+        # Save JSON result
         output_path = Path("output") / f"test_{prompt_name}_result.json"
         output_path.write_text(json.dumps(result, indent=2))
-        print(f"\n✓ Result saved to: {output_path}")
+        print(f"\n✓ JSON saved to: {output_path}")
+
+        # Save Markdown result
+        markdown_content = json_to_markdown(result, prompt_name)
+        md_output_path = Path("output") / f"test_{prompt_name}_result.md"
+        md_output_path.write_text(markdown_content)
+        print(f"✓ Markdown saved to: {md_output_path}")
 
     except Exception as e:
         print(f"\n✗ ERROR: {e}")
@@ -78,4 +191,6 @@ def test_prompt(prompt_name: str = "objectives_endpoints"):
 
 
 if __name__ == "__main__":
-    test_prompt("objectives_endpoints")
+    import sys
+    prompt_name = sys.argv[1] if len(sys.argv) > 1 else "objectives_endpoints"
+    test_prompt(prompt_name)
