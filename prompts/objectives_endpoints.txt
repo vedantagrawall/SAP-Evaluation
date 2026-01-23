@@ -9,7 +9,11 @@ PROTOCOL: Source of truth when discrepancies arise
 
 YOUR TASK
 Evaluate the Objectives and Endpoints content in the GENERATED SAP.
-Discover what objectives and endpoints exist across all documents. Do not check against a predefined list of expected items. Instead:
+Discover what objectives and endpoints exist across all documents. Do not check against a predefined list of expected items.
+
+IMPORTANT: You MUST create separate rows for each individual endpoint. Never bundle multiple endpoints into one row. Each objective and each endpoint gets its own evaluation row.
+
+Instead:
 
 SEARCH the Protocol to find what objectives and endpoints exist
 SEARCH the entire Original SAP to find where this content appears
@@ -41,9 +45,9 @@ If Generated SAP matches Protocol → CORRECT
 
 Endpoints:
 
-Should align with Protocol, but refinement is expected
-Protocols sometimes describe endpoints vaguely rather than as fully specified measurements
-If Protocol is vague and Generated SAP adds specificity → ACCEPTABLE
+Should align with Protocol
+Adding specificity to a vague Protocol definition is acceptable
+Changing, adding, or removing clinical/statistical meaning is a difference that must be recorded
 If Generated SAP changes what is being measured → PROBLEM
 
 Exploratory Objectives/Endpoints:
@@ -134,7 +138,9 @@ JSON OUTPUT (for programmatic use):
       "protocol_consulted": "yes | no | n/a",
       "result": "correct | problem",
       "issue_type": "none | absence | contradiction | incomplete",
-      "severity": "none | minor | critical"
+      "severity": "none | minor | critical",
+      "original_sap_differs_from_protocol": "yes | no | n/a",
+      "original_sap_difference": "exact quote of what Original SAP contains that differs from Protocol, or null if n/a"
     }
   ],
 
@@ -169,8 +175,14 @@ PROCESS
 2. Read ORIGINAL SAP - identify all objectives, endpoints, estimands present
 3. Read GENERATED SAP - identify all objectives, endpoints, estimands present
 4. For EACH item found:
-   - Compare Generated SAP to Original SAP first
+   - Extract the full definition text from Generated SAP, Original SAP, and Protocol
+   - Compare the actual definition text, not just the component name
+   - If a component contains multiple items, create a separate evaluation row for each item
+   - Text matches only if the definition text is identical or nearly identical. Additional clauses, conditions, or qualifiers constitute a difference.
+   - If Generated SAP and Original SAP text match → CORRECT, no further investigation
    - If they differ → consult Protocol as tiebreaker
+   - If Generated SAP matches Protocol but Original SAP differs → record what Original SAP contains that differs from Protocol
+   - If Original SAP contains more detail than Protocol, record this difference even when Generated SAP correctly matches Protocol
    - Determine evaluation type (exact_match for objectives, semantic for endpoints, judgment for estimands)
    - Record result
 
@@ -189,3 +201,4 @@ IMPORTANT REMINDERS
 - Do not penalize the Generated SAP for matching Protocol when Original SAP differs
 - Do not penalize explicit "Gap" flags when Protocol lacks that content
 - Do not penalize extra information unless it contradicts
+- When comparing, always compare the actual text, not just the presence of a component name
