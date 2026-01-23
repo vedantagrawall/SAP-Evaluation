@@ -12,19 +12,14 @@
 |-----------|-----------------|---------------------|-------------------|--------|------------|----------|
 | Primary Objective | exact_match | no | yes | correct | none | none |
 | Secondary Objective (Efficacy) | exact_match | yes | n/a | correct | none | none |
-| Secondary Objective (PK) | exact_match | yes | n/a | correct | none | none |
+| Secondary Objective (PK) | exact_match | no | yes | correct | none | none |
 | Secondary Objective (Safety) | exact_match | yes | n/a | correct | none | none |
 | Secondary Objective (QoL) | exact_match | yes | n/a | correct | none | none |
-| Primary Endpoint (ORR) | exact_match | yes | n/a | correct | none | none |
-| Secondary Endpoint (ORR Whole Study) | exact_match | yes | n/a | correct | none | none |
-| Secondary Endpoint (Response Duration) | exact_match | yes | n/a | correct | none | none |
-| Secondary Endpoint (TTP) | exact_match | yes | n/a | correct | none | none |
-| Secondary Endpoint (PFS) | exact_match | yes | n/a | correct | none | none |
-| Secondary Endpoint (OS) | exact_match | yes | n/a | correct | none | none |
-| Secondary Endpoint (PK) | exact_match | yes | n/a | correct | none | none |
-| Secondary Endpoint (QoL) | exact_match | yes | n/a | correct | none | none |
-| Secondary Endpoint (Safety) | exact_match | yes | n/a | correct | none | none |
+| Primary Endpoint | exact_match | no | yes | correct | none | none |
+| Secondary Endpoints (Efficacy) | semantic | yes | n/a | correct | none | none |
+| Secondary Endpoints (PK) | exact_match | no | yes | correct | none | none |
 | Exploratory Objectives/Endpoints | judgment | yes | yes | correct | none | none |
+| Estimands | judgment | no | n/a | correct | none | none |
 
 ---
 
@@ -38,16 +33,16 @@
 
 | Content | Contradicts | Detail |
 |---------|-------------|--------|
-| Estimand Specification (Section 6.1.1.1) | no | The Generated SAP includes a formal Estimand Specification (Population, Variable, ICE Handling, Missing Data) which is not explicitly structured as such in the Original SAP. However, the content (ITT population, non-responder imputation) aligns with the statistical methods described in the Original SAP. |
+| Estimand Specification | no | Formalizes the analysis logic into an estimand framework not explicitly present in Original SAP. |
 
 ---
 
 ### Reasoning
 
-The Generated SAP accurately extracts all objectives and endpoints from the Protocol. For the Primary Objective, the Generated SAP matches the Protocol exactly ('up to Cycle 6'), whereas the Original SAP omitted this phrase. All secondary endpoints match the Protocol and Original SAP. The Generated SAP correctly identifies that there are no exploratory objectives/endpoints defined in the Protocol. It includes an Estimand section that formalizes the analysis methods described in the Original SAP without contradicting them.
+Step-by-step chain-of-thought reasoning trace: 1) I compared the Generated SAP against the Protocol and Original SAP. 2) The Generated SAP matches the Protocol text almost exactly for Objectives and Endpoints, often correcting minor phrasing differences found in the Original SAP (e.g., including 'up to Cycle 6' in the primary objective). 3) The Generated SAP correctly identifies that there are no exploratory objectives. 4) The Generated SAP adds an Estimand section which formalizes the non-responder imputation logic found in the Original SAP; this is a positive addition aligning with modern standards. 5) The Generated SAP omits a specific 'PK Maintenance Subset' population found in the Original SAP, but since this population is not in the Protocol, the Generated SAP is technically correct per the instructions to prioritize the Protocol. 6) Overall, the document is highly accurate.
 
 ---
 
 ### Summary
 
-The Generated SAP provides a highly accurate representation of the Protocol's objectives and endpoints. It correctly includes details found in the Protocol that were slightly abbreviated in the Original SAP (Primary Objective). No issues were found.
+The Generated SAP is excellent. It faithfully reproduces the Protocol's objectives and endpoints, correctly identifies the absence of exploratory endpoints, and structures the primary analysis logic into a formal Estimand framework consistent with the Original SAP's intent.

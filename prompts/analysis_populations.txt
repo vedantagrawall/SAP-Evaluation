@@ -146,24 +146,31 @@ Provide BOTH markdown (for human review) AND JSON (for programmatic use).
 
 **Section:** analysis_populations
 **Rating:** [GREAT | DECENT | POOR]
+**Status:** [pass | pass_with_notes | fail]
 
 ---
 
 ### Evaluation Summary Table
 
-| Population | Component | Eval Type | Original SAP Text | Generated SAP Text | Protocol Text | Matches Original | Matches Protocol | Result | Issue | Severity |
-|------------|-----------|-----------|-------------------|--------------------|--------------|--------------------|------------------|--------|-------|----------|
-| [name] | name | exact_match | "[quote]" | "[quote]" | "[quote]" | yes/no | yes/no | correct/problem | none/missing/contradiction | none/minor/major |
-| [name] | definition | semantic | "[quote]" | "[quote]" | "[quote]" | yes/no | yes/no | correct/problem | none/missing/contradiction | none/minor/major |
-| [name] | treatment_assignment | semantic | "[quote]" | "[quote]" | "[quote]" | yes/no | yes/no | correct/problem | none/missing/contradiction | none/minor/major |
+| Component | Evaluation Type | Original SAP Text | Generated SAP Text | Protocol Text | Matches Original | Protocol Consulted | Result | Issue Type | Severity | Reasoning |
+|-----------|-----------------|-------------------|--------------------|--------------|-----------------|--------------------|--------|------------|----------|-----------|
+| [Population - component] | exact_match / semantic | "[quote]" | "[quote]" | "[quote]" | yes/no | yes/no/n/a | correct/problem | none/absent/contradiction/incomplete | none/minor/critical | [chain-of-thought] |
+
+---
+
+### Missing Information
+
+| Component | Original SAP Text | In Protocol | Note | Reasoning |
+|-----------|-------------------|-------------|------|-----------|
+| [description] | "[quote]" | yes/no | [explanation] | [chain-of-thought] |
 
 ---
 
 ### Issues Found
 
-| Issue Type | Population | Component | Original SAP Text | Generated SAP Text | Protocol Text | Description |
-|------------|------------|-----------|-------------------|--------------------|--------------| -------------|
-| [missing/contradiction] | [name] | [component] | "[quote]" | "[quote]" | "[quote]" | [explanation] |
+| Issue Type | Severity | Component | Original SAP Text | Generated SAP Text | Protocol Text | Description | Reasoning |
+|------------|----------|-----------|-------------------|--------------------|--------------| -------------|-----------|
+| [absent/contradiction/incomplete] | [minor/critical] | [name] | "[quote]" | "[quote]" | "[quote]" | [explanation] | [chain-of-thought] |
 
 (If no issues: "No issues found.")
 
@@ -171,9 +178,9 @@ Provide BOTH markdown (for human review) AND JSON (for programmatic use).
 
 ### In Original SAP But Not In Generated SAP
 
-| Population | Component | Original SAP Text | In Protocol | Note |
-|------------|-----------|-------------------|-------------|------|
-| [name] | [component] | "[quote]" | yes/no | [explanation of what Generated SAP is missing] |
+| Component | Original SAP Text | In Protocol | Note | Reasoning |
+|-----------|-------------------|-------------|------|-----------|
+| [Population - component] | "[quote]" | yes/no | [explanation of what Generated SAP is missing] | [chain-of-thought] |
 
 (If none: "Generated SAP contains all content from Original SAP.")
 
@@ -181,9 +188,9 @@ Provide BOTH markdown (for human review) AND JSON (for programmatic use).
 
 ### Original SAP Content Not in Generated SAP
 
-| Population | Content Type | Original SAP Text | In Protocol | Description |
-|------------|--------------|-------------------|-------------|-------------|
-| [name] | [operational_detail/exclusion_criterion/assignment_logic/additional_population] | "[quote]" | yes/no | [what is missing] |
+| Component | Content Type | Original SAP Text | In Protocol | Description | Reasoning |
+|-----------|--------------|-------------------|-------------|-------------|-----------|
+| [Population] | [operational_detail/exclusion_criterion/assignment_logic/additional_population] | "[quote]" | yes/no | [what is missing] | [chain-of-thought] |
 
 (If none: "Generated SAP contains all Original SAP content.")
 
@@ -191,9 +198,9 @@ Provide BOTH markdown (for human review) AND JSON (for programmatic use).
 
 ### Extra Information in Generated SAP
 
-| Content | Contradicts | Detail |
-|---------|-------------|--------|
-| [description] | yes/no | [explanation if contradicts] |
+| Content | Generated SAP Text | Contradicts | Detail | Reasoning |
+|---------|-------------------|-------------|--------|-----------|
+| [description] | "[quote]" | yes/no | [explanation if contradicts] | [chain-of-thought] |
 
 (If none: "No extra information identified.")
 
@@ -201,12 +208,14 @@ Provide BOTH markdown (for human review) AND JSON (for programmatic use).
 
 ### Reasoning
 
-[Provide step-by-step explanation:]
-1. What populations did you find in each document?
-2. What did you compare first?
-3. Where did you find differences?
-4. When did you consult Protocol and what did it say?
-5. Why did you assign this rating?
+[Step-by-step chain-of-thought reasoning trace:]
+1. What populations I found in Protocol
+2. What populations I found in Original SAP
+3. What populations I found in Generated SAP
+4. How I compared each population (Original SAP first, then Protocol as tiebreaker)
+5. Where differences were found
+6. When Protocol was consulted and what it said
+7. Why this rating was assigned
 
 ---
 
@@ -223,65 +232,79 @@ Provide BOTH markdown (for human review) AND JSON (for programmatic use).
 {
   "section": "analysis_populations",
   "rating": "GREAT | DECENT | POOR",
+  "status": "pass | pass_with_notes | fail",
 
   "evaluation_table": [
     {
-      "population": "name of population",
-      "component": "name | definition | treatment_assignment",
+      "component": "Population Name - component (e.g., 'ITT Population - definition')",
       "evaluation_type": "exact_match | semantic",
       "original_sap_text": "exact quote",
       "generated_sap_text": "exact quote (or null if absent)",
-      "protocol_text": "exact quote",
-      "matches_original_sap": true,
-      "matches_protocol": true,
+      "protocol_text": "exact quote, or null if not consulted",
+      "matches_original_sap": "yes | no",
+      "protocol_consulted": "yes | no | n/a",
       "result": "correct | problem",
-      "issue_type": "none | missing | contradiction",
-      "severity": "none | minor | major"
+      "issue_type": "none | absent | contradiction | incomplete",
+      "severity": "none | minor | critical",
+      "reasoning": "Chain-of-thought: 1) What I found in Original SAP, 2) What I found in Generated SAP, 3) Whether they match semantically, 4) If not, what Protocol says, 5) Why this result"
+    }
+  ],
+
+  "missing_information": [
+    {
+      "component": "description of what is missing",
+      "original_sap_text": "exact quote from Original SAP",
+      "in_protocol": "yes | no",
+      "note": "explanation of what is missing from Generated SAP",
+      "reasoning": "Chain-of-thought: 1) Where I found this in Original SAP, 2) How I searched for it in Generated SAP, 3) Why it is considered missing, 4) Whether Protocol requires it"
     }
   ],
 
   "in_original_sap_not_in_generated": [
     {
-      "population": "name of population",
-      "component": "name | definition | treatment_assignment",
+      "component": "Population Name - component",
       "original_sap_text": "exact quote of what Original SAP contains",
-      "in_protocol": true | false,
-      "note": "explanation of what is missing from Generated SAP"
+      "in_protocol": "yes | no",
+      "note": "explanation of what is missing from Generated SAP",
+      "reasoning": "Chain-of-thought: 1) Where I found this population/component in Original SAP, 2) How I searched for it in Generated SAP and Protocol, 3) Why it exists only in Original SAP"
     }
   ],
 
   "original_sap_content_not_in_generated": [
     {
-      "population": "name of population",
+      "component": "Population Name",
       "content_type": "operational_detail | exclusion_criterion | assignment_logic | additional_population | other",
       "original_sap_text": "exact quote of what Original SAP contains",
-      "in_protocol": true | false,
-      "description": "explanation of what is missing from Generated SAP"
+      "in_protocol": "yes | no",
+      "description": "explanation of what is missing from Generated SAP",
+      "reasoning": "Chain-of-thought: 1) What operational detail I found in Original SAP, 2) Why this is considered operational vs definitional, 3) Whether Protocol contains this, 4) Why Generated SAP omitting this is acceptable or not"
     }
   ],
 
   "issues": [
     {
-      "issue_type": "missing | contradiction",
-      "severity": "minor | major",
-      "population": "name of population",
-      "component": "name | definition | treatment_assignment",
+      "issue_type": "absent | contradiction | incomplete",
+      "severity": "minor | critical",
+      "component": "Population Name - component",
       "original_sap_text": "exact quote",
       "generated_sap_text": "exact quote or null if absent",
       "protocol_text": "exact quote",
-      "description": "explanation of the issue"
+      "description": "explanation of the issue",
+      "reasoning": "Chain-of-thought: 1) What the issue is, 2) How I identified it, 3) What each document says, 4) Why this severity level, 5) Impact on analysis"
     }
   ],
 
   "extra_information_flagged": [
     {
       "content": "description of extra content",
-      "contradicts": false,
-      "detail": "explanation if contradicts"
+      "generated_sap_text": "exact quote from Generated SAP",
+      "contradicts": "yes | no",
+      "detail": "explanation if contradicts",
+      "reasoning": "Chain-of-thought: 1) What extra content I found, 2) Where it appears in Generated SAP, 3) Whether it exists in Original SAP or Protocol, 4) Why it contradicts or not"
     }
   ],
 
-  "reasoning": "Step-by-step explanation of the evaluation process",
+  "reasoning": "Step-by-step chain-of-thought reasoning trace: 1) What populations I found in Protocol, 2) What populations I found in Original SAP, 3) What populations I found in Generated SAP, 4) How I compared each population (Original SAP first, then Protocol as tiebreaker), 5) Where differences were found, 6) When Protocol was consulted and what it said, 7) Why this rating was assigned",
 
   "summary": "2-3 sentence overall assessment"
 }

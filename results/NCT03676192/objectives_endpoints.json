@@ -6,144 +6,153 @@
     {
       "component": "Primary Objective",
       "evaluation_type": "exact_match",
+      "original_sap_text": "To demonstrate CT-P16 is similar to EU-Approved Avastin in terms of efficacy as determined by objective response rate (ORR) during the Induction Study Period",
+      "generated_sap_text": "To demonstrate CT-P16 is similar to EU-Approved Avastin in terms of efficacy as determined by objective response rate (ORR) up to Cycle 6 during the Induction Study Period",
+      "protocol_text": "To demonstrate CT-P16 is similar to EU-Approved Avastin in terms of efficacy as determined by objective response rate (ORR) up to Cycle 6 during the Induction Study Period",
       "matches_original_sap": "no",
       "protocol_consulted": "yes",
       "result": "correct",
       "issue_type": "none",
       "severity": "none",
-      "original_sap_differs_from_protocol": "yes",
-      "original_sap_difference": "Original SAP omits 'up to Cycle 6' which is present in Protocol and Generated SAP."
+      "reasoning": "Chain-of-thought: 1) Original SAP omits 'up to Cycle 6'. 2) Generated SAP includes 'up to Cycle 6'. 3) Protocol includes 'up to Cycle 6'. 4) Generated SAP matches Protocol exactly."
     },
     {
-      "component": "Primary Endpoint (ORR Induction)",
+      "component": "Secondary Objective (Efficacy)",
       "evaluation_type": "exact_match",
+      "original_sap_text": "To evaluate additional efficacy profiles including ORR during the Whole Study Period, response duration, time to progression (TTP), progression-free survival (PFS), and overall survival (OS)",
+      "generated_sap_text": "To evaluate additional efficacy profiles including ORR during the Whole Study Period, response duration, time to progression (TTP), progression-free survival (PFS), and overall survival (OS)",
+      "protocol_text": "To evaluate additional efficacy profiles including ORR during the Whole Study Period, response duration, time to progression (TTP), progression-free survival (PFS), and overall survival (OS)",
       "matches_original_sap": "yes",
       "protocol_consulted": "n/a",
       "result": "correct",
       "issue_type": "none",
       "severity": "none",
-      "original_sap_differs_from_protocol": "n/a",
-      "original_sap_difference": null
+      "reasoning": "Chain-of-thought: 1) Texts match exactly across all documents."
     },
     {
-      "component": "Secondary Objectives",
+      "component": "Secondary Objective (PK)",
       "evaluation_type": "exact_match",
-      "matches_original_sap": "yes",
-      "protocol_consulted": "n/a",
-      "result": "correct",
-      "issue_type": "none",
-      "severity": "none",
-      "original_sap_differs_from_protocol": "n/a",
-      "original_sap_difference": null
-    },
-    {
-      "component": "Secondary Endpoint (ORR Whole Study)",
-      "evaluation_type": "semantic",
-      "matches_original_sap": "yes",
-      "protocol_consulted": "n/a",
-      "result": "correct",
-      "issue_type": "none",
-      "severity": "none",
-      "original_sap_differs_from_protocol": "n/a",
-      "original_sap_difference": null
-    },
-    {
-      "component": "Secondary Endpoint (Response Duration)",
-      "evaluation_type": "semantic",
+      "original_sap_text": "To evaluate the Pharmacokinetic (PK) parameter of trough serum concentration (Ctrough)",
+      "generated_sap_text": "To evaluate the pharmacokinetics (PK) of trough serum concentration (Ctrough)",
+      "protocol_text": "To evaluate the pharmacokinetics (PK) of trough serum concentration (Ctrough)",
       "matches_original_sap": "no",
       "protocol_consulted": "yes",
       "result": "correct",
       "issue_type": "none",
       "severity": "none",
-      "original_sap_differs_from_protocol": "yes",
-      "original_sap_difference": "Original SAP Section 12 explicitly updates definition to include 'death from any cause', whereas Protocol only lists 'PD/recurrence'. Generated SAP lists Protocol definition in Section 2.2.1 but correctly applies Original SAP's updated definition in Analysis Section 6.2.2."
+      "reasoning": "Chain-of-thought: 1) Original SAP adds 'parameter of'. 2) Generated SAP matches Protocol text exactly."
     },
     {
-      "component": "Secondary Endpoint (TTP)",
-      "evaluation_type": "semantic",
+      "component": "Secondary Objective (Safety)",
+      "evaluation_type": "exact_match",
+      "original_sap_text": "To evaluate safety profile including immunogenicity",
+      "generated_sap_text": "To evaluate safety profile including immunogenicity",
+      "protocol_text": "To evaluate safety profile including immunogenicity",
       "matches_original_sap": "yes",
       "protocol_consulted": "n/a",
       "result": "correct",
       "issue_type": "none",
       "severity": "none",
-      "original_sap_differs_from_protocol": "n/a",
-      "original_sap_difference": null
+      "reasoning": "Chain-of-thought: 1) Texts match exactly."
     },
     {
-      "component": "Secondary Endpoint (PFS)",
-      "evaluation_type": "semantic",
+      "component": "Secondary Objective (QoL)",
+      "evaluation_type": "exact_match",
+      "original_sap_text": "To evaluate quality of life (QoL)",
+      "generated_sap_text": "To evaluate quality of life (QoL)",
+      "protocol_text": "To evaluate quality of life (QoL)",
       "matches_original_sap": "yes",
       "protocol_consulted": "n/a",
       "result": "correct",
       "issue_type": "none",
       "severity": "none",
-      "original_sap_differs_from_protocol": "n/a",
-      "original_sap_difference": null
+      "reasoning": "Chain-of-thought: 1) Texts match exactly."
     },
     {
-      "component": "Secondary Endpoint (OS)",
+      "component": "Primary Endpoint",
+      "evaluation_type": "exact_match",
+      "original_sap_text": "The primary efficacy endpoint will be the ORR based on BOR during the Induction Study Period by RECIST v.1.1",
+      "generated_sap_text": "Objective response rate (ORR, %) based on BOR during the Induction Study Period by RECIST v.1.1",
+      "protocol_text": "Objective response rate (ORR, %) based on BOR during the Induction Study Period by RECIST v.1.1",
+      "matches_original_sap": "no",
+      "protocol_consulted": "yes",
+      "result": "correct",
+      "issue_type": "none",
+      "severity": "none",
+      "reasoning": "Chain-of-thought: 1) Original SAP phrasing differs slightly ('The primary efficacy endpoint will be...'). 2) Generated SAP matches Protocol text exactly."
+    },
+    {
+      "component": "Secondary Endpoints (Efficacy)",
       "evaluation_type": "semantic",
+      "original_sap_text": "ORR based on BOR during the Whole Study Period... Response duration... TTP... PFS... OS",
+      "generated_sap_text": "ORR based on BOR during the Whole Study Period... Response duration... TTP... PFS... OS",
+      "protocol_text": "ORR based on BOR during the Whole Study Period... Response duration... TTP... PFS... OS",
       "matches_original_sap": "yes",
       "protocol_consulted": "n/a",
       "result": "correct",
       "issue_type": "none",
       "severity": "none",
-      "original_sap_differs_from_protocol": "n/a",
-      "original_sap_difference": null
+      "reasoning": "Chain-of-thought: 1) List of secondary efficacy endpoints matches across all documents."
     },
     {
-      "component": "Secondary Endpoint (PK)",
-      "evaluation_type": "semantic",
-      "matches_original_sap": "yes",
-      "protocol_consulted": "n/a",
+      "component": "Secondary Endpoints (PK)",
+      "evaluation_type": "exact_match",
+      "original_sap_text": "The secondary PK endpoint is trough serum concentration.",
+      "generated_sap_text": "Ctrough: Trough serum concentration",
+      "protocol_text": "Ctrough: Trough serum concentration",
+      "matches_original_sap": "no",
+      "protocol_consulted": "yes",
       "result": "correct",
       "issue_type": "none",
       "severity": "none",
-      "original_sap_differs_from_protocol": "n/a",
-      "original_sap_difference": null
-    },
-    {
-      "component": "Secondary Endpoint (QoL)",
-      "evaluation_type": "semantic",
-      "matches_original_sap": "yes",
-      "protocol_consulted": "n/a",
-      "result": "correct",
-      "issue_type": "none",
-      "severity": "none",
-      "original_sap_differs_from_protocol": "n/a",
-      "original_sap_difference": null
-    },
-    {
-      "component": "Secondary Endpoint (Safety)",
-      "evaluation_type": "semantic",
-      "matches_original_sap": "yes",
-      "protocol_consulted": "n/a",
-      "result": "correct",
-      "issue_type": "none",
-      "severity": "none",
-      "original_sap_differs_from_protocol": "n/a",
-      "original_sap_difference": null
+      "reasoning": "Chain-of-thought: 1) Generated SAP matches Protocol format/text."
     },
     {
       "component": "Exploratory Objectives/Endpoints",
       "evaluation_type": "judgment",
+      "original_sap_text": "None defined",
+      "generated_sap_text": "[GAP: No exploratory objectives defined in protocol]",
+      "protocol_text": "None defined",
       "matches_original_sap": "yes",
       "protocol_consulted": "yes",
       "result": "correct",
       "issue_type": "none",
       "severity": "none",
-      "original_sap_differs_from_protocol": "no",
-      "original_sap_difference": null
+      "reasoning": "Chain-of-thought: 1) Protocol does not define exploratory objectives. 2) Generated SAP correctly identifies this gap."
+    },
+    {
+      "component": "Estimands",
+      "evaluation_type": "judgment",
+      "original_sap_text": "Missing values in ORR will be considered as 'Non-responder' to analyze primary efficacy endpoint.",
+      "generated_sap_text": "Estimand Specification: Population: ITT/PP... Variable: Objective Response... ICE: Premature discontinuation... non-responders (Composite strategy)...",
+      "protocol_text": "null",
+      "matches_original_sap": "no",
+      "protocol_consulted": "n/a",
+      "result": "correct",
+      "issue_type": "none",
+      "severity": "none",
+      "reasoning": "Chain-of-thought: 1) Original SAP does not have a formal Estimand section but defines non-responder imputation. 2) Generated SAP formalizes this into an ICH E9(R1) estimand structure. 3) The content (non-responder strategy) aligns with Original SAP logic. 4) This is an acceptable enhancement."
+    }
+  ],
+  "missing_information": [
+    {
+      "component": "PK Population \u2013 Maintenance Period Subset",
+      "original_sap_text": "The PK population \u2013 Maintenance Period Subset will consist of all patients in PK population who received at least 1 dose (full) of either of the study drugs and have at least one post treatment PK result during the Maintenance Study Period.",
+      "in_protocol": "no",
+      "note": "Generated SAP defines ITT, PP, PK, Safety but omits the specific Maintenance PK subset defined in Original SAP.",
+      "reasoning": "Chain-of-thought: 1) Original SAP defines a specific subset for maintenance PK. 2) Protocol Section 7.4 only lists ITT, PP, PK, Safety. 3) Generated SAP matches Protocol. 4) This is not a failure, but a difference worth noting."
     }
   ],
   "issues": [],
   "extra_information_flagged": [
     {
-      "content": "Estimand Specification (Section 6.1.1.1)",
+      "content": "Estimand Specification",
+      "generated_sap_text": "Estimand Specification: Population: ITT/PP... Variable: Objective Response... ICE...",
       "contradicts": "no",
-      "detail": "Generated SAP explicitly defines estimands (Composite/Hypothetical strategies) which are not explicitly structured as such in the Original SAP, but align with the analysis methods described (non-responder imputation)."
+      "detail": "Formalizes the analysis logic into an estimand framework not explicitly present in Original SAP.",
+      "reasoning": "Chain-of-thought: 1) Original SAP uses non-responder imputation but doesn't use 'Estimand' terminology. 2) Generated SAP adds this structure. 3) It does not contradict the analysis method."
     }
   ],
-  "reasoning": "The Generated SAP accurately extracts all objectives and endpoints from the Protocol. It correctly identifies the Primary Objective text from the Protocol (including 'up to Cycle 6') which the Original SAP had abbreviated. For the Response Duration endpoint, the Generated SAP correctly lists the Protocol definition in the Endpoints section (2.2.1) but adopts the Original SAP's updated definition (including death) in the Analysis section (6.2.2), demonstrating excellent handling of protocol deviations documented in the Original SAP. It correctly identifies that no exploratory endpoints exist.",
-  "summary": "The Generated SAP provides a precise and accurate reflection of the Protocol's objectives and endpoints. It correctly handles discrepancies between the Protocol and Original SAP by adhering to Protocol definitions in the listing while incorporating necessary analysis updates in the methodology."
+  "reasoning": "Step-by-step chain-of-thought reasoning trace: 1) I compared the Generated SAP against the Protocol and Original SAP. 2) The Generated SAP matches the Protocol text almost exactly for Objectives and Endpoints, often correcting minor phrasing differences found in the Original SAP (e.g., including 'up to Cycle 6' in the primary objective). 3) The Generated SAP correctly identifies that there are no exploratory objectives. 4) The Generated SAP adds an Estimand section which formalizes the non-responder imputation logic found in the Original SAP; this is a positive addition aligning with modern standards. 5) The Generated SAP omits a specific 'PK Maintenance Subset' population found in the Original SAP, but since this population is not in the Protocol, the Generated SAP is technically correct per the instructions to prioritize the Protocol. 6) Overall, the document is highly accurate.",
+  "summary": "The Generated SAP is excellent. It faithfully reproduces the Protocol's objectives and endpoints, correctly identifies the absence of exploratory endpoints, and structures the primary analysis logic into a formal Estimand framework consistent with the Original SAP's intent."
 }
