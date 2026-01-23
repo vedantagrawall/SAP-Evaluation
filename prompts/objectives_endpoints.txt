@@ -15,15 +15,7 @@ Discover what objectives and endpoints exist across all documents. Do not check 
 
 IMPORTANT: You MUST create separate rows for each individual endpoint. Never bundle multiple endpoints into one row. Each objective and each endpoint gets its own evaluation row.
 
-COMPLETENESS RULE: For each objective found, you MUST also evaluate the corresponding endpoints. The standard endpoint categories are:
-- Primary Endpoints (for Primary Objective)
-- Secondary Efficacy Endpoints (for Secondary Efficacy Objective)
-- Secondary PK Endpoints (for Secondary PK Objective)
-- Secondary Safety Endpoints (for Secondary Safety Objective) - includes AEs, SAEs, deaths, laboratory abnormalities, immunogenicity
-- Secondary QoL Endpoints (for Secondary QoL Objective) - includes PRO measures like EORTC QLQ-C30
-- Exploratory Endpoints (if exploratory objectives exist)
-
-If an objective exists but no corresponding endpoints are evaluated, this is incomplete coverage.
+COMPLETENESS RULE: For each objective found, you MUST also evaluate the corresponding endpoints. If an objective exists but no corresponding endpoints are evaluated, this is incomplete coverage.
 
 Instead:
 
