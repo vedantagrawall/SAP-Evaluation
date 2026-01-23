@@ -1,0 +1,205 @@
+{
+  "section": "analysis_populations",
+  "rating": "GREAT",
+  "evaluation_table": [
+    {
+      "population": "Intent-to-Treat (ITT) Population",
+      "component": "name",
+      "evaluation_type": "exact_match",
+      "original_sap_text": "Intent-to-Treat (ITT) Population",
+      "generated_sap_text": "Intent-to-treat (ITT) Population",
+      "protocol_text": "Intent-to-treat (ITT) Population",
+      "matches_original_sap": true,
+      "matches_protocol": true,
+      "result": "correct",
+      "issue_type": "none",
+      "severity": "none"
+    },
+    {
+      "population": "Intent-to-Treat (ITT) Population",
+      "component": "definition",
+      "evaluation_type": "semantic",
+      "original_sap_text": "The ITT population will consist of all randomized patients who are randomly assigned to study drug regardless of whether or not any study treatment dosing is completed and successfully screened based on the \u2018Screening Pass/Fail\u2019 eCRF page.",
+      "generated_sap_text": "The ITT population is defined as all patients randomly assigned to study drug, regardless of whether or not any study treatment dosing is completed.",
+      "protocol_text": "The ITT population is defined as all patients randomly assigned to study drug, regardless of whether or not any study treatment dosing is completed.",
+      "matches_original_sap": false,
+      "matches_protocol": true,
+      "result": "correct",
+      "issue_type": "none",
+      "severity": "none"
+    },
+    {
+      "population": "Intent-to-Treat (ITT) Population",
+      "component": "treatment_assignment",
+      "evaluation_type": "semantic",
+      "original_sap_text": "Patients will be assigned to treatment groups based on randomization.",
+      "generated_sap_text": "Patients will be assigned to treatment groups based on randomization.",
+      "protocol_text": "Patients will be assigned to treatment groups based on randomization.",
+      "matches_original_sap": true,
+      "matches_protocol": true,
+      "result": "correct",
+      "issue_type": "none",
+      "severity": "none"
+    },
+    {
+      "population": "Per-Protocol (PP) Population",
+      "component": "name",
+      "evaluation_type": "exact_match",
+      "original_sap_text": "Per-Protocol (PP) Population",
+      "generated_sap_text": "Per-Protocol (PP) Population",
+      "protocol_text": "Per-Protocol (PP) Population",
+      "matches_original_sap": true,
+      "matches_protocol": true,
+      "result": "correct",
+      "issue_type": "none",
+      "severity": "none"
+    },
+    {
+      "population": "Per-Protocol (PP) Population",
+      "component": "definition",
+      "evaluation_type": "semantic",
+      "original_sap_text": "The PP population will consist of all randomly assigned patients who have at least one response evaluation after receiving at least one full dose of study drug (CT-P16 or EU-Approved Avastin) in the Induction Study Period and who do not have any major protocol deviations that may affect the interpretation of the primary endpoint. A patient will be considered as receiving full dose if the planned dose is recorded as \u201815mg/kg\u2019 and the action taken is recorded as \u2018Dose Not Changed\u2019 on \u2018Study Treatment Administration\u2019 eCRF page. Final determination of the PP population was made at the Data Review Meeting (DRM) before unblinding.",
+      "generated_sap_text": "The PP population is defined as all randomly assigned patients who have at least one response evaluation after receiving at least one full dose of study drug (CT-P16 or EU-Approved Avastin) in the Induction Study Period and who do not have any major protocol deviation. A major protocol deviation is one that may affect the interpretation of the primary endpoint and it will be defined in the statistical analysis plan (SAP). Final determinations of the PP population will be made at the blinded data review meeting before unblinding.",
+      "protocol_text": "The PP population is defined as all randomly assigned patients who have at least one response evaluation after receiving at least one full dose of study drug (CT-P16 or EU-Approved Avastin) in the Induction Study Period and who do not have any major protocol deviation. A major protocol deviation is one that may affect the interpretation of primary endpoint and it will be defined in the SAP. Final determinations of the PP population will be made at the blinded data review meeting before unblinding.",
+      "matches_original_sap": false,
+      "matches_protocol": true,
+      "result": "correct",
+      "issue_type": "none",
+      "severity": "none"
+    },
+    {
+      "population": "Per-Protocol (PP) Population",
+      "component": "treatment_assignment",
+      "evaluation_type": "semantic",
+      "original_sap_text": "Patients will be assigned to treatment groups based on randomization.",
+      "generated_sap_text": "Patients will be assigned to treatment groups based on randomization.",
+      "protocol_text": "Patients will be assigned to treatment groups based on randomization.",
+      "matches_original_sap": true,
+      "matches_protocol": true,
+      "result": "correct",
+      "issue_type": "none",
+      "severity": "none"
+    },
+    {
+      "population": "Pharmacokinetic (PK) Population",
+      "component": "name",
+      "evaluation_type": "exact_match",
+      "original_sap_text": "Pharmacokinetic Population",
+      "generated_sap_text": "PK Population",
+      "protocol_text": "PK Population",
+      "matches_original_sap": false,
+      "matches_protocol": true,
+      "result": "correct",
+      "issue_type": "none",
+      "severity": "none"
+    },
+    {
+      "population": "Pharmacokinetic (PK) Population",
+      "component": "definition",
+      "evaluation_type": "semantic",
+      "original_sap_text": "The PK population will consist of all randomly assigned patients who receive at least one full dose (as defined in Section 4.4.2) of study drug (CT-P16 or EU-Approved Avastin) and who have at least one post treatment PK result. Patients who received incorrect treatment during the Induction Study Period will be excluded from the PK population. If a patient does not receive full dose, the patient will be discussed during the DRM to confirm whether the patient can be considered as receiving full dose or not.",
+      "generated_sap_text": "The PK population is defined as all patients who receive at least one full dose of study drug (CT-P16 or EU-Approved Avastin) and who have at least one post treatment PK result. If any patients are found to be non-compliant with respect to dosing, a decision will be made on a case-by-case basis at the blinded data review meeting before unblinding.",
+      "protocol_text": "The PK population is defined as all patients who receive at least one full dose of study drug (CT-P16 or EU-Approved Avastin) and who have at least one post treatment PK result. If any patients are found to be non-compliant with respect to dosing, a decision will be made on a case-by-case basis at the blinded data review meeting before unblinding.",
+      "matches_original_sap": false,
+      "matches_protocol": true,
+      "result": "correct",
+      "issue_type": "none",
+      "severity": "none"
+    },
+    {
+      "population": "Pharmacokinetic (PK) Population",
+      "component": "treatment_assignment",
+      "evaluation_type": "semantic",
+      "original_sap_text": "Patients will be assigned to treatment groups based on treatment they actually received during the Induction Study Period.",
+      "generated_sap_text": "Patients will be assigned to treatment groups based on treatment actually received.",
+      "protocol_text": "Patients will be assigned to treatment groups based on treatment actually received.",
+      "matches_original_sap": true,
+      "matches_protocol": true,
+      "result": "correct",
+      "issue_type": "none",
+      "severity": "none"
+    },
+    {
+      "population": "Safety Population",
+      "component": "name",
+      "evaluation_type": "exact_match",
+      "original_sap_text": "Safety Population",
+      "generated_sap_text": "Safety Population",
+      "protocol_text": "Safety Population",
+      "matches_original_sap": true,
+      "matches_protocol": true,
+      "result": "correct",
+      "issue_type": "none",
+      "severity": "none"
+    },
+    {
+      "population": "Safety Population",
+      "component": "definition",
+      "evaluation_type": "semantic",
+      "original_sap_text": "The safety population will consist of all randomly assigned patients who receive at least one dose (partial or full) of study drug (CT-P16 or EU-Approved Avastin). A patient will be considered to have received study drug if the patient is recorded as having study drug administered on the \u2018Study Treatment Administration\u2019 eCRF page.",
+      "generated_sap_text": "The safety population is defined as all randomly assigned patients who receive at least one dose (full or partial) of study drug (CT-P16 or EU-Approved Avastin).",
+      "protocol_text": "The safety population is defined as all randomly assigned patients who receive at least one dose (full or partial) of study drug (CT-P16 or EU-Approved Avastin).",
+      "matches_original_sap": false,
+      "matches_protocol": true,
+      "result": "correct",
+      "issue_type": "none",
+      "severity": "none"
+    },
+    {
+      "population": "Safety Population",
+      "component": "treatment_assignment",
+      "evaluation_type": "semantic",
+      "original_sap_text": "Patients will be assigned to treatment groups based on treatment they actually received. Treatment patients actually received will be based on the kit number recorded on the \u2018Study Treatment Administration\u2019 eCRF page. Patients receiving at least one dose of CT-P16 will be analyzed under the CT-P16 treatment group. All other patients will be analyzed under the EU-Approved Avastin treatment group.",
+      "generated_sap_text": "Patients will be assigned to treatment groups based on treatment actually received.",
+      "protocol_text": "Patients will be assigned to treatment groups based on treatment actually received.",
+      "matches_original_sap": false,
+      "matches_protocol": true,
+      "result": "correct",
+      "issue_type": "none",
+      "severity": "none"
+    }
+  ],
+  "in_original_sap_not_in_generated": [
+    {
+      "population": "Pharmacokinetic Population \u2013 Maintenance Period Subset",
+      "component": "definition",
+      "original_sap_text": "The PK population \u2013 Maintenance Period Subset will consist of all patients in PK population who received at least 1 dose (full) of either of the study drugs and have at least one post treatment PK result during the Maintenance Study Period.",
+      "in_protocol": false,
+      "note": "This subset population is defined in the Original SAP but not in the Protocol or Generated SAP."
+    }
+  ],
+  "original_sap_content_not_in_generated": [
+    {
+      "population": "Intent-to-Treat (ITT) Population",
+      "content_type": "operational_detail",
+      "original_sap_text": "and successfully screened based on the \u2018Screening Pass/Fail\u2019 eCRF page",
+      "in_protocol": false,
+      "description": "Operational detail regarding eCRF page confirmation."
+    },
+    {
+      "population": "Per-Protocol (PP) Population",
+      "content_type": "operational_detail",
+      "original_sap_text": "A patient will be considered as receiving full dose if the planned dose is recorded as \u201815mg/kg\u2019 and the action taken is recorded as \u2018Dose Not Changed\u2019 on \u2018Study Treatment Administration\u2019 eCRF page.",
+      "in_protocol": false,
+      "description": "Specific definition of 'full dose' based on eCRF fields."
+    },
+    {
+      "population": "Pharmacokinetic (PK) Population",
+      "content_type": "exclusion_criterion",
+      "original_sap_text": "Patients who received incorrect treatment during the Induction Study Period will be excluded from the PK population.",
+      "in_protocol": false,
+      "description": "Specific exclusion criterion for incorrect treatment."
+    },
+    {
+      "population": "Safety Population",
+      "content_type": "assignment_logic",
+      "original_sap_text": "Patients receiving at least one dose of CT-P16 will be analyzed under the CT-P16 treatment group. All other patients will be analyzed under the EU-Approved Avastin treatment group.",
+      "in_protocol": false,
+      "description": "Specific logic for handling mixed treatment cases."
+    }
+  ],
+  "issues": [],
+  "extra_information_flagged": [],
+  "reasoning": "The Generated SAP aligns almost perfectly with the Protocol text for all analysis populations. The Original SAP contains significant operational details (eCRF references, specific logic for 'full dose' and safety treatment assignment) and an additional PK subset population that are not present in the Protocol. Since the Generated SAP matches the Protocol, the omission of these Original SAP-specific details is not considered a problem. The Generated SAP is rated GREAT for its adherence to the Protocol.",
+  "summary": "The Generated SAP correctly identifies and defines all analysis populations required by the Protocol (ITT, PP, PK, Safety). It omits operational details and one subset population found in the Original SAP, but since these are not present in the Protocol, the Generated SAP is compliant."
+}

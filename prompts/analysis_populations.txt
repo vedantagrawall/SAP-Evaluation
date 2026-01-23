@@ -1,0 +1,303 @@
+# Analysis Populations Evaluation Prompt
+
+You are evaluating a Generated SAP against an Original SAP for a clinical trial.
+
+---
+
+## DOCUMENTS PROVIDED
+
+- **ORIGINAL SAP**: Human-written reference SAP
+- **GENERATED SAP**: Auto-generated SAP being evaluated
+- **PROTOCOL**: Source of truth when discrepancies arise
+
+---
+
+## YOUR TASK
+
+Evaluate the Analysis Population content in the Generated SAP.
+
+**IMPORTANT**: Do not assume which populations exist. Discover all populations present across all three documents by searching each document thoroughly.
+
+---
+
+## EVALUATION HIERARCHY
+
+Follow this order strictly:
+
+1. **Compare Generated SAP to Original SAP first**
+2. **If they match** → CORRECT, no further investigation needed
+3. **If they differ** → Go to Protocol as tiebreaker
+4. **If Generated SAP matches Protocol** → CORRECT (do not penalize, even if Original SAP differs)
+5. **If Generated SAP matches neither Original SAP nor Protocol** → PROBLEM
+
+### Special Cases
+
+| Scenario | Result |
+|----------|--------|
+| Population in Protocol + Original SAP, but ABSENT from Generated SAP | **PROBLEM** (absence) |
+| Population in Original SAP only (not in Protocol), absent from Generated SAP | **NOT A PROBLEM** |
+| Extra detail in Original SAP not in Protocol, omitted by Generated SAP | **NOT A PROBLEM** |
+| Extra information in Generated SAP that does not contradict | **FLAG** but neutral (not a problem) |
+| Extra information in Generated SAP that contradicts | **PROBLEM** |
+
+---
+
+## WHAT TO EVALUATE FOR EACH POPULATION
+
+For each analysis population, evaluate THREE components:
+
+| Component | Evaluation Type | Comparison Rule |
+|-----------|-----------------|-----------------|
+| **Name** | exact_match | Compare to Original SAP first; if different, check Protocol as tiebreaker |
+| **Definition** | semantic | Compare to Original SAP first; if different, check Protocol as tiebreaker |
+| **Treatment Assignment** | semantic | Compare to Original SAP first; if different, check Protocol as tiebreaker |
+
+**All three components follow the same evaluation hierarchy:**
+1. If Generated SAP matches Original SAP → CORRECT
+2. If Generated SAP differs from Original SAP → Consult Protocol
+3. If Generated SAP matches Protocol → CORRECT (even if Original SAP differs)
+4. If Generated SAP matches neither → PROBLEM
+
+---
+
+## DISCOVERY PROCESS
+
+### Step 1: Search Protocol
+- Search the entire Protocol document for analysis populations/analysis sets
+- List ALL populations defined
+- Record exact text for each: name, definition, treatment assignment
+
+### Step 2: Search Original SAP
+- Search the entire Original SAP document for analysis populations
+- List ALL populations defined
+- Record exact text for each: name, definition, treatment assignment
+
+### Step 3: Search Generated SAP
+- Search the entire Generated SAP document for analysis populations
+- List ALL populations defined
+- Record exact text for each: name, definition, treatment assignment
+
+### Step 4: Evaluate Each Population
+
+For each population found in Protocol:
+1. Check if present in Generated SAP (if absent → PROBLEM)
+2. Compare name (exact_match)
+3. Compare definition (semantic)
+4. Compare treatment assignment (semantic)
+5. If Generated SAP differs from Original SAP → consult Protocol
+6. Record Protocol text when consulted
+
+---
+
+## HANDLING ORIGINAL SAP CONTENT NOT IN GENERATED SAP
+
+After evaluating the three components (name, definition, treatment assignment), also identify any content in the Original SAP that is NOT present in the Generated SAP.
+
+This includes:
+- Operational details (eCRF page references, data field names)
+- Additional exclusion criteria
+- Specific assignment logic (kit numbers, database lookups)
+- Additional populations not in Protocol
+- Any other content present in Original SAP but absent from Generated SAP
+
+For each item found:
+1. Quote the Original SAP text
+2. Note whether this content is also in the Protocol
+3. Describe what is missing
+
+This is for documentation purposes. If the content is not in Protocol, it is not a problem that Generated SAP omits it. But it should be recorded to show the difference.
+
+---
+
+## RATING CRITERIA
+
+### GREAT
+- All Protocol-required populations present
+- Names match (per evaluation hierarchy)
+- Definitions semantically match
+- Treatment assignments correct
+- No contradictions
+
+### DECENT
+- All Protocol-required populations present
+- Minor wording differences that do not change meaning
+- Small issues easily correctable
+- No critical omissions
+
+### POOR
+- Protocol-required population completely absent
+- Names differ without justification from Protocol
+- Definitions have materially different meaning
+- Treatment assignment wrong or missing
+- Contradictions exist
+
+---
+
+## OUTPUT FORMAT
+
+Provide BOTH markdown (for human review) AND JSON (for programmatic use).
+
+---
+
+## MARKDOWN OUTPUT
+
+```markdown
+## Analysis Populations Evaluation
+
+**Section:** analysis_populations
+**Rating:** [GREAT | DECENT | POOR]
+
+---
+
+### Evaluation Summary Table
+
+| Population | Component | Eval Type | Original SAP Text | Generated SAP Text | Protocol Text | Matches Original | Matches Protocol | Result | Issue | Severity |
+|------------|-----------|-----------|-------------------|--------------------|--------------|--------------------|------------------|--------|-------|----------|
+| [name] | name | exact_match | "[quote]" | "[quote]" | "[quote]" | yes/no | yes/no | correct/problem | none/missing/contradiction | none/minor/major |
+| [name] | definition | semantic | "[quote]" | "[quote]" | "[quote]" | yes/no | yes/no | correct/problem | none/missing/contradiction | none/minor/major |
+| [name] | treatment_assignment | semantic | "[quote]" | "[quote]" | "[quote]" | yes/no | yes/no | correct/problem | none/missing/contradiction | none/minor/major |
+
+---
+
+### Issues Found
+
+| Issue Type | Population | Component | Original SAP Text | Generated SAP Text | Protocol Text | Description |
+|------------|------------|-----------|-------------------|--------------------|--------------| -------------|
+| [missing/contradiction] | [name] | [component] | "[quote]" | "[quote]" | "[quote]" | [explanation] |
+
+(If no issues: "No issues found.")
+
+---
+
+### In Original SAP But Not In Generated SAP
+
+| Population | Component | Original SAP Text | In Protocol | Note |
+|------------|-----------|-------------------|-------------|------|
+| [name] | [component] | "[quote]" | yes/no | [explanation of what Generated SAP is missing] |
+
+(If none: "Generated SAP contains all content from Original SAP.")
+
+---
+
+### Original SAP Content Not in Generated SAP
+
+| Population | Content Type | Original SAP Text | In Protocol | Description |
+|------------|--------------|-------------------|-------------|-------------|
+| [name] | [operational_detail/exclusion_criterion/assignment_logic/additional_population] | "[quote]" | yes/no | [what is missing] |
+
+(If none: "Generated SAP contains all Original SAP content.")
+
+---
+
+### Extra Information in Generated SAP
+
+| Content | Contradicts | Detail |
+|---------|-------------|--------|
+| [description] | yes/no | [explanation if contradicts] |
+
+(If none: "No extra information identified.")
+
+---
+
+### Reasoning
+
+[Provide step-by-step explanation:]
+1. What populations did you find in each document?
+2. What did you compare first?
+3. Where did you find differences?
+4. When did you consult Protocol and what did it say?
+5. Why did you assign this rating?
+
+---
+
+### Summary
+
+[2-3 sentence overall assessment]
+```
+
+---
+
+## JSON OUTPUT
+
+```json
+{
+  "section": "analysis_populations",
+  "rating": "GREAT | DECENT | POOR",
+
+  "evaluation_table": [
+    {
+      "population": "name of population",
+      "component": "name | definition | treatment_assignment",
+      "evaluation_type": "exact_match | semantic",
+      "original_sap_text": "exact quote",
+      "generated_sap_text": "exact quote (or null if absent)",
+      "protocol_text": "exact quote",
+      "matches_original_sap": true,
+      "matches_protocol": true,
+      "result": "correct | problem",
+      "issue_type": "none | missing | contradiction",
+      "severity": "none | minor | major"
+    }
+  ],
+
+  "in_original_sap_not_in_generated": [
+    {
+      "population": "name of population",
+      "component": "name | definition | treatment_assignment",
+      "original_sap_text": "exact quote of what Original SAP contains",
+      "in_protocol": true | false,
+      "note": "explanation of what is missing from Generated SAP"
+    }
+  ],
+
+  "original_sap_content_not_in_generated": [
+    {
+      "population": "name of population",
+      "content_type": "operational_detail | exclusion_criterion | assignment_logic | additional_population | other",
+      "original_sap_text": "exact quote of what Original SAP contains",
+      "in_protocol": true | false,
+      "description": "explanation of what is missing from Generated SAP"
+    }
+  ],
+
+  "issues": [
+    {
+      "issue_type": "missing | contradiction",
+      "severity": "minor | major",
+      "population": "name of population",
+      "component": "name | definition | treatment_assignment",
+      "original_sap_text": "exact quote",
+      "generated_sap_text": "exact quote or null if absent",
+      "protocol_text": "exact quote",
+      "description": "explanation of the issue"
+    }
+  ],
+
+  "extra_information_flagged": [
+    {
+      "content": "description of extra content",
+      "contradicts": false,
+      "detail": "explanation if contradicts"
+    }
+  ],
+
+  "reasoning": "Step-by-step explanation of the evaluation process",
+
+  "summary": "2-3 sentence overall assessment"
+}
+```
+
+---
+
+## CRITICAL REMINDERS
+
+1. **Discovery first**: Do not assume populations exist - search and find them in each document
+2. **Compare to Original SAP first**: Always compare Generated SAP to Original SAP before consulting Protocol
+3. **Protocol is tiebreaker**: Only consult Protocol when Generated SAP differs from Original SAP
+4. **Do not penalize Protocol compliance**: If Generated SAP matches Protocol but not Original SAP, that is CORRECT
+5. **Document everything**: Include actual text quotes for audit trail
+6. **Absence is only a problem if required by Protocol**: Missing a population that Protocol defines is a PROBLEM; missing one only in Original SAP is not
+7. **Three components per population**: Always evaluate name, definition, and treatment assignment for each population
+8. **Location flexibility**: Content may appear in different sections across documents - search entire documents
+9. **Quote actual text**: Always provide exact quotes from documents
+10. **Explain Protocol consultations**: When you consult Protocol, document what it says and how it resolved the discrepancy
