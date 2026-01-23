@@ -65,17 +65,18 @@ For each analysis population, evaluate THREE components:
 ### Step 1: Search Protocol
 - Search the entire Protocol document for analysis populations/analysis sets
 - List ALL populations defined
-- Record exact text for each: name, definition, treatment assignment
+- Record ALL text related to each population
 
 ### Step 2: Search Original SAP
 - Search the entire Original SAP document for analysis populations
 - List ALL populations defined
-- Record exact text for each: name, definition, treatment assignment
+- Record ALL text related to each population—every sentence, clause, phrase, list, reference, and statement
+- Do not filter or summarize. Extract the complete text.
 
 ### Step 3: Search Generated SAP
 - Search the entire Generated SAP document for analysis populations
 - List ALL populations defined
-- Record exact text for each: name, definition, treatment assignment
+- Record ALL text related to each population
 
 ### Step 4: Evaluate Each Population
 
@@ -91,21 +92,58 @@ For each population found in Protocol:
 
 ## HANDLING ORIGINAL SAP CONTENT NOT IN GENERATED SAP
 
-After evaluating the three components (name, definition, treatment assignment), also identify any content in the Original SAP that is NOT present in the Generated SAP.
+Separately from the evaluation, you MUST identify ALL content in the Original SAP that is NOT present in the Generated SAP. This is a parallel task, not a secondary one.
 
-This includes:
-- Operational details (eCRF page references, data field names)
-- Additional exclusion criteria
-- Specific assignment logic (kit numbers, database lookups)
-- Additional populations not in Protocol
-- Any other content present in Original SAP but absent from Generated SAP
+### EXHAUSTIVE DOCUMENTATION REQUIREMENT
 
-For each item found:
-1. Quote the Original SAP text
-2. Note whether this content is also in the Protocol
-3. Describe what is missing
+You MUST capture EVERY piece of content from the Original SAP that does not appear in the Generated SAP. No exceptions. No filtering. No judgment about importance.
 
-This is for documentation purposes. If the content is not in Protocol, it is not a problem that Generated SAP omits it. But it should be recorded to show the difference.
+### MANDATORY METHODOLOGY
+
+Follow this exact process:
+
+**Step 1: Extract**
+- Go through the ENTIRE Original SAP analysis populations section from beginning to end
+- Extract EVERY distinct sentence, clause, phrase, and piece of information
+- Do not skip anything
+
+**Step 2: Decompose**
+- Do NOT compare sentences as wholes
+- Break each Original SAP sentence into its individual components: clauses, phrases, qualifiers, modifiers, references, and embedded information
+- Each component must be checked separately
+
+**Step 3: Search**
+- For EACH component, search the Generated SAP for equivalent content
+- Check for both exact matches and semantic equivalents
+- If an Original SAP sentence contains information that the Generated SAP sentence omits or shortens, that omission must be documented—even if the "main idea" is preserved
+
+**Step 4: Document**
+- If ANY component is NOT found in Generated SAP (neither verbatim nor semantically), add it to `missing_from_generated_sap`
+- Document the exact Original SAP text
+- Note whether it appears in Protocol (yes/no)
+- Describe what is missing
+- If a single sentence has multiple missing components, document each one separately
+- This includes both entire missing populations AND missing content within populations
+
+**Step 5: Verify Completeness**
+- After completing the comparison, re-read the Original SAP section
+- Confirm that every sentence, clause, phrase, qualifier, modifier, and reference has been accounted for
+- If you find anything not yet documented, add it
+
+### RULES
+
+1. **No filtering**: Do not skip content because it seems minor, trivial, or unimportant
+2. **No categorization bias**: Do not skip content because it doesn't fit a predefined category
+3. **No semantic shortcuts**: If the Original SAP says something in a specific way and the Generated SAP says it differently or omits it, document it
+4. **Capture everything**: Every word, phrase, clause, sentence, list item, reference, and statement that exists in Original SAP but not in Generated SAP must be documented
+5. **When in doubt, include it**: If you are unsure whether something is missing, document it
+6. **Sub-sentence granularity**: Do not stop at checking whether a sentence exists. Check whether every part of that sentence exists. A sentence with 5 pieces of information requires 5 checks.
+7. **Preserved meaning is not enough**: If the Generated SAP captures the "main idea" but omits words, phrases, or clauses from the Original SAP, document what was omitted
+8. **Missing information is not a wording difference**: If the Original SAP contains information that the Generated SAP does not contain, that is missing content—not a wording difference. Document it.
+
+### OUTPUT FIELD
+
+For `content_type` in the JSON output, use a brief descriptive label that accurately describes what the content is. Do not limit yourself to predefined categories.
 
 ---
 
@@ -158,14 +196,6 @@ Provide BOTH markdown (for human review) AND JSON (for programmatic use).
 
 ---
 
-### Missing Information
-
-| Component | Original SAP Text | In Protocol | Note | Reasoning |
-|-----------|-------------------|-------------|------|-----------|
-| [description] | "[quote]" | yes/no | [explanation] | [chain-of-thought] |
-
----
-
 ### Issues Found
 
 | Issue Type | Severity | Component | Original SAP Text | Generated SAP Text | Protocol Text | Description | Reasoning |
@@ -176,23 +206,43 @@ Provide BOTH markdown (for human review) AND JSON (for programmatic use).
 
 ---
 
-### In Original SAP But Not In Generated SAP
+### ✅ Acceptable Differences (X items)
 
-| Component | Original SAP Text | In Protocol | Note | Reasoning |
-|-----------|-------------------|-------------|------|-----------|
-| [Population - component] | "[quote]" | yes/no | [explanation of what Generated SAP is missing] | [chain-of-thought] |
+Content in Original SAP only (not in Protocol) - acceptable to omit.
 
-(If none: "Generated SAP contains all content from Original SAP.")
+| Component | Type | Description |
+|-----------|------|-------------|
+| [Population or General] | [descriptive label] | [what is missing] |
+
+<details>
+<summary>Reasoning</summary>
+
+- **[Component]**: [reasoning for why this is acceptable]
+- **[Component]**: [reasoning]
+
+</details>
+
+(If none: "No differences found.")
 
 ---
 
-### Original SAP Content Not in Generated SAP
+### ❌ Missing Required Content (X items)
 
-| Component | Content Type | Original SAP Text | In Protocol | Description | Reasoning |
-|-----------|--------------|-------------------|-------------|-------------|-----------|
-| [Population] | [operational_detail/exclusion_criterion/assignment_logic/additional_population] | "[quote]" | yes/no | [what is missing] | [chain-of-thought] |
+Content in both Original SAP AND Protocol - should be in Generated SAP.
 
-(If none: "Generated SAP contains all Original SAP content.")
+| Component | Type | Description |
+|-----------|------|-------------|
+| [Population or General] | [descriptive label] | [what is missing] |
+
+<details>
+<summary>Reasoning</summary>
+
+- **[Component]**: [reasoning for why this is a problem]
+- **[Component]**: [reasoning]
+
+</details>
+
+(If none: "No missing required content.")
 
 ---
 
@@ -250,34 +300,14 @@ Provide BOTH markdown (for human review) AND JSON (for programmatic use).
     }
   ],
 
-  "missing_information": [
+  "missing_from_generated_sap": [
     {
-      "component": "description of what is missing",
-      "original_sap_text": "exact quote from Original SAP",
-      "in_protocol": "yes | no",
-      "note": "explanation of what is missing from Generated SAP",
-      "reasoning": "Chain-of-thought: 1) Where I found this in Original SAP, 2) How I searched for it in Generated SAP, 3) Why it is considered missing, 4) Whether Protocol requires it"
-    }
-  ],
-
-  "in_original_sap_not_in_generated": [
-    {
-      "component": "Population Name - component",
+      "component": "Population Name or General",
+      "content_type": "entire_population | descriptive label for content type",
       "original_sap_text": "exact quote of what Original SAP contains",
-      "in_protocol": "yes | no",
-      "note": "explanation of what is missing from Generated SAP",
-      "reasoning": "Chain-of-thought: 1) Where I found this population/component in Original SAP, 2) How I searched for it in Generated SAP and Protocol, 3) Why it exists only in Original SAP"
-    }
-  ],
-
-  "original_sap_content_not_in_generated": [
-    {
-      "component": "Population Name",
-      "content_type": "operational_detail | exclusion_criterion | assignment_logic | additional_population | other",
-      "original_sap_text": "exact quote of what Original SAP contains",
-      "in_protocol": "yes | no",
+      "in_protocol": "yes | no (yes = PROBLEM, no = acceptable difference)",
       "description": "explanation of what is missing from Generated SAP",
-      "reasoning": "Chain-of-thought: 1) What operational detail I found in Original SAP, 2) Why this is considered operational vs definitional, 3) Whether Protocol contains this, 4) Why Generated SAP omitting this is acceptable or not"
+      "reasoning": "Chain-of-thought: 1) What I found in Original SAP, 2) How I searched for it in Generated SAP, 3) Why it is considered absent"
     }
   ],
 
