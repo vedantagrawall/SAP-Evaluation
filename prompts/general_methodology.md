@@ -10,20 +10,17 @@
 
 | Component | Evaluation Type | Matches Original SAP | Protocol Consulted | Result | Issue Type | Severity |
 |-----------|-----------------|---------------------|-------------------|--------|------------|----------|
-| Continuous data summary stats | semantic | yes |  | correct | none | none |
-| Categorical data summary | semantic | yes |  | correct | none | none |
-| EOT visit handling | semantic | no |  | problem | contradiction_original | minor |
-| Unscheduled visit handling | semantic | no |  | problem | contradiction_original | minor |
-| Listing content | semantic | yes |  | correct | none | none |
-| Interim unblinding | semantic | yes |  | correct | none | none |
-| ITT Definition | semantic | no |  | correct | none | none |
-| PP Definition | semantic | yes |  | correct | none | none |
-| PK Definition | semantic | yes |  | correct | none | none |
-| PK Exclusion Rule | semantic | no |  | correct | none | none |
-| Safety Definition | semantic | yes |  | correct | none | none |
+| ITT Population Definition | semantic | no |  | correct | none | none |
+| PP Population Definition | semantic | yes |  | correct | none | none |
+| Safety Population Definition | semantic | yes |  | correct | none | none |
+| PK Population Definition | semantic | yes |  | correct | none | none |
 | Baseline Definition | semantic | yes |  | correct | none | none |
-| Post-baseline Definition | semantic | yes |  | correct | none | none |
-| ORR Missing Handling | semantic | yes |  | correct | none | none |
+| Missing Data (Primary Endpoint) | semantic | yes |  | correct | none | none |
+| EOT Visit Handling | semantic | no |  | problem | contradiction_original | minor |
+| Unscheduled Visit Handling | semantic | no |  | problem | contradiction_original | minor |
+| Software Version | semantic | no |  | correct | none | none |
+| Stratification Factors | semantic | yes |  | correct | none | none |
+| Safety Assignment Rule | semantic | no |  | correct | none | none |
 
 ---
 
@@ -31,86 +28,87 @@
 
 | Issue Type | Component | Description |
 |------------|-----------|-------------|
-| contradiction_original | EOT visit handling | Original SAP explicitly excludes EOT from visit summaries; Generated SAP explicitly maps EOT to cycle windows for inclusion. |
-| contradiction_original | Unscheduled visit handling | Original SAP strictly excludes unscheduled visits from summaries; Generated SAP allows them if they fall within windows. |
+| contradiction_original | EOT Visit Handling | Original SAP excludes EOT from visit summaries by default; Generated SAP maps it to cycles. |
+| contradiction_original | Unscheduled Visit Handling | Original SAP excludes unscheduled visits by default; Generated SAP includes them if closest to target. |
 
 ---
 
 ### Extra Information Flagged
 
-*No extra information flagged.*
+| Content | Contradicts | Detail |
+|---------|-------------|--------|
+| Software Version |  | Generated SAP specifies software version where Original was silent. |
 
 ---
 
-### ✅ Acceptable Differences (31 items)
+### ✅ Acceptable Differences (38 items)
+
 Content in Original SAP only (not in Protocol) - acceptable to omit.
 
 | Component | Category | Original SAP Text |
 |-----------|----------|-------------------|
-| Min/Max decimal precision | decimal_precision_minmax | same number of decimal places as the raw data |
-| Mean decimal precision | decimal_precision_mean | one more decimal place than the raw data |
-| Median decimal precision | decimal_precision_median | one more decimal place than the raw data |
-| SD decimal precision | decimal_precision_sd | two more decimal places than the raw data |
-| Geometric mean precision | decimal_precision_geometric_mean | same precision as the mean |
-| CV decimal precision | decimal_precision_cv | two more decimal places than the raw data |
-| Percentage precision | percentage_precision | one decimal place |
-| Percentage suppression | percentage_zero_handling | suppressed when the count is zero |
-| Not Done row | not_done_row_handling | row denoted "Not Done" will be included |
-| Percentage denominator | percentage_denominator | number of patients within the treatment group |
-| Listing sort order 1 | listing_sort_order | sorted by the treatment group |
-| Listing sort order 2 | listing_sort_order | then patient number |
-| Listing sort order 3 | listing_sort_order | and visit, if applicable |
-| Additional sorting | listing_sort_order | other variables will be included in sorting |
-| Quant limit summary | quantification_limit_summary | set to the respective limit |
-| Quant limit listing | quantification_limit_listing | original results containing inequality sign |
-| Discrepancy handling 1 | data_discrepancy_handling | listing will display only sample collection visit |
-| Discrepancy handling 2 | data_discrepancy_handling | display only specimen collection visit |
-| Discrepancy handling 3 | data_discrepancy_handling | display results from analytical facility |
-| Schedule generation | randomization_method | unblinded statistician will generate |
-| PK Maintenance Def | population_other_subsets | PK population – Maintenance Period Subset |
-| Safety actual treatment | population_safety | Any CT-P16 = CT-P16 |
-| Major PD 1 | protocol_deviation_definition | Mis-randomizations |
-| Major PD 2 | protocol_deviation_definition | Non-compliance of Inclusion or Exclusion |
-| Major PD 3 | protocol_deviation_definition | Significant GCP non-compliance |
-| Major PD 4 | protocol_deviation_definition | Receiving any prohibited therapies |
-| Major PD 5 | protocol_deviation_definition | Missing primary efficacy assessment |
-| PD summary population | protocol_deviation_definition | summarized by treatment group for the ITT |
-| COVID-19 PD analysis | protocol_deviation_definition | excluding patients with major protocol deviation... |
-| Outlier exclusion | outlier_handling | not be excluded unless they are considered to be erroneous |
-| Tipping point analysis | sensitivity_analyses | tipping point analyses will be conducted |
+| Tipping Point Analysis | sensitivity_analyses | additional analyses with tipping point analyses wi |
+| Decimal Precision (Mean) | decimal_precision_mean | mean... will be presented to one more decimal plac |
+| Decimal Precision (Median) | decimal_precision_median | median will be presented to one more decimal place |
+| Decimal Precision (SD) | decimal_precision_sd | standard deviation will be presented to two more d |
+| Decimal Precision (Min/Max) | decimal_precision_minmax | Minimum and maximum will be presented to the same  |
+| Decimal Precision (GeoMean) | decimal_precision_geometric_mean | geometric mean... set to the same precision as the |
+| Decimal Precision (CV) | decimal_precision_cv | Percent coefficient of variation (CV) will be pres |
+| Percentage Precision | percentage_precision | Percentages will be presented to one decimal place |
+| Percentage Suppression | percentage_zero_handling | suppressed when the count is zero |
+| Not Done Row | not_done_row_handling | A row denoted 'Not Done' will be included... where |
+| Percentage Denominator | percentage_denominator | denominator... will be the number of patients with |
+| Listing Sort Order | listing_sort_order | sorted by the treatment group and then patient num |
+| Quantification Limit (Low) | quantification_limit_summary | values recorded below the lower limit... set to th |
+| Quantification Limit (High) | quantification_limit_summary | values... above the upper limit... set to the resp |
+| Inequality Signs in Listings | listing_inequality_signs | original results containing inequality sign will b |
+| Data Discrepancy (eCRF only) | data_discrepancy_handling | listing will display only sample collection visit/ |
+| Data Discrepancy (Lab only) | data_discrepancy_handling | listing will display only specimen collection visi |
+| Data Discrepancy (Date) | data_discrepancy_handling | listing will display results from analytical facil |
+| PK Maintenance Subset | population_other_subsets | PK population - Maintenance Period Subset |
+| Post-Baseline Definition | post_baseline_definition | all visits after the first infusion |
+| Major Deviation (Mis-randomization) | protocol_deviation_definition | Mis-randomizations |
+| Major Deviation (Inc/Exc) | protocol_deviation_definition | Non-compliance of Inclusion or Exclusion criteria |
+| Major Deviation (GCP) | protocol_deviation_definition | Significant Good Clinical Practice (GCP) non-compl |
+| Major Deviation (Prohibited) | protocol_deviation_definition | Receiving any prohibited therapies |
+| Major Deviation (Missing Efficacy) | protocol_deviation_definition | Missing primary efficacy assessment |
+| COVID-19 Deviations | protocol_deviation_definition | primary analysis will be performed excluding patie |
+| General Comments Listing | listing_sort_order | Data collected on the 'General Comments' eCRF page |
+| Outlier Handling | outlier_handling | outliers will not be excluded unless they are cons |
+| Screening Failure Summary | population_other_subsets | number of screening failures and the primary reaso |
+| Disposition Summary | population_other_subsets | number of patients who have been randomized... ini |
+| Demographics Summary | population_other_subsets | Age... Fertility... Race... Ethnicity... Smoking.. |
+| Gene Screening Summary | population_other_subsets | table and listing of gene screening will be provid |
+| Viral Serology Summary | population_other_subsets | Viral serology will be summarized by treatment gro |
+| Medical History Summary | population_other_subsets | Medical history will be summarized by treatment gr |
+| Disease Characteristic Summary | population_other_subsets | Disease characteristic will be displayed in a summ |
+| Previous Treatment Summary | population_other_subsets | Previous treatment for NSCLC will be summarized |
+| Inc/Exc Criteria Listing | population_other_subsets | listing of the inclusion and exclusion criteria... |
+| Medication Summary | population_other_subsets | Prior and concomitant medication data will be pres |
 
 ---
 
-### ❌ Missing Required Content (16 items)
+### ❌ Missing Required Content (6 items)
+
 Content in both Original SAP AND Protocol - should be in Generated SAP.
 
 | Component | Category | Original SAP Text | Protocol Text |
 |-----------|----------|-------------------|---------------|
-| Sample size per group | sample_size_calculation | 305 patients per group | sample size of 305 patients per group |
-| Expected ORR | sample_size_calculation | expected ORR of 38% | expected ORR of 38% |
-| Equivalence margin | sample_size_calculation | equivalence margin of -12.5 to 12.5 | equivalence margin of (±12.5) |
-| Alpha level | sample_size_calculation | two one-sided alpha 0.025 | two one-sided alpha 0.025 |
-| Total enrollment | sample_size_calculation | Approximately 678 patients | Approximately 678 patients |
-| Drop-out rate | sample_size_calculation | anticipated drop-out rate of 10% | anticipated drop-out rate of 10% |
-| Randomization method | randomization_method | Interactive Web Response System (IWRS) | interactive voice response system (IVRS) |
-| Randomization ratio | randomization_method | 1:1 ratio | 1:1 ratio |
-| Randomization type | randomization_method | permuted blocks | permuted blocks |
-| Stratification factor 1 | stratification_factors | country | country |
-| Stratification factor 2 | stratification_factors | sex (female vs. male) | sex (female vs. male) |
-| Stratification factor 3 | stratification_factors | disease status (recurrence vs. metastatic) | disease status (recurrence vs. metastatic) |
-| Stratification factor 4 | stratification_factors | ECOG performance status (0 vs. 1) | ECOG performance score (0 vs. 1) |
-| Blinding duration | blinding_procedure | double-blinded during both Induction... | double-blind... during the Whole Study Period |
-| Unblinding timing | blinding_procedure | until all final clinical data have been entered | until all patients have completed the study |
-| Investigator blinding | blinding_procedure | blinded to the investigators and patients | blinded to the investigators... until all patients |
+| Sample Size | sample_size_calculation | Sample size of 305 patients per group... | Sample size of 305 patients per group... |
+| Randomization System | randomization_method | Interactive Web Response System (IWRS) | IVRS or IWRS |
+| Randomization Ratio | randomization_method | 1:1 ratio | 1:1 ratio |
+| Randomization Method | randomization_method | permuted blocks | permuted blocks |
+| Blinding Procedure | blinding_procedure | double-blinded... randomization code wil | double-blind... randomization codes will |
+| Unblinding for Reporting | blinding_procedure | database will be unblinded for the 1st C | unblinded... after the completion of Cyc |
 
 ---
 
 ### Reasoning
 
-The Generated SAP is missing significant portions of the General Statistical Considerations found in the Original SAP, including sample size calculations, randomization details, and specific decimal precision rules. While some of these are missing because they are typically in the Protocol (and thus 'Missing Required'), the Generated SAP also introduces methodological contradictions regarding the handling of EOT and Unscheduled visits (mapping/including them vs Original SAP's exclusion). However, the Generated SAP correctly aligns with the Protocol on the ITT population definition, correcting a restriction found in the Original SAP. The rating is DECENT because the core population definitions are correct and aligned with the Protocol, but the missing operational details and minor data handling contradictions lower the quality.
+The Generated SAP is generally consistent with the Original SAP in terms of core methodology (populations, endpoints, primary analysis method). However, there are two notable contradictions regarding the handling of EOT and Unscheduled visits in summaries (Original excludes, Generated maps/includes). Additionally, the Sample Size calculation, which is a required element present in the Protocol, is missing from the Generated SAP. The ITT definition in the Generated SAP correctly matches the Protocol, whereas the Original SAP had added an extra constraint ('successfully screened'), so this difference is actually a correction. The missing formatting/precision rules are acceptable differences.
 
 ---
 
 ### Summary
 
-The Generated SAP aligns well with the Protocol for key population definitions but lacks significant operational detail found in the Original SAP (sample size, randomization, precision rules). It introduces minor contradictions in how EOT and unscheduled visits are handled in summaries.
+The Generated SAP correctly defines populations and primary analysis methods, aligning well with the Protocol. However, it contradicts the Original SAP's specific instructions for handling EOT and unscheduled visits in summaries and omits the required Sample Size calculation.

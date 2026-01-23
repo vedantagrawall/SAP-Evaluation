@@ -83,18 +83,18 @@ Step B: If content found, extract core meaning
 - Compare the core meanings
 
 Step C: Classify based on comparison
-- If Generated SAP has NO content on topic (null) → missing_information (ALWAYS)
+- If Generated SAP has NO content on topic (null) → missing_from_generated_sap (ALWAYS)
 - If Generated SAP has content that MATCHES → evaluation_table (correct)
 - If Generated SAP has content that CONFLICTS → evaluation_table (problem/contradiction)
 
 Step D: For missing items, check Protocol
-- If Generated SAP has NO content (going to missing_information):
+- If Generated SAP has NO content (going to missing_from_generated_sap):
 - Search Protocol for the same element
 - Record in_protocol: "yes" or "no"
 - This determines classification but does NOT affect rating
 
 CRITICAL CLASSIFICATION RULE:
-Silence is NEVER a contradiction. If generated_sap_text is null or empty, it MUST go to missing_information.
+Silence is NEVER a contradiction. If generated_sap_text is null or empty, it MUST go to missing_from_generated_sap.
 A contradiction REQUIRES Generated SAP to ACTIVELY STATE something conflicting.
 "Original requires X, Generated is silent" = MISSING, not contradiction.
 
@@ -138,7 +138,7 @@ Type 3: Internal Contradiction
 - Generated SAP Section B says NOT X
 - Flag as inconsistency
 
-NOT a Contradiction (MUST go to missing_information):
+NOT a Contradiction (MUST go to missing_from_generated_sap):
 - Generated has NO content on topic (null/silent/empty)
 - Original requires something, Generated is silent
 - Generated matches Protocol, Original has extra operational detail (Generated is CORRECT)
@@ -176,7 +176,7 @@ For EACH element from Original SAP:
 
 Step 3: Compare Each Element
 For each element:
-- If nothing found in Generated SAP → missing_information (ALWAYS)
+- If nothing found in Generated SAP → missing_from_generated_sap (ALWAYS)
 - If content found → compare semantic meaning → correct or contradiction
 
 Step 4: Check for Internal Contradictions
@@ -196,25 +196,25 @@ Indicators of multiple elements:
 
 MANDATORY OUTPUT STRUCTURE
 
-For missing_information entries:
+For missing_from_generated_sap entries:
 - generated_sap_search MUST show what was searched for
 - If nothing found, value MUST be null
-- Items with generated_sap_search: null MUST be in missing_information, NEVER in evaluation_table
+- Items with generated_sap_search: null MUST be in missing_from_generated_sap, NEVER in evaluation_table
 
 For evaluation_table entries:
-- generated_sap_text MUST NOT be null (if null, move to missing_information)
+- generated_sap_text MUST NOT be null (if null, move to missing_from_generated_sap)
 - Only items where Generated SAP ACTIVELY STATES something belong here
 
 BLOCKING VALIDATION:
 counts_match MUST be true for valid output.
-If evaluation_table.length + missing_information.length ≠ elements_extracted, your output is INVALID.
+If evaluation_table.length + missing_from_generated_sap.length ≠ elements_extracted, your output is INVALID.
 Do not output until counts match. Re-extract if necessary.
 
 GENERATED SAP BOILERPLATE
 The Generated SAP may include standard boilerplate paragraphs (software specification, a priori vs post hoc definitions). These do not need to match Original SAP exactly, but you must still extract and evaluate corresponding elements from the Original SAP.
 
 MISSING INFORMATION CLASSIFICATION
-For items in missing_information, classify based on Protocol check:
+For items in missing_from_generated_sap, classify based on Protocol check:
 
 - in_protocol: "yes" → classification: "missing_required"
   Content exists in BOTH Original SAP AND Protocol
@@ -272,7 +272,7 @@ Keep all text quotes short (max 50 characters). Use "..." to truncate longer quo
     "paragraphs_processed": 0,
     "elements_extracted": 0,
     "elements_in_evaluation_table": 0,
-    "elements_in_missing_information": 0,
+    "elements_in_missing_from_generated_sap": 0,
     "missing_required_count": 0,
     "acceptable_difference_count": 0,
     "counts_match": true
@@ -308,7 +308,7 @@ Keep all text quotes short (max 50 characters). Use "..." to truncate longer quo
     }
   ],
 
-  "missing_information": [
+  "missing_from_generated_sap": [
     {
       "component": "short description (max 20 chars)",
       "category": "category from checklist",
@@ -376,7 +376,7 @@ EXTRACTION (do this thoroughly):
 - One element = one distinct requirement - do NOT bundle
 
 SILENCE = MISSING (never contradiction):
-- If generated_sap_text would be null → goes to missing_information
+- If generated_sap_text would be null → goes to missing_from_generated_sap
 - A contradiction requires BOTH documents to actively state something
 - "Original requires, Generated is silent" = MISSING
 - Only active conflicts are contradictions
@@ -399,16 +399,16 @@ PROTOCOL TIEBREAKER:
 - Generated contradicting Protocol = CRITICAL
 
 PROTOCOL CHECK FOR MISSING ITEMS:
-- For EVERY item in missing_information, search Protocol
+- For EVERY item in missing_from_generated_sap, search Protocol
 - If found in Protocol → in_protocol: "yes", classification: "missing_required"
 - If NOT in Protocol → in_protocol: "no", classification: "acceptable_difference"
 - This is for display purposes - does NOT affect rating
 
 BLOCKING VALIDATION (must pass):
 - Count elements in evaluation_table
-- Count elements in missing_information
+- Count elements in missing_from_generated_sap
 - Sum MUST equal elements_extracted
 - If counts_match is false, output is INVALID - re-extract
 - Every evaluation_table entry MUST have non-null generated_sap_text
-- Every missing_information entry MUST have null generated_sap_search
-- Every missing_information entry MUST have in_protocol field
+- Every missing_from_generated_sap entry MUST have null generated_sap_search
+- Every missing_from_generated_sap entry MUST have in_protocol field

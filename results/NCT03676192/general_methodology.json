@@ -1,129 +1,649 @@
 {
   "section": "general_methodology",
-  "rating": "GREAT",
-  "status": "pass",
+  "rating": "DECENT",
+  "status": "pass_with_notes",
+  "extraction_validation": {
+    "sections_read": [
+      "4",
+      "4.1",
+      "4.2",
+      "4.3",
+      "4.4",
+      "4.4.1",
+      "4.4.2",
+      "4.4.3",
+      "4.4.4",
+      "4.4.5",
+      "4.5",
+      "4.6",
+      "4.7",
+      "4.8",
+      "4.9"
+    ],
+    "elements_per_section": {
+      "4": 15,
+      "4.1": 0,
+      "4.2": 7,
+      "4.3": 6,
+      "4.4": 8,
+      "4.4.1": 2,
+      "4.4.2": 2,
+      "4.4.3": 2,
+      "4.4.4": 2,
+      "4.4.5": 2,
+      "4.5": 2,
+      "4.6": 3,
+      "4.7": 1,
+      "4.8": 1,
+      "4.9": 2
+    },
+    "categories_found": {
+      "software_version": false,
+      "decimal_precision_mean": true,
+      "decimal_precision_median": true,
+      "decimal_precision_sd": true,
+      "visit_handling_unscheduled": true,
+      "visit_handling_eot": true
+    },
+    "paragraphs_processed": 25,
+    "elements_extracted": 55,
+    "elements_in_evaluation_table": 11,
+    "elements_in_missing_from_generated_sap": 44,
+    "missing_required_count": 2,
+    "acceptable_difference_count": 42,
+    "counts_match": true
+  },
+  "discovery_summary": {
+    "original_sap": {
+      "sections_identified": [
+        "4. General Statistical Considerations",
+        "4.2 Sample Size",
+        "4.3 Randomization",
+        "4.4 Populations",
+        "4.5 Baseline",
+        "4.9 Missing Values"
+      ],
+      "elements_extracted": 55
+    },
+    "generated_sap": {
+      "sections_identified": [
+        "3.3 Analysis Populations",
+        "4.1 General Methodology",
+        "4.2 Key Definitions",
+        "4.5 Visit Windows",
+        "6.1.1 Primary Endpoint"
+      ],
+      "elements_extracted": 11
+    }
+  },
   "evaluation_table": [
     {
-      "component": "Descriptive Statistics (Continuous)",
+      "component": "ITT Population Definition",
+      "category": "population_itt",
       "evaluation_type": "semantic",
-      "original_sap_text": "Continuous data will be summarized using descriptive statistics: the number of observations (n), mean, standard deviation, minimum, median and maximum",
-      "generated_sap_text": "The term \u201cdescriptive statistics\u201d refers to the number of patients (n), mean, median, standard deviation (SD), minimum, and maximum for continuous variables",
-      "protocol_text": "Continuous variables will be summarized by reporting the number of observations (n), mean, standard deviation, median, minimum, and maximum.",
-      "matches_original_sap": "yes",
-      "protocol_consulted": "n/a",
-      "result": "correct",
-      "issue_type": "none",
-      "severity": "none",
-      "reasoning": "Chain-of-thought: 1) Original SAP lists n, mean, SD, min, median, max. 2) Generated SAP lists the same. 3) They match."
-    },
-    {
-      "component": "Baseline Definition",
-      "evaluation_type": "semantic",
-      "original_sap_text": "The baseline value for all analyses will be the last non-missing value prior to the first infusion unless otherwise specified.",
-      "generated_sap_text": "Baseline Value: Defined as the last non-missing observation (including central laboratory results, vital signs, and tumor assessments) recorded prior to the First Dose Date.",
-      "protocol_text": "Response will be calculated in comparison to the baseline tumor measurements obtained before starting study treatment.",
-      "matches_original_sap": "yes",
-      "protocol_consulted": "n/a",
-      "result": "correct",
-      "issue_type": "none",
-      "severity": "none",
-      "reasoning": "Chain-of-thought: 1) Original SAP defines baseline as last non-missing prior to first infusion. 2) Generated SAP defines it as last non-missing prior to First Dose Date. 3) These are semantically equivalent."
-    },
-    {
-      "component": "PK Population Definition",
-      "evaluation_type": "semantic",
-      "original_sap_text": "Patients who received incorrect treatment during the Induction Study Period will be excluded from the PK population.",
-      "generated_sap_text": "If any patients are found to be non-compliant with respect to dosing, a decision will be made on a case-by-case basis at the blinded data review meeting before unblinding.",
-      "protocol_text": "If any patients are found to be non-compliant with respect to dosing, a decision will be made on a case-by-case basis at the blinded data review meeting before unblinding.",
+      "original_sap_text": "randomly assigned... and successfully screened",
+      "original_core_meaning": "INCLUDE randomized AND screened",
+      "generated_sap_text": "randomly assigned... regardless of whether or not any study treatment dosing is completed",
+      "generated_core_meaning": "INCLUDE randomized",
+      "protocol_text": "all patients randomly assigned to study drug, regardless of whether or not any study treatment dosing is completed",
       "matches_original_sap": "no",
-      "protocol_consulted": "yes",
+      "matches_protocol": "yes",
       "result": "correct",
       "issue_type": "none",
       "severity": "none",
-      "reasoning": "Chain-of-thought: 1) Original SAP adds a specific exclusion rule for incorrect treatment. 2) Generated SAP uses broader 'case-by-case' language. 3) Generated SAP matches the Protocol text exactly. 4) Therefore, Generated SAP is correct."
+      "reasoning": "Generated SAP matches Protocol definition. Original SAP added an extra constraint (successfully screened) not present in Protocol."
+    },
+    {
+      "component": "PP Population Definition",
+      "category": "population_pp",
+      "evaluation_type": "semantic",
+      "original_sap_text": "randomly assigned... >=1 response evaluation... >=1 full dose... no major protocol deviation",
+      "original_core_meaning": "INCLUDE valid patients",
+      "generated_sap_text": "randomly assigned... >=1 response evaluation... >=1 full dose... no major protocol deviation",
+      "generated_core_meaning": "INCLUDE valid patients",
+      "protocol_text": "randomly assigned patients who have at least one response evaluation after receiving at least one full dose... and who do not have any major protocol deviation",
+      "matches_original_sap": "yes",
+      "matches_protocol": "yes",
+      "result": "correct",
+      "issue_type": "none",
+      "severity": "none",
+      "reasoning": "Definitions match."
     },
     {
       "component": "Safety Population Definition",
+      "category": "population_safety",
       "evaluation_type": "semantic",
-      "original_sap_text": "Patients receiving at least one dose of CT-P16 will be analyzed under the CT-P16 treatment group. All other patients will be analyzed under the EU-Approved Avastin treatment group.",
-      "generated_sap_text": "Patients will be assigned to treatment groups based on treatment actually received.",
-      "protocol_text": "Patients will be assigned to treatment groups based on treatment actually received.",
+      "original_sap_text": "receive at least one dose (full or partial)",
+      "original_core_meaning": "INCLUDE treated",
+      "generated_sap_text": "receive at least one dose (full or partial)",
+      "generated_core_meaning": "INCLUDE treated",
+      "protocol_text": "all randomly assigned patients who receive at least one dose (full or partial)",
       "matches_original_sap": "yes",
-      "protocol_consulted": "n/a",
+      "matches_protocol": "yes",
       "result": "correct",
       "issue_type": "none",
       "severity": "none",
-      "reasoning": "Chain-of-thought: 1) Original SAP specifies the 'as-treated' logic in detail. 2) Generated SAP states 'based on treatment actually received'. 3) This is the standard definition of Safety Population and matches the intent."
+      "reasoning": "Definitions match."
+    },
+    {
+      "component": "PK Population Definition",
+      "category": "population_pk",
+      "evaluation_type": "semantic",
+      "original_sap_text": "receive at least one full dose... and who have at least one post treatment PK result",
+      "original_core_meaning": "INCLUDE valid PK patients",
+      "generated_sap_text": "receive at least one full dose... and who have at least one post treatment PK result",
+      "generated_core_meaning": "INCLUDE valid PK patients",
+      "protocol_text": "all patients who receive at least one full dose... and who have at least one post treatment PK result",
+      "matches_original_sap": "yes",
+      "matches_protocol": "yes",
+      "result": "correct",
+      "issue_type": "none",
+      "severity": "none",
+      "reasoning": "Definitions match."
+    },
+    {
+      "component": "Baseline Definition",
+      "category": "baseline_definition",
+      "evaluation_type": "semantic",
+      "original_sap_text": "last non-missing value prior to the first infusion",
+      "original_core_meaning": "Last pre-dose value",
+      "generated_sap_text": "last non-missing observation... recorded prior to the First Dose Date",
+      "generated_core_meaning": "Last pre-dose value",
+      "protocol_text": null,
+      "matches_original_sap": "yes",
+      "matches_protocol": "not_checked",
+      "result": "correct",
+      "issue_type": "none",
+      "severity": "none",
+      "reasoning": "Definitions match."
+    },
+    {
+      "component": "Missing Data (Primary Endpoint)",
+      "category": "missing_value_handling",
+      "evaluation_type": "semantic",
+      "original_sap_text": "Missing values in ORR will be considered as 'Non-responder'",
+      "original_core_meaning": "Non-responder imputation",
+      "generated_sap_text": "Patients with no post-baseline tumor assessment or whose response cannot be evaluated (NE) will be treated as non-responders",
+      "generated_core_meaning": "Non-responder imputation",
+      "protocol_text": null,
+      "matches_original_sap": "yes",
+      "matches_protocol": "not_checked",
+      "result": "correct",
+      "issue_type": "none",
+      "severity": "none",
+      "reasoning": "Handling matches."
+    },
+    {
+      "component": "EOT Visit Handling",
+      "category": "visit_handling_eot",
+      "evaluation_type": "semantic",
+      "original_sap_text": "EOT... will not be summarized in visit-based tables",
+      "original_core_meaning": "EXCLUDE from summary",
+      "generated_sap_text": "Data collected at the EOT visit will be mapped to the appropriate cycle window",
+      "generated_core_meaning": "INCLUDE/MAP to summary",
+      "protocol_text": null,
+      "matches_original_sap": "no",
+      "matches_protocol": "not_checked",
+      "result": "problem",
+      "issue_type": "contradiction_original",
+      "severity": "minor",
+      "reasoning": "Original SAP explicitly excludes EOT from visit-based summaries by default. Generated SAP explicitly maps EOT to cycle windows for inclusion."
+    },
+    {
+      "component": "Unscheduled Visit Handling",
+      "category": "visit_handling_unscheduled",
+      "evaluation_type": "semantic",
+      "original_sap_text": "unscheduled visit will not be summarized in visit-based tables",
+      "original_core_meaning": "EXCLUDE from summary",
+      "generated_sap_text": "Unscheduled visits... will be included... if it is the closest record to the target day",
+      "generated_core_meaning": "INCLUDE/MAP to summary",
+      "protocol_text": null,
+      "matches_original_sap": "no",
+      "matches_protocol": "not_checked",
+      "result": "problem",
+      "issue_type": "contradiction_original",
+      "severity": "minor",
+      "reasoning": "Original SAP explicitly excludes unscheduled visits from visit-based summaries. Generated SAP includes them if they fall within windows."
+    },
+    {
+      "component": "Software Version",
+      "category": "software_version",
+      "evaluation_type": "semantic",
+      "original_sap_text": null,
+      "original_core_meaning": "Not specified",
+      "generated_sap_text": "SAS v9.4 or higher",
+      "generated_core_meaning": "SAS v9.4+",
+      "protocol_text": null,
+      "matches_original_sap": "no",
+      "matches_protocol": "not_checked",
+      "result": "correct",
+      "issue_type": "none",
+      "severity": "none",
+      "reasoning": "Generated SAP provides specific software version where Original was silent. This is acceptable extra detail."
+    },
+    {
+      "component": "Stratification Factors",
+      "category": "stratification_factors",
+      "evaluation_type": "semantic",
+      "original_sap_text": "stratified by country, sex... disease status... ECOG",
+      "original_core_meaning": "Country, Sex, Disease, ECOG",
+      "generated_sap_text": "stratification factors: sex... disease status... ECOG... Country will be included as a covariate",
+      "generated_core_meaning": "Sex, Disease, ECOG (Country as covariate)",
+      "protocol_text": "stratified by country, sex... disease status... ECOG",
+      "matches_original_sap": "yes",
+      "matches_protocol": "yes",
+      "result": "correct",
+      "issue_type": "none",
+      "severity": "none",
+      "reasoning": "While Generated SAP distinguishes Country as a covariate rather than a randomization stratification factor in the analysis section, Original SAP also specifies using Country as a covariate in the logistic regression model. The analytical approach matches."
+    },
+    {
+      "component": "Safety Assignment Rule",
+      "category": "population_safety",
+      "evaluation_type": "semantic",
+      "original_sap_text": "Patients receiving at least one dose of CT-P16 will be analyzed under the CT-P16 treatment group",
+      "original_core_meaning": "CT-P16 priority rule",
+      "generated_sap_text": "Patients will be assigned to treatment groups based on treatment actually received",
+      "generated_core_meaning": "Actual treatment",
+      "protocol_text": "Patients will be assigned to treatment groups based on treatment actually received",
+      "matches_original_sap": "no",
+      "matches_protocol": "yes",
+      "result": "correct",
+      "issue_type": "none",
+      "severity": "none",
+      "reasoning": "Generated SAP matches Protocol's general rule. Original SAP had a specific tie-breaker rule for mixed treatment cases which Generated SAP omits, but this is not a direct contradiction of the Protocol."
     }
   ],
-  "missing_information": [
+  "missing_from_generated_sap": [
     {
-      "component": "Decimal Precision Rules",
-      "original_sap_text": "Minimum and maximum will be presented to the same number of decimal places as the raw data, mean and median will be presented to one more decimal place than the raw data, and standard deviation will be presented to two more decimal places than the raw data.",
-      "in_protocol": "no",
-      "note": "Generated SAP lacks specific rounding rules found in Original SAP.",
-      "reasoning": "Chain-of-thought: 1) Found in Original SAP Section 4. 2) Not found in Generated SAP Section 4.1. 3) Protocol does not specify rounding rules. 4) Missing Original SAP-only content."
+      "component": "Sample Size",
+      "category": "sample_size_calculation",
+      "original_sap_text": "Sample size of 305 patients per group... Total 678",
+      "protocol_text": "Sample size of 305 patients per group... Total 678",
+      "in_protocol": "yes",
+      "classification": "missing_required"
     },
     {
       "component": "Tipping Point Analysis",
-      "original_sap_text": "In order to evaluate the impact of missing data on the primary efficacy endpoint results, additional analyses with tipping point analyses will be conducted for the primary efficacy endpoint (central review data) for ITT population.",
+      "category": "sensitivity_analyses",
+      "original_sap_text": "additional analyses with tipping point analyses will be conducted",
+      "protocol_text": null,
       "in_protocol": "no",
-      "note": "Original SAP includes Tipping Point Analysis for missing data; Generated SAP includes Complete Case Analysis instead.",
-      "reasoning": "Chain-of-thought: 1) Found in Original SAP Section 4.9. 2) Generated SAP Section 6.1.1.4 lists sensitivity analyses but omits Tipping Point. 3) Protocol Section 7.6.1 mentions covariates but not specific missing data sensitivity analyses like Tipping Point. 4) Missing Original SAP-only content."
+      "classification": "acceptable_difference"
     },
     {
-      "component": "COVID-19 Protocol Deviation Handling",
-      "original_sap_text": "Additionally, if any case of major protocol deviation related to COVID-19 is identified during the DRM, primary analysis will be performed excluding patients with major protocol deviation related to COVID-19 in ITT population as supportive analysis",
+      "component": "Decimal Precision (Mean)",
+      "category": "decimal_precision_mean",
+      "original_sap_text": "mean... will be presented to one more decimal place than the raw data",
+      "protocol_text": null,
       "in_protocol": "no",
-      "note": "Original SAP includes specific COVID-19 logic likely added during the study; Generated SAP (and Protocol) do not.",
-      "reasoning": "Chain-of-thought: 1) Found in Original SAP Section 4.6. 2) Not found in Generated SAP. 3) Protocol is from 2019 (pre-COVID impact). 4) Missing Original SAP-only content."
+      "classification": "acceptable_difference"
     },
     {
-      "component": "List of Major Protocol Deviations",
-      "original_sap_text": "Major protocol deviations include the following: Mis-randomizations... Non-compliance of Inclusion or Exclusion criteria... Significant Good Clinical Practice (GCP) non-compliance... Receiving any prohibited therapies... Missing primary efficacy assessment",
+      "component": "Decimal Precision (Median)",
+      "category": "decimal_precision_median",
+      "original_sap_text": "median will be presented to one more decimal place than the raw data",
+      "protocol_text": null,
       "in_protocol": "no",
-      "note": "Original SAP defines specific major deviations; Generated SAP defers definition to the SAP (circular reference) or omits the list.",
-      "reasoning": "Chain-of-thought: 1) Found in Original SAP Section 4.6. 2) Generated SAP Section 3.3 mentions deviations will be defined in the SAP but does not list them. 3) Protocol Section 7.4 says deviations will be defined in the SAP. 4) Missing Original SAP-only content."
+      "classification": "acceptable_difference"
     },
     {
-      "component": "Handling of LLOQ/ULOQ in Summaries",
-      "original_sap_text": "For the purpose of summarization, any numeric values recorded below the lower limit or above the upper limit of quantification will be set to the respective limit for all related summaries unless otherwise indicated.",
+      "component": "Decimal Precision (SD)",
+      "category": "decimal_precision_sd",
+      "original_sap_text": "standard deviation will be presented to two more decimal places",
+      "protocol_text": null,
       "in_protocol": "no",
-      "note": "Specific data handling rule for quantification limits is missing.",
-      "reasoning": "Chain-of-thought: 1) Found in Original SAP Section 4. 2) Not found in Generated SAP General Methodology. 3) Protocol does not specify. 4) Missing Original SAP-only content."
+      "classification": "acceptable_difference"
     },
     {
-      "component": "Data Discrepancy Rules (eCRF vs Analytical)",
-      "original_sap_text": "When combining data from eCRF and analytical facilities discrepancy will be handled as following: 1. Recorded as collected sample in eCRF but no corresponding results... 2. No corresponding records in eCRF... 3. Discrepancy in sample collection date...",
+      "component": "Decimal Precision (Min/Max)",
+      "category": "decimal_precision_minmax",
+      "original_sap_text": "Minimum and maximum will be presented to the same number of decimal places",
+      "protocol_text": null,
       "in_protocol": "no",
-      "note": "Detailed data cleaning/handling rules are missing.",
-      "reasoning": "Chain-of-thought: 1) Found in Original SAP Section 4. 2) Not found in Generated SAP. 3) Protocol does not specify. 4) Missing Original SAP-only content."
+      "classification": "acceptable_difference"
+    },
+    {
+      "component": "Decimal Precision (GeoMean)",
+      "category": "decimal_precision_geometric_mean",
+      "original_sap_text": "geometric mean... set to the same precision as the mean",
+      "protocol_text": null,
+      "in_protocol": "no",
+      "classification": "acceptable_difference"
+    },
+    {
+      "component": "Decimal Precision (CV)",
+      "category": "decimal_precision_cv",
+      "original_sap_text": "Percent coefficient of variation (CV) will be presented to two more decimal places",
+      "protocol_text": null,
+      "in_protocol": "no",
+      "classification": "acceptable_difference"
+    },
+    {
+      "component": "Percentage Precision",
+      "category": "percentage_precision",
+      "original_sap_text": "Percentages will be presented to one decimal place",
+      "protocol_text": null,
+      "in_protocol": "no",
+      "classification": "acceptable_difference"
+    },
+    {
+      "component": "Percentage Suppression",
+      "category": "percentage_zero_handling",
+      "original_sap_text": "suppressed when the count is zero",
+      "protocol_text": null,
+      "in_protocol": "no",
+      "classification": "acceptable_difference"
+    },
+    {
+      "component": "Not Done Row",
+      "category": "not_done_row_handling",
+      "original_sap_text": "A row denoted 'Not Done' will be included... where necessary",
+      "protocol_text": null,
+      "in_protocol": "no",
+      "classification": "acceptable_difference"
+    },
+    {
+      "component": "Percentage Denominator",
+      "category": "percentage_denominator",
+      "original_sap_text": "denominator... will be the number of patients within the treatment group",
+      "protocol_text": null,
+      "in_protocol": "no",
+      "classification": "acceptable_difference"
+    },
+    {
+      "component": "Listing Sort Order",
+      "category": "listing_sort_order",
+      "original_sap_text": "sorted by the treatment group and then patient number... and visit",
+      "protocol_text": null,
+      "in_protocol": "no",
+      "classification": "acceptable_difference"
+    },
+    {
+      "component": "Quantification Limit (Low)",
+      "category": "quantification_limit_summary",
+      "original_sap_text": "values recorded below the lower limit... set to the respective limit",
+      "protocol_text": null,
+      "in_protocol": "no",
+      "classification": "acceptable_difference"
+    },
+    {
+      "component": "Quantification Limit (High)",
+      "category": "quantification_limit_summary",
+      "original_sap_text": "values... above the upper limit... set to the respective limit",
+      "protocol_text": null,
+      "in_protocol": "no",
+      "classification": "acceptable_difference"
+    },
+    {
+      "component": "Inequality Signs in Listings",
+      "category": "listing_inequality_signs",
+      "original_sap_text": "original results containing inequality sign will be displayed",
+      "protocol_text": null,
+      "in_protocol": "no",
+      "classification": "acceptable_difference"
+    },
+    {
+      "component": "Data Discrepancy (eCRF only)",
+      "category": "data_discrepancy_handling",
+      "original_sap_text": "listing will display only sample collection visit/date/time from eCRF",
+      "protocol_text": null,
+      "in_protocol": "no",
+      "classification": "acceptable_difference"
+    },
+    {
+      "component": "Data Discrepancy (Lab only)",
+      "category": "data_discrepancy_handling",
+      "original_sap_text": "listing will display only specimen collection visit/date and results from analytical facility",
+      "protocol_text": null,
+      "in_protocol": "no",
+      "classification": "acceptable_difference"
+    },
+    {
+      "component": "Data Discrepancy (Date)",
+      "category": "data_discrepancy_handling",
+      "original_sap_text": "listing will display results from analytical facility and visit/date/time from eCRF",
+      "protocol_text": null,
+      "in_protocol": "no",
+      "classification": "acceptable_difference"
+    },
+    {
+      "component": "Randomization System",
+      "category": "randomization_method",
+      "original_sap_text": "Interactive Web Response System (IWRS)",
+      "protocol_text": "IVRS or IWRS",
+      "in_protocol": "yes",
+      "classification": "missing_required"
+    },
+    {
+      "component": "Randomization Ratio",
+      "category": "randomization_method",
+      "original_sap_text": "1:1 ratio",
+      "protocol_text": "1:1 ratio",
+      "in_protocol": "yes",
+      "classification": "missing_required"
+    },
+    {
+      "component": "Randomization Method",
+      "category": "randomization_method",
+      "original_sap_text": "permuted blocks",
+      "protocol_text": "permuted blocks",
+      "in_protocol": "yes",
+      "classification": "missing_required"
+    },
+    {
+      "component": "Blinding Procedure",
+      "category": "blinding_procedure",
+      "original_sap_text": "double-blinded... randomization code will not be revealed",
+      "protocol_text": "double-blind... randomization codes will not be revealed",
+      "in_protocol": "yes",
+      "classification": "missing_required"
+    },
+    {
+      "component": "Unblinding for Reporting",
+      "category": "blinding_procedure",
+      "original_sap_text": "database will be unblinded for the 1st CSR for a reporting purpose",
+      "protocol_text": "unblinded... after the completion of Cycle 6... for the reporting purposes",
+      "in_protocol": "yes",
+      "classification": "missing_required"
+    },
+    {
+      "component": "PK Maintenance Subset",
+      "category": "population_other_subsets",
+      "original_sap_text": "PK population - Maintenance Period Subset",
+      "protocol_text": null,
+      "in_protocol": "no",
+      "classification": "acceptable_difference"
+    },
+    {
+      "component": "Post-Baseline Definition",
+      "category": "post_baseline_definition",
+      "original_sap_text": "all visits after the first infusion",
+      "protocol_text": null,
+      "in_protocol": "no",
+      "classification": "acceptable_difference"
+    },
+    {
+      "component": "Major Deviation (Mis-randomization)",
+      "category": "protocol_deviation_definition",
+      "original_sap_text": "Mis-randomizations",
+      "protocol_text": null,
+      "in_protocol": "no",
+      "classification": "acceptable_difference"
+    },
+    {
+      "component": "Major Deviation (Inc/Exc)",
+      "category": "protocol_deviation_definition",
+      "original_sap_text": "Non-compliance of Inclusion or Exclusion criteria",
+      "protocol_text": null,
+      "in_protocol": "no",
+      "classification": "acceptable_difference"
+    },
+    {
+      "component": "Major Deviation (GCP)",
+      "category": "protocol_deviation_definition",
+      "original_sap_text": "Significant Good Clinical Practice (GCP) non-compliance",
+      "protocol_text": null,
+      "in_protocol": "no",
+      "classification": "acceptable_difference"
+    },
+    {
+      "component": "Major Deviation (Prohibited)",
+      "category": "protocol_deviation_definition",
+      "original_sap_text": "Receiving any prohibited therapies",
+      "protocol_text": null,
+      "in_protocol": "no",
+      "classification": "acceptable_difference"
+    },
+    {
+      "component": "Major Deviation (Missing Efficacy)",
+      "category": "protocol_deviation_definition",
+      "original_sap_text": "Missing primary efficacy assessment",
+      "protocol_text": null,
+      "in_protocol": "no",
+      "classification": "acceptable_difference"
+    },
+    {
+      "component": "COVID-19 Deviations",
+      "category": "protocol_deviation_definition",
+      "original_sap_text": "primary analysis will be performed excluding patients with major protocol deviation related to COVID-19",
+      "protocol_text": null,
+      "in_protocol": "no",
+      "classification": "acceptable_difference"
+    },
+    {
+      "component": "General Comments Listing",
+      "category": "listing_sort_order",
+      "original_sap_text": "Data collected on the 'General Comments' eCRF page will be presented in a listing",
+      "protocol_text": null,
+      "in_protocol": "no",
+      "classification": "acceptable_difference"
+    },
+    {
+      "component": "Outlier Handling",
+      "category": "outlier_handling",
+      "original_sap_text": "outliers will not be excluded unless they are considered to be erroneous values",
+      "protocol_text": null,
+      "in_protocol": "no",
+      "classification": "acceptable_difference"
+    },
+    {
+      "component": "Screening Failure Summary",
+      "category": "population_other_subsets",
+      "original_sap_text": "number of screening failures and the primary reason... will also be summarized",
+      "protocol_text": null,
+      "in_protocol": "no",
+      "classification": "acceptable_difference"
+    },
+    {
+      "component": "Disposition Summary",
+      "category": "population_other_subsets",
+      "original_sap_text": "number of patients who have been randomized... initiated... completed... discontinued",
+      "protocol_text": null,
+      "in_protocol": "no",
+      "classification": "acceptable_difference"
+    },
+    {
+      "component": "Demographics Summary",
+      "category": "population_other_subsets",
+      "original_sap_text": "Age... Fertility... Race... Ethnicity... Smoking... Height... Weight",
+      "protocol_text": null,
+      "in_protocol": "no",
+      "classification": "acceptable_difference"
+    },
+    {
+      "component": "Gene Screening Summary",
+      "category": "population_other_subsets",
+      "original_sap_text": "table and listing of gene screening will be provided",
+      "protocol_text": null,
+      "in_protocol": "no",
+      "classification": "acceptable_difference"
+    },
+    {
+      "component": "Viral Serology Summary",
+      "category": "population_other_subsets",
+      "original_sap_text": "Viral serology will be summarized by treatment group",
+      "protocol_text": null,
+      "in_protocol": "no",
+      "classification": "acceptable_difference"
+    },
+    {
+      "component": "Medical History Summary",
+      "category": "population_other_subsets",
+      "original_sap_text": "Medical history will be summarized by treatment group, SOC and PT",
+      "protocol_text": null,
+      "in_protocol": "no",
+      "classification": "acceptable_difference"
+    },
+    {
+      "component": "Disease Characteristic Summary",
+      "category": "population_other_subsets",
+      "original_sap_text": "Disease characteristic will be displayed in a summary table",
+      "protocol_text": null,
+      "in_protocol": "no",
+      "classification": "acceptable_difference"
+    },
+    {
+      "component": "Previous Treatment Summary",
+      "category": "population_other_subsets",
+      "original_sap_text": "Previous treatment for NSCLC will be summarized",
+      "protocol_text": null,
+      "in_protocol": "no",
+      "classification": "acceptable_difference"
+    },
+    {
+      "component": "Inc/Exc Criteria Listing",
+      "category": "population_other_subsets",
+      "original_sap_text": "listing of the inclusion and exclusion criteria... will be presented",
+      "protocol_text": null,
+      "in_protocol": "no",
+      "classification": "acceptable_difference"
+    },
+    {
+      "component": "Medication Summary",
+      "category": "population_other_subsets",
+      "original_sap_text": "Prior and concomitant medication data will be presented by drug class... and PT",
+      "protocol_text": null,
+      "in_protocol": "no",
+      "classification": "acceptable_difference"
     }
   ],
+  "internal_contradictions": [],
   "extra_information_flagged": [
     {
       "content": "Software Version",
-      "generated_sap_text": "All analyses described in this plan will be performed using SAS v9.4 or higher unless specified otherwise.",
-      "contradicts": "no",
-      "detail": "Original SAP text for software section is empty/missing in provided document; Generated SAP specifies SAS.",
-      "reasoning": "Chain-of-thought: 1) Generated SAP specifies SAS v9.4. 2) Original SAP Section 4.1 header exists but text is absent. 3) Standard practice, no contradiction."
-    },
-    {
-      "content": "Detailed Visit Window Tables",
-      "generated_sap_text": "The following windows apply to assessments scheduled every cycle... Cycle 2 | 22 | 2 \u2013 < 33...",
-      "contradicts": "no",
-      "detail": "Generated SAP provides explicit visit window tables not found in Original SAP General Methodology section.",
-      "reasoning": "Chain-of-thought: 1) Generated SAP Section 4.5 includes detailed tables. 2) Original SAP does not have these in Section 4. 3) They align with Protocol schedule (every 3 weeks). 4) Beneficial extra detail."
-    },
-    {
-      "content": "Study Day and Duration Definitions",
-      "generated_sap_text": "Study Day 1: Defined as the First Dose Date... Duration of Treatment: Calculated as (Last Dose Date \u2013 First Dose Date) + 1.",
-      "contradicts": "no",
-      "detail": "Generated SAP explicitly defines derived variables for study days and durations.",
-      "reasoning": "Chain-of-thought: 1) Generated SAP Section 4.2 defines these variables. 2) Original SAP uses them but does not explicitly define the formulas in Section 4. 3) Standard definitions, no contradiction."
+      "generated_sap_text": "SAS v9.4 or higher",
+      "contradicts_original": "no",
+      "contradicts_protocol": "no",
+      "detail": "Generated SAP specifies software version where Original was silent."
     }
   ],
-  "issues": [],
-  "reasoning": "Step-by-step chain-of-thought reasoning trace: 1) I compared the General Methodology sections of the Original and Generated SAPs. 2) The Generated SAP covers the core requirements (populations, descriptive statistics, baseline definitions) accurately. 3) The Generated SAP matches the Protocol where it differs from the Original SAP (e.g., PK population exclusion criteria). 4) There are several items present in the Original SAP that are missing from the Generated SAP, including decimal precision rules, tipping point analysis, and COVID-19 handling. 5) None of these missing items are required by the Protocol (Protocol defers to SAP or is silent). 6) According to the instructions, missing Original SAP-only content does not lower the rating. 7) There are no contradictions. 8) Therefore, the rating is GREAT.",
-  "summary": "The Generated SAP accurately reflects the general methodology outlined in the Protocol and aligns well with the Original SAP's core definitions. While it omits some specific data handling rules (e.g., decimal precision, tipping point analysis) present in the Original SAP, these are not Protocol requirements. The Generated SAP provides additional useful details on visit windows and derived variables."
+  "issues": [
+    {
+      "issue_type": "contradiction_original",
+      "severity": "minor",
+      "component": "EOT Visit Handling",
+      "original_sap_text": "EOT... will not be summarized in visit-based tables",
+      "original_core_meaning": "EXCLUDE from summary",
+      "generated_sap_text": "Data collected at the EOT visit will be mapped to the appropriate cycle window",
+      "generated_core_meaning": "INCLUDE/MAP to summary",
+      "protocol_text": null,
+      "description": "Original SAP excludes EOT from visit summaries by default; Generated SAP maps it to cycles.",
+      "reasoning": "Direct conflict in default handling of EOT data."
+    },
+    {
+      "issue_type": "contradiction_original",
+      "severity": "minor",
+      "component": "Unscheduled Visit Handling",
+      "original_sap_text": "unscheduled visit will not be summarized in visit-based tables",
+      "original_core_meaning": "EXCLUDE from summary",
+      "generated_sap_text": "Unscheduled visits... will be included... if it is the closest record to the target day",
+      "generated_core_meaning": "INCLUDE/MAP to summary",
+      "protocol_text": null,
+      "description": "Original SAP excludes unscheduled visits by default; Generated SAP includes them if closest to target.",
+      "reasoning": "Direct conflict in default handling of unscheduled visit data."
+    }
+  ],
+  "reasoning": "The Generated SAP is generally consistent with the Original SAP in terms of core methodology (populations, endpoints, primary analysis method). However, there are two notable contradictions regarding the handling of EOT and Unscheduled visits in summaries (Original excludes, Generated maps/includes). Additionally, the Sample Size calculation, which is a required element present in the Protocol, is missing from the Generated SAP. The ITT definition in the Generated SAP correctly matches the Protocol, whereas the Original SAP had added an extra constraint ('successfully screened'), so this difference is actually a correction. The missing formatting/precision rules are acceptable differences.",
+  "summary": "The Generated SAP correctly defines populations and primary analysis methods, aligning well with the Protocol. However, it contradicts the Original SAP's specific instructions for handling EOT and unscheduled visits in summaries and omits the required Sample Size calculation."
 }
