@@ -99,6 +99,52 @@ def json_to_markdown(result: dict, section_name: str) -> str:
     lines.append("---")
     lines.append("")
 
+    # Missing from Generated SAP - split into two sections
+    missing = result.get('missing_from_generated_sap', [])
+
+    # Acceptable Differences (in_protocol: "no")
+    acceptable = [m for m in missing if m.get('in_protocol') == 'no']
+    lines.append(f"### ✅ Acceptable Differences ({len(acceptable)} items)")
+    lines.append("")
+    lines.append("Content in Original SAP only (not in Protocol) - acceptable to omit.")
+    lines.append("")
+    if acceptable:
+        lines.append("| Component | Category | Original SAP Text |")
+        lines.append("|-----------|----------|-------------------|")
+        for item in acceptable:
+            comp = item.get('component', '')
+            cat = item.get('category', '')
+            orig_text = item.get('original_sap_text', '')[:50]
+            lines.append(f"| {comp} | {cat} | {orig_text} |")
+    else:
+        lines.append("*None*")
+
+    lines.append("")
+    lines.append("---")
+    lines.append("")
+
+    # Missing Required Content (in_protocol: "yes")
+    required = [m for m in missing if m.get('in_protocol') == 'yes']
+    lines.append(f"### ❌ Missing Required Content ({len(required)} items)")
+    lines.append("")
+    lines.append("Content in both Original SAP AND Protocol - should be in Generated SAP.")
+    lines.append("")
+    if required:
+        lines.append("| Component | Category | Original SAP Text | Protocol Text |")
+        lines.append("|-----------|----------|-------------------|---------------|")
+        for item in required:
+            comp = item.get('component', '')
+            cat = item.get('category', '')
+            orig_text = item.get('original_sap_text', '')[:40]
+            proto_text = (item.get('protocol_text') or '')[:40]
+            lines.append(f"| {comp} | {cat} | {orig_text} | {proto_text} |")
+    else:
+        lines.append("*None - all required content is present.*")
+
+    lines.append("")
+    lines.append("---")
+    lines.append("")
+
     # Reasoning
     lines.append("### Reasoning")
     lines.append("")

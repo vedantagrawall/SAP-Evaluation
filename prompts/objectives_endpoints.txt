@@ -1,5 +1,7 @@
 You are evaluating a Generated SAP against an Original SAP for a clinical trial.
 
+IMPORTANT: Do not copy text between fields. Each quote must come from its own document. Cite the section where you found each quote.
+
 DOCUMENTS PROVIDED
 
 ORIGINAL SAP: Human-written reference SAP (primary comparison)
@@ -12,6 +14,16 @@ Evaluate the Objectives and Endpoints content in the GENERATED SAP.
 Discover what objectives and endpoints exist across all documents. Do not check against a predefined list of expected items.
 
 IMPORTANT: You MUST create separate rows for each individual endpoint. Never bundle multiple endpoints into one row. Each objective and each endpoint gets its own evaluation row.
+
+COMPLETENESS RULE: For each objective found, you MUST also evaluate the corresponding endpoints. The standard endpoint categories are:
+- Primary Endpoints (for Primary Objective)
+- Secondary Efficacy Endpoints (for Secondary Efficacy Objective)
+- Secondary PK Endpoints (for Secondary PK Objective)
+- Secondary Safety Endpoints (for Secondary Safety Objective) - includes AEs, SAEs, deaths, laboratory abnormalities, immunogenicity
+- Secondary QoL Endpoints (for Secondary QoL Objective) - includes PRO measures like EORTC QLQ-C30
+- Exploratory Endpoints (if exploratory objectives exist)
+
+If an objective exists but no corresponding endpoints are evaluated, this is incomplete coverage.
 
 Instead:
 
@@ -36,6 +48,9 @@ SEARCH the entire document. Section names and locations are irrelevant.
 Only the accuracy of the content matters.
 
 EVALUATION RULES
+
+CRITICAL: Do not copy text between fields. The original_sap_text must come from the Original SAP document, not from Generated SAP. Search for topics/concepts, not exact wording. Find where Original SAP discusses each topic (even as section headers or analysis methods), quote that content, then compare semantically. Quote VERBATIM text from each document first, then compare semantically. Do not paraphrase or summarize. If the exact text does not exist in the document, state what actually exists or "not found". Compare the verbatim quotes for semantic equivalence - minor wording differences with same meaning = "yes", but different meaning or scope = "no".
+
 Objectives:
 
 Must match Protocol language exactly
@@ -99,11 +114,23 @@ MARKDOWN OUTPUT (for human review):
 
 ---
 
-### Missing Information
+### ✅ Acceptable Differences (X items)
 
-| Component | Original SAP Text | In Protocol | Note | Reasoning |
-|-----------|-------------------|-------------|------|-----------|
-| [name] | "[quote]" | yes/no | [explanation] | [chain-of-thought] |
+Content in Original SAP only (not in Protocol) - acceptable to omit.
+
+| Component | Content Type | Original SAP Text | Description |
+|-----------|--------------|-------------------|-------------|
+| [name] | [type] | "[quote]" | [explanation] |
+
+---
+
+### ❌ Missing Required Content (X items)
+
+Content in both Original SAP AND Protocol - should be in Generated SAP.
+
+| Component | Content Type | Original SAP Text | Description |
+|-----------|--------------|-------------------|-------------|
+| [name] | [type] | "[quote]" | [explanation] |
 
 ---
 
@@ -125,13 +152,12 @@ MARKDOWN OUTPUT (for human review):
 
 ### Reasoning
 [Step-by-step chain-of-thought reasoning trace:]
-1. What I found in Protocol for objectives/endpoints
-2. What I found in Original SAP
-3. What I found in Generated SAP
-4. How I compared them (Original SAP first, then Protocol as tiebreaker)
-5. Where discrepancies were found
-6. How each was resolved
-7. Why this rating was assigned
+1. What I found in Original SAP
+2. What I found in Generated SAP
+3. Whether they match
+4. If they differ, what Protocol says
+5. How each was resolved
+6. Why this rating was assigned
 
 ---
 
@@ -149,9 +175,12 @@ JSON OUTPUT (for programmatic use):
     {
       "component": "name of what was evaluated",
       "evaluation_type": "exact_match | semantic | judgment",
-      "original_sap_text": "exact quote from Original SAP",
+      "original_sap_text": "exact quote from Original SAP (do not copy from Generated SAP)",
+      "original_sap_section": "section number/name where found, or 'not found'",
       "generated_sap_text": "exact quote from Generated SAP",
+      "generated_sap_section": "section number/name where found",
       "protocol_text": "exact quote from Protocol, or null if not consulted",
+      "protocol_section": "section number/name where found, or null",
       "matches_original_sap": "yes | no",
       "protocol_consulted": "yes | no | n/a",
       "result": "correct | problem",
@@ -161,12 +190,13 @@ JSON OUTPUT (for programmatic use):
     }
   ],
 
-  "missing_information": [
+  "missing_from_generated_sap": [
     {
       "component": "name of what is missing",
+      "content_type": "objective | endpoint | estimand | descriptive label",
       "original_sap_text": "exact quote from Original SAP",
-      "in_protocol": "yes | no",
-      "note": "explanation of what is missing from Generated SAP",
+      "in_protocol": "yes | no (yes = missing required, no = acceptable difference)",
+      "description": "explanation of what is missing from Generated SAP",
       "reasoning": "Chain-of-thought: 1) Where I found this in Original SAP, 2) How I searched for it in Generated SAP, 3) Why it is considered missing, 4) Whether Protocol requires it"
     }
   ],
@@ -194,7 +224,7 @@ JSON OUTPUT (for programmatic use):
     }
   ],
 
-  "reasoning": "Step-by-step chain-of-thought reasoning trace: 1) What I found in Protocol for objectives/endpoints, 2) What I found in Original SAP, 3) What I found in Generated SAP, 4) How I compared them (Original SAP first, then Protocol as tiebreaker), 5) Where discrepancies were found, 6) How each was resolved, 7) Why this rating was assigned",
+  "reasoning": "Step-by-step chain-of-thought reasoning trace: 1) What I found in Original SAP, 2) What I found in Generated SAP, 3) Whether they match, 4) If they differ, what Protocol says, 5) How each was resolved, 6) Why this rating was assigned",
 
   "summary": "2-3 sentence overall assessment"
 }
@@ -202,11 +232,12 @@ JSON OUTPUT (for programmatic use):
 
 PROCESS
 
-1. Read PROTOCOL - identify all objectives and endpoints present
-2. Read ORIGINAL SAP - identify all objectives, endpoints, estimands present
-3. Read GENERATED SAP - identify all objectives, endpoints, estimands present
-4. For EACH item found:
-   - Extract the full definition text from Generated SAP, Original SAP, and Protocol
+1. Read ORIGINAL SAP - identify all objectives, endpoints, estimands present
+2. Read GENERATED SAP - identify all objectives, endpoints, estimands present
+3. Only consult PROTOCOL when Original SAP and Generated SAP differ
+4. VERIFY COMPLETENESS: For each objective found (Primary, Secondary Efficacy, Secondary PK, Secondary Safety, Secondary QoL), ensure the corresponding endpoints are also identified and evaluated. Do not skip Safety or QoL endpoints.
+5. For EACH item found:
+   - Quote text that actually exists in each document and cite the section where you found it. Do not copy text from Generated SAP into the Original SAP field. If the document has no equivalent content, state "not found".
    - Compare the actual definition text, not just the component name
    - If a component contains multiple items, create a separate evaluation row for each item
    - Text matches only if the definition text is identical or nearly identical. Additional clauses, conditions, or qualifiers constitute a difference.
@@ -217,12 +248,12 @@ PROCESS
    - Determine evaluation type (exact_match for objectives, semantic for endpoints, judgment for estimands)
    - Record result
 
-5. Check if Generated SAP includes any items not present in Protocol. Compare each individual item, not bundled groups. Flag these as extra information and assess for contradiction.
-6. Check for exploratory content: Does Protocol define any? Does Generated SAP include or flag absence?
-7. Check for estimands: Compare to Original SAP
-8. Document all findings with ACTUAL TEXT QUOTES
-9. Write reasoning explaining your evaluation process
-10. Assign rating
+6. Check if Generated SAP includes any items not present in Protocol. Compare each individual item, not bundled groups. Flag these as extra information and assess for contradiction.
+7. Check for exploratory content: Does Protocol define any? Does Generated SAP include or flag absence?
+8. Check for estimands: Compare to Original SAP
+9. Document all findings with ACTUAL TEXT QUOTES
+10. Write reasoning explaining your evaluation process
+11. Assign rating
 
 
 IMPORTANT REMINDERS

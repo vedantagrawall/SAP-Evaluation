@@ -28,5 +28,5 @@ LLAMAPARSE_CONFIG = {
 GEMINI_MODEL = "gemini-3-pro-preview"
 GEMINI_CONFIG = {
     "temperature": 0.1,  # Low temperature for consistent evaluations
-    "max_output_tokens": 8192,
+    "max_output_tokens": 32768,
 }
