@@ -12,7 +12,18 @@
       "issue_type": "none",
       "severity": "none",
       "original_sap_differs_from_protocol": "yes",
-      "original_sap_difference": "Omitted 'up to Cycle 6' from the text"
+      "original_sap_difference": "Original SAP omits 'up to Cycle 6' which is present in Protocol and Generated SAP."
+    },
+    {
+      "component": "Primary Endpoint (ORR Induction)",
+      "evaluation_type": "exact_match",
+      "matches_original_sap": "yes",
+      "protocol_consulted": "n/a",
+      "result": "correct",
+      "issue_type": "none",
+      "severity": "none",
+      "original_sap_differs_from_protocol": "n/a",
+      "original_sap_difference": null
     },
     {
       "component": "Secondary Objectives",
@@ -22,22 +33,22 @@
       "result": "correct",
       "issue_type": "none",
       "severity": "none",
-      "original_sap_differs_from_protocol": "no",
+      "original_sap_differs_from_protocol": "n/a",
       "original_sap_difference": null
     },
     {
-      "component": "Primary Endpoint",
-      "evaluation_type": "exact_match",
+      "component": "Secondary Endpoint (ORR Whole Study)",
+      "evaluation_type": "semantic",
       "matches_original_sap": "yes",
       "protocol_consulted": "n/a",
       "result": "correct",
       "issue_type": "none",
       "severity": "none",
-      "original_sap_differs_from_protocol": "no",
+      "original_sap_differs_from_protocol": "n/a",
       "original_sap_difference": null
     },
     {
-      "component": "Secondary Endpoints",
+      "component": "Secondary Endpoint (Response Duration)",
       "evaluation_type": "semantic",
       "matches_original_sap": "no",
       "protocol_consulted": "yes",
@@ -45,7 +56,73 @@
       "issue_type": "none",
       "severity": "none",
       "original_sap_differs_from_protocol": "yes",
-      "original_sap_difference": "Original SAP Section 12 explicitly notes Response Duration definition was updated to include 'death', differing from Protocol."
+      "original_sap_difference": "Original SAP Section 12 explicitly updates definition to include 'death from any cause', whereas Protocol only lists 'PD/recurrence'. Generated SAP lists Protocol definition in Section 2.2.1 but correctly applies Original SAP's updated definition in Analysis Section 6.2.2."
+    },
+    {
+      "component": "Secondary Endpoint (TTP)",
+      "evaluation_type": "semantic",
+      "matches_original_sap": "yes",
+      "protocol_consulted": "n/a",
+      "result": "correct",
+      "issue_type": "none",
+      "severity": "none",
+      "original_sap_differs_from_protocol": "n/a",
+      "original_sap_difference": null
+    },
+    {
+      "component": "Secondary Endpoint (PFS)",
+      "evaluation_type": "semantic",
+      "matches_original_sap": "yes",
+      "protocol_consulted": "n/a",
+      "result": "correct",
+      "issue_type": "none",
+      "severity": "none",
+      "original_sap_differs_from_protocol": "n/a",
+      "original_sap_difference": null
+    },
+    {
+      "component": "Secondary Endpoint (OS)",
+      "evaluation_type": "semantic",
+      "matches_original_sap": "yes",
+      "protocol_consulted": "n/a",
+      "result": "correct",
+      "issue_type": "none",
+      "severity": "none",
+      "original_sap_differs_from_protocol": "n/a",
+      "original_sap_difference": null
+    },
+    {
+      "component": "Secondary Endpoint (PK)",
+      "evaluation_type": "semantic",
+      "matches_original_sap": "yes",
+      "protocol_consulted": "n/a",
+      "result": "correct",
+      "issue_type": "none",
+      "severity": "none",
+      "original_sap_differs_from_protocol": "n/a",
+      "original_sap_difference": null
+    },
+    {
+      "component": "Secondary Endpoint (QoL)",
+      "evaluation_type": "semantic",
+      "matches_original_sap": "yes",
+      "protocol_consulted": "n/a",
+      "result": "correct",
+      "issue_type": "none",
+      "severity": "none",
+      "original_sap_differs_from_protocol": "n/a",
+      "original_sap_difference": null
+    },
+    {
+      "component": "Secondary Endpoint (Safety)",
+      "evaluation_type": "semantic",
+      "matches_original_sap": "yes",
+      "protocol_consulted": "n/a",
+      "result": "correct",
+      "issue_type": "none",
+      "severity": "none",
+      "original_sap_differs_from_protocol": "n/a",
+      "original_sap_difference": null
     },
     {
       "component": "Exploratory Objectives/Endpoints",
@@ -64,9 +141,9 @@
     {
       "content": "Estimand Specification (Section 6.1.1.1)",
       "contradicts": "no",
-      "detail": "Generated SAP defines a formal estimand framework (Composite/Hypothetical strategies) which is not present in the Original SAP, but aligns with the analysis logic."
+      "detail": "Generated SAP explicitly defines estimands (Composite/Hypothetical strategies) which are not explicitly structured as such in the Original SAP, but align with the analysis methods described (non-responder imputation)."
     }
   ],
-  "reasoning": "The Generated SAP accurately extracts all objectives and endpoints from the Protocol. For the Primary Objective, it correctly matches the Protocol text ('up to Cycle 6') which was slightly abbreviated in the Original SAP. For Secondary Endpoints, specifically Response Duration, the Generated SAP correctly lists the Protocol definition in the Endpoints section (2.2.1), even though the Original SAP explicitly changed this definition in its 'Changes from Protocol' section (the Generated SAP correctly adopts the updated definition later in the Analysis section 6.2.2). The Generated SAP correctly identifies that there are no exploratory objectives defined in the Protocol. It adds an Estimand framework which is extra information but consistent with the study design.",
-  "summary": "The Generated SAP provides an exact match to the Protocol's objectives and endpoints, correctly identifying all primary and secondary items. It appropriately handles discrepancies between the Protocol and Original SAP by adhering to the Protocol definitions in this section."
+  "reasoning": "The Generated SAP accurately extracts all objectives and endpoints from the Protocol. It correctly identifies the Primary Objective text from the Protocol (including 'up to Cycle 6') which the Original SAP had abbreviated. For the Response Duration endpoint, the Generated SAP correctly lists the Protocol definition in the Endpoints section (2.2.1) but adopts the Original SAP's updated definition (including death) in the Analysis section (6.2.2), demonstrating excellent handling of protocol deviations documented in the Original SAP. It correctly identifies that no exploratory endpoints exist.",
+  "summary": "The Generated SAP provides a precise and accurate reflection of the Protocol's objectives and endpoints. It correctly handles discrepancies between the Protocol and Original SAP by adhering to Protocol definitions in the listing while incorporating necessary analysis updates in the methodology."
 }

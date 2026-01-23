@@ -186,9 +186,9 @@ PROCESS
    - Determine evaluation type (exact_match for objectives, semantic for endpoints, judgment for estimands)
    - Record result
 
-5. Check for exploratory content: Does Protocol define any? Does Generated SAP include or flag absence?
-6. Check for estimands: Compare to Original SAP
-7. Identify any extra information in Generated SAP - flag and assess for contradiction only
+5. Check if Generated SAP includes any items not present in Protocol. Compare each individual item, not bundled groups. Flag these as extra information and assess for contradiction.
+6. Check for exploratory content: Does Protocol define any? Does Generated SAP include or flag absence?
+7. Check for estimands: Compare to Original SAP
 8. Document all findings with ACTUAL TEXT QUOTES
 9. Write reasoning explaining your evaluation process
 10. Assign rating
