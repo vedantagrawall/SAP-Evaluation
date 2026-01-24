@@ -44,15 +44,19 @@ Follow this order strictly:
 
 ## WHAT TO EVALUATE FOR EACH POPULATION
 
-For each analysis population, evaluate THREE components:
+**CRITICAL**: For each population, you MUST evaluate AT MINIMUM these 3 components:
+1. **Name**
+2. **Definition**
+3. **Treatment Assignment**
 
-| Component | Evaluation Type | Comparison Rule |
-|-----------|-----------------|-----------------|
-| **Name** | exact_match | Compare to Original SAP first; if different, check Protocol as tiebreaker |
-| **Definition** | semantic | Compare to Original SAP first; if different, check Protocol as tiebreaker |
-| **Treatment Assignment** | semantic | Compare to Original SAP first; if different, check Protocol as tiebreaker |
+Also evaluate any other components and sub-components found for each population. Every distinct piece of information must have its own evaluation row. Do not combine or skip any content.
 
-**All three components follow the same evaluation hierarchy:**
+For each analysis population, you must:
+1. Create evaluation rows for Name, Definition, and Treatment Assignment (REQUIRED)
+2. Create additional rows for any other distinct components found
+3. Never bundle multiple pieces of information into one row
+
+**All components follow the same evaluation hierarchy:**
 1. If Generated SAP matches Original SAP → CORRECT
 2. If Generated SAP differs from Original SAP → Consult Protocol
 3. If Generated SAP matches Protocol → CORRECT (even if Original SAP differs)
@@ -62,6 +66,8 @@ For each analysis population, evaluate THREE components:
 
 ## DISCOVERY PROCESS
 
+**MANDATORY: Complete discovery BEFORE evaluation. List everything first, then evaluate.**
+
 ### Step 1: Search Protocol
 - Search the entire Protocol document for analysis populations/analysis sets
 - List ALL populations defined
@@ -70,23 +76,32 @@ For each analysis population, evaluate THREE components:
 ### Step 2: Search Original SAP
 - Search the entire Original SAP document for analysis populations
 - List ALL populations defined
+- For EACH population, list ALL distinct components found (name, definition, criteria, treatment assignment, timing, subsets, etc.)
 - Record ALL text related to each population—every sentence, clause, phrase, list, reference, and statement
 - Do not filter or summarize. Extract the complete text.
+- **Count the total number of distinct components across all populations**
 
 ### Step 3: Search Generated SAP
 - Search the entire Generated SAP document for analysis populations
 - List ALL populations defined
+- For EACH population, list ALL distinct components found
 - Record ALL text related to each population
+- **Count the total number of distinct components across all populations**
 
-### Step 4: Evaluate Each Population
+### Step 4: Create Component Inventory
+**Before evaluating, create a complete inventory:**
+- List every population found in any document
+- For each population, list every distinct component found in Original SAP
+- This inventory determines how many evaluation rows you must create
+- **Total components extracted = Number of evaluation_table rows + Number of missing_from_generated_sap rows**
 
-For each population found in Protocol:
-1. Check if present in Generated SAP (if absent → PROBLEM)
-2. Compare name (exact_match)
-3. Compare definition (semantic)
-4. Compare treatment assignment (semantic)
-5. If Generated SAP differs from Original SAP → consult Protocol
-6. Record Protocol text when consulted
+### Step 5: Evaluate Each Component
+For each component in your inventory:
+1. Check if present in Generated SAP (if absent → add to missing_from_generated_sap)
+2. If present, compare content following the evaluation hierarchy
+3. Create one evaluation_table row per component that exists in Generated SAP
+4. If Generated SAP differs from Original SAP → consult Protocol
+5. Record Protocol text when consulted
 
 ---
 
@@ -140,6 +155,8 @@ Follow this exact process:
 6. **Sub-sentence granularity**: Do not stop at checking whether a sentence exists. Check whether every part of that sentence exists. A sentence with 5 pieces of information requires 5 checks.
 7. **Preserved meaning is not enough**: If the Generated SAP captures the "main idea" but omits words, phrases, or clauses from the Original SAP, document what was omitted
 8. **Missing information is not a wording difference**: If the Original SAP contains information that the Generated SAP does not contain, that is missing content—not a wording difference. Document it.
+9. **One row per component**: Every distinct component must have its own row in either evaluation_table or missing_from_generated_sap. Never combine multiple components into one row.
+10. **Validate your counts**: Before outputting, verify that total_components_extracted equals components_in_evaluation_table + components_in_missing_from_generated_sap.
 
 ### OUTPUT FIELD
 
@@ -206,26 +223,6 @@ Provide BOTH markdown (for human review) AND JSON (for programmatic use).
 
 ---
 
-### ✅ Acceptable Differences (X items)
-
-Content in Original SAP only (not in Protocol) - acceptable to omit.
-
-| Component | Type | Description |
-|-----------|------|-------------|
-| [Population or General] | [descriptive label] | [what is missing] |
-
-<details>
-<summary>Reasoning</summary>
-
-- **[Component]**: [reasoning for why this is acceptable]
-- **[Component]**: [reasoning]
-
-</details>
-
-(If none: "No differences found.")
-
----
-
 ### ❌ Missing Required Content (X items)
 
 Content in both Original SAP AND Protocol - should be in Generated SAP.
@@ -235,18 +232,6 @@ Content in both Original SAP AND Protocol - should be in Generated SAP.
 | [Population or General] | [descriptive label] | [what is missing] |
 
 (If none: "No missing required content.")
-
----
-
-### ⚠️ Protocol Content Not In Generated SAP (X items)
-
-Content in Protocol but not in Generated SAP.
-
-| Component | Content Type | Protocol Text | Description |
-|-----------|--------------|---------------|-------------|
-| [Population or General] | [descriptive label] | "[quote]" | [what is missing] |
-
-(If none: "No protocol content missing.")
 
 ---
 
@@ -288,6 +273,15 @@ Content in Protocol but not in Generated SAP.
   "rating": "GREAT | DECENT | POOR",
   "status": "pass | pass_with_notes | fail",
 
+  "extraction_validation": {
+    "populations_found": ["list every population discovered"],
+    "components_per_population": {"Population Name": "count of distinct components"},
+    "total_components_extracted": 0,
+    "components_in_evaluation_table": 0,
+    "components_in_missing_from_generated_sap": 0,
+    "counts_match": true
+  },
+
   "evaluation_table": [
     {
       "component": "Population Name - component",
@@ -309,17 +303,9 @@ Content in Protocol but not in Generated SAP.
       "component": "Population Name or General",
       "content_type": "entire_population | descriptive label for content type",
       "original_sap_text": "exact quote of what Original SAP contains",
-      "in_protocol": "yes | no (yes = PROBLEM, no = acceptable difference)",
-      "description": "explanation of what is missing from Generated SAP",
-      "reasoning": "Chain-of-thought: 1) What I found in Original SAP, 2) How I searched for it in Generated SAP, 3) Why it is considered absent"
-    }
-  ],
-
-  "protocol_content_not_in_generated_sap": [
-    {
-      "component": "Population Name or General",
-      "content_type": "descriptive label for content type",
-      "protocol_text": "exact quote from Protocol",
+      "protocol_text": "exact quote if found, null if not",
+      "in_protocol": "yes | no",
+      "classification": "missing_required | acceptable_difference",
       "description": "explanation of what is missing from Generated SAP"
     }
   ],
@@ -355,6 +341,18 @@ Content in Protocol but not in Generated SAP.
 
 ---
 
+## BLOCKING VALIDATION
+
+**counts_match MUST be true for valid output.**
+
+Before finalizing your output, verify:
+- `total_components_extracted` = `components_in_evaluation_table` + `components_in_missing_from_generated_sap`
+- If the counts do not match, your output is INVALID - go back and find the missing components
+
+This ensures no component is skipped or lost during evaluation.
+
+---
+
 ## CRITICAL REMINDERS
 
 1. **Discovery first**: Do not assume populations exist - search and find them in each document
@@ -363,7 +361,8 @@ Content in Protocol but not in Generated SAP.
 4. **Do not penalize Protocol compliance**: If Generated SAP matches Protocol but not Original SAP, that is CORRECT
 5. **Document everything**: Include actual text quotes for audit trail
 6. **Absence is only a problem if required by Protocol**: Missing a population that Protocol defines is a PROBLEM; missing one only in Original SAP is not
-7. **Three components per population**: Always evaluate name, definition, and treatment assignment for each population
+7. **Evaluate ALL components**: Every distinct piece of information for each population must have its own evaluation row - do not skip or combine
 8. **Location flexibility**: Content may appear in different sections across documents - search entire documents
 9. **Quote actual text**: Always provide exact quotes from documents
 10. **Explain Protocol consultations**: When you consult Protocol, document what it says and how it resolved the discrepancy
+11. **Blocking validation**: Ensure counts_match is true before outputting - total_components_extracted must equal components_in_evaluation_table + components_in_missing_from_generated_sap
