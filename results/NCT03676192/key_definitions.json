@@ -1,0 +1,260 @@
+{
+  "section": "key_definitions",
+  "rating": "DECENT",
+  "status": "pass_with_notes",
+  "extraction_validation": {
+    "definitions_in_generated_sap": 19,
+    "definitions_in_original_sap": 15,
+    "definitions_in_protocol": 14,
+    "definitions_evaluated": 22,
+    "definitions_missing": 3,
+    "definitions_added": 4,
+    "counts_valid": true
+  },
+  "evaluation_table": [
+    {
+      "definition": "Baseline Value",
+      "source_category": "sap-originated",
+      "generated_sap_text": "Defined as the last non-missing observation (including central laboratory results, vital signs, and tumor assessments) recorded prior to the First Dose Date.",
+      "generated_sap_location": "4.2 Key Definitions",
+      "original_sap_text": "The baseline value for all analyses will be the last non-missing value prior to the first infusion unless otherwise specified.",
+      "original_sap_location": "4.5 Definition of Baseline and Post-Baseline",
+      "protocol_text": null,
+      "protocol_location": null,
+      "matches_source": "yes",
+      "result": "correct",
+      "issue_type": "none",
+      "severity": "none",
+      "reasoning": "Matches the Original SAP definition."
+    },
+    {
+      "definition": "Intent-to-treat (ITT) Population",
+      "source_category": "protocol-defined",
+      "generated_sap_text": "The ITT population is defined as all patients randomly assigned to study drug, regardless of whether or not any study treatment dosing is completed.",
+      "generated_sap_location": "3.3 Analysis Populations",
+      "original_sap_text": "The ITT population will consist of all randomized patients who are randomly assigned to study drug... and successfully screened based on the \u2018Screening Pass/Fail\u2019 eCRF page.",
+      "original_sap_location": "4.4.1 Intent-to-Treat Population",
+      "protocol_text": "The ITT population is defined as all patients randomly assigned to study drug, regardless of whether or not any study treatment dosing is completed.",
+      "protocol_location": "7.4 Analysis Sets",
+      "matches_source": "yes",
+      "result": "correct",
+      "issue_type": "none",
+      "severity": "none",
+      "reasoning": "Generated SAP matches the Protocol definition exactly. The Original SAP added a 'successfully screened' constraint which the Generated SAP omitted, reverting to the Protocol definition."
+    },
+    {
+      "definition": "Per-Protocol (PP) Population",
+      "source_category": "protocol-defined",
+      "generated_sap_text": "defined as all randomly assigned patients who have at least one response evaluation after receiving at least one full dose of study drug... and who do not have any major protocol deviation.",
+      "generated_sap_location": "3.3 Analysis Populations",
+      "original_sap_text": "consist of all randomly assigned patients who have at least one response evaluation after receiving at least one full dose of study drug... and who do not have any major protocol deviations",
+      "original_sap_location": "4.4.2 Per-Protocol Population",
+      "protocol_text": "defined as all randomly assigned patients who have at least one response evaluation after receiving at least one full dose of study drug... and who do not have any major protocol deviation.",
+      "protocol_location": "7.4 Analysis Sets",
+      "matches_source": "yes",
+      "result": "correct",
+      "issue_type": "none",
+      "severity": "none",
+      "reasoning": "Matches Protocol and Original SAP."
+    },
+    {
+      "definition": "Safety Population",
+      "source_category": "protocol-defined",
+      "generated_sap_text": "defined as all randomly assigned patients who receive at least one dose (full or partial) of study drug",
+      "generated_sap_location": "3.3 Analysis Populations",
+      "original_sap_text": "consist of all randomly assigned patients who receive at least one dose (partial or full) of study drug",
+      "original_sap_location": "4.4.5 Safety Population",
+      "protocol_text": "defined as all randomly assigned patients who receive at least one dose (full or partial) of study drug",
+      "protocol_location": "7.4 Analysis Sets",
+      "matches_source": "yes",
+      "result": "correct",
+      "issue_type": "none",
+      "severity": "none",
+      "reasoning": "Matches Protocol and Original SAP."
+    },
+    {
+      "definition": "PK Population",
+      "source_category": "protocol-defined",
+      "generated_sap_text": "defined as all patients who receive at least one full dose of study drug... and who have at least one post treatment PK result.",
+      "generated_sap_location": "3.3 Analysis Populations",
+      "original_sap_text": "consist of all randomly assigned patients who receive at least one full dose... and who have at least one post treatment PK result.",
+      "original_sap_location": "4.4.3 Pharmacokinetic Population",
+      "protocol_text": "defined as all patients who receive at least one full dose of study drug... and who have at least one post treatment PK result.",
+      "protocol_location": "7.4 Analysis Sets",
+      "matches_source": "yes",
+      "result": "correct",
+      "issue_type": "none",
+      "severity": "none",
+      "reasoning": "Matches Protocol exactly."
+    },
+    {
+      "definition": "Controlled Disease",
+      "source_category": "protocol-defined",
+      "generated_sap_text": "Defined as a patient achieving a Best Overall Response (BOR) of Complete Response (CR), Partial Response (PR), or Stable Disease (SD) as assessed at the end of Cycle 6",
+      "generated_sap_location": "4.2 Key Definitions",
+      "original_sap_text": "patients with controlled disease (complete response [CR], partial response [PR], or stable disease [SD], assessed at the end of Cycle 6) will enter the Maintenance Study Period",
+      "original_sap_location": "3 Overall Study Design and Plan",
+      "protocol_text": "patients with controlled disease (complete response [CR], partial response [PR] or stable disease [SD], assessed at the end of Cycle 6) will enter the Maintenance Study Period",
+      "protocol_location": "3.1 Study Design",
+      "matches_source": "yes",
+      "result": "correct",
+      "issue_type": "none",
+      "severity": "none",
+      "reasoning": "Matches Protocol definition."
+    },
+    {
+      "definition": "Response Duration",
+      "source_category": "sap-originated",
+      "generated_sap_text": "Time from the first documented response (CR or PR) until the first documentation of PD or death (among responders only).",
+      "generated_sap_location": "6.2.2 Time-to-Event Endpoints",
+      "original_sap_text": "time between initial response (CR or PR) that is confirmed... and PD/recurrence or death from any cause",
+      "original_sap_location": "12 Changes from Protocol",
+      "protocol_text": "the time between initial response (CR or PR) and PD/recurrence",
+      "protocol_location": "7.2.1 Efficacy Endpoints",
+      "matches_source": "yes",
+      "result": "correct",
+      "issue_type": "internal_contradiction",
+      "severity": "minor",
+      "reasoning": "The definition in Section 6.2.2 correctly matches the Original SAP (which updated the Protocol to include death). However, Section 2.2.1 of the Generated SAP still lists the old Protocol definition (excluding death), creating an internal contradiction."
+    },
+    {
+      "definition": "Study Day",
+      "source_category": "generated-addition",
+      "generated_sap_text": "Defined as the number of days from Study Day 1... There is no Study Day 0.",
+      "generated_sap_location": "4.2 Key Definitions",
+      "original_sap_text": null,
+      "original_sap_location": null,
+      "protocol_text": null,
+      "protocol_location": null,
+      "matches_source": "n/a",
+      "result": "acceptable",
+      "issue_type": "none",
+      "severity": "none",
+      "reasoning": "Standard SAP definition added for clarity."
+    },
+    {
+      "definition": "Age",
+      "source_category": "generated-addition",
+      "generated_sap_text": "Calculated as the integer part of (Date of Informed Consent \u2013 Date of Birth) / 365.25.",
+      "generated_sap_location": "4.2 Key Definitions",
+      "original_sap_text": "Age will be automatically calculated in the eCRF system",
+      "original_sap_location": "6.1 Demographics",
+      "protocol_text": null,
+      "protocol_location": null,
+      "matches_source": "n/a",
+      "result": "acceptable",
+      "issue_type": "none",
+      "severity": "none",
+      "reasoning": "Provides specific formula where Original SAP referenced eCRF calculation."
+    },
+    {
+      "definition": "Duration of Treatment",
+      "source_category": "sap-originated",
+      "generated_sap_text": "Calculated as (Last Dose Date \u2013 First Dose Date) + 1.",
+      "generated_sap_location": "4.2 Key Definitions",
+      "original_sap_text": "calculated as (Last dose date \u2013 First dose date + 1)",
+      "original_sap_location": "5 Patient Disposition",
+      "protocol_text": null,
+      "protocol_location": null,
+      "matches_source": "yes",
+      "result": "correct",
+      "issue_type": "none",
+      "severity": "none",
+      "reasoning": "Matches Original SAP formula."
+    }
+  ],
+  "additions": [
+    {
+      "definition": "Study Day",
+      "generated_sap_text": "Defined as the number of days from Study Day 1... There is no Study Day 0.",
+      "generated_sap_location": "4.2 Key Definitions",
+      "consistent_with_study_design": "yes",
+      "contradicts_source": "no",
+      "assessment": "acceptable",
+      "reasoning": "Standard CDISC/SAP definition."
+    },
+    {
+      "definition": "First/Last Dose/Visit Dates",
+      "generated_sap_text": "Definitions provided for First Dose Date, Last Dose Date, First Visit Date, Last Visit Date.",
+      "generated_sap_location": "4.2 Key Definitions",
+      "consistent_with_study_design": "yes",
+      "contradicts_source": "no",
+      "assessment": "acceptable",
+      "reasoning": "Standard definitions to support analysis."
+    },
+    {
+      "definition": "Study Periods (Induction/Maintenance/Follow-up)",
+      "generated_sap_text": "Explicit start/end definitions for each period.",
+      "generated_sap_location": "4.2 Key Definitions",
+      "consistent_with_study_design": "yes",
+      "contradicts_source": "no",
+      "assessment": "acceptable",
+      "reasoning": "Clarifies period boundaries consistent with Protocol design."
+    },
+    {
+      "definition": "Age",
+      "generated_sap_text": "Calculated as the integer part of (Date of Informed Consent \u2013 Date of Birth) / 365.25.",
+      "generated_sap_location": "4.2 Key Definitions",
+      "consistent_with_study_design": "yes",
+      "contradicts_source": "no",
+      "assessment": "acceptable",
+      "reasoning": "Provides explicit formula."
+    }
+  ],
+  "missing_definitions": [
+    {
+      "definition": "Treatment-Emergent Adverse Event (TEAE)",
+      "original_sap_text": "defined as any event not present before exposure to study drug or any event already present that worsens in either severity or frequency after exposure to study drug.",
+      "original_sap_location": "10.1 Adverse Events",
+      "protocol_text": "Any new condition noted at Screening would be regarded as an AE, but not a treatment-emergent AE.",
+      "protocol_location": "6.5.1.1 Definitions of Adverse Events",
+      "in_protocol": "yes",
+      "classification": "missing_required",
+      "reasoning": "The Generated SAP mentions TEAEs in analysis sections but fails to define the criteria (e.g., onset on/after first dose) in the Key Definitions or Safety Analysis section."
+    },
+    {
+      "definition": "Prior and Concomitant Medications",
+      "original_sap_text": "A prior medication is defined as any medication where both the start and stop dates are before the date of first infusion. A concomitant medication is defined as any medication that has a stop date that is on or after the date of first infusion or missing.",
+      "original_sap_location": "7.1 Prior and Concomitant Medications",
+      "protocol_text": "All medications used during the study, as well as all medications taken within 30 days of Day 1 of Cycle 1... will be collected.",
+      "protocol_location": "5.9 Prior, Concomitant, and Subsequent Therapy",
+      "in_protocol": "yes",
+      "classification": "missing_required",
+      "reasoning": "The Generated SAP lists these as endpoints but does not define the logic for classifying a medication as Prior vs. Concomitant."
+    },
+    {
+      "definition": "Date Imputation Rules",
+      "original_sap_text": "Incomplete medications start and stop dates will be imputed as follows...",
+      "original_sap_location": "14.4 Date Imputation",
+      "protocol_text": null,
+      "protocol_location": null,
+      "in_protocol": "no",
+      "classification": "acceptable_omission",
+      "reasoning": "While useful, imputation rules are often detailed in appendices or programming specs. Their omission from Key Definitions is acceptable if not critical for understanding the core concepts."
+    }
+  ],
+  "internal_contradictions": [
+    {
+      "definition": "Response Duration",
+      "location_a": "2.2.1 Secondary Endpoints",
+      "text_a": "Response duration: the time between initial response (CR or PR) and PD/recurrence",
+      "location_b": "6.2.2 Time-to-Event Endpoints",
+      "text_b": "Response Duration: Time from the first documented response (CR or PR) until the first documentation of PD or death",
+      "description": "Section 2.2.1 uses the old Protocol definition (excluding death), while Section 6.2.2 uses the updated Original SAP definition (including death).",
+      "severity": "minor"
+    }
+  ],
+  "issues": [
+    {
+      "issue_type": "internal_contradiction",
+      "severity": "minor",
+      "definition": "Response Duration",
+      "source_text": "time between initial response... and PD/recurrence or death from any cause (Original SAP Section 12)",
+      "generated_text": "Section 2.2.1: '...and PD/recurrence' vs Section 6.2.2: '...until... PD or death'",
+      "description": "Inconsistent definition of the event for Response Duration within the Generated SAP.",
+      "reasoning": "The Generated SAP correctly identifies the updated definition in the analysis section (6.2.2) but likely copied the outdated definition from the Protocol into the Objectives section (2.2.1)."
+    }
+  ],
+  "reasoning": "The Generated SAP performs well in defining populations and time-based variables (Baseline, Study Day, Periods), closely matching the Protocol and Original SAP. It correctly identifies the 'Controlled Disease' definition from the Protocol. However, it misses standard definitions for classifying Adverse Events (TEAE) and Medications (Prior/Concomitant), which are present in the Original SAP and essential for analysis. There is also an internal contradiction regarding 'Response Duration' where one section reflects the Protocol and another reflects the Original SAP update.",
+  "summary": "The Key Definitions section is decent, covering populations and time intervals accurately. However, it lacks explicit logic for classifying TEAEs and Concomitant Medications, and contains an internal inconsistency regarding the definition of Response Duration."
+}

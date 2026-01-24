@@ -8,8 +8,178 @@ import json
 from pathlib import Path
 
 
+def json_to_markdown_analysis_populations(result: dict) -> str:
+    """Convert analysis_populations JSON to markdown with 3-component focus."""
+    lines = []
+
+    # Header
+    lines.append("## Analysis Populations Evaluation")
+    lines.append("")
+    lines.append(f"**Section:** {result.get('section', 'analysis_populations')}")
+    lines.append(f"**Rating:** {result.get('rating', 'N/A')}")
+    lines.append(f"**Status:** {result.get('status', 'N/A')}")
+    lines.append("")
+    lines.append("---")
+    lines.append("")
+
+    # Get evaluation table
+    eval_table = result.get('evaluation_table', [])
+
+    # Extract populations and consolidate into 3 components each
+    populations = {}
+    granular_details = []
+
+    for row in eval_table:
+        comp = row.get('component', '')
+        result_val = row.get('result', '')
+
+        # Parse population name and component type
+        if ' - ' in comp:
+            pop_name, comp_type = comp.split(' - ', 1)
+        else:
+            pop_name = comp
+            comp_type = 'Other'
+
+        # Classify into 3 main components or granular
+        comp_lower = comp_type.lower()
+
+        # Name matching - exact "name" only
+        if comp_lower == 'name':
+            category = 'Name'
+        # Treatment Assignment matching - flexible
+        elif 'assignment' in comp_lower or (comp_lower == 'treatment assignment'):
+            category = 'Treatment Assignment'
+        # Definition matching - includes sub-components
+        elif 'definition' in comp_lower:
+            category = 'Definition'
+            # Also add to granular if it's a sub-component
+            if '(' in comp_type:
+                granular_details.append(row)
+        # Other known sub-components that belong to Definition
+        elif any(keyword in comp_lower for keyword in ['base', 'dosing', 'randomization', 'response', 'deviations', 'results']):
+            category = 'Definition'
+            granular_details.append(row)
+        # Other items (usage, timing, non-compliance, etc.) go to granular only
+        else:
+            granular_details.append(row)
+            continue
+
+        # Initialize population if not exists
+        if pop_name not in populations:
+            populations[pop_name] = {'Name': None, 'Definition': None, 'Treatment Assignment': None}
+
+        # Store result (use first match or consolidate)
+        if populations[pop_name][category] is None:
+            populations[pop_name][category] = result_val
+        elif populations[pop_name][category] == 'correct' and result_val == 'problem':
+            populations[pop_name][category] = 'problem'  # Problem takes precedence
+
+    # Main Section: 3 Critical Components
+    lines.append("### Critical Components (3 per Population)")
+    lines.append("")
+    lines.append("These are the MUST match items for each population.")
+    lines.append("")
+    lines.append("| Population | Name | Definition | Treatment Assignment |")
+    lines.append("|------------|------|------------|---------------------|")
+
+    for pop_name, components in populations.items():
+        name_result = components.get('Name', '-')
+        def_result = components.get('Definition', '-')
+        treat_result = components.get('Treatment Assignment', '-')
+
+        # Format with checkmarks/crosses
+        name_display = '✓' if name_result == 'correct' else ('✗' if name_result == 'problem' else '-')
+        def_display = '✓' if def_result == 'correct' else ('✗' if def_result == 'problem' else '-')
+        treat_display = '✓' if treat_result == 'correct' else ('✗' if treat_result == 'problem' else '-')
+
+        lines.append(f"| {pop_name} | {name_display} | {def_display} | {treat_display} |")
+
+    lines.append("")
+    lines.append("---")
+    lines.append("")
+
+    # Issues Found
+    lines.append("### Issues Found")
+    lines.append("")
+    issues = result.get('issues', [])
+    if issues:
+        lines.append("| Issue Type | Severity | Component | Description |")
+        lines.append("|------------|----------|-----------|-------------|")
+        for issue in issues:
+            itype = issue.get('issue_type', '')
+            sev = issue.get('severity', '')
+            comp = issue.get('component', '')
+            desc = issue.get('description', '')[:50]
+            lines.append(f"| {itype} | {sev} | {comp} | {desc} |")
+    else:
+        lines.append("*No issues found.*")
+
+    lines.append("")
+    lines.append("---")
+    lines.append("")
+
+    # Missing Required Content
+    missing = result.get('missing_from_generated_sap', [])
+    required = [m for m in missing if m.get('in_protocol') == 'yes' or m.get('classification') == 'missing_required']
+
+    lines.append(f"### ❌ Missing Required Content ({len(required)} items)")
+    lines.append("")
+    lines.append("Content in both Original SAP AND Protocol - should be in Generated SAP.")
+    lines.append("")
+    if required:
+        lines.append("| Component | Content Type | Description |")
+        lines.append("|-----------|--------------|-------------|")
+        for item in required:
+            comp = item.get('component', '')
+            ctype = item.get('content_type', '')
+            desc = item.get('description', '')[:50]
+            lines.append(f"| {comp} | {ctype} | {desc} |")
+    else:
+        lines.append("*None - all required content is present.*")
+
+    lines.append("")
+    lines.append("---")
+    lines.append("")
+
+    # Secondary Section: Granular Details
+    lines.append("### Granular Details (Definition Sub-components)")
+    lines.append("")
+    lines.append("<details>")
+    lines.append("<summary>Click to expand detailed breakdown</summary>")
+    lines.append("")
+
+    if granular_details:
+        lines.append("| Component | Result | Protocol Consulted |")
+        lines.append("|-----------|--------|-------------------|")
+        for row in granular_details:
+            comp = row.get('component', '')
+            res = row.get('result', '')
+            proto = row.get('protocol_consulted', '')
+            lines.append(f"| {comp} | {res} | {proto} |")
+    else:
+        lines.append("*No granular details.*")
+
+    lines.append("")
+    lines.append("</details>")
+    lines.append("")
+    lines.append("---")
+    lines.append("")
+
+    # Summary
+    lines.append("### Summary")
+    lines.append("")
+    lines.append(result.get('summary', '*No summary provided.*'))
+
+    return "\n".join(lines)
+
+
 def json_to_markdown(result: dict, section_name: str) -> str:
     """Convert JSON evaluation result to markdown format."""
+
+    # Use specialized formatter for analysis_populations
+    if section_name == 'analysis_populations':
+        return json_to_markdown_analysis_populations(result)
+
     lines = []
 
     # Header
@@ -44,7 +214,7 @@ def json_to_markdown(result: dict, section_name: str) -> str:
                 sev = row.get('severity', '')
                 lines.append(f"| {comp} | {cat} | {match_orig} | {proto_cons} | {res} | {issue} | {sev} |")
         else:
-            # Objectives/endpoints and analysis_populations format
+            # Objectives/endpoints format
             lines.append("| Component | Evaluation Type | Matches Original SAP | Protocol Consulted | Result | Issue Type | Severity |")
             lines.append("|-----------|-----------------|---------------------|-------------------|--------|------------|----------|")
             for row in eval_table:
