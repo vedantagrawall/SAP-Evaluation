@@ -314,7 +314,7 @@ Extract ALL statements. Do not summarize or skip any.
 
         return result
     finally:
-        delete_cache(cache_name)
+        pass  # Keep cache for reuse
 
 
 def test_prompt(prompt_name: str = "objectives_endpoints"):
@@ -365,9 +365,8 @@ def test_prompt(prompt_name: str = "objectives_endpoints"):
         print(f"\n✗ ERROR: {e}")
         raise
     finally:
-        # Cleanup
-        print("\n6. Cleaning up cache...")
-        delete_cache(cache_name)
+        # Keep cache for reuse (expires after 24 hours)
+        print(f"\n6. Cache preserved: {cache_name}")
 
     return result
 

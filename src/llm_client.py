@@ -17,7 +17,7 @@ def get_client() -> genai.Client:
     return _client
 
 
-def create_document_cache(documents: dict, ttl_minutes: int = 60) -> str:
+def create_document_cache(documents: dict, ttl_minutes: int = 1440) -> str:
     """
     Create a cache for the SAP documents.
 
