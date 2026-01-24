@@ -234,15 +234,19 @@ Content in both Original SAP AND Protocol - should be in Generated SAP.
 |-----------|------|-------------|
 | [Population or General] | [descriptive label] | [what is missing] |
 
-<details>
-<summary>Reasoning</summary>
-
-- **[Component]**: [reasoning for why this is a problem]
-- **[Component]**: [reasoning]
-
-</details>
-
 (If none: "No missing required content.")
+
+---
+
+### ⚠️ Protocol Content Not In Generated SAP (X items)
+
+Content in Protocol but not in Generated SAP.
+
+| Component | Content Type | Protocol Text | Description |
+|-----------|--------------|---------------|-------------|
+| [Population or General] | [descriptive label] | "[quote]" | [what is missing] |
+
+(If none: "No protocol content missing.")
 
 ---
 
@@ -286,7 +290,7 @@ Content in both Original SAP AND Protocol - should be in Generated SAP.
 
   "evaluation_table": [
     {
-      "component": "Population Name - component (e.g., 'ITT Population - definition')",
+      "component": "Population Name - component",
       "evaluation_type": "exact_match | semantic",
       "original_sap_text": "exact quote",
       "generated_sap_text": "exact quote (or null if absent)",
@@ -308,6 +312,15 @@ Content in both Original SAP AND Protocol - should be in Generated SAP.
       "in_protocol": "yes | no (yes = PROBLEM, no = acceptable difference)",
       "description": "explanation of what is missing from Generated SAP",
       "reasoning": "Chain-of-thought: 1) What I found in Original SAP, 2) How I searched for it in Generated SAP, 3) Why it is considered absent"
+    }
+  ],
+
+  "protocol_content_not_in_generated_sap": [
+    {
+      "component": "Population Name or General",
+      "content_type": "descriptive label for content type",
+      "protocol_text": "exact quote from Protocol",
+      "description": "explanation of what is missing from Generated SAP"
     }
   ],
 

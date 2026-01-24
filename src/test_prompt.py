@@ -30,21 +30,21 @@ def json_to_markdown(result: dict, section_name: str) -> str:
     if eval_table:
         # Determine columns based on first item
         first_item = eval_table[0]
-        if 'population' in first_item:
-            # Analysis populations format
-            lines.append("| Population | Component | Matches Original SAP | Matches Protocol | Result | Issue Type | Severity |")
-            lines.append("|------------|-----------|---------------------|------------------|--------|------------|----------|")
+        if 'category' in first_item:
+            # General methodology format (has category field)
+            lines.append("| Component | Category | Matches Original SAP | Protocol Consulted | Result | Issue Type | Severity |")
+            lines.append("|-----------|----------|---------------------|-------------------|--------|------------|----------|")
             for row in eval_table:
-                pop = row.get('population', '')
                 comp = row.get('component', '')
+                cat = row.get('category', '')
                 match_orig = row.get('matches_original_sap', '')
-                match_proto = row.get('matches_protocol', '')
+                proto_cons = row.get('protocol_consulted', '')
                 res = row.get('result', '')
                 issue = row.get('issue_type', '')
                 sev = row.get('severity', '')
-                lines.append(f"| {pop} | {comp} | {match_orig} | {match_proto} | {res} | {issue} | {sev} |")
+                lines.append(f"| {comp} | {cat} | {match_orig} | {proto_cons} | {res} | {issue} | {sev} |")
         else:
-            # Objectives/endpoints format
+            # Objectives/endpoints and analysis_populations format
             lines.append("| Component | Evaluation Type | Matches Original SAP | Protocol Consulted | Result | Issue Type | Severity |")
             lines.append("|-----------|-----------------|---------------------|-------------------|--------|------------|----------|")
             for row in eval_table:
@@ -66,13 +66,27 @@ def json_to_markdown(result: dict, section_name: str) -> str:
     lines.append("")
     issues = result.get('issues', [])
     if issues:
-        lines.append("| Issue Type | Component | Description |")
-        lines.append("|------------|-----------|-------------|")
-        for issue in issues:
-            itype = issue.get('issue_type', '')
-            comp = issue.get('component', '')
-            desc = issue.get('description', '')
-            lines.append(f"| {itype} | {comp} | {desc} |")
+        # Check if core meaning fields are present
+        has_core_meaning = any(i.get('original_core_meaning') for i in issues)
+        if has_core_meaning:
+            lines.append("| Issue Type | Severity | Component | Original Core Meaning | Generated Core Meaning | Description |")
+            lines.append("|------------|----------|-----------|----------------------|------------------------|-------------|")
+            for issue in issues:
+                itype = issue.get('issue_type', '')
+                sev = issue.get('severity', '')
+                comp = issue.get('component', '')
+                orig_core = issue.get('original_core_meaning', '')
+                gen_core = issue.get('generated_core_meaning', '')
+                desc = issue.get('description', '')[:50]
+                lines.append(f"| {itype} | {sev} | {comp} | {orig_core} | {gen_core} | {desc} |")
+        else:
+            lines.append("| Issue Type | Component | Description |")
+            lines.append("|------------|-----------|-------------|")
+            for issue in issues:
+                itype = issue.get('issue_type', '')
+                comp = issue.get('component', '')
+                desc = issue.get('description', '')
+                lines.append(f"| {itype} | {comp} | {desc} |")
     else:
         lines.append("*No issues found.*")
 
@@ -99,29 +113,8 @@ def json_to_markdown(result: dict, section_name: str) -> str:
     lines.append("---")
     lines.append("")
 
-    # Missing from Generated SAP - split into two sections
+    # Missing from Generated SAP
     missing = result.get('missing_from_generated_sap', [])
-
-    # Acceptable Differences (in_protocol: "no")
-    acceptable = [m for m in missing if m.get('in_protocol') == 'no']
-    lines.append(f"### ✅ Acceptable Differences ({len(acceptable)} items)")
-    lines.append("")
-    lines.append("Content in Original SAP only (not in Protocol) - acceptable to omit.")
-    lines.append("")
-    if acceptable:
-        lines.append("| Component | Category | Original SAP Text |")
-        lines.append("|-----------|----------|-------------------|")
-        for item in acceptable:
-            comp = item.get('component', '')
-            cat = item.get('category', '')
-            orig_text = item.get('original_sap_text', '')[:50]
-            lines.append(f"| {comp} | {cat} | {orig_text} |")
-    else:
-        lines.append("*None*")
-
-    lines.append("")
-    lines.append("---")
-    lines.append("")
 
     # Missing Required Content (in_protocol: "yes")
     required = [m for m in missing if m.get('in_protocol') == 'yes']
@@ -130,11 +123,14 @@ def json_to_markdown(result: dict, section_name: str) -> str:
     lines.append("Content in both Original SAP AND Protocol - should be in Generated SAP.")
     lines.append("")
     if required:
-        lines.append("| Component | Category | Original SAP Text | Protocol Text |")
-        lines.append("|-----------|----------|-------------------|---------------|")
+        # Use category if present, otherwise content_type
+        has_category = any(m.get('category') for m in required)
+        col_name = "Category" if has_category else "Content Type"
+        lines.append(f"| Component | {col_name} | Original SAP Text | Protocol Text |")
+        lines.append("|-----------|--------------|-------------------|---------------|")
         for item in required:
             comp = item.get('component', '')
-            cat = item.get('category', '')
+            cat = item.get('category', '') or item.get('content_type', '')
             orig_text = item.get('original_sap_text', '')[:40]
             proto_text = (item.get('protocol_text') or '')[:40]
             lines.append(f"| {comp} | {cat} | {orig_text} | {proto_text} |")
@@ -144,6 +140,66 @@ def json_to_markdown(result: dict, section_name: str) -> str:
     lines.append("")
     lines.append("---")
     lines.append("")
+
+    # Protocol Content Not In Generated SAP
+    # Combine: protocol_content_not_in_generated_sap array + missing items where in_protocol="yes"
+    protocol_missing_direct = result.get('protocol_content_not_in_generated_sap', [])
+    protocol_missing_from_required = [m for m in missing if m.get('in_protocol') == 'yes']
+
+    # Merge both lists (avoid duplicates by component name)
+    seen_components = set()
+    protocol_missing_combined = []
+    for item in protocol_missing_direct + protocol_missing_from_required:
+        comp = item.get('component', '')
+        if comp not in seen_components:
+            seen_components.add(comp)
+            protocol_missing_combined.append(item)
+
+    lines.append(f"### ⚠️ Protocol Content Not In Generated SAP ({len(protocol_missing_combined)} items)")
+    lines.append("")
+    lines.append("Content in Protocol but not in Generated SAP.")
+    lines.append("")
+    if protocol_missing_combined:
+        # Use category if present, otherwise content_type
+        has_category = any(m.get('category') for m in protocol_missing_combined)
+        col_name = "Category" if has_category else "Content Type"
+        lines.append(f"| Component | {col_name} | Protocol Text | Description |")
+        lines.append("|-----------|--------------|---------------|-------------|")
+        for item in protocol_missing_combined:
+            comp = item.get('component', '')
+            cat = item.get('category', '') or item.get('content_type', '')
+            proto_text = (item.get('protocol_text') or '')[:40]
+            desc = item.get('description', '')[:40]
+            lines.append(f"| {comp} | {cat} | {proto_text} | {desc} |")
+    else:
+        lines.append("*No protocol content missing.*")
+
+    lines.append("")
+    lines.append("---")
+    lines.append("")
+
+    # Internal Contradictions (for general_methodology)
+    internal_contradictions = result.get('internal_contradictions', [])
+    if internal_contradictions or section_name == 'general_methodology':
+        lines.append(f"### Internal Contradictions ({len(internal_contradictions)} items)")
+        lines.append("")
+        if internal_contradictions:
+            lines.append("| Component | Section A | Section A Text | Section B | Section B Text | Description |")
+            lines.append("|-----------|-----------|----------------|-----------|----------------|-------------|")
+            for item in internal_contradictions:
+                comp = item.get('component', '')
+                sec_a = item.get('section_a', '')
+                sec_a_text = (item.get('section_a_text') or '')[:30]
+                sec_b = item.get('section_b', '')
+                sec_b_text = (item.get('section_b_text') or '')[:30]
+                desc = item.get('description', '')[:40]
+                lines.append(f"| {comp} | {sec_a} | {sec_a_text} | {sec_b} | {sec_b_text} | {desc} |")
+        else:
+            lines.append("*No internal contradictions found.*")
+
+        lines.append("")
+        lines.append("---")
+        lines.append("")
 
     # Reasoning
     lines.append("### Reasoning")

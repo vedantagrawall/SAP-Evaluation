@@ -14,7 +14,7 @@
       "result": "correct",
       "issue_type": "none",
       "severity": "none",
-      "reasoning": "Chain-of-thought: 1) Original SAP uses 'Intent-to-Treat Population'. 2) Generated SAP uses 'Intent-to-treat (ITT) Population'. 3) Protocol uses 'Intent-to-treat (ITT) Population'. 4) Generated SAP matches Protocol."
+      "reasoning": "Chain-of-thought: 1) Original SAP uses 'Intent-to-Treat Population'. 2) Generated SAP uses 'Intent-to-treat (ITT) Population'. 3) They differ slightly. 4) Protocol uses 'Intent-to-treat (ITT) Population'. 5) Generated SAP matches Protocol exactly."
     },
     {
       "component": "Intent-to-Treat (ITT) Population - Definition",
@@ -27,7 +27,7 @@
       "result": "correct",
       "issue_type": "none",
       "severity": "none",
-      "reasoning": "Chain-of-thought: 1) Original SAP adds a condition about 'successfully screened' based on eCRF. 2) Generated SAP omits this. 3) Protocol definition matches Generated SAP exactly. 4) Generated SAP is correct per Protocol."
+      "reasoning": "Chain-of-thought: 1) Original SAP adds 'successfully screened' criteria not found in Generated SAP. 2) Generated SAP matches Protocol definition verbatim. 3) Original SAP's addition narrows the population beyond the Protocol definition. 4) Generated SAP is correct per Protocol."
     },
     {
       "component": "Intent-to-Treat (ITT) Population - Treatment Assignment",
@@ -40,7 +40,7 @@
       "result": "correct",
       "issue_type": "none",
       "severity": "none",
-      "reasoning": "Chain-of-thought: 1) Both documents specify assignment based on randomization. 2) Match."
+      "reasoning": "Chain-of-thought: 1) Both SAPs state assignment is based on randomization. 2) Match."
     },
     {
       "component": "Per-Protocol (PP) Population - Name",
@@ -53,20 +53,20 @@
       "result": "correct",
       "issue_type": "none",
       "severity": "none",
-      "reasoning": "Chain-of-thought: 1) Original SAP omits abbreviation in header. 2) Generated SAP includes it. 3) Protocol includes it. 4) Match."
+      "reasoning": "Chain-of-thought: 1) Original SAP uses 'Per-Protocol Population'. 2) Generated SAP uses 'Per-Protocol (PP) Population'. 3) Protocol uses 'Per-Protocol (PP) Population'. 4) Generated SAP matches Protocol."
     },
     {
       "component": "Per-Protocol (PP) Population - Definition",
       "evaluation_type": "semantic",
-      "original_sap_text": "The PP population will consist of all randomly assigned patients who have at least one response evaluation after receiving at least one full dose of study drug (CT-P16 or EU-Approved Avastin) in the Induction Study Period and who do not have any major protocol deviations that may affect the interpretation of the primary endpoint. A patient will be considered as receiving full dose if the planned dose is recorded as \u201815mg/kg\u2019 and the action taken is recorded as \u2018Dose Not Changed\u2019 on \u2018Study Treatment Administration\u2019 eCRF page.",
-      "generated_sap_text": "The PP population is defined as all randomly assigned patients who have at least one response evaluation after receiving at least one full dose of study drug (CT-P16 or EU-Approved Avastin) in the Induction Study Period and who do not have any major protocol deviation.",
-      "protocol_text": "The PP population is defined as all randomly assigned patients who have at least one response evaluation after receiving at least one full dose of study drug (CT-P16 or EU-Approved Avastin) in the Induction Study Period and who do not have any major protocol deviation.",
+      "original_sap_text": "The PP population will consist of all randomly assigned patients who have at least one response evaluation after receiving at least one full dose of study drug (CT-P16 or EU-Approved Avastin) in the Induction Study Period and who do not have any major protocol deviations that may affect the interpretation of the primary endpoint. A patient will be considered as receiving full dose if the planned dose is recorded as \u201815mg/kg\u2019 and the action taken is recorded as \u2018Dose Not Changed\u2019 on \u2018Study Treatment Administration\u2019 eCRF page. Final determination of the PP population was made at the Data Review Meeting (DRM) before unblinding.",
+      "generated_sap_text": "The PP population is defined as all randomly assigned patients who have at least one response evaluation after receiving at least one full dose of study drug (CT-P16 or EU-Approved Avastin) in the Induction Study Period and who do not have any major protocol deviation. A major protocol deviation is one that may affect the interpretation of the primary endpoint and it will be defined in the statistical analysis plan (SAP). Final determinations of the PP population will be made at the blinded data review meeting before unblinding.",
+      "protocol_text": "The PP population is defined as all randomly assigned patients who have at least one response evaluation after receiving at least one full dose of study drug (CT-P16 or EU-Approved Avastin) in the Induction Study Period and who do not have any major protocol deviation. A major protocol deviation is one that may affect the interpretation of primary endpoint and it will be defined in the SAP. Final determinations of the PP population will be made at the blinded data review meeting before unblinding.",
       "matches_original_sap": "no",
       "protocol_consulted": "yes",
       "result": "correct",
       "issue_type": "none",
       "severity": "none",
-      "reasoning": "Chain-of-thought: 1) Original SAP includes specific eCRF definition for 'full dose'. 2) Generated SAP omits this operational detail. 3) Protocol matches Generated SAP. 4) Correct."
+      "reasoning": "Chain-of-thought: 1) Original SAP includes specific eCRF criteria for 'full dose' (15mg/kg, Dose Not Changed). 2) Generated SAP omits these details but matches the Protocol text almost verbatim. 3) Generated SAP retains the Protocol's self-referential statement 'will be defined in the SAP', which is technically correct per Protocol text."
     },
     {
       "component": "Per-Protocol (PP) Population - Treatment Assignment",
@@ -79,7 +79,7 @@
       "result": "correct",
       "issue_type": "none",
       "severity": "none",
-      "reasoning": "Chain-of-thought: 1) Both specify randomization. 2) Match."
+      "reasoning": "Chain-of-thought: 1) Both SAPs state assignment is based on randomization. 2) Match."
     },
     {
       "component": "PK Population - Name",
@@ -92,12 +92,12 @@
       "result": "correct",
       "issue_type": "none",
       "severity": "none",
-      "reasoning": "Chain-of-thought: 1) Original SAP spells out 'Pharmacokinetic'. 2) Generated SAP uses 'PK'. 3) Protocol uses 'PK'. 4) Match."
+      "reasoning": "Chain-of-thought: 1) Original SAP uses 'Pharmacokinetic Population'. 2) Generated SAP uses 'PK Population'. 3) Protocol uses 'PK Population'. 4) Generated SAP matches Protocol."
     },
     {
       "component": "PK Population - Definition",
       "evaluation_type": "semantic",
-      "original_sap_text": "The PK population will consist of all randomly assigned patients who receive at least one full dose (as defined in Section 4.4.2) of study drug (CT-P16 or EU-Approved Avastin) and who have at least one post treatment PK result. Patients who received incorrect treatment during the Induction Study Period will be excluded from the PK population.",
+      "original_sap_text": "The PK population will consist of all randomly assigned patients who receive at least one full dose (as defined in Section 4.4.2) of study drug (CT-P16 or EU-Approved Avastin) and who have at least one post treatment PK result. Patients who received incorrect treatment during the Induction Study Period will be excluded from the PK population. If a patient does not receive full dose, the patient will be discussed during the DRM to confirm whether the patient can be considered as receiving full dose or not.",
       "generated_sap_text": "The PK population is defined as all patients who receive at least one full dose of study drug (CT-P16 or EU-Approved Avastin) and who have at least one post treatment PK result. If any patients are found to be non-compliant with respect to dosing, a decision will be made on a case-by-case basis at the blinded data review meeting before unblinding.",
       "protocol_text": "The PK population is defined as all patients who receive at least one full dose of study drug (CT-P16 or EU-Approved Avastin) and who have at least one post treatment PK result. If any patients are found to be non-compliant with respect to dosing, a decision will be made on a case-by-case basis at the blinded data review meeting before unblinding.",
       "matches_original_sap": "no",
@@ -105,7 +105,7 @@
       "result": "correct",
       "issue_type": "none",
       "severity": "none",
-      "reasoning": "Chain-of-thought: 1) Original SAP adds exclusion for incorrect treatment and references Section 4.4.2. 2) Generated SAP includes Protocol text about non-compliance decisions. 3) Generated SAP matches Protocol text exactly. 4) Correct."
+      "reasoning": "Chain-of-thought: 1) Original SAP adds exclusion for 'incorrect treatment' and references Section 4.4.2 for full dose definition. 2) Generated SAP matches Protocol text verbatim. 3) Original SAP details are acceptable omissions."
     },
     {
       "component": "PK Population - Treatment Assignment",
@@ -118,7 +118,7 @@
       "result": "correct",
       "issue_type": "none",
       "severity": "none",
-      "reasoning": "Chain-of-thought: 1) Original SAP specifies 'during Induction Study Period'. 2) Generated SAP says 'actually received'. 3) Protocol says 'actually received'. 4) Semantic match."
+      "reasoning": "Chain-of-thought: 1) Original SAP specifies 'during the Induction Study Period'. 2) Generated SAP says 'treatment actually received'. 3) Semantically equivalent in context. 4) Generated SAP matches Protocol verbatim."
     },
     {
       "component": "Safety Population - Name",
@@ -144,7 +144,7 @@
       "result": "correct",
       "issue_type": "none",
       "severity": "none",
-      "reasoning": "Chain-of-thought: 1) Original SAP includes eCRF specifics. 2) Generated SAP omits them. 3) Generated SAP matches Protocol. 4) Correct."
+      "reasoning": "Chain-of-thought: 1) Original SAP includes eCRF specific definition. 2) Generated SAP matches Protocol verbatim. 3) Omission of eCRF detail is acceptable."
     },
     {
       "component": "Safety Population - Treatment Assignment",
@@ -157,69 +157,54 @@
       "result": "correct",
       "issue_type": "none",
       "severity": "none",
-      "reasoning": "Chain-of-thought: 1) Original SAP defines specific rules for mixed treatments (CT-P16 priority). 2) Generated SAP uses the general Protocol phrase. 3) Generated SAP matches Protocol. 4) Correct."
+      "reasoning": "Chain-of-thought: 1) Original SAP includes specific logic for mixed treatments (CT-P16 priority) and eCRF source (kit number). 2) Generated SAP matches Protocol verbatim. 3) Omission of specific handling logic is acceptable as it is an implementation detail."
     }
   ],
   "missing_from_generated_sap": [
     {
-      "component": "General",
-      "content_type": "tabulation requirement",
-      "original_sap_text": "The number of patients in each population will be tabulated by treatment group for the ITT population. A listing will also be provided displaying this data.",
-      "in_protocol": "no",
-      "description": "Requirement to tabulate population counts",
-      "reasoning": "Chain-of-thought: 1) Original SAP Section 4.4 intro includes this requirement. 2) Generated SAP does not include this text. 3) Not in Protocol."
-    },
-    {
       "component": "Intent-to-Treat Population",
-      "content_type": "screening condition",
+      "content_type": "screening criteria",
       "original_sap_text": "and successfully screened based on the \u2018Screening Pass/Fail\u2019 eCRF page",
       "in_protocol": "no",
-      "description": "Condition requiring successful screening for ITT inclusion",
-      "reasoning": "Chain-of-thought: 1) Original SAP adds this condition. 2) Protocol ITT definition does not include it. 3) Acceptable omission."
+      "description": "Requirement for successful screening in ITT definition",
+      "reasoning": "Chain-of-thought: 1) Original SAP adds this criteria. 2) Protocol defines ITT as 'all patients randomly assigned'. 3) Generated SAP follows Protocol. 4) This is an acceptable omission."
     },
     {
       "component": "Per-Protocol Population",
-      "content_type": "operational definition",
+      "content_type": "full dose definition",
       "original_sap_text": "A patient will be considered as receiving full dose if the planned dose is recorded as \u201815mg/kg\u2019 and the action taken is recorded as \u2018Dose Not Changed\u2019 on \u2018Study Treatment Administration\u2019 eCRF page.",
       "in_protocol": "no",
-      "description": "Specific eCRF criteria for 'full dose'",
-      "reasoning": "Chain-of-thought: 1) Original SAP defines 'full dose' operationally. 2) Protocol does not. 3) Acceptable omission."
+      "description": "Specific eCRF criteria for defining 'full dose'",
+      "reasoning": "Chain-of-thought: 1) Original SAP defines 'full dose' operationally. 2) Protocol does not. 3) Generated SAP omits it. 4) Acceptable omission."
     },
     {
-      "component": "PK Population",
+      "component": "Pharmacokinetic Population",
       "content_type": "exclusion criteria",
       "original_sap_text": "Patients who received incorrect treatment during the Induction Study Period will be excluded from the PK population.",
       "in_protocol": "no",
-      "description": "Explicit exclusion of incorrect treatment",
-      "reasoning": "Chain-of-thought: 1) Original SAP includes this exclusion. 2) Protocol mentions case-by-case decisions for non-compliance but not this specific exclusion rule. 3) Acceptable omission."
+      "description": "Explicit exclusion of patients receiving incorrect treatment",
+      "reasoning": "Chain-of-thought: 1) Original SAP adds this exclusion. 2) Protocol does not explicitly state it in the definition. 3) Acceptable omission."
     },
     {
       "component": "Pharmacokinetic Population \u2013 Maintenance Period Subset",
       "content_type": "entire_population",
-      "original_sap_text": "The PK population \u2013 Maintenance Period Subset will consist of all patients in PK population who received at least 1 dose (full) of either of the study drugs and have at least one post treatment PK result during the Maintenance Study Period. Patients who received incorrect treatment during the Maintenance Study Period will be excluded from the PK population \u2013 Maintenance Period Subset. If a patient does not receive full dose, the patient will be discussed during the DRM to confirm whether the patient can be considered as receiving full dose or not. Patients will be assigned to treatment groups based on treatment they actually received.",
+      "original_sap_text": "The PK population \u2013 Maintenance Period Subset will consist of all patients in PK population who received at least 1 dose (full) of either of the study drugs and have at least one post treatment PK result during the Maintenance Study Period...",
       "in_protocol": "no",
-      "description": "Specific subset population for maintenance period PK analysis",
-      "reasoning": "Chain-of-thought: 1) Original SAP defines this subset. 2) Protocol Section 7.4 does not list it. 3) Protocol Section 7.6.3 mentions analyzing maintenance PK based on 'PK population'. 4) Acceptable omission."
+      "description": "Definition of a specific PK subset for the maintenance period",
+      "reasoning": "Chain-of-thought: 1) Original SAP defines this subset. 2) Protocol mentions analyzing maintenance PK based on 'PK population' but does not define a separate subset. 3) Acceptable omission."
     },
     {
       "component": "Safety Population",
-      "content_type": "operational definition",
-      "original_sap_text": "A patient will be considered to have received study drug if the patient is recorded as having study drug administered on the \u2018Study Treatment Administration\u2019 eCRF page.",
-      "in_protocol": "no",
-      "description": "eCRF criteria for receiving study drug",
-      "reasoning": "Chain-of-thought: 1) Original SAP includes eCRF reference. 2) Protocol does not. 3) Acceptable omission."
-    },
-    {
-      "component": "Safety Population",
-      "content_type": "treatment assignment rule",
+      "content_type": "treatment assignment logic",
       "original_sap_text": "Treatment patients actually received will be based on the kit number recorded on the \u2018Study Treatment Administration\u2019 eCRF page. Patients receiving at least one dose of CT-P16 will be analyzed under the CT-P16 treatment group. All other patients will be analyzed under the EU-Approved Avastin treatment group.",
       "in_protocol": "no",
-      "description": "Specific rules for handling mixed treatment assignments",
-      "reasoning": "Chain-of-thought: 1) Original SAP defines priority rule for mixed treatments. 2) Protocol is vague ('actually received'). 3) Acceptable omission."
+      "description": "Specific logic for assigning treatment groups in cases of mixed treatment",
+      "reasoning": "Chain-of-thought: 1) Original SAP defines the 'As Treated' logic for mixed dosing. 2) Protocol only says 'based on treatment actually received'. 3) Acceptable omission."
     }
   ],
+  "protocol_content_not_in_generated_sap": [],
   "issues": [],
   "extra_information_flagged": [],
-  "reasoning": "Step-by-step chain-of-thought reasoning trace: 1) I identified four populations in the Protocol: ITT, PP, PK, and Safety. 2) I identified five populations in the Original SAP: ITT, PP, PK, PK Maintenance Subset, and Safety. 3) I identified four populations in the Generated SAP: ITT, PP, PK, and Safety. 4) I compared the Generated SAP definitions to the Original SAP and found significant differences in operational details (eCRF references, specific dose definitions). 5) I consulted the Protocol and found that the Generated SAP text matches the Protocol text almost verbatim for all four populations. 6) The 'PK Maintenance Subset' found in the Original SAP is not defined in the Protocol's Analysis Sets section, so its omission is acceptable. 7) The Generated SAP is rated GREAT because it adheres strictly to the Protocol, which is the primary source of truth for the definitions, even though it lacks the operational specificity added by the human statistician in the Original SAP.",
-  "summary": "The Generated SAP accurately reflects the Analysis Populations defined in the Protocol. While it omits the operational details (eCRF references, specific handling of mixed treatments) and the 'PK Maintenance Subset' found in the Original SAP, these omissions are acceptable as they are not present in the Protocol."
+  "reasoning": "Step-by-step chain-of-thought reasoning trace: 1) I found 4 populations in the Protocol (ITT, PP, PK, Safety). 2) I found 5 populations in the Original SAP (added PK Maintenance Subset). 3) I found 4 populations in the Generated SAP (matching Protocol). 4) I compared each population. The Generated SAP consistently matches the Protocol text verbatim or nearly verbatim. 5) The Original SAP contains significant operational details (eCRF references, specific definitions of 'full dose', logic for mixed treatments) that are not in the Protocol. 6) The Generated SAP omits these details. 7) Since the Generated SAP adheres strictly to the Protocol requirements, the omissions are acceptable. 8) The Generated SAP is rated GREAT for strict Protocol compliance.",
+  "summary": "The Generated SAP accurately reflects the Analysis Populations defined in the Protocol, including the Intent-to-Treat, Per-Protocol, PK, and Safety populations. While it omits operational details and eCRF references found in the Original SAP (such as specific definitions for 'full dose' and handling of mixed treatments), these details are not present in the Protocol, making the Generated SAP compliant with the source requirements."
 }
