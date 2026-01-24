@@ -317,6 +317,24 @@ Extract ALL statements. Do not summarize or skip any.
         pass  # Keep cache for reuse
 
 
+def get_or_create_cache(docs: dict, ttl_minutes: int = 1440) -> str:
+    """Get existing cache or create new one."""
+    from src.llm_client import list_caches, create_document_cache
+
+    # Check for existing caches
+    caches = list_caches()
+    if caches:
+        # Use the cache with latest expiry
+        latest_cache = max(caches, key=lambda c: c.expire_time)
+        print(f"✓ Reusing existing cache: {latest_cache.name}")
+        print(f"  Expires: {latest_cache.expire_time}")
+        return latest_cache.name
+
+    # No cache exists, create new one
+    print("No existing cache found, creating new one...")
+    return create_document_cache(docs, ttl_minutes=ttl_minutes)
+
+
 def test_prompt(prompt_name: str = "objectives_endpoints"):
     """Test a prompt against the NCT03676192 documents."""
     from src.llm_client import create_document_cache, evaluate_with_cache, delete_cache
@@ -334,9 +352,9 @@ def test_prompt(prompt_name: str = "objectives_endpoints"):
     prompt = load_prompt(prompt_name)
     print(f"   Prompt length: {len(prompt):,} chars")
 
-    # Create cache
-    print("\n3. Creating document cache...")
-    cache_name = create_document_cache(docs, ttl_minutes=30)
+    # Get or create cache
+    print("\n3. Checking for existing cache...")
+    cache_name = get_or_create_cache(docs, ttl_minutes=1440)
 
     # Run evaluation
     print("\n4. Running evaluation (this may take 30-60 seconds)...")
