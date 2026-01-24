@@ -40,81 +40,73 @@ This evaluation has three phases. Complete each phase fully before the next.
 
 ### PHASE 1: EXHAUSTIVE EXTRACTION
 
-Extract EVERY element from Original SAP. Do not skip anything. Do not make judgments about importance.
-Read each paragraph individually. If a paragraph contains multiple requirements, extract each as a separate element.
+Read the Original SAP document line by line. For each statement, rule, or definition:
+1. Extract the EXACT TEXT (word-for-word quote)
+2. Do not paraphrase or summarize
+3. Do not fit into predefined categories
+4. Create one entry per statement
 
 **CONJUNCTION RULE (CRITICAL):**
-When a sentence contains "X and Y" or "X, Y, and Z", each item is a SEPARATE element.
-Split conjunctions BEFORE extraction:
-- "EOT and unscheduled visits will not be summarized" = TWO elements
-- "Mean and median will use one more decimal" = TWO elements
-- "Sorted by treatment group and patient number" = TWO elements
+When a sentence contains "X and Y" or "X, Y, and Z", split into SEPARATE elements.
 
-**MANDATORY EXTRACTION CHECKLIST:**
-You MUST extract elements for each category below. If Original SAP has content for a category, extract it. Mark categories as "not_found" only if truly absent.
-
-Categories:
-- software_version
-- sample_size_calculation
-- randomization_method
-- stratification_factors
-- blinding_procedure
-- baseline_definition
-- post_baseline_definition
-- decimal_precision_mean
-- decimal_precision_median
-- decimal_precision_sd
-- decimal_precision_minmax
-- decimal_precision_geometric_mean
-- decimal_precision_cv
-- percentage_precision
-- percentage_zero_handling
-- percentage_denominator
-- not_done_row_handling
-- visit_handling_scheduled
-- visit_handling_unscheduled
-- visit_handling_eot
-- listing_sort_order
-- listing_inequality_signs
-- quantification_limit_summary
-- quantification_limit_listing
-- outlier_handling
-- missing_value_handling
-- data_discrepancy_handling
-- protocol_deviation_definition
-- sensitivity_analyses
+**CONJUNCTION VERIFICATION:**
+Before moving to Phase 2, review every extracted element. If any element contains "and" or "or" joining two different items, STOP and split it into separate entries.
 
 ### PHASE 2: COMPARISON AND CLASSIFICATION
 
-For EACH element extracted from Original SAP:
+**TRACKING RULE:**
+Every element extracted in Phase 1 MUST appear in either evaluation_table OR missing_from_generated_sap. No element can be skipped or lost.
 
-**Step A**: Search Generated SAP thoroughly
-- Search the ENTIRE Generated SAP document
-- Look in ALL sections, not just corresponding section names
-- Document what you find (exact text or null if nothing found)
+**Step A**: For each extracted element, search Generated SAP
+- Identify the key terms from the Original SAP element
+- Search the ENTIRE Generated SAP for those key terms
+- When found, copy the EXACT sentence word-for-word as generated_sap_text
+- Do NOT paraphrase, summarize, or reword what you find
+- Only record null if no content with those key terms exists in the entire document
 
-**Step B**: If content found, extract core meaning (CRITICAL)
-- Reduce Original SAP statement to core meaning (e.g., INCLUDE vs EXCLUDE, REQUIRED vs OPTIONAL)
-- Reduce Generated SAP statement to core meaning
-- Compare the core meanings
-- You MUST record both `original_core_meaning` and `generated_core_meaning` in the evaluation_table
-- Example: Original says "will not be summarized" → core meaning = "EXCLUDE"
-- Example: Generated says "will be mapped to windows" → core meaning = "INCLUDE"
-- If core meanings are opposites (INCLUDE vs EXCLUDE), this is a CONTRADICTION
+**Step B**: Compare statements directly
+- Ask: "Can both statements be true at the same time?"
+- If YES → no conflict (statements are compatible)
+- If NO → contradiction (statements conflict)
+- Less detail is NOT a conflict
+- Silence is NOT a conflict
 
-**Step C**: Classify based on comparison
-- If Generated SAP has NO content on topic (null) → missing_from_generated_sap (ALWAYS)
-- If Generated SAP has content that MATCHES → evaluation_table (correct)
-- If Generated SAP has content that CONFLICTS → evaluation_table (problem/contradiction)
+**Step C**: Apply Evaluation Logic
+
+| Scenario | Result | JSON Location |
+|----------|--------|---------------|
+| Both statements can be true at the same time | ✅ CORRECT | evaluation_table (result: correct) |
+| Generated SAP is less detailed than Original SAP | ✅ ACCEPTABLE | evaluation_table (result: correct) |
+| Statements conflict, but Generated MATCHES Protocol | ✅ CORRECT | evaluation_table (result: correct, protocol_consulted: yes) |
+| Statements conflict, Protocol is SILENT | ❌ PROBLEM | evaluation_table (result: problem, issue_type: contradiction_original) |
+| Statements conflict with Protocol | ❌ PROBLEM | evaluation_table (result: problem, issue_type: contradiction_protocol) |
+| Element missing from Generated, EXISTS in Protocol | ❌ PROBLEM | missing_from_generated_sap (in_protocol: yes, classification: missing_required) |
+| Element missing from Generated, NOT in Protocol | ✅ ACCEPTABLE | missing_from_generated_sap (in_protocol: no, classification: acceptable_difference) |
+
+**CONTENT vs EXISTENCE Hierarchy:**
+
+For CONTENT (what it says):
+- Compare Generated SAP to Original SAP
+- Match or less detail = CORRECT
+- DIFFERENT content = PROBLEM/CONTRADICTION
+
+For EXISTENCE (whether it's there):
+- Check Original SAP first
+- If missing from Generated, check Protocol
+- If Protocol has it → Generated MUST have it (missing_required)
+- If only Original has it → acceptable to omit (acceptable_difference)
 
 **Step D**: For missing items, check Protocol
-- Search Protocol for the same element
-- Record in_protocol: "yes" or "no"
-- This determines classification but does NOT affect rating
+- Search the ENTIRE Protocol document for the same element
+- Content may be worded differently - look for semantic match
+- Look in ALL sections, not just sections with similar names
+- Record in_protocol: "yes" if concept exists (even if worded differently)
+- Record in_protocol: "no" ONLY if concept is truly absent after thorough search
 
-**CRITICAL CLASSIFICATION RULE:**
-Silence is NEVER a contradiction. If generated_sap_text is null or empty, it MUST go to missing_from_generated_sap.
-A contradiction REQUIRES Generated SAP to ACTIVELY STATE something conflicting.
+**CRITICAL RULES:**
+1. Each statement = separate entry (NEVER combine)
+2. "Less detail" ≠ "Different content" - abbreviation is OK, contradiction is not
+3. If both statements cannot be true at the same time → CONTRADICTION (flag it)
 
 ### PHASE 3: INTERNAL CONSISTENCY CHECK
 
@@ -127,22 +119,19 @@ Scan the Generated SAP for internal contradictions:
 
 ## CONTRADICTION DETECTION LOGIC
 
-A contradiction is when two statements CONFLICT (cannot both be true).
+A contradiction is when two statements CANNOT BOTH BE TRUE.
 Missing detail is NOT a contradiction.
 Silence is NOT a contradiction.
 
-**Semantic Conflict Detection:**
-Before classifying, reduce both statements to their core instruction:
-- INCLUDE vs EXCLUDE
-- REQUIRED vs OPTIONAL
-- VALUE X vs VALUE Y
-- METHOD A vs METHOD B
-
-If the core instructions conflict, it IS a contradiction regardless of different wording.
+**How to detect conflicts:**
+Ask: "Can both statements be true at the same time?"
+- If NO → they conflict
+- If YES → no conflict
 
 **Type 1: Contradiction with Original SAP**
-- Generated ACTIVELY STATES X
-- Original ACTIVELY STATES NOT X
+- Generated ACTIVELY STATES something
+- Original ACTIVELY STATES something incompatible
+- Both cannot be true at the same time
 - EXCEPTION: If Generated matches Protocol → Generated is CORRECT
 
 **Type 2: Contradiction with Protocol (Critical)**
@@ -198,17 +187,17 @@ Provide BOTH markdown (for human review) AND JSON (for programmatic use).
 
 ### Evaluation Summary Table
 
-| Component | Category | Matches Original SAP | Protocol Consulted | Result | Issue Type | Severity |
-|-----------|----------|---------------------|-------------------|--------|------------|----------|
-| [description] | [category] | yes/no | yes/no/n/a | correct/problem | none/contradiction | none/minor/critical |
+| Component | Matches Original SAP | Protocol Consulted | Result | Issue Type | Severity |
+|-----------|---------------------|-------------------|--------|------------|----------|
+| [description] | yes/no | yes/no/n/a | correct/problem | none/contradiction | none/minor/critical |
 
 ---
 
 ### Issues Found
 
-| Issue Type | Severity | Component | Original Core Meaning | Generated Core Meaning | Description |
-|------------|----------|-----------|----------------------|------------------------|-------------|
-| [contradiction_original/contradiction_protocol/internal] | [minor/critical] | [name] | [INCLUDE/EXCLUDE/etc.] | [INCLUDE/EXCLUDE/etc.] | [explanation] |
+| Issue Type | Severity | Component | Why They Conflict | Description |
+|------------|----------|-----------|-------------------|-------------|
+| [type] | [severity] | [name] | [why both cannot be true] | [explanation] |
 
 (If no issues: "*No issues found.*")
 
@@ -228,23 +217,11 @@ Provide BOTH markdown (for human review) AND JSON (for programmatic use).
 
 Content in both Original SAP AND Protocol - should be in Generated SAP.
 
-| Component | Category | Original SAP Text | Protocol Text |
-|-----------|----------|-------------------|---------------|
-| [name] | [category] | "[quote]" | "[quote]" |
+| Component | Original SAP Text | Protocol Text |
+|-----------|-------------------|---------------|
+| [name] | "[quote]" | "[quote]" |
 
 (If none: "*None - all required content is present.*")
-
----
-
-### ⚠️ Protocol Content Not In Generated SAP (X items)
-
-Content in Protocol but not in Generated SAP.
-
-| Component | Category | Protocol Text | Description |
-|-----------|----------|---------------|-------------|
-| [name] | [category] | "[quote]" | [explanation] |
-
-(If none: "*No protocol content missing.*")
 
 ---
 
@@ -282,10 +259,6 @@ Content in Protocol but not in Generated SAP.
   "extraction_validation": {
     "sections_read": ["list every section number read"],
     "elements_per_section": {"section_name": "count"},
-    "categories_found": {
-      "visit_handling_unscheduled": true,
-      "visit_handling_eot": true
-    },
     "paragraphs_processed": 0,
     "elements_extracted": 0,
     "elements_in_evaluation_table": 0,
@@ -296,14 +269,11 @@ Content in Protocol but not in Generated SAP.
   "evaluation_table": [
     {
       "component": "short description",
-      "category": "category from checklist",
       "evaluation_type": "exact_match | semantic",
       "original_sap_text": "exact quote",
-      "original_core_meaning": "INCLUDE | EXCLUDE | REQUIRED | OPTIONAL | VALUE",
-      "generated_sap_text": "exact quote (MUST NOT BE NULL)",
-      "generated_core_meaning": "INCLUDE | EXCLUDE | REQUIRED | OPTIONAL | VALUE",
+      "generated_sap_text": "exact quote or null",
+      "can_both_be_true": "yes | no",
       "protocol_text": "exact quote, or null if not consulted",
-      "matches_original_sap": "yes | no",
       "protocol_consulted": "yes | no | n/a",
       "result": "correct | problem",
       "issue_type": "none | contradiction_original | contradiction_protocol | internal_contradiction",
@@ -315,22 +285,10 @@ Content in Protocol but not in Generated SAP.
   "missing_from_generated_sap": [
     {
       "component": "short description",
-      "category": "category from checklist",
-      "content_type": "descriptive label",
       "original_sap_text": "exact quote",
       "protocol_text": "exact quote if found, null if not",
       "in_protocol": "yes | no",
       "classification": "missing_required | acceptable_difference",
-      "description": "explanation of what is missing"
-    }
-  ],
-
-  "protocol_content_not_in_generated_sap": [
-    {
-      "component": "short description",
-      "category": "category from checklist",
-      "content_type": "descriptive label",
-      "protocol_text": "exact quote from Protocol",
       "description": "explanation of what is missing"
     }
   ],
@@ -353,10 +311,9 @@ Content in Protocol but not in Generated SAP.
       "severity": "minor | critical",
       "component": "short description",
       "original_sap_text": "exact quote",
-      "original_core_meaning": "the core instruction (INCLUDE/EXCLUDE/etc.)",
       "generated_sap_text": "exact quote",
-      "generated_core_meaning": "the core instruction (INCLUDE/EXCLUDE/etc.)",
       "protocol_text": "exact quote if relevant",
+      "why_they_conflict": "explanation of why both cannot be true",
       "description": "explanation of the issue",
       "reasoning": "Chain-of-thought explanation"
     }
@@ -389,12 +346,11 @@ If evaluation_table.length + missing_from_generated_sap.length ≠ elements_extr
 
 ## CRITICAL REMINDERS
 
-1. **Conjunction splitting**: "X and Y" = TWO separate elements. Split BEFORE extraction.
+1. **Conjunction splitting**: Split "X and Y" into TWO separate elements.
 2. **Silence = Missing**: If generated_sap_text would be null → goes to missing_from_generated_sap, NOT a contradiction.
 3. **Compare to Original SAP first**: Always compare Generated SAP to Original SAP before consulting Protocol.
-4. **Protocol is tiebreaker**: Only consult Protocol when Generated SAP differs from Original SAP.
+4. **Protocol is tiebreaker**: Consult Protocol when (1) Generated SAP content differs from Original SAP, OR (2) content is missing from Generated SAP.
 5. **Do not penalize Protocol compliance**: If Generated SAP matches Protocol but not Original SAP, that is CORRECT.
 6. **Rating based on contradictions only**: Missing information does NOT affect rating.
 7. **Internal consistency**: Check for contradictions within the Generated SAP itself.
-8. **Use categories**: Each element must have a category from the mandatory checklist.
-9. **Blocking validation**: Ensure counts match before outputting.
+8. **Blocking validation**: Ensure counts match before outputting.

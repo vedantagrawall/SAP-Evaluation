@@ -66,27 +66,15 @@ def json_to_markdown(result: dict, section_name: str) -> str:
     lines.append("")
     issues = result.get('issues', [])
     if issues:
-        # Check if core meaning fields are present
-        has_core_meaning = any(i.get('original_core_meaning') for i in issues)
-        if has_core_meaning:
-            lines.append("| Issue Type | Severity | Component | Original Core Meaning | Generated Core Meaning | Description |")
-            lines.append("|------------|----------|-----------|----------------------|------------------------|-------------|")
-            for issue in issues:
-                itype = issue.get('issue_type', '')
-                sev = issue.get('severity', '')
-                comp = issue.get('component', '')
-                orig_core = issue.get('original_core_meaning', '')
-                gen_core = issue.get('generated_core_meaning', '')
-                desc = issue.get('description', '')[:50]
-                lines.append(f"| {itype} | {sev} | {comp} | {orig_core} | {gen_core} | {desc} |")
-        else:
-            lines.append("| Issue Type | Component | Description |")
-            lines.append("|------------|-----------|-------------|")
-            for issue in issues:
-                itype = issue.get('issue_type', '')
-                comp = issue.get('component', '')
-                desc = issue.get('description', '')
-                lines.append(f"| {itype} | {comp} | {desc} |")
+        lines.append("| Issue Type | Severity | Component | Why They Conflict | Description |")
+        lines.append("|------------|----------|-----------|-------------------|-------------|")
+        for issue in issues:
+            itype = issue.get('issue_type', '')
+            sev = issue.get('severity', '')
+            comp = issue.get('component', '')
+            why_conflict = issue.get('why_they_conflict', '')[:40]
+            desc = issue.get('description', '')[:40]
+            lines.append(f"| {itype} | {sev} | {comp} | {why_conflict} | {desc} |")
     else:
         lines.append("*No issues found.*")
 
@@ -116,8 +104,8 @@ def json_to_markdown(result: dict, section_name: str) -> str:
     # Missing from Generated SAP
     missing = result.get('missing_from_generated_sap', [])
 
-    # Missing Required Content (in_protocol: "yes")
-    required = [m for m in missing if m.get('in_protocol') == 'yes']
+    # Missing Required Content (in_protocol: "yes" OR classification: "missing_required")
+    required = [m for m in missing if m.get('in_protocol') == 'yes' or m.get('classification') == 'missing_required']
     lines.append(f"### ❌ Missing Required Content ({len(required)} items)")
     lines.append("")
     lines.append("Content in both Original SAP AND Protocol - should be in Generated SAP.")
@@ -136,43 +124,6 @@ def json_to_markdown(result: dict, section_name: str) -> str:
             lines.append(f"| {comp} | {cat} | {orig_text} | {proto_text} |")
     else:
         lines.append("*None - all required content is present.*")
-
-    lines.append("")
-    lines.append("---")
-    lines.append("")
-
-    # Protocol Content Not In Generated SAP
-    # Combine: protocol_content_not_in_generated_sap array + missing items where in_protocol="yes"
-    protocol_missing_direct = result.get('protocol_content_not_in_generated_sap', [])
-    protocol_missing_from_required = [m for m in missing if m.get('in_protocol') == 'yes']
-
-    # Merge both lists (avoid duplicates by component name)
-    seen_components = set()
-    protocol_missing_combined = []
-    for item in protocol_missing_direct + protocol_missing_from_required:
-        comp = item.get('component', '')
-        if comp not in seen_components:
-            seen_components.add(comp)
-            protocol_missing_combined.append(item)
-
-    lines.append(f"### ⚠️ Protocol Content Not In Generated SAP ({len(protocol_missing_combined)} items)")
-    lines.append("")
-    lines.append("Content in Protocol but not in Generated SAP.")
-    lines.append("")
-    if protocol_missing_combined:
-        # Use category if present, otherwise content_type
-        has_category = any(m.get('category') for m in protocol_missing_combined)
-        col_name = "Category" if has_category else "Content Type"
-        lines.append(f"| Component | {col_name} | Protocol Text | Description |")
-        lines.append("|-----------|--------------|---------------|-------------|")
-        for item in protocol_missing_combined:
-            comp = item.get('component', '')
-            cat = item.get('category', '') or item.get('content_type', '')
-            proto_text = (item.get('protocol_text') or '')[:40]
-            desc = item.get('description', '')[:40]
-            lines.append(f"| {comp} | {cat} | {proto_text} | {desc} |")
-    else:
-        lines.append("*No protocol content missing.*")
 
     lines.append("")
     lines.append("---")
@@ -217,8 +168,52 @@ def json_to_markdown(result: dict, section_name: str) -> str:
     return "\n".join(lines)
 
 
+def validate_contradictions(result: dict) -> dict:
+    """
+    Post-processing validation to enforce contradiction detection.
+    If can_both_be_true == 'no', it's a contradiction.
+    This guarantees consistency regardless of LLM judgment.
+    """
+    if 'evaluation_table' not in result:
+        return result
+
+    # Track existing issues by component
+    existing_issues = {issue.get('component') for issue in result.get('issues', [])}
+
+    for row in result['evaluation_table']:
+        can_both_be_true = row.get('can_both_be_true', '').lower()
+
+        # If statements conflict (can_both_be_true == 'no'), it's a contradiction
+        if can_both_be_true == 'no':
+            # Update the row if not already marked as problem
+            if row.get('result') != 'problem':
+                row['result'] = 'problem'
+                row['issue_type'] = 'contradiction_original'
+                if row.get('severity') == 'none':
+                    row['severity'] = 'minor'
+
+            # Add to issues array if not already there
+            component = row.get('component', 'Unknown')
+            if component not in existing_issues:
+                issue = {
+                    'issue_type': 'contradiction_original',
+                    'severity': 'minor',
+                    'component': component,
+                    'original_sap_text': row.get('original_sap_text', ''),
+                    'generated_sap_text': row.get('generated_sap_text', ''),
+                    'why_they_conflict': row.get('reasoning', 'Statements cannot both be true'),
+                    'description': 'Detected conflict between Original and Generated SAP',
+                    'reasoning': 'Detected by post-processing validation'
+                }
+                if 'issues' not in result:
+                    result['issues'] = []
+                result['issues'].append(issue)
+                existing_issues.add(component)
+
+    return result
+
+
 def load_documents():
-    """Load the processed markdown documents."""
     data_dir = Path("data/processed_files")
 
     docs = {
@@ -238,6 +233,88 @@ def load_prompt(prompt_name: str) -> str:
     """Load a prompt file from prompts/"""
     prompt_path = Path("prompts") / f"{prompt_name}.txt"
     return prompt_path.read_text()
+
+
+def get_extraction_cache_path(nct_id: str, section: str) -> Path:
+    """Get path for cached extraction results."""
+    cache_dir = Path("cache")
+    cache_dir.mkdir(exist_ok=True)
+    return cache_dir / f"{nct_id}_{section}_extraction.json"
+
+
+def extract_statements(nct_id: str, section: str, force: bool = False):
+    """
+    Extract statements from Original SAP (run ONCE, cache results).
+
+    Args:
+        nct_id: Trial ID (e.g., 'NCT03676192')
+        section: Section name (e.g., 'general_methodology')
+        force: If True, re-extract even if cache exists
+    """
+    from src.llm_client import create_document_cache, evaluate_with_cache, delete_cache
+
+    cache_path = get_extraction_cache_path(nct_id, section)
+
+    # Check if already cached
+    if cache_path.exists() and not force:
+        print(f"✓ Using cached extraction: {cache_path}")
+        return json.loads(cache_path.read_text())
+
+    print(f"Extracting statements from Original SAP (section: {section})...")
+
+    # Load only Original SAP
+    docs = load_documents()
+
+    # Extraction prompt - only extracts, no comparison
+    extraction_prompt = f"""
+You are extracting statements from an Original SAP document for later comparison.
+
+## YOUR TASK
+
+Read the Original SAP document and extract ALL statements related to {section.replace('_', ' ')}.
+
+For each statement:
+1. Extract the EXACT TEXT (word-for-word quote)
+2. Create one entry per statement
+3. When a sentence contains "X and Y", split into SEPARATE entries
+
+## OUTPUT FORMAT
+
+Return a JSON array of extracted statements:
+
+```json
+{{
+  "section": "{section}",
+  "nct_id": "{nct_id}",
+  "statements": [
+    {{
+      "id": 1,
+      "component": "short description",
+      "original_sap_text": "exact quote from Original SAP",
+      "section_reference": "section number where found"
+    }}
+  ],
+  "total_count": 0
+}}
+```
+
+Extract ALL statements. Do not summarize or skip any.
+"""
+
+    # Create cache and run extraction
+    cache_name = create_document_cache({"original_sap": docs["original_sap"]}, ttl_minutes=30)
+
+    try:
+        result = evaluate_with_cache(cache_name, extraction_prompt)
+
+        # Save to cache
+        cache_path.write_text(json.dumps(result, indent=2))
+        print(f"✓ Extraction cached: {cache_path}")
+        print(f"  Statements extracted: {result.get('total_count', len(result.get('statements', [])))}")
+
+        return result
+    finally:
+        delete_cache(cache_name)
 
 
 def test_prompt(prompt_name: str = "objectives_endpoints"):
@@ -265,6 +342,9 @@ def test_prompt(prompt_name: str = "objectives_endpoints"):
     print("\n4. Running evaluation (this may take 30-60 seconds)...")
     try:
         result = evaluate_with_cache(cache_name, prompt)
+
+        # Post-processing validation to enforce contradiction rules
+        result = validate_contradictions(result)
 
         print("\n5. RESULT:")
         print("=" * 60)
@@ -294,5 +374,13 @@ def test_prompt(prompt_name: str = "objectives_endpoints"):
 
 if __name__ == "__main__":
     import sys
-    prompt_name = sys.argv[1] if len(sys.argv) > 1 else "objectives_endpoints"
-    test_prompt(prompt_name)
+
+    if len(sys.argv) > 1 and sys.argv[1] == "extract":
+        # Run extraction: python -m src.test_prompt extract general_methodology
+        section = sys.argv[2] if len(sys.argv) > 2 else "general_methodology"
+        force = "--force" in sys.argv
+        extract_statements("NCT03676192", section, force=force)
+    else:
+        # Run evaluation: python -m src.test_prompt general_methodology
+        prompt_name = sys.argv[1] if len(sys.argv) > 1 else "objectives_endpoints"
+        test_prompt(prompt_name)
