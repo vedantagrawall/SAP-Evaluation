@@ -1,0 +1,338 @@
+# Statistical Hypotheses Evaluation Prompt
+
+You are evaluating a Generated SAP against an Original SAP for a clinical trial.
+
+---
+
+## DOCUMENTS PROVIDED
+
+- **ORIGINAL SAP**: Human-written reference SAP
+- **GENERATED SAP**: Auto-generated SAP being evaluated
+- **PROTOCOL**: Source of truth when discrepancies arise
+
+---
+
+## YOUR TASK
+
+Evaluate the Statistical Hypotheses / Decision Criteria content in the Generated SAP.
+
+Only evaluate these sections in Generated SAP:
+- Section 3.7 (decision criteria/hypothesis)
+- Section 3.7.1 (first paragraph only)
+- Section 3.7.5 (multiplicity - multiple endpoints)
+- Section 3.7.6 (multiplicity - interim analyses)
+
+Ignore all other sections - they contain noise.
+
+Where to find corresponding content in Original SAP:
+- For 3.7 and 3.7.1 content → Look in Original SAP Section 8.1, first sentence of 4th paragraph
+- Content may also be in different sections - search entire document if needed
+
+---
+
+## EVALUATION HIERARCHY
+
+Follow this order strictly:
+
+1. **Compare Generated SAP to Original SAP first**
+2. **If they match** → CORRECT, no further investigation needed
+3. **If they differ** → Go to Protocol as tiebreaker
+4. **If Generated SAP matches Protocol** → CORRECT (do not penalize, even if Original SAP differs)
+5. **If Generated SAP matches neither Original SAP nor Protocol** → PROBLEM
+
+---
+
+## FALLBACK RULE
+
+For EXISTENCE (does this element exist?):
+- Check Original SAP first
+- If not there, check Protocol as fallback
+- If Protocol has it, Generated SAP must have it
+
+For CONTENT (what does it say?):
+- Check Original SAP only
+- Protocol is NOT a fallback for content detail
+- SAP is more descriptive than Protocol - it's not just a copy paste
+
+---
+
+## EVALUATION LOGIC
+
+| Scenario | Result |
+|----------|--------|
+| Generated SAP content matches Original SAP | ✅ CORRECT |
+| Generated SAP content doesn't match Original SAP | Check if it's a contradiction or just less detailed |
+| Generated SAP is less detailed than Original SAP | ✅ ACCEPTABLE (Generated is abbreviated) |
+| Generated SAP says something DIFFERENT (contradicts) Original SAP | ❌ PROBLEM - contradiction |
+| Generated SAP missing an element that exists in Original SAP | Check Protocol - does element exist there? |
+| Element exists in Protocol but not in Generated SAP | ❌ PROBLEM - missing element |
+| Element only in Original SAP (not in Protocol), not in Generated SAP | ✅ ACCEPTABLE |
+| Generated SAP has extra content (Original SAP is silent) | Check if it contradicts → if no, ✅ CORRECT (flag as good practice) |
+| Generated SAP states "no multiplicity" and Original is silent | Check Protocol sample size section → if no indication of multiplicity, ✅ CORRECT |
+
+---
+
+## SPECIAL RULE FOR MULTIPLICITY (3.7.5 and 3.7.6)
+
+The Original SAP may not discuss statistical adjustments for multiple endpoints or interim analyses - likely because there are none.
+
+If Generated SAP explicitly states "no multiplicity adjustment needed" and Original SAP is silent:
+- This is GOOD PRACTICE - give credit, not penalty
+- BUT you must confirm against Protocol
+- Check the sample size section of Protocol for any indication of multiplicity
+
+| Original SAP | Protocol Sample Size Section | Generated SAP Says "No Multiplicity" | Result |
+|--------------|------------------------------|--------------------------------------|--------|
+| Silent | No indication of multiplicity | States no multiplicity needed | ✅ CORRECT (good practice) |
+| Silent | HAS indication of multiplicity | States no multiplicity needed | ❌ PROBLEM |
+| Says no multiplicity | Any | States no multiplicity needed | ✅ CORRECT |
+| Says HAS multiplicity | Any | States no multiplicity needed | ❌ CONTRADICTION |
+
+---
+
+## WHAT IS A CONTRADICTION
+
+A contradiction is when Generated SAP says something DIFFERENT from Original SAP (and Protocol).
+
+Ask: "Can both statements be true at the same time?"
+- If YES → no conflict
+- If NO → contradiction
+
+**NOT a contradiction:**
+- Less detail (abbreviated SAP)
+- Silence (Original SAP doesn't mention it)
+- Different wording, same meaning
+- Extra information that doesn't conflict
+
+---
+
+## DISCOVERY PROCESS
+
+### Step 1: Search Generated SAP
+- Find content in sections 3.7, 3.7.1 (first paragraph only), 3.7.5, 3.7.6
+- Ignore all other sections
+- Record all relevant text
+
+### Step 2: Search Original SAP
+- For 3.7 and 3.7.1 content → Look in Section 8.1, first sentence of 4th paragraph
+- Also search entire document - content may be in different sections
+- Record all relevant text
+
+### Step 3: Search Protocol (only when needed)
+- For existence check: If element not in Original SAP
+- For multiplicity (3.7.5, 3.7.6): Check sample size section for any indication of multiplicity
+- For contradictions: Check as tiebreaker
+- Record relevant text
+
+### Step 4: Evaluate
+- Compare Generated to Original first
+- If different, determine if it's less detail (acceptable) or contradiction (problem)
+- If element missing, check Protocol for existence
+- Apply multiplicity special rule for 3.7.5 and 3.7.6
+- Determine result
+
+---
+
+## RATING CRITERIA
+
+### GREAT
+- All required content present
+- No contradictions
+- Multiplicity correctly stated (confirmed against Protocol)
+
+### DECENT
+- All required content present
+- Minor wording differences that do not change meaning
+- Small issues easily correctable
+
+### POOR
+- Content contradicts Original SAP and Protocol
+- Multiplicity statement incorrect (Protocol shows multiplicity exists but Generated says none)
+- Critical information wrong
+
+---
+
+## OUTPUT FORMAT
+
+Provide BOTH markdown (for human review) AND JSON (for programmatic use).
+
+---
+
+## MARKDOWN OUTPUT
+
+```markdown
+## Statistical Hypotheses Evaluation
+
+**Section:** statistical_hypotheses
+**Rating:** [GREAT | DECENT | POOR]
+**Status:** [pass | pass_with_notes | fail]
+
+---
+
+### Evaluation Summary Table
+
+| Component | Evaluation Type | Matches Original SAP | Protocol Consulted | Result | Issue Type | Severity |
+|-----------|-----------------|---------------------|-------------------|--------|------------|----------|
+| [component] | exact_match / semantic | yes/no | yes/no/n/a | correct/acceptable/problem | none/contradiction | none/minor/critical |
+
+---
+
+### Issues Found
+
+| Issue Type | Severity | Component | Why They Conflict | Description |
+|------------|----------|-----------|-------------------|-------------|
+| [type] | [severity] | [name] | [why both cannot be true] | [explanation] |
+
+(If no issues: "*No issues found.*")
+
+---
+
+### Extra Information Flagged
+
+| Content | Generated SAP Text | Contradicts | Detail |
+|---------|-------------------|-------------|--------|
+| [description] | "[quote]" | yes/no | [explanation] |
+
+(If none: "*No extra information flagged.*")
+
+---
+
+### Missing from Generated SAP (X items)
+
+| Component | Classification | In Protocol | Original SAP Text | Protocol Text | Reasoning |
+|-----------|----------------|-------------|-------------------|---------------|-----------|
+| [name] | missing_required/acceptable_difference | yes/no | "[quote]" | "[quote]" | [chain-of-thought] |
+
+(If none: "*None - all required content is present.*")
+
+---
+
+### Reasoning
+
+[Step-by-step chain-of-thought reasoning trace]
+
+---
+
+### Summary
+
+[2-3 sentence overall assessment]
+```
+
+---
+
+## JSON OUTPUT ROUTING RULES
+
+**Which array to use:**
+
+| Original SAP | Generated SAP | Where to Put It |
+|--------------|---------------|-----------------|
+| Has content | Has content | `evaluation_table` (compare them) |
+| Has content | Silent/missing | `missing_from_generated_sap` |
+| Silent/null | Has content | `extra_information_flagged` (this is extra info) |
+
+**CRITICAL**: If `original_sap_text` would be null, the item goes in `extra_information_flagged`, NOT `evaluation_table`.
+
+---
+
+## JSON OUTPUT
+
+```json
+{
+  "section": "statistical_hypotheses",
+  "rating": "GREAT | DECENT | POOR",
+  "status": "pass | pass_with_notes | fail",
+
+  "extraction_validation": {
+    "sections_evaluated": ["3.7", "3.7.1", "3.7.5", "3.7.6"],
+    "components_extracted": 0,
+    "components_in_evaluation_table": 0,
+    "components_in_missing_from_generated_sap": 0,
+    "components_in_extra_information_flagged": 0,
+    "counts_match": true
+  },
+
+  "evaluation_table": [
+    {
+      "component": "short description",
+      "evaluation_type": "exact_match | semantic",
+      "original_sap_text": "exact quote (REQUIRED - never null)",
+      "generated_sap_text": "exact quote",
+      "protocol_text": "exact quote, or null if not consulted",
+      "protocol_consulted": "yes | no | n/a",
+      "matches_original_sap": "yes | no",
+      "result": "correct | acceptable | problem",
+      "issue_type": "none | contradiction_original | contradiction_protocol",
+      "severity": "none | minor | critical",
+      "reasoning": "Chain-of-thought explanation"
+    }
+  ],
+
+  "missing_from_generated_sap": [
+    {
+      "component": "short description",
+      "original_sap_text": "exact quote",
+      "protocol_text": "exact quote if found, null if not",
+      "in_protocol": "yes | no",
+      "classification": "missing_required | acceptable_difference",
+      "description": "explanation of what is missing",
+      "reasoning": "Chain-of-thought explanation"
+    }
+  ],
+
+  "issues": [
+    {
+      "issue_type": "contradiction_original | contradiction_protocol",
+      "severity": "minor | critical",
+      "component": "short description",
+      "original_sap_text": "exact quote",
+      "generated_sap_text": "exact quote",
+      "protocol_text": "exact quote if relevant",
+      "why_they_conflict": "explanation of why both cannot be true",
+      "description": "explanation of the issue",
+      "reasoning": "Chain-of-thought explanation"
+    }
+  ],
+
+  "extra_information_flagged": [
+    {
+      "content": "description of extra content",
+      "generated_sap_text": "exact quote from Generated SAP",
+      "original_sap_text": "null (Original SAP is silent on this)",
+      "protocol_text": "exact quote if consulted for verification",
+      "contradicts": "yes | no",
+      "detail": "explanation - if no contradiction, note as good practice",
+      "reasoning": "Chain-of-thought: 1) Original SAP is silent, 2) What Generated SAP says, 3) Protocol verification if needed, 4) Whether this contradicts or is good practice"
+    }
+  ],
+
+  "reasoning": "Step-by-step chain-of-thought reasoning trace",
+
+  "summary": "2-3 sentence overall assessment"
+}
+```
+
+---
+
+## BLOCKING VALIDATION
+
+**counts_match MUST be true for valid output.**
+
+Before finalizing your output, verify:
+- `components_extracted` = `components_in_evaluation_table` + `components_in_missing_from_generated_sap` + `components_in_extra_information_flagged`
+- If the counts do not match, your output is INVALID - go back and find the missing components
+- Items with `original_sap_text: null` must be in `extra_information_flagged`, NOT `evaluation_table`
+
+---
+
+## CRITICAL REMINDERS
+
+1. **Only evaluate sections 3.7, 3.7.1 (first paragraph), 3.7.5, 3.7.6** - ignore all other sections
+2. **For 3.7 and 3.7.1 content** - look in Original SAP Section 8.1, first sentence of 4th paragraph
+3. **Compare to Original SAP first** - Protocol is only tiebreaker for existence, not content
+4. **Content may be in different sections across documents** - this is OK
+5. **Less detail is acceptable** - Generated SAP is abbreviated
+6. **Extra info that doesn't contradict is GOOD** - give credit for good practice
+7. **Multiplicity special rule (3.7.5, 3.7.6)** - if Original is silent and Generated states "no multiplicity", confirm against Protocol sample size section
+8. **Do not use checklists for what to look for within sections** - discover content from documents
+9. **Blocking validation** - ensure counts_match is true before outputting
+10. **Routing rule** - if Original SAP is silent (`original_sap_text` would be null), put the item in `extra_information_flagged`, NOT `evaluation_table`

@@ -1,0 +1,70 @@
+{
+  "section": "statistical_hypotheses",
+  "rating": "GREAT",
+  "status": "pass",
+  "extraction_validation": {
+    "sections_evaluated": [
+      "3.7",
+      "3.7.1",
+      "3.7.5",
+      "3.7.6"
+    ],
+    "components_extracted": 4,
+    "components_in_evaluation_table": 2,
+    "components_in_missing_from_generated_sap": 0,
+    "components_in_extra_information_flagged": 2,
+    "counts_match": true
+  },
+  "evaluation_table": [
+    {
+      "component": "Primary Objective Definition",
+      "evaluation_type": "semantic",
+      "original_sap_text": "To demonstrate CT-P16 is similar to EU-Approved Avastin in terms of efficacy as determined by objective response rate (ORR) during the Induction Study Period",
+      "generated_sap_text": "The primary objective of this study is to demonstrate that CT-P16 is similar to EU-Approved Avastin in terms of efficacy, as determined by the objective response rate (ORR) up to Cycle 6 during the Induction Study Period.",
+      "protocol_text": "To demonstrate CT-P16 is similar to EU-Approved Avastin in terms of efficacy as determined by objective response rate (ORR) up to Cycle 6 during the Induction Study Period",
+      "protocol_consulted": "yes",
+      "matches_original_sap": "yes",
+      "result": "correct",
+      "issue_type": "none",
+      "severity": "none",
+      "reasoning": "The Generated SAP accurately reflects the primary objective stated in the Original SAP Section 2.1 and Protocol Section 2.1."
+    },
+    {
+      "component": "Equivalence Criteria",
+      "evaluation_type": "semantic",
+      "original_sap_text": "The similarity criterion has been set such that the confidence limits of the 95% CI of the difference in ORR from each treatment group will be entirely bounded by the interval (-12.5, 12.5).",
+      "generated_sap_text": "Therapeutic similarity will be concluded if the 95% confidence interval (CI) for the difference in ORR (CT-P16 minus EU-Approved Avastin) is entirely contained within the predefined equivalence margin of (-12.5%, 12.5%).",
+      "protocol_text": "The similarity criterion has been set such that the confidence limits of the 95% CI of the difference in ORR will be entirely bounded by the interval (-12.5, 12.5).",
+      "protocol_consulted": "yes",
+      "matches_original_sap": "yes",
+      "result": "correct",
+      "issue_type": "none",
+      "severity": "none",
+      "reasoning": "The Generated SAP correctly identifies the equivalence margin (-12.5%, 12.5%) and the statistical method (95% CI of the difference) found in Original SAP Section 8.1."
+    }
+  ],
+  "missing_from_generated_sap": [],
+  "issues": [],
+  "extra_information_flagged": [
+    {
+      "content": "Multiplicity Adjustment Statement",
+      "generated_sap_text": "As there is only one primary endpoint and one primary comparison for the demonstration of similarity, no multiplicity adjustments are required for the primary analysis.",
+      "original_sap_text": null,
+      "protocol_text": "A sample size of 305 patients per group will provide 80% power to show similarity... using a 95% CI (two one-sided alpha 0.025) of the difference in ORR.",
+      "contradicts": "no",
+      "detail": "Original SAP is silent on explicit multiplicity statements but implies a single primary endpoint. Protocol sample size calculation confirms single endpoint design without adjustment. Generated SAP statement is correct and good practice.",
+      "reasoning": "Original SAP does not explicitly state 'no multiplicity', but the design (single primary endpoint) implies it. Protocol Section 7.3 confirms the statistical power is based on a single comparison. Therefore, the Generated SAP's explicit statement is accurate and helpful."
+    },
+    {
+      "content": "Interim Analysis Statement",
+      "generated_sap_text": "No interim analyses for the purpose of early termination for efficacy or futility are planned.",
+      "original_sap_text": null,
+      "protocol_text": "No interim analyses are planned for this study.",
+      "contradicts": "no",
+      "detail": "Original SAP outlines a reporting schedule (1st, 2nd, 3rd CSR) but is silent on 'interim analyses for early termination'. Protocol Section 7.6.7 explicitly states no interim analyses are planned. Generated SAP matches Protocol.",
+      "reasoning": "While the Original SAP mentions multiple reporting points (CSRs), it does not describe them as interim analyses with stopping boundaries. The Protocol explicitly negates planned interim analyses. The Generated SAP correctly captures this distinction."
+    }
+  ],
+  "reasoning": "The Generated SAP accurately captures the primary objective and equivalence criteria from the Original SAP. It includes explicit statements regarding multiplicity and interim analyses which, while not present in the Original SAP text, are confirmed by the Protocol and the study design (single primary endpoint, no stopping boundaries). These additions represent good statistical reporting practice.",
+  "summary": "The Generated SAP correctly defines the primary hypothesis and equivalence margins (-12.5%, 12.5%) matching the Original SAP. It appropriately adds clarification regarding the absence of multiplicity adjustments and interim analyses for early termination, which is consistent with the Protocol."
+}
