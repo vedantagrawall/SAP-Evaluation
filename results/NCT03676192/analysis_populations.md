@@ -6,30 +6,22 @@
 
 ---
 
-### Critical Components (3 per Population)
+### Evaluation Summary Table
 
-These are the MUST match items for each population.
-
-| Population | Name | Definition | Treatment Assignment |
-|------------|------|------------|---------------------|
-| Intent-to-Treat (ITT) Population | ✓ | ✓ | ✓ |
-| Per-Protocol (PP) Population | ✓ | ✓ | ✓ |
-| Pharmacokinetic (PK) Population | ✓ | ✓ | ✓ |
-| Safety Population | ✓ | ✓ | ✓ |
-
----
-
-### What Was Omitted (Definition & Treatment Assignment)
-
-Exact quotes of content in Original SAP that is missing from Generated SAP.
-
-| Component | Omitted Content | Result |
-|-----------|-----------------|--------|
-| Intent-to-Treat (ITT) Population - Definition | and successfully screened based on the ‘Screening Pass/Fail’ eCRF page | acceptable |
-| Per-Protocol (PP) Population - Definition | A patient will be considered as receiving full dose if the planned dose is recorded as ‘15mg/kg’ and the action taken is recorded as ‘Dose Not Changed’ on ‘Study Treatment Administration’ eCRF page. | acceptable |
-| Pharmacokinetic (PK) Population - Definition | Patients who received incorrect treatment during the Induction Study Period will be excluded from the PK population. | acceptable |
-| Pharmacokinetic (PK) Population - Treatment Assignment | during the Induction Study Period | acceptable |
-| Safety Population - Treatment Assignment | Patients receiving at least one dose of CT-P16 will be analyzed under the CT-P16 treatment group. All other patients will be analyzed under the EU-Approved Avastin treatment group. | acceptable |
+| Component | Evaluation Type | Matches Original SAP | Protocol Consulted | Result | Issue Type | Severity |
+|-----------|-----------------|---------------------|-------------------|--------|------------|----------|
+| Intent-to-Treat (ITT) Population - Name | exact_match | yes | yes | correct | none | none |
+| Intent-to-Treat (ITT) Population - Definition | semantic | no | no | acceptable | none | minor |
+| Intent-to-Treat (ITT) Population - Treatment Assignment | exact_match | yes | no | correct | none | none |
+| Per-Protocol (PP) Population - Name | exact_match | yes | yes | correct | none | none |
+| Per-Protocol (PP) Population - Definition | semantic | no | no | acceptable | none | minor |
+| Per-Protocol (PP) Population - Treatment Assignment | exact_match | yes | no | correct | none | none |
+| Pharmacokinetic (PK) Population - Name | semantic | yes | yes | correct | none | none |
+| Pharmacokinetic (PK) Population - Definition | semantic | no | no | acceptable | none | minor |
+| Pharmacokinetic (PK) Population - Treatment Assignment | semantic | yes | no | acceptable | none | none |
+| Safety Population - Name | exact_match | yes | yes | correct | none | none |
+| Safety Population - Definition | semantic | no | no | acceptable | none | none |
+| Safety Population - Treatment Assignment | semantic | no | no | acceptable | none | minor |
 
 ---
 
@@ -39,25 +31,29 @@ Exact quotes of content in Original SAP that is missing from Generated SAP.
 
 ---
 
-### ❌ Missing Required Content (0 items)
+### Extra Information Flagged
 
-Content in both Original SAP AND Protocol - should be in Generated SAP.
-
-*None - all required content is present.*
+*No extra information flagged.*
 
 ---
 
-### Granular Details (Definition Sub-components)
+### Missing from Generated SAP (4 items)
 
-<details>
-<summary>Click to expand detailed breakdown</summary>
+| Component | Classification | In Protocol | Original SAP Text | Protocol Text | Reasoning |
+|-----------|----------------|-------------|-------------------|---------------|-----------|
+| Pharmacokinetic Population – Maintenance Period Subset | acceptable_difference | no | The PK population – Maintenance Period Subset will consist o... | Searched Protocol Section 7.4 and 7.6.3 ... | Chain-of-thought: 1) Original SAP defines a specif... |
+| General Tabulation Instruction | acceptable_difference | no | The number of patients in each population will be tabulated ... | Searched Protocol Section 7.6 - not foun... | Chain-of-thought: 1) Original SAP includes instruc... |
+| Safety Population - Assignment Logic | acceptable_difference | no | Patients receiving at least one dose of CT-P16 will be analy... | Searched Protocol Section 7.4 - not foun... | Chain-of-thought: 1) Original SAP defines how to h... |
+| Per-Protocol Population - Full Dose Definition | acceptable_difference | no | A patient will be considered as receiving full dose if the p... | Searched Protocol Section 7.4 - not foun... | Chain-of-thought: 1) Original SAP defines 'full do... |
 
-*No granular details.*
+---
 
-</details>
+### Reasoning
+
+Step-by-step chain-of-thought reasoning trace: 1) Found ITT, PP, PK, and Safety populations in Protocol. 2) Found the same plus 'PK Maintenance Subset' in Original SAP. 3) Found ITT, PP, PK, and Safety in Generated SAP. 4) Compared content: Generated SAP definitions are largely copied from the Protocol rather than the Original SAP. This means they lack the specific operational details found in the Original SAP (e.g., eCRF references, specific definitions of 'full dose', handling of mixed treatments). 5) Checked existence: The 'PK Maintenance Subset' is missing from Generated SAP, but since it is not in the Protocol, this is acceptable. 6) Less detailed vs contradiction: The Generated SAP is consistently less detailed than the Original SAP but does not contradict the core definitions. 7) Rating: DECENT because all required populations are present and definitions are factually correct per Protocol, even if they miss the specific operational details of the Original SAP.
 
 ---
 
 ### Summary
 
-The Generated SAP includes all Protocol-required analysis populations (ITT, PP, PK, Safety). It omits the 'PK Population – Maintenance Period Subset' found in the Original SAP, which is acceptable as it is not explicitly defined in the Protocol. The definitions in the Generated SAP are less detailed than the Original SAP, missing specific operational criteria such as the 'successfully screened' requirement for ITT and the hierarchy rule for mixed treatments in the Safety population.
+The Generated SAP includes all Protocol-required analysis populations (ITT, PP, PK, Safety). However, the definitions are less detailed than the Original SAP, omitting specific operational criteria (e.g., eCRF fields, specific 'full dose' definitions, and mixed treatment assignment rules) and instead using text that appears copied from the Protocol. The 'PK Population – Maintenance Period Subset' found in the Original SAP is missing, but this is acceptable as it is not required by the Protocol.

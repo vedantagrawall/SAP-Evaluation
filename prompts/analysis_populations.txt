@@ -202,7 +202,7 @@ Follow this exact process:
 - Document the exact Original SAP text
 - **CRITICAL: Actually search the Protocol for this content**
 - If found in Protocol: Set `in_protocol: "yes"` and quote the Protocol text in `protocol_text`
-- If NOT found in Protocol: Set `in_protocol: "no"` and set `protocol_text` to a verification statement like "Searched Protocol sections X, Y, Z - not found"
+- If NOT found in Protocol: Set `in_protocol: "no"` and set `protocol_text` to a verification statement confirming the search was performed
 - You must PROVE you checked the Protocol, not just assume
 - Describe what is missing
 - If a single sentence has multiple missing components, document each one separately
@@ -275,17 +275,17 @@ Provide BOTH markdown (for human review) AND JSON (for programmatic use).
 
 ### Evaluation Summary Table
 
-| Component | Evaluation Type | Original SAP Text | Generated SAP Text | Protocol Text | Matches Original | Protocol Consulted | Result | Issue Type | Severity | Reasoning |
-|-----------|-----------------|-------------------|--------------------|--------------|-----------------|--------------------|--------|------------|----------|-----------|
-| [Population - component] | exact_match / semantic | "[quote]" | "[quote]" | "[quote]" | yes/no | yes/no/n/a | correct/problem | none/absent/contradiction/incomplete | none/minor/critical | [chain-of-thought] |
+| Component | Evaluation Type | Matches Original SAP | Protocol Consulted | Result | Issue Type | Severity |
+|-----------|-----------------|---------------------|-------------------|--------|------------|----------|
+| [Population - component] | exact_match / semantic | yes/no | yes/no | correct/acceptable/problem | none/contradiction | none/minor/critical |
 
 ---
 
 ### Issues Found
 
-| Issue Type | Severity | Component | Original SAP Text | Generated SAP Text | Protocol Text | Description | Reasoning |
-|------------|----------|-----------|-------------------|--------------------|--------------| -------------|-----------|
-| [absent/contradiction/incomplete] | [minor/critical] | [name] | "[quote]" | "[quote]" | "[quote]" | [explanation] | [chain-of-thought] |
+| Issue Type | Severity | Component | Why They Conflict | Description |
+|------------|----------|-----------|-------------------|-------------|
+| [absent/contradiction/incomplete] | [minor/critical] | [name] | [explanation] | [explanation] |
 
 (If no issues: "No issues found.")
 
@@ -356,6 +356,8 @@ Content in both Original SAP AND Protocol - should be in Generated SAP.
       "evaluation_type": "exact_match | semantic",
       "original_sap_text": "exact quote",
       "generated_sap_text": "exact quote (or null if absent)",
+      "protocol_text": "exact quote or null",
+      "protocol_consulted": "yes | no",
       "matches_original_sap": "yes | no",
       "detail_level": "match | less_detailed | contradiction",
       "omitted_content": "what specific words/clauses are omitted (null if match)",
@@ -375,7 +377,8 @@ Content in both Original SAP AND Protocol - should be in Generated SAP.
       "protocol_text": "REQUIRED: exact quote if found, OR 'Searched Protocol section X - not found' if not",
       "in_protocol": "yes | no",
       "classification": "missing_required | acceptable_difference",
-      "description": "explanation of what is missing from Generated SAP"
+      "description": "explanation of what is missing from Generated SAP",
+      "reasoning": "Chain-of-thought: 1) What Original SAP says, 2) What Protocol says (or doesn't say), 3) Why this classification, 4) Impact of omission on analysis"
     }
   ],
 
@@ -387,6 +390,7 @@ Content in both Original SAP AND Protocol - should be in Generated SAP.
       "original_sap_text": "exact quote",
       "generated_sap_text": "exact quote or null if absent",
       "protocol_text": "exact quote",
+      "why_they_conflict": "explanation of why both cannot be true",
       "description": "explanation of the issue",
       "reasoning": "Chain-of-thought: 1) What the issue is, 2) How I identified it, 3) What each document says, 4) Why this severity level, 5) Impact on analysis"
     }

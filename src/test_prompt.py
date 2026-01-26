@@ -296,29 +296,23 @@ def json_to_markdown(result: dict, section_name: str) -> str:
     lines.append("---")
     lines.append("")
 
-    # Missing from Generated SAP
+    # Missing from Generated SAP - show ALL items
     missing = result.get('missing_from_generated_sap', [])
-
-    # Missing Required Content (in_protocol: "yes" OR classification: "missing_required")
-    required = [m for m in missing if m.get('in_protocol') == 'yes' or m.get('classification') == 'missing_required']
-    lines.append(f"### ❌ Missing Required Content ({len(required)} items)")
+    lines.append(f"### Missing from Generated SAP ({len(missing)} items)")
     lines.append("")
-    lines.append("Content in both Original SAP AND Protocol - should be in Generated SAP.")
-    lines.append("")
-    if required:
-        # Use category if present, otherwise content_type
-        has_category = any(m.get('category') for m in required)
-        col_name = "Category" if has_category else "Content Type"
-        lines.append(f"| Component | {col_name} | Original SAP Text | Protocol Text |")
-        lines.append("|-----------|--------------|-------------------|---------------|")
-        for item in required:
+    if missing:
+        lines.append("| Component | Classification | In Protocol | Original SAP Text | Protocol Text | Reasoning |")
+        lines.append("|-----------|----------------|-------------|-------------------|---------------|-----------|")
+        for item in missing:
             comp = item.get('component', '')
-            cat = item.get('category', '') or item.get('content_type', '')
-            orig_text = item.get('original_sap_text', '')[:40]
-            proto_text = (item.get('protocol_text') or '')[:40]
-            lines.append(f"| {comp} | {cat} | {orig_text} | {proto_text} |")
+            classification = item.get('classification', '')
+            in_proto = item.get('in_protocol', '')
+            orig_text = (item.get('original_sap_text') or '')[:60] + "..." if len(item.get('original_sap_text') or '') > 60 else (item.get('original_sap_text') or '')
+            proto_text = (item.get('protocol_text') or '')[:40] + "..." if len(item.get('protocol_text') or '') > 40 else (item.get('protocol_text') or '')
+            reasoning = (item.get('reasoning') or item.get('description') or '')[:50] + "..." if len(item.get('reasoning') or item.get('description') or '') > 50 else (item.get('reasoning') or item.get('description') or '')
+            lines.append(f"| {comp} | {classification} | {in_proto} | {orig_text} | {proto_text} | {reasoning} |")
     else:
-        lines.append("*None - all required content is present.*")
+        lines.append("*No missing content.*")
 
     lines.append("")
     lines.append("---")
