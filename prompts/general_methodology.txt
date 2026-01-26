@@ -66,8 +66,8 @@ Every element extracted in Phase 1 MUST appear in either evaluation_table OR mis
 
 **Step B**: Compare statements directly
 - Ask: "Can both statements be true at the same time?"
-- If YES → no conflict (statements are compatible)
-- If NO → contradiction (statements conflict)
+- If YES → matches_original_sap: "yes" (no conflict, statements are compatible)
+- If NO → matches_original_sap: "no" (contradiction, statements conflict)
 - Less detail is NOT a conflict
 - Silence is NOT a conflict
 
@@ -75,9 +75,9 @@ Every element extracted in Phase 1 MUST appear in either evaluation_table OR mis
 
 | Scenario | Result | JSON Location |
 |----------|--------|---------------|
-| Both statements can be true at the same time | ✅ CORRECT | evaluation_table (result: correct) |
-| Generated SAP is less detailed than Original SAP | ✅ ACCEPTABLE | evaluation_table (result: correct) |
-| Statements conflict (cannot both be true) | ❌ PROBLEM | evaluation_table (result: problem, issue_type: contradiction_original) |
+| Both statements can be true (matches_original_sap: yes) | ✅ CORRECT | evaluation_table (result: correct) |
+| Generated SAP is less detailed (matches_original_sap: yes) | ✅ CORRECT | evaluation_table (result: correct) |
+| Statements conflict - cannot both be true (matches_original_sap: no) | ❌ PROBLEM | evaluation_table (result: problem, issue_type: contradiction_original) |
 | Element missing from Generated, EXISTS in Protocol | ❌ PROBLEM | missing_from_generated_sap (in_protocol: yes, classification: missing_required) |
 | Element missing from Generated, NOT in Protocol | ✅ ACCEPTABLE | missing_from_generated_sap (in_protocol: no, classification: acceptable_difference) |
 
@@ -103,8 +103,8 @@ For EXISTENCE (whether it's there):
 
 **CRITICAL RULES:**
 1. Each statement = separate entry (NEVER combine)
-2. "Less detail" ≠ "Different content" - abbreviation is OK, contradiction is not
-3. If both statements cannot be true at the same time → CONTRADICTION (flag it)
+2. "Less detail" ≠ "conflict" → matches_original_sap: yes (both can be true)
+3. If both statements cannot be true at the same time → matches_original_sap: no (CONTRADICTION)
 
 ### PHASE 3: INTERNAL CONSISTENCY CHECK
 
@@ -121,16 +121,20 @@ A contradiction is when two statements CANNOT BOTH BE TRUE.
 Missing detail is NOT a contradiction.
 Silence is NOT a contradiction.
 
+**matches_original_sap field:**
+- "yes" = both statements can be true at the same time (no conflict)
+- "no" = statements conflict (cannot both be true)
+
 **How to detect conflicts:**
 Ask: "Can both statements be true at the same time?"
-- If NO → they conflict
-- If YES → no conflict
+- If NO → matches_original_sap: "no" (they conflict)
+- If YES → matches_original_sap: "yes" (no conflict)
 
 **Type 1: Contradiction with Original SAP**
-- Generated ACTIVELY STATES something
-- Original ACTIVELY STATES something incompatible
-- Both cannot be true at the same time
-- EXCEPTION: If Generated matches Protocol → Generated is CORRECT
+- Generated SAP has different meaning than Original SAP (matches_original_sap: no)
+- Check Protocol as tiebreaker
+- If Generated matches Protocol → Generated is CORRECT
+- If Generated matches neither → PROBLEM
 
 **Type 2: Contradiction with Protocol (Critical)**
 - Generated ACTIVELY STATES X
@@ -270,7 +274,7 @@ Content in both Original SAP AND Protocol - should be in Generated SAP.
       "evaluation_type": "exact_match | semantic",
       "original_sap_text": "exact quote",
       "generated_sap_text": "exact quote or null",
-      "can_both_be_true": "yes | no",
+      "matches_original_sap": "yes | no",
       "protocol_text": "exact quote, or null if not consulted",
       "protocol_consulted": "yes | no | n/a",
       "result": "correct | problem",
