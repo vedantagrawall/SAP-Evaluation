@@ -22,45 +22,110 @@ Evaluate the Analysis Population content in the Generated SAP.
 
 ## EVALUATION HIERARCHY
 
-Follow this order strictly:
+There are TWO separate checks. Do not conflate them.
 
-1. **Compare Generated SAP to Original SAP first**
-2. **If they match** → CORRECT, no further investigation needed
-3. **If they differ** → Go to Protocol as tiebreaker
-4. **If Generated SAP matches Protocol** → CORRECT (do not penalize, even if Original SAP differs)
-5. **If Generated SAP matches neither Original SAP nor Protocol** → PROBLEM
+### CHECK 1: EXISTENCE (Does the element exist?)
+
+**What is a "missing element"?**
+- Missing element = an entire component is completely absent from Generated SAP
+- If the component exists in Generated SAP (even if shorter/abbreviated), it is NOT missing
+
+Use this hierarchy only when an entire component is absent:
+1. Check if element exists in Original SAP
+2. If entirely absent from Generated SAP → Check Protocol
+3. If element exists in Protocol → **PROBLEM** (missing required element)
+4. If element only exists in Original SAP (not in Protocol) → **ACCEPTABLE** (not required)
+
+**When NOT to use Protocol:**
+- Component exists in Generated SAP but is shorter/abbreviated → Do NOT check Protocol
+- Component exists but omits qualifiers/details → Do NOT check Protocol
+- These are CONTENT differences, not EXISTENCE differences
+
+### CHECK 2: CONTENT (What does it say?)
+
+Compare to Original SAP ONLY.
+
+**DO NOT use Protocol to evaluate content differences. Protocol is ONLY for EXISTENCE checks.**
+**DO NOT mention Protocol in your reasoning for content comparisons.**
+
+For CONTENT, ask only these questions:
+1. Does Generated SAP match Original SAP? → **CORRECT**
+2. Is Generated SAP less detailed than Original SAP? → **ACCEPTABLE** only if the missing detail does NOT change which patients are included/excluded or how they are assigned. If it changes the patients or assignment, it is a different meaning → **PROBLEM**
+3. Does Generated SAP contradict Original SAP? → **PROBLEM**
+
+Stop. Do not consult Protocol for content. Do not mention Protocol in reasoning.
+
+| Scenario | Result |
+|----------|--------|
+| Generated SAP content matches Original SAP | ✅ **CORRECT** |
+| Generated SAP is less detailed but does NOT change patients or assignment | ✅ **ACCEPTABLE** |
+| Generated SAP is less detailed AND changes which patients are included/excluded or how assigned | ❌ **PROBLEM** (different meaning) |
+| Generated SAP says something DIFFERENT that contradicts Original SAP | ❌ **PROBLEM** (contradiction) |
+
+**How to distinguish "less detailed" from "contradiction":**
+- Less detailed: Generated SAP omits words/clauses but core meaning is preserved
+- Contradiction: Generated SAP states something incompatible with Original SAP (cannot both be true)
+
+**REASONING REQUIREMENT:**
+For EVERY component, you MUST provide detailed reasoning that explains:
+1. What you found in Original SAP (exact text)
+2. What you found in Generated SAP (exact text)
+3. How they compare (match, less detailed, or contradiction)
+4. If less detailed: what specific words/clauses are omitted
+5. If less detailed: could this omission change the meaning? (flag if yes)
+6. Your conclusion and why
+
+**FORBIDDEN IN CONTENT REASONING:**
+When comparing content (not checking existence), your reasoning must NEVER include:
+- "matches Protocol" or "matches the Protocol"
+- "Protocol definition" or "Protocol says"
+- "consistent with Protocol"
+- "aligns with Protocol"
+- "Protocol does not require" or "not required by Protocol"
+- "Protocol does not explicitly require"
+- Any reference to Protocol whatsoever - including when assessing impact
+
+Your content reasoning must ONLY reference Original SAP and Generated SAP. The impact of an omission should be assessed by asking: "Does this omission change the MEANING?" - NOT by asking whether Protocol requires it. Protocol is completely irrelevant to content comparisons and impact assessments.
 
 ### Special Cases
 
 | Scenario | Result |
 |----------|--------|
-| Population in Protocol + Original SAP, but ABSENT from Generated SAP | **PROBLEM** (absence) |
-| Population in Original SAP only (not in Protocol), absent from Generated SAP | **NOT A PROBLEM** |
-| Extra detail in Original SAP not in Protocol, omitted by Generated SAP | **NOT A PROBLEM** |
-| Extra information in Generated SAP that does not contradict | **FLAG** but neutral (not a problem) |
-| Extra information in Generated SAP that contradicts | **PROBLEM** |
+| Population in Protocol + Original SAP, but ABSENT from Generated SAP | **PROBLEM** (missing required) |
+| Population in Original SAP only (not in Protocol), absent from Generated SAP | **ACCEPTABLE** |
+| Generated SAP has extra information that does not contradict | **FLAG** but neutral |
+| Generated SAP has extra information that contradicts | **PROBLEM** |
 
 ---
 
 ## WHAT TO EVALUATE FOR EACH POPULATION
 
-**CRITICAL**: For each population, you MUST evaluate AT MINIMUM these 3 components:
-1. **Name**
-2. **Definition**
-3. **Treatment Assignment**
+### The 3 Critical Components (MUST match)
 
-Also evaluate any other components and sub-components found for each population. Every distinct piece of information must have its own evaluation row. Do not combine or skip any content.
+For each population, evaluate these 3 components:
 
-For each analysis population, you must:
-1. Create evaluation rows for Name, Definition, and Treatment Assignment (REQUIRED)
-2. Create additional rows for any other distinct components found
-3. Never bundle multiple pieces of information into one row
+1. **Name** - Must match exactly
 
-**All components follow the same evaluation hierarchy:**
-1. If Generated SAP matches Original SAP → CORRECT
-2. If Generated SAP differs from Original SAP → Consult Protocol
-3. If Generated SAP matches Protocol → CORRECT (even if Original SAP differs)
-4. If Generated SAP matches neither → PROBLEM
+2. **Definition** - Extract the COMPLETE text from Original SAP that describes which patients are in this population. This includes ALL inclusion criteria AND ALL exclusion criteria together as ONE text. Compare to the COMPLETE definition text in Generated SAP. Meaning = which patients are included/excluded. Different meaning = PROBLEM. Less detail with same meaning = ACCEPTABLE.
+
+3. **Treatment Assignment** - Extract the COMPLETE text from Original SAP that describes how patients are assigned to treatment groups. This includes ALL assignment rules together as ONE text. Compare to the COMPLETE assignment text in Generated SAP. Meaning = how patients are assigned. Different meaning = PROBLEM. Less detail with same meaning = ACCEPTABLE.
+
+**Evaluation logic for these 3 components:**
+- If Generated SAP matches Original SAP → CORRECT
+- If Generated SAP is less detailed but meaning preserved → ACCEPTABLE
+- If Generated SAP contradicts Original SAP → PROBLEM
+
+### Everything Else in Original SAP
+
+For any other content in Original SAP (operational details, references, timing, etc.):
+
+1. Check if it exists in Generated SAP
+2. If missing from Generated SAP → **Check Protocol**
+3. Search Protocol and provide evidence:
+   - If found in Protocol → Quote the Protocol text → Missing = **PROBLEM**
+   - If NOT found in Protocol → State where you searched → Missing = **ACCEPTABLE**
+
+**You must PROVE you checked Protocol** - either quote what you found, or confirm which sections you searched and found nothing.
 
 ---
 
@@ -97,11 +162,11 @@ For each analysis population, you must:
 
 ### Step 5: Evaluate Each Component
 For each component in your inventory:
-1. Check if present in Generated SAP (if absent → add to missing_from_generated_sap)
-2. If present, compare content following the evaluation hierarchy
+1. Check if present in Generated SAP (if absent → add to missing_from_generated_sap, then check Protocol for EXISTENCE)
+2. If present, compare content to Original SAP ONLY (never consult Protocol for content)
 3. Create one evaluation_table row per component that exists in Generated SAP
-4. If Generated SAP differs from Original SAP → consult Protocol
-5. Record Protocol text when consulted
+4. Determine: match, less detailed, or contradiction (comparing to Original SAP only)
+5. For missing elements only: Record Protocol text to determine if required
 
 ---
 
@@ -132,10 +197,13 @@ Follow this exact process:
 - Check for both exact matches and semantic equivalents
 - If an Original SAP sentence contains information that the Generated SAP sentence omits or shortens, that omission must be documented—even if the "main idea" is preserved
 
-**Step 4: Document**
+**Step 4: Document and VERIFY Against Protocol**
 - If ANY component is NOT found in Generated SAP (neither verbatim nor semantically), add it to `missing_from_generated_sap`
 - Document the exact Original SAP text
-- Note whether it appears in Protocol (yes/no)
+- **CRITICAL: Actually search the Protocol for this content**
+- If found in Protocol: Set `in_protocol: "yes"` and quote the Protocol text in `protocol_text`
+- If NOT found in Protocol: Set `in_protocol: "no"` and set `protocol_text` to a verification statement like "Searched Protocol sections X, Y, Z - not found"
+- You must PROVE you checked the Protocol, not just assume
 - Describe what is missing
 - If a single sentence has multiple missing components, document each one separately
 - This includes both entire missing populations AND missing content within populations
@@ -248,12 +316,12 @@ Content in both Original SAP AND Protocol - should be in Generated SAP.
 ### Reasoning
 
 [Step-by-step chain-of-thought reasoning trace:]
-1. What populations I found in Protocol
-2. What populations I found in Original SAP
-3. What populations I found in Generated SAP
-4. How I compared each population (Original SAP first, then Protocol as tiebreaker)
-5. Where differences were found
-6. When Protocol was consulted and what it said
+1. What populations I found in Original SAP
+2. What populations I found in Generated SAP
+3. For each component: Original SAP text vs Generated SAP text
+4. For each component: match, less detailed, or contradiction
+5. For less detailed items: what is omitted and could it change meaning
+6. For missing items: checked Protocol for existence (required or not)
 7. Why this rating was assigned
 
 ---
@@ -288,13 +356,14 @@ Content in both Original SAP AND Protocol - should be in Generated SAP.
       "evaluation_type": "exact_match | semantic",
       "original_sap_text": "exact quote",
       "generated_sap_text": "exact quote (or null if absent)",
-      "protocol_text": "exact quote, or null if not consulted",
       "matches_original_sap": "yes | no",
-      "protocol_consulted": "yes | no | n/a",
-      "result": "correct | problem",
-      "issue_type": "none | absent | contradiction | incomplete",
+      "detail_level": "match | less_detailed | contradiction",
+      "omitted_content": "what specific words/clauses are omitted (null if match)",
+      "omission_impact": "none | low | potential (could this omission change meaning?)",
+      "result": "correct | acceptable | problem",
+      "issue_type": "none | contradiction",
       "severity": "none | minor | critical",
-      "reasoning": "Chain-of-thought: 1) What I found in Original SAP, 2) What I found in Generated SAP, 3) Whether they match semantically, 4) If not, what Protocol says, 5) Why this result"
+      "reasoning": "Chain-of-thought: 1) Original SAP says [X], 2) Generated SAP says [Y], 3) Comparison: [match/less detailed/contradiction], 4) If less detailed: omitted [Z], impact: [none/low/potential], 5) Conclusion based on Original SAP comparison only (NEVER mention Protocol here)"
     }
   ],
 
@@ -303,7 +372,7 @@ Content in both Original SAP AND Protocol - should be in Generated SAP.
       "component": "Population Name or General",
       "content_type": "entire_population | descriptive label for content type",
       "original_sap_text": "exact quote of what Original SAP contains",
-      "protocol_text": "exact quote if found, null if not",
+      "protocol_text": "REQUIRED: exact quote if found, OR 'Searched Protocol section X - not found' if not",
       "in_protocol": "yes | no",
       "classification": "missing_required | acceptable_difference",
       "description": "explanation of what is missing from Generated SAP"
@@ -333,7 +402,7 @@ Content in both Original SAP AND Protocol - should be in Generated SAP.
     }
   ],
 
-  "reasoning": "Step-by-step chain-of-thought reasoning trace: 1) What populations I found in Protocol, 2) What populations I found in Original SAP, 3) What populations I found in Generated SAP, 4) How I compared each population (Original SAP first, then Protocol as tiebreaker), 5) Where differences were found, 6) When Protocol was consulted and what it said, 7) Why this rating was assigned",
+  "reasoning": "Step-by-step chain-of-thought reasoning trace: 1) What populations I found in Protocol, 2) What populations I found in Original SAP, 3) What populations I found in Generated SAP, 4) How I compared content (Original SAP only), 5) How I checked existence (Protocol for missing elements only), 6) What is less detailed vs what contradicts, 7) Why this rating was assigned",
 
   "summary": "2-3 sentence overall assessment"
 }
@@ -356,13 +425,13 @@ This ensures no component is skipped or lost during evaluation.
 ## CRITICAL REMINDERS
 
 1. **Discovery first**: Do not assume populations exist - search and find them in each document
-2. **Compare to Original SAP first**: Always compare Generated SAP to Original SAP before consulting Protocol
-3. **Protocol is tiebreaker**: Only consult Protocol when Generated SAP differs from Original SAP
-4. **Do not penalize Protocol compliance**: If Generated SAP matches Protocol but not Original SAP, that is CORRECT
-5. **Document everything**: Include actual text quotes for audit trail
-6. **Absence is only a problem if required by Protocol**: Missing a population that Protocol defines is a PROBLEM; missing one only in Original SAP is not
-7. **Evaluate ALL components**: Every distinct piece of information for each population must have its own evaluation row - do not skip or combine
-8. **Location flexibility**: Content may appear in different sections across documents - search entire documents
+2. **Protocol is for EXISTENCE only, never for CONTENT**: Do not use Protocol to excuse content differences
+3. **For CONTENT**: Compare Generated SAP to Original SAP only - is it a match, less detailed, or contradiction?
+4. **For EXISTENCE**: Use Protocol only to check if a missing element is required
+5. **Less detailed is acceptable**: If Generated SAP omits words but preserves meaning, that is ACCEPTABLE
+6. **Contradiction is a problem**: If Generated SAP says something incompatible with Original SAP, that is a PROBLEM
+7. **Absence is only a problem if required by Protocol**: Missing a population that Protocol defines is a PROBLEM; missing one only in Original SAP is not
+8. **Do not split Definition or Treatment Assignment**: Evaluate each as ONE complete text. Include all inclusion/exclusion criteria in Definition. Include all assignment rules in Treatment Assignment. Do not put parts of Definition or Treatment Assignment in missing_from_generated_sap - evaluate them together.
 9. **Quote actual text**: Always provide exact quotes from documents
-10. **Explain Protocol consultations**: When you consult Protocol, document what it says and how it resolved the discrepancy
-11. **Blocking validation**: Ensure counts_match is true before outputting - total_components_extracted must equal components_in_evaluation_table + components_in_missing_from_generated_sap
+10. **Blocking validation**: Ensure counts_match is true before outputting - total_components_extracted must equal components_in_evaluation_table + components_in_missing_from_generated_sap
+11. **NEVER mention Protocol in content reasoning**: Your reasoning for content comparisons must only reference Original SAP and Generated SAP. Writing "matches Protocol" or similar in content reasoning is WRONG.

@@ -702,13 +702,16 @@ def test_prompt(prompt_name: str = "objectives_endpoints"):
         print(json.dumps(result, indent=2))
 
         # Save JSON result
-        output_path = Path("output") / f"test_{prompt_name}_result.json"
+        results_dir = Path("results/NCT03676192")
+        results_dir.mkdir(parents=True, exist_ok=True)
+
+        output_path = results_dir / f"{prompt_name}.json"
         output_path.write_text(json.dumps(result, indent=2))
         print(f"\n✓ JSON saved to: {output_path}")
 
         # Save Markdown result
         markdown_content = json_to_markdown(result, prompt_name)
-        md_output_path = Path("output") / f"test_{prompt_name}_result.md"
+        md_output_path = results_dir / f"{prompt_name}.md"
         md_output_path.write_text(markdown_content)
         print(f"✓ Markdown saved to: {md_output_path}")
 
