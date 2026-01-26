@@ -77,9 +77,7 @@ Every element extracted in Phase 1 MUST appear in either evaluation_table OR mis
 |----------|--------|---------------|
 | Both statements can be true at the same time | ✅ CORRECT | evaluation_table (result: correct) |
 | Generated SAP is less detailed than Original SAP | ✅ ACCEPTABLE | evaluation_table (result: correct) |
-| Statements conflict, but Generated MATCHES Protocol | ✅ CORRECT | evaluation_table (result: correct, protocol_consulted: yes) |
-| Statements conflict, Protocol is SILENT | ❌ PROBLEM | evaluation_table (result: problem, issue_type: contradiction_original) |
-| Statements conflict with Protocol | ❌ PROBLEM | evaluation_table (result: problem, issue_type: contradiction_protocol) |
+| Statements conflict (cannot both be true) | ❌ PROBLEM | evaluation_table (result: problem, issue_type: contradiction_original) |
 | Element missing from Generated, EXISTS in Protocol | ❌ PROBLEM | missing_from_generated_sap (in_protocol: yes, classification: missing_required) |
 | Element missing from Generated, NOT in Protocol | ✅ ACCEPTABLE | missing_from_generated_sap (in_protocol: no, classification: acceptable_difference) |
 
