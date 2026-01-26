@@ -12,7 +12,11 @@ _client = None
 
 # Path to store persistent cache info
 CACHE_INFO_FILE = "cache/persistent_cache_info.json"
-LLAMAPARSE_ORIGINAL_SAP = "cache/NCT03676192_original_sap_llamaparse.md"
+
+# Processed files (LlamaParse extracted)
+PROCESSED_FILES_DIR = "data/processed_files"
+ORIGINAL_SAP_FILE = f"{PROCESSED_FILES_DIR}/NCT03676192_original_sap.md"
+PROTOCOL_FILE = f"{PROCESSED_FILES_DIR}/NCT03676192_protocol.md"
 
 
 def get_client() -> genai.Client:
@@ -131,10 +135,10 @@ def list_caches():
     return caches
 
 
-def get_or_create_original_sap_cache(ttl_minutes: int = 1440) -> str:
+def get_or_create_static_docs_cache(ttl_minutes: int = 1440) -> str:
     """
-    Get existing Original SAP cache or create a new one.
-    Uses the LlamaParse extracted document for consistency.
+    Get existing cache or create a new one for static documents (Original SAP + Protocol).
+    These documents never change, so we cache them together to save tokens.
 
     Args:
         ttl_minutes: Cache TTL in minutes (default 24 hours)
@@ -159,23 +163,38 @@ def get_or_create_original_sap_cache(ttl_minutes: int = 1440) -> str:
         except Exception as e:
             print(f"Existing cache invalid or expired: {e}")
 
-    # Read the LlamaParse extracted document
-    if not os.path.exists(LLAMAPARSE_ORIGINAL_SAP):
-        raise FileNotFoundError(f"LlamaParse document not found: {LLAMAPARSE_ORIGINAL_SAP}")
+    # Read the processed files
+    if not os.path.exists(ORIGINAL_SAP_FILE):
+        raise FileNotFoundError(f"Original SAP not found: {ORIGINAL_SAP_FILE}")
+    if not os.path.exists(PROTOCOL_FILE):
+        raise FileNotFoundError(f"Protocol not found: {PROTOCOL_FILE}")
 
-    with open(LLAMAPARSE_ORIGINAL_SAP, 'r') as f:
+    with open(ORIGINAL_SAP_FILE, 'r') as f:
         original_sap_content = f.read()
+    with open(PROTOCOL_FILE, 'r') as f:
+        protocol_content = f.read()
 
-    print(f"Creating new cache from LlamaParse document...")
-    print(f"  Document size: {len(original_sap_content)} characters")
+    print(f"Creating new cache from processed files...")
+    print(f"  Original SAP: {len(original_sap_content):,} characters")
+    print(f"  Protocol: {len(protocol_content):,} characters")
 
-    # Create the cache with just the Original SAP
+    # Create the cache with both Original SAP and Protocol
+    cached_content = f"""## ORIGINAL SAP DOCUMENT
+
+{original_sap_content}
+
+---
+
+## PROTOCOL DOCUMENT
+
+{protocol_content}"""
+
     cache = client.caches.create(
         model=GEMINI_MODEL,
         config=types.CreateCachedContentConfig(
-            contents=[f"## ORIGINAL SAP DOCUMENT (LlamaParse Extracted)\n\n{original_sap_content}"],
+            contents=[cached_content],
             ttl=f"{ttl_minutes * 60}s",
-            display_name="original_sap_llamaparse_cache",
+            display_name="original_sap_and_protocol_cache",
         ),
     )
 
@@ -183,7 +202,7 @@ def get_or_create_original_sap_cache(ttl_minutes: int = 1440) -> str:
     cache_info = {
         'cache_name': cache.name,
         'created_at': datetime.now(timezone.utc).isoformat(),
-        'source_file': LLAMAPARSE_ORIGINAL_SAP,
+        'source_files': [ORIGINAL_SAP_FILE, PROTOCOL_FILE],
         'ttl_minutes': ttl_minutes
     }
 
@@ -200,17 +219,19 @@ def get_or_create_original_sap_cache(ttl_minutes: int = 1440) -> str:
 
 def evaluate_sap_with_persistent_cache(
     generated_sap: str,
-    protocol: str,
-    instruction: str,
+    protocol: str = None,  # No longer needed - Protocol is cached
+    instruction: str = None,
     schema: dict = None,
     max_retries: int = 3
 ) -> dict:
     """
-    Evaluate Generated SAP using the persistent Original SAP cache.
+    Evaluate Generated SAP using the persistent cache (Original SAP + Protocol).
+
+    Only Generated SAP is sent fresh each call. Original SAP and Protocol are cached.
 
     Args:
         generated_sap: The Generated SAP content
-        protocol: The Protocol content
+        protocol: DEPRECATED - Protocol is now cached. Kept for backwards compatibility.
         instruction: The evaluation instruction/prompt
         schema: Optional JSON schema for response
         max_retries: Number of retries on failure
@@ -218,19 +239,13 @@ def evaluate_sap_with_persistent_cache(
     Returns:
         Parsed JSON response
     """
-    # Get or create the persistent Original SAP cache
-    original_sap_cache = get_or_create_original_sap_cache()
+    # Get or create the persistent cache (Original SAP + Protocol)
+    static_docs_cache = get_or_create_static_docs_cache()
 
-    # Build the evaluation prompt with Generated SAP and Protocol
+    # Build the evaluation prompt with only Generated SAP (Original SAP + Protocol are cached)
     full_prompt = f"""## GENERATED SAP DOCUMENT
 
 {generated_sap}
-
----
-
-## PROTOCOL DOCUMENT
-
-{protocol}
 
 ---
 
@@ -246,7 +261,7 @@ def evaluate_sap_with_persistent_cache(
                 temperature=GEMINI_CONFIG["temperature"],
                 max_output_tokens=GEMINI_CONFIG["max_output_tokens"],
                 response_mime_type="application/json",
-                cached_content=original_sap_cache,
+                cached_content=static_docs_cache,
             )
 
             if schema:
