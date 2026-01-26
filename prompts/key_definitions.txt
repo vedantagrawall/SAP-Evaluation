@@ -178,17 +178,17 @@ Provide BOTH markdown (for human review) AND JSON (for programmatic use).
 
 ### Evaluation Summary Table
 
-| Definition | Source Category | Found in Protocol | Found in Original SAP | Matches Original SAP | Result |
-|------------|-----------------|-------------------|----------------------|---------------------|--------|
-| [name] | [protocol-defined/sap-originated/generated-addition] | yes (location) / no | yes (location) / no | yes/no/n/a | correct/acceptable/problem |
+| Component | Evaluation Type | Matches Original SAP | Protocol Consulted | Result | Issue Type | Severity |
+|-----------|-----------------|---------------------|-------------------|--------|------------|----------|
+| [name] | [protocol-defined/sap-originated/generated-addition] | yes/no/n/a | yes/no | correct/acceptable/problem | [type] | [severity] |
 
 ---
 
 ### Issues Found
 
-| Issue Type | Severity | Definition | Source Text | Generated Text | Description |
-|------------|----------|------------|-------------|----------------|-------------|
-| [type] | [severity] | [name] | [quote] | [quote] | [explanation] |
+| Issue Type | Severity | Component | Why They Conflict | Description |
+|------------|----------|-----------|-------------------|-------------|
+| [type] | [severity] | [name] | [explanation] | [explanation] |
 
 (If no issues: "*No issues found.*")
 
@@ -196,8 +196,8 @@ Provide BOTH markdown (for human review) AND JSON (for programmatic use).
 
 ### Additions in Generated SAP
 
-| Definition | Consistent with Study Design | Contradicts Source | Assessment |
-|------------|------------------------------|-------------------|------------|
+| Component | Consistent with Study Design | Contradicts Source | Assessment |
+|-----------|------------------------------|-------------------|------------|
 | [name] | yes/no | yes/no | acceptable/problem |
 
 (If none: "*No additions found.*")
@@ -206,8 +206,8 @@ Provide BOTH markdown (for human review) AND JSON (for programmatic use).
 
 ### Missing Definitions
 
-| Definition | In Protocol | In Original SAP | Classification |
-|------------|-------------|-----------------|----------------|
+| Component | In Protocol | In Original SAP | Classification |
+|-----------|-------------|-----------------|----------------|
 | [name] | yes/no | yes (quote) | missing_required/acceptable_omission |
 
 (If none: "*No missing definitions.*")
@@ -216,9 +216,9 @@ Provide BOTH markdown (for human review) AND JSON (for programmatic use).
 
 ### Internal Contradictions
 
-| Definition | Location A | Text A | Location B | Text B | Description |
-|------------|------------|--------|------------|--------|-------------|
-| [name] | [section] | [quote] | [section] | [quote] | [how they conflict] |
+| Component | Location A | Text A | Location B | Text B | Why They Conflict |
+|-----------|------------|--------|------------|--------|-------------------|
+| [name] | [section] | [quote] | [section] | [quote] | [explanation] |
 
 (If none: "*No internal contradictions found.*")
 
@@ -257,14 +257,15 @@ Provide BOTH markdown (for human review) AND JSON (for programmatic use).
 
   "evaluation_table": [
     {
-      "definition": "name of definition",
-      "source_category": "protocol-defined | sap-originated | generated-addition",
+      "component": "name of definition",
+      "evaluation_type": "protocol-defined | sap-originated | generated-addition",
       "generated_sap_text": "exact quote",
       "generated_sap_location": "section/location",
       "original_sap_text": "exact quote or null",
       "original_sap_location": "section/location or null",
       "protocol_text": "exact quote or null",
       "protocol_location": "section/location or null",
+      "protocol_consulted": "yes | no",
       "matches_original_sap": "yes | no | n/a",
       "result": "correct | acceptable | problem",
       "issue_type": "none | contradiction_protocol | contradiction_original | internal_contradiction",
@@ -275,7 +276,7 @@ Provide BOTH markdown (for human review) AND JSON (for programmatic use).
 
   "additions": [
     {
-      "definition": "name of definition",
+      "component": "name of definition",
       "generated_sap_text": "exact quote",
       "generated_sap_location": "section/location",
       "consistent_with_study_design": "yes | no",
@@ -287,7 +288,7 @@ Provide BOTH markdown (for human review) AND JSON (for programmatic use).
 
   "missing_definitions": [
     {
-      "definition": "name of definition",
+      "component": "name of definition",
       "original_sap_text": "exact quote",
       "original_sap_location": "section/location",
       "protocol_text": "exact quote or null",
@@ -300,12 +301,13 @@ Provide BOTH markdown (for human review) AND JSON (for programmatic use).
 
   "internal_contradictions": [
     {
-      "definition": "name of definition",
+      "component": "name of definition",
       "location_a": "section/location",
       "text_a": "exact quote",
       "location_b": "section/location",
       "text_b": "exact quote",
       "description": "how they conflict",
+      "why_they_conflict": "explanation of why both cannot be true",
       "severity": "minor | critical"
     }
   ],
@@ -314,9 +316,10 @@ Provide BOTH markdown (for human review) AND JSON (for programmatic use).
     {
       "issue_type": "contradiction_protocol | contradiction_original | internal_contradiction | problematic_addition",
       "severity": "minor | critical",
-      "definition": "name",
+      "component": "name",
       "source_text": "exact quote",
       "generated_text": "exact quote",
+      "why_they_conflict": "explanation of why both cannot be true",
       "description": "explanation",
       "reasoning": "chain-of-thought"
     }

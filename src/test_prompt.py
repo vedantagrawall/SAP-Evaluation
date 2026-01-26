@@ -203,9 +203,7 @@ def json_to_markdown_analysis_populations(result: dict) -> str:
 def json_to_markdown(result: dict, section_name: str) -> str:
     """Convert JSON evaluation result to markdown format."""
 
-    # Use specialized formatter for analysis_populations
-    if section_name == 'analysis_populations':
-        return json_to_markdown_analysis_populations(result)
+    # Use standard format for all sections (removed specialized formatter)
 
     lines = []
 
