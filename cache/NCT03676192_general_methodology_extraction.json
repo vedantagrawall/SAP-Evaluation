@@ -1,0 +1,757 @@
+{
+  "section": "general_methodology",
+  "nct_id": "NCT03676192",
+  "statements": [
+    {
+      "id": 1,
+      "component": "introduction",
+      "original_sap_text": "This statistical analysis plan (SAP) defines the statistical methods and data presentations to be used by CELLTRION Clinical Statistics team in the analysis and presentation of data from CELLTRION study number CT-P16 3.1",
+      "section_reference": "1. INTRODUCTION"
+    },
+    {
+      "id": 2,
+      "component": "introduction",
+      "original_sap_text": "There are three clinical study reports (CSRs) planned: To report data after completion of the Induction Study Period (1st CSR); To report data up to 1-year completion of the last patient (2nd CSR); To report all data until the end of study (3rd CSR)",
+      "section_reference": "1. INTRODUCTION"
+    },
+    {
+      "id": 3,
+      "component": "introduction",
+      "original_sap_text": "This SAP covers data analysis for the final CSR (3rd CSR).",
+      "section_reference": "1. INTRODUCTION"
+    },
+    {
+      "id": 4,
+      "component": "introduction",
+      "original_sap_text": "The final CSR will contain all data obtained up to the end of study.",
+      "section_reference": "1.1. Data Cut-off for Analysis"
+    },
+    {
+      "id": 5,
+      "component": "primary_objective",
+      "original_sap_text": "To demonstrate CT-P16 is similar to EU-Approved Avastin in terms of efficacy as determined by objective response rate (ORR) during the Induction Study Period",
+      "section_reference": "2.1. Primary Objective"
+    },
+    {
+      "id": 6,
+      "component": "secondary_objective",
+      "original_sap_text": "To evaluate additional efficacy profiles including ORR during the Whole Study Period, response duration, time to progression (TTP), progression-free survival (PFS), and overall survival (OS)",
+      "section_reference": "2.2. Secondary Objective"
+    },
+    {
+      "id": 7,
+      "component": "secondary_objective",
+      "original_sap_text": "To evaluate the Pharmacokinetic (PK) parameter of trough serum concentration (Ctrough)",
+      "section_reference": "2.2. Secondary Objective"
+    },
+    {
+      "id": 8,
+      "component": "secondary_objective",
+      "original_sap_text": "To evaluate safety profile including immunogenicity",
+      "section_reference": "2.2. Secondary Objective"
+    },
+    {
+      "id": 9,
+      "component": "secondary_objective",
+      "original_sap_text": "To evaluate quality of life (QoL)",
+      "section_reference": "2.2. Secondary Objective"
+    },
+    {
+      "id": 10,
+      "component": "study_design",
+      "original_sap_text": "This study is a double-blind, randomized, active-controlled, parallel-group, Phase 3 study to compare efficacy, PK, and overall safety of CT-P16 (15 mg/kg) and EU-Approved Avastin (15 mg/kg) when co-administered with paclitaxel and carboplatin in patients with metastatic or recurrent non-squamous non-small cell lung cancer (nsNSCLC) as first-line treatment.",
+      "section_reference": "3. OVERALL STUDY DESIGN AND PLAN"
+    },
+    {
+      "id": 11,
+      "component": "study_design",
+      "original_sap_text": "A total of 678 male and female patients with metastatic or recurrent nsNSCLC will be enrolled and randomly assigned in a 1:1 ratio (approximately 339 patients per treatment group) to CT-P16 or EU-Approved Avastin.",
+      "section_reference": "3. OVERALL STUDY DESIGN AND PLAN"
+    },
+    {
+      "id": 12,
+      "component": "study_design",
+      "original_sap_text": "This study will comprise 4 study periods (including Screening Period, Induction Study Period, Maintenance Study Period and Follow-Up Period)",
+      "section_reference": "3. OVERALL STUDY DESIGN AND PLAN"
+    },
+    {
+      "id": 13,
+      "component": "study_design",
+      "original_sap_text": "During the Induction Study Period, patients will receive 15 mg/kg intravenous (IV) of either CT-P16 or EU-Approved Avastin every 3 weeks up to 6 cycles.",
+      "section_reference": "3. OVERALL STUDY DESIGN AND PLAN"
+    },
+    {
+      "id": 14,
+      "component": "study_design",
+      "original_sap_text": "Patients will receive paclitaxel 200 mg/m2 IV and carboplatin area under the curve 6 IV every 3 weeks up to 6 cycles (at least 4 cycles).",
+      "section_reference": "3. OVERALL STUDY DESIGN AND PLAN"
+    },
+    {
+      "id": 15,
+      "component": "study_design",
+      "original_sap_text": "After the completion of 6 cycles during the Induction Study Period, patients with controlled disease (complete response (CR), partial response (PR), or stable disease (SD), assessed at the end of Cycle 6) will enter the Maintenance Study Period.",
+      "section_reference": "3. OVERALL STUDY DESIGN AND PLAN"
+    },
+    {
+      "id": 16,
+      "component": "study_design",
+      "original_sap_text": "Patients will receive monotherapy of 15 mg/kg of CT-P16 or EU-Approved Avastin every 3 weeks until PD or intolerable toxicity, whichever occurs first.",
+      "section_reference": "3. OVERALL STUDY DESIGN AND PLAN"
+    },
+    {
+      "id": 17,
+      "component": "study_design",
+      "original_sap_text": "All patients who enter the Follow-Up Period due to any reason will be followed every 9 weeks until death or the end of study, whichever occurs first.",
+      "section_reference": "3. OVERALL STUDY DESIGN AND PLAN"
+    },
+    {
+      "id": 18,
+      "component": "statistical_considerations",
+      "original_sap_text": "Continuous data will be summarized using descriptive statistics: the number of observations (n), mean, standard deviation, minimum, median and maximum unless otherwise indicated.",
+      "section_reference": "4. GENERAL STATISTICAL CONSIDERATIONS"
+    },
+    {
+      "id": 19,
+      "component": "statistical_considerations",
+      "original_sap_text": "Minimum and maximum will be presented to the same number of decimal places as the raw data, mean and median will be presented to one more decimal place than the raw data, and standard deviation will be presented to two more decimal places than the raw data.",
+      "section_reference": "4. GENERAL STATISTICAL CONSIDERATIONS"
+    },
+    {
+      "id": 20,
+      "component": "statistical_considerations",
+      "original_sap_text": "Percent coefficient of variation (CV) will be presented to two more decimal places than the raw data.",
+      "section_reference": "4. GENERAL STATISTICAL CONSIDERATIONS"
+    },
+    {
+      "id": 21,
+      "component": "statistical_considerations",
+      "original_sap_text": "Categorical data will be summarized using numbers and percentages of patients. Percentages will be presented to one decimal place and will be suppressed when the count is zero.",
+      "section_reference": "4. GENERAL STATISTICAL CONSIDERATIONS"
+    },
+    {
+      "id": 22,
+      "component": "sample_size",
+      "original_sap_text": "A sample size of 305 patients per group will provide 80% power to show similarity in efficacy between CT-P16 and EU-Approved Avastin based on the expected ORR of 38% with an equivalence margin of -12.5 to 12.5 using a 95% CI (two one-sided alpha 0.025) of the difference in ORR.",
+      "section_reference": "4.2. Sample Size"
+    },
+    {
+      "id": 23,
+      "component": "sample_size",
+      "original_sap_text": "Approximately 678 patients (339 in each group) will need to be enrolled for the anticipated drop-out rate of 10%.",
+      "section_reference": "4.2. Sample Size"
+    },
+    {
+      "id": 24,
+      "component": "randomization",
+      "original_sap_text": "Patients who qualify for randomization will be randomly assigned on Day 1 of Cycle 1 in the Induction Study Period in a 1:1 ratio to receive CT-P16 or EU-Approved Avastin.",
+      "section_reference": "4.3. Randomization, Stratification, and Blinding"
+    },
+    {
+      "id": 25,
+      "component": "randomization",
+      "original_sap_text": "The randomization will be balanced by using permuted blocks and will be stratified by country, sex (female vs. male), disease status (recurrence vs. metastatic), Eastern Cooperative Oncology Group (ECOG) performance status (0 vs. 1).",
+      "section_reference": "4.3. Randomization, Stratification, and Blinding"
+    },
+    {
+      "id": 26,
+      "component": "blinding",
+      "original_sap_text": "This study will be double-blinded during both the Induction Study Period and the Maintenance Study Period.",
+      "section_reference": "4.3. Randomization, Stratification, and Blinding"
+    },
+    {
+      "id": 27,
+      "component": "blinding",
+      "original_sap_text": "The database will be unblinded for the 1st CSR for a reporting purpose. However, the study will remain blinded to the investigators and patients until study termination.",
+      "section_reference": "4.3. Randomization, Stratification, and Blinding"
+    },
+    {
+      "id": 28,
+      "component": "population_definition",
+      "original_sap_text": "The ITT population will consist of all randomized patients who are randomly assigned to study drug regardless of whether or not any study treatment dosing is completed and successfully screened based on the 'Screening Pass/Fail' eCRF page.",
+      "section_reference": "4.4.1. Intent-to-Treat Population"
+    },
+    {
+      "id": 29,
+      "component": "population_definition",
+      "original_sap_text": "Patients will be assigned to treatment groups based on randomization.",
+      "section_reference": "4.4.1. Intent-to-Treat Population"
+    },
+    {
+      "id": 30,
+      "component": "population_definition",
+      "original_sap_text": "The PP population will consist of all randomly assigned patients who have at least one response evaluation after receiving at least one full dose of study drug (CT-P16 or EU-Approved Avastin) in the Induction Study Period and who do not have any major protocol deviations that may affect the interpretation of the primary endpoint.",
+      "section_reference": "4.4.2. Per-Protocol Population"
+    },
+    {
+      "id": 31,
+      "component": "population_definition",
+      "original_sap_text": "A patient will be considered as receiving full dose if the planned dose is recorded as '15mg/kg' and the action taken is recorded as 'Dose Not Changed' on 'Study Treatment Administration' eCRF page.",
+      "section_reference": "4.4.2. Per-Protocol Population"
+    },
+    {
+      "id": 32,
+      "component": "population_definition",
+      "original_sap_text": "The PK population will consist of all randomly assigned patients who receive at least one full dose (as defined in Section 4.4.2) of study drug (CT-P16 or EU-Approved Avastin) and who have at least one post treatment PK result.",
+      "section_reference": "4.4.3. Pharmacokinetic Population"
+    },
+    {
+      "id": 33,
+      "component": "population_definition",
+      "original_sap_text": "Patients who received incorrect treatment during the Induction Study Period will be excluded from the PK population.",
+      "section_reference": "4.4.3. Pharmacokinetic Population"
+    },
+    {
+      "id": 34,
+      "component": "population_definition",
+      "original_sap_text": "Patients will be assigned to treatment groups based on treatment they actually received during the Induction Study Period.",
+      "section_reference": "4.4.3. Pharmacokinetic Population"
+    },
+    {
+      "id": 35,
+      "component": "population_definition",
+      "original_sap_text": "The PK population - Maintenance Period Subset will consist of all patients in PK population who received at least 1 dose (full) of either of the study drugs and have at least one post treatment PK result during the Maintenance Study Period.",
+      "section_reference": "4.4.4. Pharmacokinetic Population - Maintenance Period Subset"
+    },
+    {
+      "id": 36,
+      "component": "population_definition",
+      "original_sap_text": "The safety population will consist of all randomly assigned patients who receive at least one dose (partial or full) of study drug (CT-P16 or EU-Approved Avastin).",
+      "section_reference": "4.4.5. Safety Population"
+    },
+    {
+      "id": 37,
+      "component": "population_definition",
+      "original_sap_text": "Patients will be assigned to treatment groups based on treatment they actually received.",
+      "section_reference": "4.4.5. Safety Population"
+    },
+    {
+      "id": 38,
+      "component": "population_definition",
+      "original_sap_text": "Patients receiving at least one dose of CT-P16 will be analyzed under the CT-P16 treatment group. All other patients will be analyzed under the EU-Approved Avastin treatment group.",
+      "section_reference": "4.4.5. Safety Population"
+    },
+    {
+      "id": 39,
+      "component": "baseline_definition",
+      "original_sap_text": "The baseline value for all analyses will be the last non-missing value prior to the first infusion unless otherwise specified.",
+      "section_reference": "4.5. Definition of Baseline and Post-Baseline"
+    },
+    {
+      "id": 40,
+      "component": "protocol_deviations",
+      "original_sap_text": "Major protocol deviations include the following: Mis-randomizations (defined as patients who received the opposite treatment to which they were assigned); Non-compliance of Inclusion or Exclusion criteria; Significant Good Clinical Practice (GCP) non-compliance (to be identified by as sites which have been closed due to scientific misconduct and/or serious GCP non-compliance); Receiving any prohibited therapies (Section 5.10 of protocol); Missing primary efficacy assessment",
+      "section_reference": "4.6. Protocol Deviations"
+    },
+    {
+      "id": 41,
+      "component": "outliers",
+      "original_sap_text": "In general, outliers will not be excluded unless they are considered to be erroneous values.",
+      "section_reference": "4.8. Outliers"
+    },
+    {
+      "id": 42,
+      "component": "missing_values",
+      "original_sap_text": "Missing values in ORR will be considered as 'Non-responder' to analyze primary efficacy endpoint.",
+      "section_reference": "4.9. Missing Values"
+    },
+    {
+      "id": 43,
+      "component": "missing_values",
+      "original_sap_text": "Tipping point analyses will be conducted under Missing Not at Random (MNAR) scenarios.",
+      "section_reference": "4.9. Missing Values"
+    },
+    {
+      "id": 44,
+      "component": "patient_disposition",
+      "original_sap_text": "A patient will be considered to have failed the screening if the screening failure date is recorded on the 'Screening Pass/Fail' eCRF page.",
+      "section_reference": "5. PATIENT DISPOSITION"
+    },
+    {
+      "id": 45,
+      "component": "patient_disposition",
+      "original_sap_text": "A patient will be considered to be randomized if the randomization date is recorded on the 'Randomization' eCRF page and the response of 'Is the patient eligible to participate in this study?' on 'Screening Pass/Fail' eCRF page is 'Yes'.",
+      "section_reference": "5. PATIENT DISPOSITION"
+    },
+    {
+      "id": 46,
+      "component": "patient_disposition",
+      "original_sap_text": "A patient will be considered to have initiated the Induction Study Period and the Maintenance Study Period if the administration date is recorded on the 'Study Treatment Administration' eCRF page for Induction Study Period and Maintenance Study Period, respectively.",
+      "section_reference": "5. PATIENT DISPOSITION"
+    },
+    {
+      "id": 47,
+      "component": "patient_disposition",
+      "original_sap_text": "A patient will be considered to have completed Induction Study Period if the patient administered up to Induction Cycle 6 and performed tumor assessment (i.e. 'Response Evaluation' eCRF page) after the administration date at Induction Cycle 6.",
+      "section_reference": "5. PATIENT DISPOSITION"
+    },
+    {
+      "id": 48,
+      "component": "patient_disposition",
+      "original_sap_text": "Time on the study drug prior to discontinuation in each study period will be calculated as (Last dose date - First dose date + 1)",
+      "section_reference": "5. PATIENT DISPOSITION"
+    },
+    {
+      "id": 49,
+      "component": "demographics",
+      "original_sap_text": "Age will be automatically calculated in the eCRF system based on the informed consent signed date, the year of birth and information on whether the date of birth has passed or not.",
+      "section_reference": "6.1. Demographics and Stratification Details"
+    },
+    {
+      "id": 50,
+      "component": "demographics",
+      "original_sap_text": "The following stratification details will also be presented: Country (as recorded in the clinical database), Sex (Female vs. Male), disease status (Recurrence vs. Metastatic), and ECOG performance status (0 vs. 1).",
+      "section_reference": "6.1. Demographics and Stratification Details"
+    },
+    {
+      "id": 51,
+      "component": "medical_history",
+      "original_sap_text": "Medical history is captured at the screening visit and will be coded using Medical Dictionary for Regulatory Activities (MedDRA) version 24.0 or higher.",
+      "section_reference": "6.4. Medical History"
+    },
+    {
+      "id": 52,
+      "component": "previous_treatment",
+      "original_sap_text": "Previous anti-cancer systemic therapy for NSCLC will be coded using World Health Organization (WHO) Drug Dictionary version March, 2021 or later.",
+      "section_reference": "6.6. Previous Treatment for NSCLC"
+    },
+    {
+      "id": 53,
+      "component": "medications",
+      "original_sap_text": "A prior medication is defined as any medication where both the start and stop dates are before the date of first infusion.",
+      "section_reference": "7.1. Prior and Concomitant Medications"
+    },
+    {
+      "id": 54,
+      "component": "medications",
+      "original_sap_text": "A concomitant medication is defined as any medication that has a stop date that is on or after the date of first infusion or missing.",
+      "section_reference": "7.1. Prior and Concomitant Medications"
+    },
+    {
+      "id": 55,
+      "component": "medications",
+      "original_sap_text": "All medications will be coded using WHO Drug Dictionary version March, 2021 or later.",
+      "section_reference": "7.1. Prior and Concomitant Medications"
+    },
+    {
+      "id": 56,
+      "component": "exposure",
+      "original_sap_text": "administered dose intensity (weight-adjusted administered dose / actual duration of dose) (mg/kg/week)",
+      "section_reference": "7.2. Exposure to Study Drug"
+    },
+    {
+      "id": 57,
+      "component": "exposure",
+      "original_sap_text": "relative dose intensity (administered dose intensity / planned dose intensity * 100) (%)",
+      "section_reference": "7.2. Exposure to Study Drug"
+    },
+    {
+      "id": 58,
+      "component": "exposure",
+      "original_sap_text": "Actual duration of dose (weeks) = (Start Date of Next Cycle - Start Date of Current Cycle) / 7",
+      "section_reference": "7.2. Exposure to Study Drug"
+    },
+    {
+      "id": 59,
+      "component": "exposure",
+      "original_sap_text": "In order to calculate dose intensity, for the last cycle, the duration of dose is assumed to be 3 weeks.",
+      "section_reference": "7.2. Exposure to Study Drug"
+    },
+    {
+      "id": 60,
+      "component": "exposure",
+      "original_sap_text": "Adjusted Carboplatin Dose (AUC) = Carboplatin Dose (mg)/(CrCl+25).",
+      "section_reference": "7.2. Exposure to Study Drug"
+    },
+    {
+      "id": 61,
+      "component": "exposure",
+      "original_sap_text": "Actual duration of dose (weeks) = (Start Date of Last Cycle + 21 - Start Date of First Cycle) / 7",
+      "section_reference": "7.2. Exposure to Study Drug"
+    },
+    {
+      "id": 62,
+      "component": "efficacy_analysis",
+      "original_sap_text": "Response evaluation will be based on tumor responses measured and recorded by using Response Evaluation Criteria In Solid Tumors (RECIST) version 1.1.",
+      "section_reference": "8. EFFICACY ANALYSIS"
+    },
+    {
+      "id": 63,
+      "component": "efficacy_analysis",
+      "original_sap_text": "Primary analysis population for the efficacy analysis is the ITT population. A supportive analysis will be repeated using the PP population.",
+      "section_reference": "8. EFFICACY ANALYSIS"
+    },
+    {
+      "id": 64,
+      "component": "primary_endpoint",
+      "original_sap_text": "The primary efficacy endpoint is ORR based on BOR during the Induction Study Period by RECIST version 1.1",
+      "section_reference": "8.1. Primary Efficacy Endpoint"
+    },
+    {
+      "id": 65,
+      "component": "primary_endpoint",
+      "original_sap_text": "The ORR is defined as the proportion of patients with a confirmed BOR of CR or PR (the 'responder').",
+      "section_reference": "8.1. Primary Efficacy Endpoint"
+    },
+    {
+      "id": 66,
+      "component": "primary_endpoint",
+      "original_sap_text": "All other patients in the ITT or PP population except responders will be considered as non-responder including patients without post-baseline tumor assessment.",
+      "section_reference": "8.1. Primary Efficacy Endpoint"
+    },
+    {
+      "id": 67,
+      "component": "primary_endpoint",
+      "original_sap_text": "The similarity criterion has been set such that the confidence limits of the 95% CI of the difference in ORR from each treatment group will be entirely bounded by the interval (-12.5, 12.5).",
+      "section_reference": "8.1. Primary Efficacy Endpoint"
+    },
+    {
+      "id": 68,
+      "component": "primary_endpoint",
+      "original_sap_text": "The primary analysis for the primary endpoint will be performed utilizing a logistic regression model considering country, sex (female vs. male), disease status at baseline (recurrence vs. metastatic), and ECOG performance status at baseline (0 vs. 1) as covariates with treatment groups (CT-P16 and EU-Approved Avastin) as a fixed effect.",
+      "section_reference": "8.1. Primary Efficacy Endpoint"
+    },
+    {
+      "id": 69,
+      "component": "primary_endpoint",
+      "original_sap_text": "For the primary analysis, central review results will be used. Local review results will be used for a sensitivity analysis.",
+      "section_reference": "8.1. Primary Efficacy Endpoint"
+    },
+    {
+      "id": 70,
+      "component": "primary_endpoint",
+      "original_sap_text": "Tipping point analysis will also be conducted using central review data based on exact binomial approach in the ITT population for a sensitivity analysis.",
+      "section_reference": "8.1. Primary Efficacy Endpoint"
+    },
+    {
+      "id": 71,
+      "component": "primary_endpoint",
+      "original_sap_text": "95% Confidence Interval = (pa - pb) +/- 1.96(SE(pa - pb))",
+      "section_reference": "8.1. Primary Efficacy Endpoint"
+    },
+    {
+      "id": 72,
+      "component": "secondary_endpoint",
+      "original_sap_text": "For the secondary efficacy endpoint, ORR based on BOR during the Whole Study Period by RECIST version 1.1 will be analyzed.",
+      "section_reference": "8.2.1. Objective Response Rate during the Whole Study Period"
+    },
+    {
+      "id": 73,
+      "component": "time_to_event",
+      "original_sap_text": "A time-to-event analysis will be undertaken for each of the response duration, TTP, PFS, and OS in the ITT and PP population.",
+      "section_reference": "8.2.2. Time-To-Event Analysis"
+    },
+    {
+      "id": 74,
+      "component": "time_to_event",
+      "original_sap_text": "The median survival time and its corresponding 95% CI for each treatment group will be estimated using the Kaplan-Meier method.",
+      "section_reference": "8.2.2. Time-To-Event Analysis"
+    },
+    {
+      "id": 75,
+      "component": "time_to_event",
+      "original_sap_text": "The Brookmeyer-Crowley methodology will be used to construct the 95% CI for each percentile.",
+      "section_reference": "8.2.2. Time-To-Event Analysis"
+    },
+    {
+      "id": 76,
+      "component": "time_to_event",
+      "original_sap_text": "Time-to-event in days will be converted to months by dividing the number of days by 30.4 (365.25 days/12 months).",
+      "section_reference": "8.2.2. Time-To-Event Analysis"
+    },
+    {
+      "id": 77,
+      "component": "time_to_event",
+      "original_sap_text": "In PFS and OS analyses, an adjusted stratified cox regression model will be used to estimate the hazard ratio and its 95% CI for receiving CT-P16 compared with receiving EU-Approved Avastin using country, sex (female vs. male), disease status at baseline (recurrence vs. metastatic), and ECOG performance score at baseline (0 vs. 1) as stratification factors.",
+      "section_reference": "8.2.2. Time-To-Event Analysis"
+    },
+    {
+      "id": 78,
+      "component": "response_duration",
+      "original_sap_text": "Response duration is defined as the time between initial response (CR or PR) that is confirmed by the subsequent assessment after study treatment administration and PD/recurrence or death from any cause (whichever occurs first).",
+      "section_reference": "8.2.2.1. Response Duration"
+    },
+    {
+      "id": 79,
+      "component": "response_duration",
+      "original_sap_text": "PD/recurrence or death that occurred on or before beginning another new anticancer therapy will be regarded as an event.",
+      "section_reference": "8.2.2.1. Response Duration"
+    },
+    {
+      "id": 80,
+      "component": "response_duration",
+      "original_sap_text": "Response duration (months) = (Date of Event/Censoring - Date of First known CR/PR that is confirmed by the subsequent assessment +1)/30.4",
+      "section_reference": "8.2.2.1. Response Duration"
+    },
+    {
+      "id": 81,
+      "component": "ttp",
+      "original_sap_text": "TTP is defined as time from randomization to determined PD/recurrence.",
+      "section_reference": "8.2.2.2. Time to Progression"
+    },
+    {
+      "id": 82,
+      "component": "ttp",
+      "original_sap_text": "PD/recurrence that occurred on or before beginning another new anticancer therapy will be regarded as an event.",
+      "section_reference": "8.2.2.2. Time to Progression"
+    },
+    {
+      "id": 83,
+      "component": "ttp",
+      "original_sap_text": "TTP (months) = (Date of Event/Censoring - Date of Randomization +1)/30.4",
+      "section_reference": "8.2.2.2. Time to Progression"
+    },
+    {
+      "id": 84,
+      "component": "pfs",
+      "original_sap_text": "PFS is defined as time from randomization to determined PD/recurrence or death from any cause (whichever occurs first).",
+      "section_reference": "8.2.2.3. Progression-free Survival"
+    },
+    {
+      "id": 85,
+      "component": "pfs",
+      "original_sap_text": "PD/recurrence or death that occurred on or before beginning another new anticancer therapy will be regarded as an event.",
+      "section_reference": "8.2.2.3. Progression-free Survival"
+    },
+    {
+      "id": 86,
+      "component": "pfs",
+      "original_sap_text": "PFS (months) = (Date of Event/Censoring - Date of Randomization +1)/30.4",
+      "section_reference": "8.2.2.3. Progression-free Survival"
+    },
+    {
+      "id": 87,
+      "component": "os",
+      "original_sap_text": "OS is defined as time from randomization to death from any cause.",
+      "section_reference": "8.2.2.4. Overall Survival"
+    },
+    {
+      "id": 88,
+      "component": "os",
+      "original_sap_text": "OS (months) = (Date of Event/Censoring - Date of Randomization +1)/30.4",
+      "section_reference": "8.2.2.4. Overall Survival"
+    },
+    {
+      "id": 89,
+      "component": "censoring_logic",
+      "original_sap_text": "If the last tumor assessment is performed during treatment periods (including EOT visit), the censoring date will be the last tumor assessment date during treatment periods.",
+      "section_reference": "8.2.2.5. Capture logic for event or censoring with incomplete date of new anticancer therapy"
+    },
+    {
+      "id": 90,
+      "component": "censoring_logic",
+      "original_sap_text": "If the day of the start date of new anticancer therapy is missing, then the censoring date will be the last tumor assessment date, provided tumor assessment date < the partial start date of new anticancer therapy.",
+      "section_reference": "8.2.2.5. Capture logic for event or censoring with incomplete date of new anticancer therapy"
+    },
+    {
+      "id": 91,
+      "component": "censoring_logic",
+      "original_sap_text": "If the start date of new anticancer therapy is completely missing, censoring date will be the last tumor assessment date during treatment periods.",
+      "section_reference": "8.2.2.5. Capture logic for event or censoring with incomplete date of new anticancer therapy"
+    },
+    {
+      "id": 92,
+      "component": "salvage_treatment",
+      "original_sap_text": "Medications used for chemotherapy/immunotherapy/targeted therapy will be coded using the WHO Drug Dictionary version March, 2021 or later and surgery will be coded using MedDRA version 24.0 or higher.",
+      "section_reference": "8.3. Salvage Treatment"
+    },
+    {
+      "id": 93,
+      "component": "pk_analysis",
+      "original_sap_text": "All PK analysis will be performed in the PK population for the Induction Study Period and in the PK population - Maintenance Period subset for the Maintenance Study Period.",
+      "section_reference": "9. PHARMACOKINETIC ANALYSIS"
+    },
+    {
+      "id": 94,
+      "component": "pk_analysis",
+      "original_sap_text": "Serum concentration below the lower limit of quantification (LLOQ) prior to the first dose will be set to 0, and all other below the LLOQ will be set to the LLOQ in the serum concentration descriptive statistics summaries.",
+      "section_reference": "9.1. Serum Concentration"
+    },
+    {
+      "id": 95,
+      "component": "pk_analysis",
+      "original_sap_text": "PK parameter is the observed Ctrough following drug administration; calculated from the pre-dose concentration of the next dose.",
+      "section_reference": "9.2. Pharmacokinetic Parameter"
+    },
+    {
+      "id": 96,
+      "component": "pk_analysis",
+      "original_sap_text": "The samples in following cases are excluded from calculation of Ctrough; i) Post-dose concentration in the Induction Study Period, ii) interval between the last dose date and sampling date at EOT < 18 days, or iii) Duplicated samples at same visit/date/time.",
+      "section_reference": "9.2. Pharmacokinetic Parameter"
+    },
+    {
+      "id": 97,
+      "component": "safety_analysis",
+      "original_sap_text": "All safety analyses will be performed in the safety population and displayed by treatment group.",
+      "section_reference": "10. SAFETY ANALYSIS"
+    },
+    {
+      "id": 98,
+      "component": "adverse_events",
+      "original_sap_text": "An adverse event (AE) is defined as any untoward medical occurrence in a patient enrolled into this study (i.e., when the 'Informed Consent' eCRF page is signed), regardless of its causal relationship to study drug.",
+      "section_reference": "10.1. Adverse Events"
+    },
+    {
+      "id": 99,
+      "component": "adverse_events",
+      "original_sap_text": "A Treatment-Emergent Adverse Event (TEAE) is defined as any event not present before exposure to study drug or any event already present that worsens in either severity or frequency after exposure to study drug.",
+      "section_reference": "10.1. Adverse Events"
+    },
+    {
+      "id": 100,
+      "component": "adverse_events",
+      "original_sap_text": "All AEs will be classified by SOC and PT according to the MedDRA version 24.0 or higher.",
+      "section_reference": "10.1. Adverse Events"
+    },
+    {
+      "id": 101,
+      "component": "adverse_events",
+      "original_sap_text": "AEs will be graded for severity according to the Common Terminology Criteria for Adverse Events (CTCAE) version 5.0.",
+      "section_reference": "10.1. Adverse Events"
+    },
+    {
+      "id": 102,
+      "component": "adverse_events",
+      "original_sap_text": "AEs will be considered to be related if the relationship is possible, probable or definite for study treatment.",
+      "section_reference": "10.1. Adverse Events"
+    },
+    {
+      "id": 103,
+      "component": "adverse_events",
+      "original_sap_text": "At each level of summarization for the number of patients with an event, a patient is counted only once if they reported one or more events and only the worst severity will be counted at each level of summarization.",
+      "section_reference": "10.1.1. Treatment-Emergent Adverse Events"
+    },
+    {
+      "id": 104,
+      "component": "serious_adverse_events",
+      "original_sap_text": "A serious adverse event (SAE) is defined as any event that is immediately life threatening, requires inpatient hospitalization or prolongation of existing hospitalization, results in persistent or significant disability/incapacity, is a congenital anomaly/birth defect or results in death.",
+      "section_reference": "10.1.2. Serious Adverse Events"
+    },
+    {
+      "id": 105,
+      "component": "ae_discontinuation",
+      "original_sap_text": "TEAEs for which an action taken with study drug is 'Drug Withdrawn' will be considered TEAEs leading to study drug discontinuation.",
+      "section_reference": "10.1.3. Treatment-Emergent Adverse Events Leading to Study Drug Discontinuation"
+    },
+    {
+      "id": 106,
+      "component": "aesi",
+      "original_sap_text": "The following TEAEs will be considered as TEAEs of special interest: Hypersensitivity/IRR, Gastrointestinal perforations and fistulae, Wound healing complications, Hypertension, posterior reversible encephalopathy syndrome (PRES), Proteinuria, arterial thromboembolism (ATE), venous thromboembolism (VTE), Hemorrhages, congestive heart failure (CHF), or Ovarian failure/fertility.",
+      "section_reference": "10.1.5. Treatment-Emergent Adverse Events of Special Interest"
+    },
+    {
+      "id": 107,
+      "component": "lab_evaluations",
+      "original_sap_text": "Clinical laboratory parameters for clinical chemistry, hematology and urinalysis will be labeled with a CTCAE term and grading will be applied to baseline values and post-baseline values for the parameters according to CTCAE version 5.0.",
+      "section_reference": "10.2. Clinical Laboratory Evaluations"
+    },
+    {
+      "id": 108,
+      "component": "lab_evaluations",
+      "original_sap_text": "The CTCAE grades for this analysis will be Grade 1 (Mild), Grade 2 (Moderate), Grade 3 (Severe) and Grade 4 (Life-threatening).",
+      "section_reference": "10.2. Clinical Laboratory Evaluations"
+    },
+    {
+      "id": 109,
+      "component": "vital_signs",
+      "original_sap_text": "Body surface area (BSA) will be calculated in eCRF by using height collected at the screening visit and weight collected at each scheduled visit.",
+      "section_reference": "10.3. Vital Signs, Weight and Body Surface Area"
+    },
+    {
+      "id": 110,
+      "component": "hypersensitivity",
+      "original_sap_text": "Hypersensitivity will be assessed by vital sign monitoring (including systolic and diastolic blood pressure, respiratory rate, heart rate, and body temperature) within 15 minutes before the beginning of the study drug infusion, within 15 minutes after the end of the study drug infusion and 60 minutes (+/- 15 minutes) after the end of the study drug infusion at each visit.",
+      "section_reference": "10.5. Hypersensitivity Monitoring"
+    },
+    {
+      "id": 111,
+      "component": "immunogenicity",
+      "original_sap_text": "The ADA assay will follow a three-tiered approach consisting of screening assay, confirmatory assay, and titration.",
+      "section_reference": "10.9. Immunogenicity"
+    },
+    {
+      "id": 112,
+      "component": "immunogenicity",
+      "original_sap_text": "Transformed ADA value can be obtained using [log3(X/42)] + 1 transformation.",
+      "section_reference": "10.9. Immunogenicity"
+    },
+    {
+      "id": 113,
+      "component": "immunogenicity",
+      "original_sap_text": "Transformed NAb value can be obtained using [log2(X/5)] + 1 transformation.",
+      "section_reference": "10.9. Immunogenicity"
+    },
+    {
+      "id": 114,
+      "component": "quality_of_life",
+      "original_sap_text": "QoL will be assessed at the time points specified in the Appendix 14.1 using EORTC QLQ. The QLQ core 30 (QLQ-C30) and QLQ lung cancer-specific module (QLQ-LC13) will be used.",
+      "section_reference": "11. QUALITY OF LIFE ANALYSES"
+    },
+    {
+      "id": 115,
+      "component": "quality_of_life",
+      "original_sap_text": "For all scales, the Raw Score (RS), is the mean of the component items: RS = (I1 + I2 + ... + In)/n",
+      "section_reference": "11. QUALITY OF LIFE ANALYSES"
+    },
+    {
+      "id": 116,
+      "component": "quality_of_life",
+      "original_sap_text": "For missing items from multi-item scales, if at least half of the items from the scale have been answered, the scale score will be calculated using all the items that were completed and apply the logic, otherwise set to missing.",
+      "section_reference": "11. QUALITY OF LIFE ANALYSES"
+    },
+    {
+      "id": 117,
+      "component": "imputation_medication",
+      "original_sap_text": "If 'Yes' is recorded for 'If stop date is unknown, was this drug stopped before the first administration of study drug?' on 'Prior & Concomitant Medications' eCRF page: Assume the first administration date - 1.",
+      "section_reference": "14.4.1. Medication"
+    },
+    {
+      "id": 118,
+      "component": "imputation_medication",
+      "original_sap_text": "If 'No' is recorded for 'If stop date is unknown, was this drug stopped before the first administration of study drug?' on 'Prior & Concomitant Medications' eCRF page: Missing day: Assume the last day of the month. Missing day and month: Assume December 31st. Missing day, month and year: Leave it as Missing.",
+      "section_reference": "14.4.1. Medication"
+    },
+    {
+      "id": 119,
+      "component": "imputation_medication",
+      "original_sap_text": "If the month and the year are equal for both dates, the start date will be imputed as the earlier date of: (i) the date of the first infusion, or (ii) the recorded/imputed stop date of the medication.",
+      "section_reference": "14.4.1. Medication"
+    },
+    {
+      "id": 120,
+      "component": "imputation_ae",
+      "original_sap_text": "If the AE stop date is incomplete the following rules will be applied. Missing day: Assume the last day of the month. Missing day and month: Assume December 31st. Missing day, month and year: Leave it as Missing.",
+      "section_reference": "14.4.2. Adverse Events"
+    },
+    {
+      "id": 121,
+      "component": "imputation_ae",
+      "original_sap_text": "If the month and the year are equal for both dates, the start date will be imputed as the earlier date of: (i) the date of the first infusion, or (ii) the recorded/imputed stop date of the AE.",
+      "section_reference": "14.4.2. Adverse Events"
+    },
+    {
+      "id": 122,
+      "component": "imputation_death",
+      "original_sap_text": "If the reason for end of study participation on the 'End of Study Participation' eCRF page is 'Death' and the death date is incomplete, then death date will be imputed as the date of end of study participation on the 'End of Study Participation' eCRF page.",
+      "section_reference": "14.4.3. Death"
+    },
+    {
+      "id": 123,
+      "component": "imputation_death",
+      "original_sap_text": "If the day of death is missing (e.g. XXFEB2021), the month and year of the partial date will be compared to the last known alive date. If month and year are equal for both dates, then death date will be imputed as the last known alive date + 1.",
+      "section_reference": "14.4.3. Death"
+    },
+    {
+      "id": 124,
+      "component": "bor_confirmation",
+      "original_sap_text": "To be assigned a status of PR or CR as BOR, changes in tumor measurements must be confirmed by repeat assessments that should be performed no less than 4 weeks after the criteria for response are first met.",
+      "section_reference": "14.5. Best Overall Response Confirmation"
+    },
+    {
+      "id": 125,
+      "component": "bor_confirmation",
+      "original_sap_text": "In the case of SD, follow-up measurements must have met the SD criteria at least once after the first study drug administration at a minimum interval of 6 weeks (42 days) considering +/- 6 days, which is equivalent to a minimum time of 36 days.",
+      "section_reference": "14.5. Best Overall Response Confirmation"
+    }
+  ],
+  "total_count": 125
+}

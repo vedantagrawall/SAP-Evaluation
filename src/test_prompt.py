@@ -87,12 +87,39 @@ def json_to_markdown_analysis_populations(result: dict) -> str:
         def_result = components.get('Definition', '-')
         treat_result = components.get('Treatment Assignment', '-')
 
-        # Format with checkmarks/crosses
-        name_display = '✓' if name_result == 'correct' else ('✗' if name_result == 'problem' else '-')
-        def_display = '✓' if def_result == 'correct' else ('✗' if def_result == 'problem' else '-')
-        treat_display = '✓' if treat_result == 'correct' else ('✗' if treat_result == 'problem' else '-')
+        # Format with checkmarks/crosses (both 'correct' and 'acceptable' are passing)
+        name_display = '✓' if name_result in ('correct', 'acceptable') else ('✗' if name_result == 'problem' else '-')
+        def_display = '✓' if def_result in ('correct', 'acceptable') else ('✗' if def_result == 'problem' else '-')
+        treat_display = '✓' if treat_result in ('correct', 'acceptable') else ('✗' if treat_result == 'problem' else '-')
 
         lines.append(f"| {pop_name} | {name_display} | {def_display} | {treat_display} |")
+
+    lines.append("")
+    lines.append("---")
+    lines.append("")
+
+    # Detailed Evaluation - show omitted content for Definition and Assignment
+    lines.append("### What Was Omitted (Definition & Treatment Assignment)")
+    lines.append("")
+    lines.append("Exact quotes of content in Original SAP that is missing from Generated SAP.")
+    lines.append("")
+
+    # Filter for Definition and Assignment rows with omitted content
+    detail_rows = [row for row in eval_table
+                   if row.get('omitted_content') and
+                   ('definition' in row.get('component', '').lower() or
+                    'assignment' in row.get('component', '').lower())]
+
+    if detail_rows:
+        lines.append("| Component | Omitted Content | Result |")
+        lines.append("|-----------|-----------------|--------|")
+        for row in detail_rows:
+            comp = row.get('component', '')
+            omitted = row.get('omitted_content', '-')
+            result_val = row.get('result', '')
+            lines.append(f"| {comp} | {omitted} | {result_val} |")
+    else:
+        lines.append("*No omissions in Definition or Treatment Assignment.*")
 
     lines.append("")
     lines.append("---")
@@ -384,17 +411,18 @@ def validate_contradictions(result: dict) -> dict:
 
 
 def load_documents():
+    """Load Generated SAP and Protocol only. Original SAP is in persistent cache."""
     data_dir = Path("data/processed_files")
 
     docs = {
         "protocol": (data_dir / "NCT03676192_protocol.md").read_text(),
-        "original_sap": (data_dir / "NCT03676192_original_sap.md").read_text(),
         "generated_sap": (data_dir / "NCT03676192_generated_sap.md").read_text(),
     }
 
     print(f"Loaded documents:")
     for name, content in docs.items():
         print(f"  {name}: {len(content):,} chars")
+    print(f"  original_sap: Using persistent LlamaParse cache")
 
     return docs
 
@@ -437,16 +465,169 @@ def extract_statements(nct_id: str, section: str, force: bool = False):
 
     # Extraction prompt - only extracts, no comparison
     extraction_prompt = f"""
-You are extracting statements from an Original SAP document for later comparison.
+You are extracting EVERY SINGLE STATEMENT from an Original SAP document.
 
 ## YOUR TASK
 
-Read the Original SAP document and extract ALL statements related to {section.replace('_', ' ')}.
+Extract EVERY statement, rule, definition, and specification from the ENTIRE Original SAP document.
+This document has approximately 600 sentences - you must extract ALL of them.
+Do NOT filter or skip anything. Extract EVERYTHING.
 
-For each statement:
-1. Extract the EXACT TEXT (word-for-word quote)
-2. Create one entry per statement
-3. When a sentence contains "X and Y", split into SEPARATE entries
+## SECTIONS TO EXTRACT (extract EVERYTHING from each):
+
+### Section 1: INTRODUCTION
+- Study background, data cut-off dates, analysis timing
+
+### Section 2: STUDY OBJECTIVES
+- Primary objective (efficacy similarity)
+- Secondary objectives (ORR, PFS, OS, TTP, response duration, PK, safety, immunogenicity, QoL)
+
+### Section 3: OVERALL STUDY DESIGN
+- Study periods (Screening, Induction, Maintenance, Follow-up)
+- Treatment regimens, dosing schedules
+- Study flow
+
+### Section 4: GENERAL STATISTICAL CONSIDERATIONS
+- Descriptive statistics rules, decimal places, percentages
+- Sample size calculation (305, 678, 80% power, 10% dropout)
+- Randomization (IWRS, permuted blocks, 1:1 ratio)
+- Stratification factors (country, sex, disease status, ECOG)
+- Blinding (double-blind, database lock, 1st CSR unblinding)
+- ALL population definitions (ITT, PP, PK, PK-Maintenance, Safety)
+- Treatment assignment rules for EACH population
+- Full dose definition (15mg/kg, Dose Not Changed)
+- Baseline/post-baseline definitions
+- Protocol deviations (FULL LIST: Mis-randomizations, Non-compliance, GCP, prohibited therapies, missing efficacy)
+- Outliers handling
+- Missing values handling (non-responder, tipping point, MNAR)
+
+### Section 5: PATIENT DISPOSITION
+- Screening failure definition
+- Randomized definition
+- Study period initiation definitions
+- Completion/discontinuation definitions
+- Time on study drug calculation
+
+### Section 6: DEMOGRAPHICS AND BASELINE
+- Age calculation
+- Stratification factors from eCRF
+- Medical history, disease characteristics
+- Gene screening, viral testing
+
+### Section 7: MEDICATIONS AND TREATMENTS
+- Prior/concomitant medication definitions
+- Medication date imputation rules (FULL DETAILS)
+- Dose intensity calculations
+- Carboplatin dose adjustments
+
+### Section 8: EFFICACY ANALYSIS
+- Primary endpoint (ORR, BOR, RECIST 1.1)
+- ORR definition (responder = CR or PR confirmed)
+- Similarity criterion (-12.5, 12.5)
+- Primary analysis method (logistic regression, covariates)
+- Delta method formulas
+- Central vs local review
+- Sensitivity analyses
+- Time-to-event definitions (Response Duration, TTP, PFS, OS)
+- Kaplan-Meier method
+- Cox regression model
+- Censoring rules (ALL scenarios)
+- Censoring for incomplete new anticancer therapy dates (Section 8.2.2.5 - FULL DETAIL)
+- Time conversion (30.4 days)
+- Salvage treatment
+
+### Section 9: PHARMACOKINETIC ANALYSIS
+- PK populations
+- Serum concentration handling (LLOQ)
+- Ctrough definition (pre-dose concentration of next dose)
+- PK parameter exclusions (post-dose, EOT <18 days, duplicates)
+
+### Section 10: SAFETY ANALYSIS
+- AE definition
+- TEAE definition
+- AE coding (MedDRA version)
+- AE grading (CTCAE version)
+- AE relationship (possible, probable, definite)
+- AE counting rule (worst severity)
+- AE date imputation (START and STOP - FULL DETAILS)
+- SAE definition
+- TEAEs leading to discontinuation
+- TEAEs leading to death
+- AESI FULL LIST (Hypersensitivity/IRR, GI perforations, wound healing, hypertension, PRES, proteinuria, ATE, VTE, hemorrhages, CHF, ovarian failure)
+- Lab data (unit conversion, CTCAE grading, shift tables)
+- Vital signs, weight, BSA
+- ECG analysis
+- Hypersensitivity monitoring
+- Physical examination
+- ECOG performance status
+- Immunogenicity (ADA assay, tiered approach, transformations)
+
+### Section 11: QUALITY OF LIFE
+- QoL instruments (EORTC QLQ-C30, QLQ-LC13)
+- Scoring formulas (Raw Score, Functional, Symptom)
+- Missing items handling
+
+### Section 14: APPENDICES
+- Date imputation rules (Medication, AE, Death - FULL DETAILS)
+- BOR confirmation rules (4 weeks CR/PR, 6 weeks SD)
+- CTCAE terms and grades
+
+## CRITICAL MISSING ITEMS - MUST EXTRACT:
+
+### Section 4:
+- General Comments eCRF page statement
+
+### Section 6 Demographics:
+- Demographics table content (sex, age, race, ethnicity will be summarized)
+- Gene Screening (EGFR mutation, ALK rearrangement)
+- Hepatitis B/C and HIV testing (HBsAg, HBsAb, HBcAb, HCV, HIV 1&2, HBV DNA)
+- Viral serology summarization rules
+- Disease Characteristic (disease status, pathological diagnosis, histologic grade, clinical stage, TNM stage)
+
+### Section 7:
+- ATC classification for medications
+- Medication coding (WHO-DD)
+
+### Section 8:
+- Reason for Censoring tables (ALL censoring reasons and dates)
+- Effusion drainage listing
+
+### Section 10:
+- Lab data shift tables rules
+- Clinically notable vital sign criteria (systolic BP ≤90/≥160, diastolic ≤50/≥90, heart rate ≤50/≥100, etc.)
+- ECG section (12-lead ECG, will be performed, will be listed)
+- Physical Examination (Normal, Abnormal not clinically significant, Abnormal clinically significant, shift table)
+- Pregnancy Test (urine and serum, Positive/Negative/Equivocal)
+- ADA/NAb titer values and transformations
+
+### Section 14:
+- SMQ terms for each AESI category
+- PT terms for AESI
+
+### Other:
+- Visit windows (days)
+- ALL "will be listed" statements
+- ALL "will be summarized" statements
+- Point estimate statements
+- ALL listings by treatment group statements
+
+## EXTRACTION RULES:
+1. Extract EXACT TEXT (word-for-word quotes)
+2. One entry per distinct statement/rule/definition/specification
+3. DO NOT skip or summarize ANYTHING
+4. Include section reference for each statement
+5. Target 500+ statements (document has ~600 sentences)
+6. Extract EVERY "will be" statement
+7. Extract EVERY "is defined as" statement
+8. Extract EVERY table/listing/figure presentation rule
+9. Extract EVERY population definition
+10. Extract EVERY analysis method
+11. Extract EVERY time point/schedule specification
+12. Extract EVERY threshold/criteria
+13. Extract EVERY eCRF reference
+14. Extract EVERY coding/classification rule
+
+DO NOT STOP until you have extracted the ENTIRE document.
 
 ## OUTPUT FORMAT
 
@@ -468,7 +649,7 @@ Return a JSON array of extracted statements:
 }}
 ```
 
-Extract ALL statements. Do not summarize or skip any.
+Extract ALL statements from ALL sections. Do not summarize or skip any.
 """
 
     # Create cache and run extraction
@@ -487,33 +668,15 @@ Extract ALL statements. Do not summarize or skip any.
         pass  # Keep cache for reuse
 
 
-def get_or_create_cache(docs: dict, ttl_minutes: int = 1440) -> str:
-    """Get existing cache or create new one."""
-    from src.llm_client import list_caches, create_document_cache
-
-    # Check for existing caches
-    caches = list_caches()
-    if caches:
-        # Use the cache with latest expiry
-        latest_cache = max(caches, key=lambda c: c.expire_time)
-        print(f"✓ Reusing existing cache: {latest_cache.name}")
-        print(f"  Expires: {latest_cache.expire_time}")
-        return latest_cache.name
-
-    # No cache exists, create new one
-    print("No existing cache found, creating new one...")
-    return create_document_cache(docs, ttl_minutes=ttl_minutes)
-
-
 def test_prompt(prompt_name: str = "objectives_endpoints"):
-    """Test a prompt against the NCT03676192 documents."""
-    from src.llm_client import create_document_cache, evaluate_with_cache, delete_cache
+    """Test a prompt against the NCT03676192 documents using persistent Original SAP cache."""
+    from src.llm_client import evaluate_sap_with_persistent_cache
 
     print("=" * 60)
     print(f"TESTING PROMPT: {prompt_name}")
     print("=" * 60)
 
-    # Load documents
+    # Load documents (Generated SAP + Protocol only, Original SAP is in persistent cache)
     print("\n1. Loading documents...")
     docs = load_documents()
 
@@ -522,19 +685,19 @@ def test_prompt(prompt_name: str = "objectives_endpoints"):
     prompt = load_prompt(prompt_name)
     print(f"   Prompt length: {len(prompt):,} chars")
 
-    # Get or create cache
-    print("\n3. Checking for existing cache...")
-    cache_name = get_or_create_cache(docs, ttl_minutes=1440)
-
-    # Run evaluation
-    print("\n4. Running evaluation (this may take 30-60 seconds)...")
+    # Run evaluation using persistent Original SAP cache
+    print("\n3. Running evaluation with persistent Original SAP cache...")
     try:
-        result = evaluate_with_cache(cache_name, prompt)
+        result = evaluate_sap_with_persistent_cache(
+            generated_sap=docs["generated_sap"],
+            protocol=docs["protocol"],
+            instruction=prompt
+        )
 
         # Post-processing validation to enforce contradiction rules
         result = validate_contradictions(result)
 
-        print("\n5. RESULT:")
+        print("\n4. RESULT:")
         print("=" * 60)
         print(json.dumps(result, indent=2))
 
@@ -552,10 +715,8 @@ def test_prompt(prompt_name: str = "objectives_endpoints"):
     except Exception as e:
         print(f"\n✗ ERROR: {e}")
         raise
-    finally:
-        # Keep cache for reuse (expires after 24 hours)
-        print(f"\n6. Cache preserved: {cache_name}")
 
+    print("\n5. Done! Persistent cache preserved for future evaluations.")
     return result
 
 

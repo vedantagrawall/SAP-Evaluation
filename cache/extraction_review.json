@@ -1,0 +1,520 @@
+{
+  "statements": [
+    {
+      "id": 1,
+      "section": "4",
+      "component": "descriptive statistics",
+      "text": "Continuous data will be summarized using descriptive statistics: the number of observations (n), mean, standard deviation, minimum, median and maximum unless otherwise indicated."
+    },
+    {
+      "id": 2,
+      "section": "4",
+      "component": "decimal places",
+      "text": "Minimum and maximum will be presented to the same number of decimal places as the raw data"
+    },
+    {
+      "id": 3,
+      "section": "4",
+      "component": "decimal places",
+      "text": "mean and median will be presented to one more decimal place than the raw data"
+    },
+    {
+      "id": 4,
+      "section": "4",
+      "component": "decimal places",
+      "text": "and standard deviation will be presented to two more decimal places than the raw data."
+    },
+    {
+      "id": 5,
+      "section": "4",
+      "component": "decimal places",
+      "text": "If the geometric mean is to be presented, it will be set to the same precision as the mean."
+    },
+    {
+      "id": 6,
+      "section": "4",
+      "component": "decimal places",
+      "text": "Percent coefficient of variation (CV) will be presented to two more decimal places than the raw data."
+    },
+    {
+      "id": 7,
+      "section": "4",
+      "component": "categorical data",
+      "text": "Categorical data will be summarized using numbers and percentages of patients."
+    },
+    {
+      "id": 8,
+      "section": "4",
+      "component": "percentages",
+      "text": "Percentages will be presented to one decimal place"
+    },
+    {
+      "id": 9,
+      "section": "4",
+      "component": "percentages",
+      "text": "and will be suppressed when the count is zero."
+    },
+    {
+      "id": 10,
+      "section": "4",
+      "component": "missing values",
+      "text": "A row denoted \u201cNot Done\u201d will be included in count tabulations where necessary to account for cases of no assessment or missing values."
+    },
+    {
+      "id": 11,
+      "section": "4",
+      "component": "percentages",
+      "text": "The denominator for all percentages will be the number of patients within the treatment group for the population of interest, unless otherwise indicated."
+    },
+    {
+      "id": 12,
+      "section": "4",
+      "component": "visit-based tables",
+      "text": "EOT and unscheduled visit will not be summarized in visit-based tables, unless otherwise indicated."
+    },
+    {
+      "id": 13,
+      "section": "4",
+      "component": "listings",
+      "text": "But, all data will be displayed in listings."
+    },
+    {
+      "id": 14,
+      "section": "4",
+      "component": "listings sorting",
+      "text": "Listings will be sorted by the treatment group and then patient number, which is the unique subject identifier and visit, if applicable."
+    },
+    {
+      "id": 15,
+      "section": "4",
+      "component": "listings sorting",
+      "text": "In cases where more additional sorting is required, other variables will be included in sorting as applicable."
+    },
+    {
+      "id": 16,
+      "section": "4",
+      "component": "quantification limits",
+      "text": "For the purpose of summarization, any numeric values recorded below the lower limit or above the upper limit of quantification will be set to the respective limit for all related summaries unless otherwise indicated."
+    },
+    {
+      "id": 17,
+      "section": "4",
+      "component": "listings",
+      "text": "In listings, original results containing inequality sign will be displayed, unless otherwise specified."
+    },
+    {
+      "id": 18,
+      "section": "4",
+      "component": "data discrepancy",
+      "text": "When combining data from eCRF and analytical facilities discrepancy will be handled as following:"
+    },
+    {
+      "id": 19,
+      "section": "4",
+      "component": "data discrepancy",
+      "text": "1. Recorded as collected sample in eCRF but no corresponding results from analytical facility \u2013 listing will display only sample collection visit/date/time from eCRF."
+    },
+    {
+      "id": 20,
+      "section": "4",
+      "component": "data discrepancy",
+      "text": "2. No corresponding records in eCRF for results from analytical facility \u2013 listing will display only specimen collection visit/date and results from analytical facility."
+    },
+    {
+      "id": 21,
+      "section": "4",
+      "component": "data discrepancy",
+      "text": "3. Discrepancy in sample collection date from eCRF and analytical facility \u2013 listing will display results from analytical facility and visit/date/time from eCRF if not missing"
+    },
+    {
+      "id": 22,
+      "section": "4",
+      "component": "data discrepancy",
+      "text": "if sample collection date/time is missing in eCRF then use specimen collection visit/date from analytical facility."
+    },
+    {
+      "id": 23,
+      "section": "4.2",
+      "component": "sample size",
+      "text": "A sample size of 305 patients per group will provide 80% power to show similarity in efficacy between CT-P16 and EU-Approved Avastin based on the expected ORR of 38% with an equivalence margin of -12.5 to 12.5 using a 95% CI (two one-sided alpha 0.025) of the difference in ORR."
+    },
+    {
+      "id": 24,
+      "section": "4.2",
+      "component": "sample size",
+      "text": "Approximately 678 patients (339 in each group) will need to be enrolled for the anticipated drop-out rate of 10%."
+    },
+    {
+      "id": 25,
+      "section": "4.3",
+      "component": "randomization",
+      "text": "An Interactive Web Response System (IWRS) will be used for the randomization"
+    },
+    {
+      "id": 26,
+      "section": "4.3",
+      "component": "randomization",
+      "text": "and an unblinded statistician will generate a computer-generated randomization schedule for IWRS, which will link sequential patient randomization numbers to treatment codes."
+    },
+    {
+      "id": 27,
+      "section": "4.3",
+      "component": "randomization",
+      "text": "Patients who qualify for randomization will be randomly assigned on Day 1 of Cycle 1 in the Induction Study Period in a 1:1 ratio to receive CT-P16 or EU-Approved Avastin."
+    },
+    {
+      "id": 28,
+      "section": "4.3",
+      "component": "randomization",
+      "text": "The randomization will be balanced by using permuted blocks"
+    },
+    {
+      "id": 29,
+      "section": "4.3",
+      "component": "stratification",
+      "text": "and will be stratified by country, sex (female vs. male), disease status (recurrence vs. metastatic), Eastern Cooperative Oncology Group (ECOG) performance status (0 vs. 1)."
+    },
+    {
+      "id": 30,
+      "section": "4.3",
+      "component": "blinding",
+      "text": "This study will be double-blinded during both the Induction Study Period and the Maintenance Study Period."
+    },
+    {
+      "id": 31,
+      "section": "4.3",
+      "component": "blinding",
+      "text": "The randomization code will not be revealed to study patients, investigators, or study site personnel, until all final clinical data have been entered onto the database and the database is locked and released for analysis."
+    },
+    {
+      "id": 32,
+      "section": "4.3",
+      "component": "unblinding",
+      "text": "The database will be unblinded for the 1st CSR for a reporting purpose."
+    },
+    {
+      "id": 33,
+      "section": "4.3",
+      "component": "blinding",
+      "text": "However, the study will remain blinded to the investigators and patients until study termination."
+    },
+    {
+      "id": 34,
+      "section": "4.4",
+      "component": "analysis populations",
+      "text": "Population to be used in analysis will be specified in related sections."
+    },
+    {
+      "id": 35,
+      "section": "4.4",
+      "component": "analysis populations",
+      "text": "The following patient populations are defined: Intent-to-Treat (ITT) population, Per-Protocol (PP) population, PK population, PK population \u2013 Maintenance Period Subset and Safety population."
+    },
+    {
+      "id": 36,
+      "section": "4.4",
+      "component": "analysis populations",
+      "text": "The number of patients in each population will be tabulated by treatment group for the ITT population."
+    },
+    {
+      "id": 37,
+      "section": "4.4",
+      "component": "analysis populations",
+      "text": "A listing will also be provided displaying this data."
+    },
+    {
+      "id": 38,
+      "section": "4.4.1",
+      "component": "ITT population",
+      "text": "The ITT population will consist of all randomized patients who are randomly assigned to study drug regardless of whether or not any study treatment dosing is completed and successfully screened based on the \u2018Screening Pass/Fail\u2019 eCRF page."
+    },
+    {
+      "id": 39,
+      "section": "4.4.1",
+      "component": "ITT population",
+      "text": "Patients will be assigned to treatment groups based on randomization."
+    },
+    {
+      "id": 40,
+      "section": "4.4.1",
+      "component": "ITT population",
+      "text": "The primary population for the primary efficacy analysis will be the ITT population."
+    },
+    {
+      "id": 41,
+      "section": "4.4.2",
+      "component": "PP population",
+      "text": "The PP population will consist of all randomly assigned patients who have at least one response evaluation after receiving at least one full dose of study drug (CT-P16 or EU-Approved Avastin) in the Induction Study Period and who do not have any major protocol deviations that may affect the interpretation of the primary endpoint."
+    },
+    {
+      "id": 42,
+      "section": "4.4.2",
+      "component": "PP population",
+      "text": "A patient will be considered as receiving full dose if the planned dose is recorded as \u201815mg/kg\u2019 and the action taken is recorded as \u2018Dose Not Changed\u2019 on \u2018Study Treatment Administration\u2019 eCRF page."
+    },
+    {
+      "id": 43,
+      "section": "4.4.2",
+      "component": "PP population",
+      "text": "Final determination of the PP population was made at the Data Review Meeting (DRM) before unblinding."
+    },
+    {
+      "id": 44,
+      "section": "4.4.2",
+      "component": "PP population",
+      "text": "Patients will be assigned to treatment groups based on randomization."
+    },
+    {
+      "id": 45,
+      "section": "4.4.2",
+      "component": "PP population",
+      "text": "A supportive efficacy analysis will be repeated using the PP population."
+    },
+    {
+      "id": 46,
+      "section": "4.4.3",
+      "component": "PK population",
+      "text": "The PK population will consist of all randomly assigned patients who receive at least one full dose (as defined in Section 4.4.2) of study drug (CT-P16 or EU-Approved Avastin) and who have at least one post treatment PK result."
+    },
+    {
+      "id": 47,
+      "section": "4.4.3",
+      "component": "PK population",
+      "text": "Patients who received incorrect treatment during the Induction Study Period will be excluded from the PK population."
+    },
+    {
+      "id": 48,
+      "section": "4.4.3",
+      "component": "PK population",
+      "text": "If a patient does not receive full dose, the patient will be discussed during the DRM to confirm whether the patient can be considered as receiving full dose or not."
+    },
+    {
+      "id": 49,
+      "section": "4.4.3",
+      "component": "PK population",
+      "text": "Patients will be assigned to treatment groups based on treatment they actually received during the Induction Study Period."
+    },
+    {
+      "id": 50,
+      "section": "4.4.4",
+      "component": "PK population - Maintenance",
+      "text": "The PK population \u2013 Maintenance Period Subset will consist of all patients in PK population who received at least 1 dose (full) of either of the study drugs and have at least one post treatment PK result during the Maintenance Study Period."
+    },
+    {
+      "id": 51,
+      "section": "4.4.4",
+      "component": "PK population - Maintenance",
+      "text": "Patients who received incorrect treatment during the Maintenance Study Period will be excluded from the PK population \u2013 Maintenance Period Subset."
+    },
+    {
+      "id": 52,
+      "section": "4.4.4",
+      "component": "PK population - Maintenance",
+      "text": "If a patient does not receive full dose, the patient will be discussed during the DRM to confirm whether the patient can be considered as receiving full dose or not."
+    },
+    {
+      "id": 53,
+      "section": "4.4.4",
+      "component": "PK population - Maintenance",
+      "text": "Patients will be assigned to treatment groups based on treatment they actually received."
+    },
+    {
+      "id": 54,
+      "section": "4.4.5",
+      "component": "Safety population",
+      "text": "The safety population will consist of all randomly assigned patients who receive at least one dose (partial or full) of study drug (CT-P16 or EU-Approved Avastin)."
+    },
+    {
+      "id": 55,
+      "section": "4.4.5",
+      "component": "Safety population",
+      "text": "A patient will be considered to have received study drug if the patient is recorded as having study drug administered on the \u2018Study Treatment Administration\u2019 eCRF page."
+    },
+    {
+      "id": 56,
+      "section": "4.4.5",
+      "component": "Safety population",
+      "text": "Patients will be assigned to treatment groups based on treatment they actually received."
+    },
+    {
+      "id": 57,
+      "section": "4.4.5",
+      "component": "Safety population",
+      "text": "Treatment patients actually received will be based on the kit number recorded on the \u2018Study Treatment Administration\u2019 eCRF page."
+    },
+    {
+      "id": 58,
+      "section": "4.4.5",
+      "component": "Safety population",
+      "text": "Patients receiving at least one dose of CT-P16 will be analyzed under the CT-P16 treatment group."
+    },
+    {
+      "id": 59,
+      "section": "4.4.5",
+      "component": "Safety population",
+      "text": "All other patients will be analyzed under the EU-Approved Avastin treatment group."
+    },
+    {
+      "id": 60,
+      "section": "4.5",
+      "component": "baseline definition",
+      "text": "The baseline value for all analyses will be the last non-missing value prior to the first infusion unless otherwise specified."
+    },
+    {
+      "id": 61,
+      "section": "4.5",
+      "component": "post-baseline definition",
+      "text": "Post-baseline visits will be considered to be all visits after the first infusion."
+    },
+    {
+      "id": 62,
+      "section": "4.6",
+      "component": "protocol deviations",
+      "text": "A major protocol deviation is one that may affect the interpretation of primary endpoint or the patient\u2019s rights, safety or welfare."
+    },
+    {
+      "id": 63,
+      "section": "4.6",
+      "component": "protocol deviations",
+      "text": "A major protocol deviation occurs when there is non-adherence to the protocol by the patient, investigator, or sub-investigator that results in a significant and additional risk to the patient or to the integrity of the study data."
+    },
+    {
+      "id": 64,
+      "section": "4.6",
+      "component": "protocol deviations",
+      "text": "Major protocol deviations include the following: Mis-randomizations (defined as patients who received the opposite treatment to which they were assigned)"
+    },
+    {
+      "id": 65,
+      "section": "4.6",
+      "component": "protocol deviations",
+      "text": "Non-compliance of Inclusion or Exclusion criteria"
+    },
+    {
+      "id": 66,
+      "section": "4.6",
+      "component": "protocol deviations",
+      "text": "Significant Good Clinical Practice (GCP) non-compliance (to be identified by as sites which have been closed due to scientific misconduct and/or serious GCP non-compliance)"
+    },
+    {
+      "id": 67,
+      "section": "4.6",
+      "component": "protocol deviations",
+      "text": "Receiving any prohibited therapies (Section 5.10 of protocol)"
+    },
+    {
+      "id": 68,
+      "section": "4.6",
+      "component": "protocol deviations",
+      "text": "Missing primary efficacy assessment"
+    },
+    {
+      "id": 69,
+      "section": "4.6",
+      "component": "protocol deviations",
+      "text": "Major protocol deviations will be identified during the DRM."
+    },
+    {
+      "id": 70,
+      "section": "4.6",
+      "component": "protocol deviations",
+      "text": "Patients with major protocol deviation could be excluded from PP population to minimize the potential impact of the deviations."
+    },
+    {
+      "id": 71,
+      "section": "4.6",
+      "component": "protocol deviations",
+      "text": "The major protocol deviations will be summarized by treatment group for the ITT population"
+    },
+    {
+      "id": 72,
+      "section": "4.6",
+      "component": "protocol deviations",
+      "text": "and will also be presented in a listing."
+    },
+    {
+      "id": 73,
+      "section": "4.6",
+      "component": "protocol deviations",
+      "text": "Additionally, if any case of major protocol deviation related to COVID-19 is identified during the DRM, primary analysis will be performed excluding patients with major protocol deviation related to COVID-19 in ITT population as supportive analysis"
+    },
+    {
+      "id": 74,
+      "section": "4.6",
+      "component": "protocol deviations",
+      "text": "and the patients will be flagged in listing."
+    },
+    {
+      "id": 75,
+      "section": "4.7",
+      "component": "general comments",
+      "text": "Data collected on the \u2018General Comments\u2019 eCRF page will be presented in a listing for the ITT population."
+    },
+    {
+      "id": 76,
+      "section": "4.8",
+      "component": "outliers",
+      "text": "Any outliers that are detected during the review of the data will be investigated and discussed during the DRM."
+    },
+    {
+      "id": 77,
+      "section": "4.8",
+      "component": "outliers",
+      "text": "In general, outliers will not be excluded unless they are considered to be erroneous values."
+    },
+    {
+      "id": 78,
+      "section": "4.8",
+      "component": "outliers",
+      "text": "Sensitivity analyses and exploratory analyses may be conducted using imputation or excluding outliers to ensure robustness of study conclusions."
+    },
+    {
+      "id": 79,
+      "section": "4.9",
+      "component": "missing values",
+      "text": "Missing values in ORR will be considered as \u2018Non-responder\u2019 to analyze primary efficacy endpoint."
+    },
+    {
+      "id": 80,
+      "section": "4.9",
+      "component": "missing values",
+      "text": "In order to evaluate the impact of missing data on the primary efficacy endpoint results, additional analyses with tipping point analyses will be conducted for the primary efficacy endpoint (central review data) for ITT population."
+    },
+    {
+      "id": 81,
+      "section": "4.9",
+      "component": "missing values",
+      "text": "Tipping point analyses will be conducted under Missing Not at Random (MNAR) scenarios."
+    },
+    {
+      "id": 82,
+      "section": "4.9",
+      "component": "missing values",
+      "text": "Imputation will be done by gradually shifting the number of responders by treatment group to make MNAR scenarios."
+    },
+    {
+      "id": 83,
+      "section": "4.9",
+      "component": "missing values",
+      "text": "95% CI of the difference between two proportions (CT-P16 and EU-Approved Avastin group) will be estimated by exact binomial approach"
+    },
+    {
+      "id": 84,
+      "section": "4.9",
+      "component": "missing values",
+      "text": "and scenarios will be displayed by shift table."
+    },
+    {
+      "id": 85,
+      "section": "4.9",
+      "component": "missing values",
+      "text": "No response evaluation result or inevaluable (NE) result evaluated in best overall response (BOR) will be considered as missing case."
+    },
+    {
+      "id": 86,
+      "section": "4.9",
+      "component": "missing values",
+      "text": "All the scenarios will be also provided using 2-dimensional plot."
+    }
+  ]
+}
