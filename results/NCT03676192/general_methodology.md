@@ -1,8 +1,8 @@
 ## General Methodology Evaluation
 
 **Section:** general_methodology
-**Rating:** DECENT
-**Status:** pass_with_notes
+**Rating:** POOR
+**Status:** fail
 
 ---
 
@@ -10,16 +10,16 @@
 
 | Component | Evaluation Type | Matches Original SAP | Protocol Consulted | Result | Issue Type | Severity |
 |-----------|-----------------|---------------------|-------------------|--------|------------|----------|
-| Software | semantic |  | n/a | correct | none | none |
-| Descriptive Statistics (Continuous) | exact_match |  | yes | correct | none | none |
-| Descriptive Statistics (Categorical) | exact_match |  | yes | correct | none | none |
-| Baseline Definition | exact_match |  | n/a | correct | none | none |
-| Post-baseline Definition | semantic |  | n/a | correct | none | none |
-| Unscheduled Visit Handling | semantic |  | yes | problem | contradiction_original | minor |
-| Missing Data (ORR) | exact_match |  | n/a | correct | none | none |
-| Tipping Point Analysis | semantic |  | yes | problem | contradiction_original | minor |
-| Date Imputation Rules | semantic |  | yes | correct | none | none |
-| Decimal Precision Rules | semantic |  | yes | correct | none | none |
+| Descriptive Statistics Definition | semantic |  | yes | correct | none | none |
+| Categorical Data Summary | semantic |  | yes | correct | none | none |
+| Baseline Definition | semantic |  | no | correct | none | none |
+| Significance Level | semantic |  | yes | correct | none | none |
+| Missing Data - Primary Endpoint | exact_match |  | no | correct | none | none |
+| Software | semantic |  | no | correct | none | none |
+| Analysis Populations | semantic |  | yes | correct | none | none |
+| Sensitivity Analysis - Tipping Point | semantic |  | yes | problem | contradiction_original | minor |
+| Major Protocol Deviations Definition | semantic |  | yes | problem | internal_contradiction | critical |
+| Sample Size Calculation | semantic |  | yes | problem | contradiction_protocol | minor |
 
 ---
 
@@ -27,42 +27,48 @@
 
 | Issue Type | Severity | Component | Why They Conflict | Description |
 |------------|----------|-----------|-------------------|-------------|
-| contradiction_original | minor | Unscheduled Visit Handling | Original SAP excludes unscheduled visits | Generated SAP uses a windowing approach  |
-| contradiction_original | minor | Tipping Point Analysis | Original SAP requires Tipping Point Anal | Detected conflict between Original and G |
+| internal_contradiction | critical | Major Protocol Deviations | The Generated SAP copies the Protocol's  | Failure to define Major Protocol Deviati |
+| contradiction_protocol | minor | Sample Size | Generated SAP omits the Sample Size sect | Missing Sample Size / Power Calculation. |
+| contradiction_original | minor | Sensitivity Analysis | Generated SAP proposes different sensiti | Change in sensitivity analysis methodolo |
+| contradiction_original | minor | Sensitivity Analysis - Tipping Point | Original SAP specifies Tipping Point ana | Detected conflict between Original and G |
+| contradiction_original | minor | Major Protocol Deviations Definition | The Generated SAP *is* the SAP, yet it c | Detected conflict between Original and G |
+| contradiction_original | minor | Sample Size Calculation | Sample size calculation is present in bo | Detected conflict between Original and G |
 
 ---
 
 ### Extra Information Flagged
 
-*No extra information flagged.*
+| Content | Contradicts | Detail |
+|---------|-------------|--------|
+| Visit Windows | no | Generated SAP includes detailed visit windowing rules not present in Original SAP Section 4 (though implied by Appendix). |
 
 ---
 
-### ❌ Missing Required Content (4 items)
+### ❌ Missing Required Content (2 items)
 
 Content in both Original SAP AND Protocol - should be in Generated SAP.
 
 | Component | Content Type | Original SAP Text | Protocol Text |
 |-----------|--------------|-------------------|---------------|
-| Randomization Stratification |  | The randomization will be balanced by us | The randomization will be balanced by us |
-| Blinding |  | This study will be double-blinded during | This study will be double-blind... durin |
-| Unblinding |  | The database will be unblinded for the 1 | The study will be unblinded to the pre-d |
-| Protocol Deviations |  | Major protocol deviations will be identi | A major protocol deviation is one that m |
+| Randomization Method (Permuted Blocks) |  | The randomization will be balanced by us | The randomization will be balanced by us |
+| Randomization System (IWRS) |  | An Interactive Web Response System (IWRS | An interactive voice response system (IV |
 
 ---
 
-### Internal Contradictions (0 items)
+### Internal Contradictions (1 items)
 
-*No internal contradictions found.*
+| Component | Section A | Section A Text | Section B | Section B Text | Description |
+|-----------|-----------|----------------|-----------|----------------|-------------|
+| Major Protocol Deviations Definition | 3.3 | A major protocol deviation...  | Entire Document | (No definition found) | The document refers to itself in the fut |
 
 ---
 
 ### Reasoning
 
-The Generated SAP captures the high-level definitions (Baseline, Descriptive Statistics) correctly but omits a significant amount of detailed general methodology found in the Original SAP, specifically regarding formatting (decimal places), data handling (outliers, discrepancies), and imputation rules (dates). It also introduces a 'Visit Windowing' strategy for unscheduled visits which contradicts the 'Nominal Visit' strategy implied in the Original SAP (where unscheduled visits are excluded from visit tables). However, the Protocol is silent on these specific methodological choices, so the Generated SAP is not non-compliant with the Protocol, just less detailed and methodologically different from the Original SAP in one aspect. The omission of Tipping Point Analysis is notable as it was a specific robustness check in the Original SAP, but since the Protocol does not require it, it is classified as an acceptable difference.
+The Generated SAP fails in a critical area: it does not define Major Protocol Deviations. The Protocol explicitly states these 'will be defined in the SAP'. The Original SAP fulfills this by listing them (Mis-randomization, etc.). The Generated SAP merely copies the Protocol's text saying they 'will be defined in the SAP', creating a circular reference and failing to provide the required definitions. Additionally, the Generated SAP omits the Sample Size calculation and specific Randomization details (permuted blocks) which are present in the Protocol. It also changes the sensitivity analysis strategy from Tipping Point (Original) to Complete Case (Generated), which is a methodological downgrade.
 
 ---
 
 ### Summary
 
-The Generated SAP is less detailed than the Original SAP, omitting specific formatting, data handling, and imputation rules. It introduces a visit windowing methodology that differs from the Original SAP's nominal visit approach for unscheduled visits. However, it remains compliant with the Protocol's high-level requirements.
+The Generated SAP is rated POOR due to a critical failure to define Major Protocol Deviations, a requirement explicitly deferred to the SAP by the Protocol. Instead of defining them, the document copies the Protocol's instruction that they 'will be defined', leaving them undefined. It also omits the Sample Size calculation and Randomization details found in the Protocol.

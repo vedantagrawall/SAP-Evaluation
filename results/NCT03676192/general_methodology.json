@@ -1,7 +1,7 @@
 {
   "section": "general_methodology",
-  "rating": "DECENT",
-  "status": "pass_with_notes",
+  "rating": "POOR",
+  "status": "fail",
   "extraction_validation": {
     "sections_read": [
       "4",
@@ -13,45 +13,30 @@
       "4.6",
       "4.7",
       "4.8",
-      "4.9",
-      "14.4"
+      "4.9"
     ],
     "elements_per_section": {
-      "4": 19,
+      "4": 20,
       "4.1": 1,
-      "4.2": 1,
-      "4.3": 3,
+      "4.2": 2,
+      "4.3": 9,
       "4.4": 5,
       "4.5": 2,
-      "4.6": 2,
+      "4.6": 10,
       "4.7": 1,
       "4.8": 3,
-      "4.9": 8,
-      "14.4": 31
+      "4.9": 8
     },
-    "paragraphs_processed": 76,
-    "elements_extracted": 76,
+    "paragraphs_processed": 61,
+    "elements_extracted": 61,
     "elements_in_evaluation_table": 10,
-    "elements_in_missing_from_generated_sap": 66,
-    "counts_match": true
+    "elements_in_missing_from_generated_sap": 12,
+    "counts_match": false
   },
   "evaluation_table": [
     {
-      "component": "Software",
+      "component": "Descriptive Statistics Definition",
       "evaluation_type": "semantic",
-      "original_sap_text": "(Blank/Implied SAS)",
-      "generated_sap_text": "All analyses described in this plan will be performed using SAS v9.4 or higher unless specified otherwise.",
-      "can_both_be_true": "yes",
-      "protocol_text": null,
-      "protocol_consulted": "n/a",
-      "result": "correct",
-      "issue_type": "none",
-      "severity": "none",
-      "reasoning": "Original SAP does not specify software in Section 4.1 (it is blank), but Generated SAP specifies SAS v9.4. This adds detail without contradiction."
-    },
-    {
-      "component": "Descriptive Statistics (Continuous)",
-      "evaluation_type": "exact_match",
       "original_sap_text": "Continuous data will be summarized using descriptive statistics: the number of observations (n), mean, standard deviation, minimum, median and maximum unless otherwise indicated.",
       "generated_sap_text": "The term \u201cdescriptive statistics\u201d refers to the number of patients (n), mean, median, standard deviation (SD), minimum, and maximum for continuous variables",
       "can_both_be_true": "yes",
@@ -60,13 +45,13 @@
       "result": "correct",
       "issue_type": "none",
       "severity": "none",
-      "reasoning": "Definitions match."
+      "reasoning": "Definitions match across all documents."
     },
     {
-      "component": "Descriptive Statistics (Categorical)",
-      "evaluation_type": "exact_match",
+      "component": "Categorical Data Summary",
+      "evaluation_type": "semantic",
       "original_sap_text": "Categorical data will be summarized using numbers and percentages of patients.",
-      "generated_sap_text": "refers to the number and/or percentage of patients (or events) for categorical variables.",
+      "generated_sap_text": "Categorical variables will be summarized using frequency tables showing the number and percentage of patients within a particular category.",
       "can_both_be_true": "yes",
       "protocol_text": "Categorical variables will be summarized using frequency tables showing the number and percentage of patients within a particular category.",
       "protocol_consulted": "yes",
@@ -77,651 +62,292 @@
     },
     {
       "component": "Baseline Definition",
-      "evaluation_type": "exact_match",
+      "evaluation_type": "semantic",
       "original_sap_text": "The baseline value for all analyses will be the last non-missing value prior to the first infusion unless otherwise specified.",
       "generated_sap_text": "Baseline Value: Defined as the last non-missing observation (including central laboratory results, vital signs, and tumor assessments) recorded prior to the First Dose Date.",
       "can_both_be_true": "yes",
       "protocol_text": null,
-      "protocol_consulted": "n/a",
+      "protocol_consulted": "no",
       "result": "correct",
       "issue_type": "none",
       "severity": "none",
-      "reasoning": "Definitions match."
+      "reasoning": "Definitions are consistent."
     },
     {
-      "component": "Post-baseline Definition",
+      "component": "Significance Level",
       "evaluation_type": "semantic",
-      "original_sap_text": "Post-baseline visits will be considered to be all visits after the first infusion.",
-      "generated_sap_text": "Change from Baseline Value: Calculated as (Post-Baseline Value \u2013 Baseline Value).",
+      "original_sap_text": "two one-sided alpha 0.025",
+      "generated_sap_text": "All statements of statistical significance will be based on a two-sided test with an overall level of significance (\u03b1) of 0.05... This corresponds to two one-sided tests (TOST) each at the 0.025 significance level.",
       "can_both_be_true": "yes",
-      "protocol_text": null,
-      "protocol_consulted": "n/a",
+      "protocol_text": "95% CI (two one-sided alpha 0.025)",
+      "protocol_consulted": "yes",
       "result": "correct",
       "issue_type": "none",
       "severity": "none",
-      "reasoning": "Generated SAP implies post-baseline logic in its change from baseline definition."
+      "reasoning": "Mathematical equivalence is correctly stated."
     },
     {
-      "component": "Unscheduled Visit Handling",
-      "evaluation_type": "semantic",
-      "original_sap_text": "EOT and unscheduled visit will not be summarized in visit-based tables, unless otherwise indicated.",
-      "generated_sap_text": "Unscheduled laboratory assessments... will be excluded from by-visit summary tables unless they fall within a visit window and are the closest assessment to the target day",
-      "can_both_be_true": "no",
-      "protocol_text": null,
-      "protocol_consulted": "yes",
-      "result": "problem",
-      "issue_type": "contradiction_original",
-      "severity": "minor",
-      "reasoning": "Original SAP explicitly excludes unscheduled visits from visit-based tables (implying a nominal visit analysis strategy). Generated SAP explicitly includes them if they map to a visit window (implying a windowing analysis strategy). This is a methodological contradiction."
-    },
-    {
-      "component": "Missing Data (ORR)",
+      "component": "Missing Data - Primary Endpoint",
       "evaluation_type": "exact_match",
       "original_sap_text": "Missing values in ORR will be considered as \u2018Non-responder\u2019 to analyze primary efficacy endpoint.",
-      "generated_sap_text": "Missing Data: Patients with no post-baseline tumor assessment or whose response cannot be evaluated (NE) will be treated as non-responders for the primary analysis.",
+      "generated_sap_text": "Patients with no post-baseline tumor assessment or whose response cannot be evaluated (NE) will be treated as non-responders for the primary analysis.",
       "can_both_be_true": "yes",
       "protocol_text": null,
-      "protocol_consulted": "n/a",
+      "protocol_consulted": "no",
       "result": "correct",
       "issue_type": "none",
       "severity": "none",
-      "reasoning": "Definitions match."
+      "reasoning": "Imputation method matches."
     },
     {
-      "component": "Tipping Point Analysis",
+      "component": "Software",
       "evaluation_type": "semantic",
-      "original_sap_text": "In order to evaluate the impact of missing data on the primary efficacy endpoint results, additional analyses with tipping point analyses will be conducted",
-      "generated_sap_text": null,
+      "original_sap_text": "(Header exists but text is blank)",
+      "generated_sap_text": "All analyses described in this plan will be performed using SAS v9.4 or higher unless specified otherwise.",
+      "can_both_be_true": "yes",
+      "protocol_text": null,
+      "protocol_consulted": "no",
+      "result": "correct",
+      "issue_type": "none",
+      "severity": "none",
+      "reasoning": "Generated SAP fills in standard detail missing from Original text."
+    },
+    {
+      "component": "Analysis Populations",
+      "evaluation_type": "semantic",
+      "original_sap_text": "The following patient populations are defined: Intent-to-Treat (ITT) population, Per-Protocol (PP) population, PK population, PK population \u2013 Maintenance Period Subset and Safety population.",
+      "generated_sap_text": "Analysis Populations referenced throughout this document (Intent-to-Treat, Per-Protocol, Safety, and PK populations) are defined in Section 3.3.",
+      "can_both_be_true": "yes",
+      "protocol_text": "The following analysis sets will be used... ITT... PP... PK... Safety",
+      "protocol_consulted": "yes",
+      "result": "correct",
+      "issue_type": "none",
+      "severity": "none",
+      "reasoning": "Generated SAP matches Protocol. Original SAP included an extra subset (PK-Maintenance) not in Protocol, so omitting it is acceptable."
+    },
+    {
+      "component": "Sensitivity Analysis - Tipping Point",
+      "evaluation_type": "semantic",
+      "original_sap_text": "additional analyses with tipping point analyses will be conducted for the primary efficacy endpoint",
+      "generated_sap_text": "Sensitivity Analysis... Complete Case Analysis... Confirmed vs. Unconfirmed Response... Alternative Covariate Adjustment",
       "can_both_be_true": "no",
       "protocol_text": "Local review result will be used as supportive data (sensitivity analysis).",
       "protocol_consulted": "yes",
       "result": "problem",
       "issue_type": "contradiction_original",
       "severity": "minor",
-      "reasoning": "Original SAP requires Tipping Point Analysis. Generated SAP omits it. Protocol is silent on Tipping Point Analysis (only mentions Local Review as sensitivity). Therefore, Generated SAP is compliant with Protocol, even though it differs from Original SAP."
+      "reasoning": "Original SAP specifies Tipping Point analysis. Generated SAP specifies different sensitivity analyses (Complete Case, etc.) and omits Tipping Point. Protocol does not mandate Tipping Point, so this is a deviation from Original SAP methodology but not Protocol."
     },
     {
-      "component": "Date Imputation Rules",
+      "component": "Major Protocol Deviations Definition",
       "evaluation_type": "semantic",
-      "original_sap_text": "(Detailed rules for Medication, AE, and Death imputation in Section 14.4)",
-      "generated_sap_text": null,
-      "can_both_be_true": "yes",
-      "protocol_text": null,
+      "original_sap_text": "Major protocol deviations include the following: Mis-randomizations... Non-compliance of Inclusion or Exclusion criteria... Significant GCP non-compliance... Receiving any prohibited therapies",
+      "generated_sap_text": "A major protocol deviation is one that may affect the interpretation of the primary endpoint and it will be defined in the statistical analysis plan (SAP).",
+      "can_both_be_true": "no",
+      "protocol_text": "A major protocol deviation... will be defined in the statistical analysis plan (SAP).",
       "protocol_consulted": "yes",
-      "result": "correct",
-      "issue_type": "none",
-      "severity": "none",
-      "reasoning": "Generated SAP omits the detailed date imputation rules found in the Original SAP. This is a loss of detail but not a direct contradiction."
+      "result": "problem",
+      "issue_type": "internal_contradiction",
+      "severity": "critical",
+      "reasoning": "The Generated SAP *is* the SAP, yet it copies the Protocol's future-tense instruction ('will be defined in the SAP') instead of actually defining the deviations. This is a critical failure to fulfill the Protocol's requirement."
     },
     {
-      "component": "Decimal Precision Rules",
+      "component": "Sample Size Calculation",
       "evaluation_type": "semantic",
-      "original_sap_text": "Minimum and maximum will be presented to the same number of decimal places as the raw data, mean and median will be presented to one more decimal place...",
+      "original_sap_text": "A sample size of 305 patients per group will provide 80% power to show similarity in efficacy... with an equivalence margin of -12.5 to 12.5",
       "generated_sap_text": null,
-      "can_both_be_true": "yes",
-      "protocol_text": null,
+      "can_both_be_true": "no",
+      "protocol_text": "A sample size of 305 patients per group will provide 80% power...",
       "protocol_consulted": "yes",
-      "result": "correct",
-      "issue_type": "none",
-      "severity": "none",
-      "reasoning": "Generated SAP omits formatting rules. Acceptable difference."
+      "result": "problem",
+      "issue_type": "contradiction_protocol",
+      "severity": "minor",
+      "reasoning": "Sample size calculation is present in both Original SAP and Protocol but missing from Generated SAP."
     }
   ],
   "missing_from_generated_sap": [
     {
-      "component": "Decimal Precision (Min/Max)",
-      "original_sap_text": "Minimum and maximum will be presented to the same number of decimal places as the raw data",
+      "component": "Decimal Precision Rules",
+      "original_sap_text": "mean and median will be presented to one more decimal place than the raw data, and standard deviation will be presented to two more decimal places than the raw data.",
       "protocol_text": null,
       "in_protocol": "no",
       "classification": "acceptable_difference",
-      "description": "Formatting rule missing."
+      "description": "Specific rounding rules for summary statistics are missing."
     },
     {
-      "component": "Decimal Precision (Mean/Median)",
-      "original_sap_text": "mean and median will be presented to one more decimal place than the raw data",
+      "component": "Suppression of Zero Counts",
+      "original_sap_text": "Percentages... will be suppressed when the count is zero.",
       "protocol_text": null,
       "in_protocol": "no",
       "classification": "acceptable_difference",
-      "description": "Formatting rule missing."
-    },
-    {
-      "component": "Decimal Precision (SD)",
-      "original_sap_text": "standard deviation will be presented to two more decimal places than the raw data.",
-      "protocol_text": null,
-      "in_protocol": "no",
-      "classification": "acceptable_difference",
-      "description": "Formatting rule missing."
-    },
-    {
-      "component": "Decimal Precision (Geometric Mean)",
-      "original_sap_text": "If the geometric mean is to be presented, it will be set to the same precision as the mean.",
-      "protocol_text": null,
-      "in_protocol": "no",
-      "classification": "acceptable_difference",
-      "description": "Formatting rule missing."
-    },
-    {
-      "component": "Decimal Precision (CV)",
-      "original_sap_text": "Percent coefficient of variation (CV) will be presented to two more decimal places than the raw data.",
-      "protocol_text": null,
-      "in_protocol": "no",
-      "classification": "acceptable_difference",
-      "description": "Formatting rule missing."
-    },
-    {
-      "component": "Percentage Formatting",
-      "original_sap_text": "Percentages will be presented to one decimal place and will be suppressed when the count is zero.",
-      "protocol_text": null,
-      "in_protocol": "no",
-      "classification": "acceptable_difference",
-      "description": "Formatting rule missing."
+      "description": "Formatting rule for zero counts is missing."
     },
     {
       "component": "Not Done Row",
-      "original_sap_text": "A row denoted \u201cNot Done\u201d will be included in count tabulations where necessary to account for cases of no assessment or missing values.",
+      "original_sap_text": "A row denoted \u201cNot Done\u201d will be included in count tabulations where necessary",
       "protocol_text": null,
       "in_protocol": "no",
       "classification": "acceptable_difference",
-      "description": "Table layout rule missing."
+      "description": "Formatting rule for missing categorical data is missing."
     },
     {
-      "component": "Percentage Denominator",
-      "original_sap_text": "The denominator for all percentages will be the number of patients within the treatment group for the population of interest, unless otherwise indicated.",
+      "component": "Listing Sorting Order",
+      "original_sap_text": "Listings will be sorted by the treatment group and then patient number... and visit",
       "protocol_text": null,
       "in_protocol": "no",
       "classification": "acceptable_difference",
-      "description": "Calculation rule missing."
+      "description": "Specific sorting instructions for listings are missing."
     },
     {
-      "component": "Listing Content",
-      "original_sap_text": "But, all data will be displayed in listings.",
+      "component": "LOQ Handling",
+      "original_sap_text": "numeric values recorded below the lower limit... will be set to the respective limit for all related summaries",
       "protocol_text": null,
       "in_protocol": "no",
       "classification": "acceptable_difference",
-      "description": "General listing rule missing."
+      "description": "General rule for handling Limit of Quantification values is missing."
     },
     {
-      "component": "Listing Sorting",
-      "original_sap_text": "Listings will be sorted by the treatment group and then patient number, which is the unique subject identifier and visit, if applicable.",
+      "component": "Inequality Signs in Listings",
+      "original_sap_text": "In listings, original results containing inequality sign will be displayed",
       "protocol_text": null,
       "in_protocol": "no",
       "classification": "acceptable_difference",
-      "description": "Sorting rule missing."
+      "description": "Formatting rule for inequality signs is missing."
     },
     {
-      "component": "Additional Sorting",
-      "original_sap_text": "In cases where more additional sorting is required, other variables will be included in sorting as applicable.",
+      "component": "Data Discrepancy Handling",
+      "original_sap_text": "When combining data from eCRF and analytical facilities discrepancy will be handled as following...",
       "protocol_text": null,
       "in_protocol": "no",
       "classification": "acceptable_difference",
-      "description": "Sorting rule missing."
+      "description": "Rules for reconciling eCRF vs Lab data dates are missing."
     },
     {
-      "component": "Quantification Limits",
-      "original_sap_text": "For the purpose of summarization, any numeric values recorded below the lower limit or above the upper limit of quantification will be set to the respective limit for all related summaries unless otherwise indicated.",
-      "protocol_text": null,
-      "in_protocol": "no",
-      "classification": "acceptable_difference",
-      "description": "Data handling rule missing."
-    },
-    {
-      "component": "Inequality Signs",
-      "original_sap_text": "In listings, original results containing inequality sign will be displayed, unless otherwise specified.",
-      "protocol_text": null,
-      "in_protocol": "no",
-      "classification": "acceptable_difference",
-      "description": "Data handling rule missing."
-    },
-    {
-      "component": "Data Discrepancy 1",
-      "original_sap_text": "Recorded as collected sample in eCRF but no corresponding results from analytical facility \u2013 listing will display only sample collection visit/date/time from eCRF.",
-      "protocol_text": null,
-      "in_protocol": "no",
-      "classification": "acceptable_difference",
-      "description": "Data reconciliation rule missing."
-    },
-    {
-      "component": "Data Discrepancy 2",
-      "original_sap_text": "No corresponding records in eCRF for results from analytical facility \u2013 listing will display only specimen collection visit/date and results from analytical facility.",
-      "protocol_text": null,
-      "in_protocol": "no",
-      "classification": "acceptable_difference",
-      "description": "Data reconciliation rule missing."
-    },
-    {
-      "component": "Data Discrepancy 3",
-      "original_sap_text": "Discrepancy in sample collection date from eCRF and analytical facility \u2013 listing will display results from analytical facility and visit/date/time from eCRF if not missing; if sample collection date/time is missing in eCRF then use specimen collection visit/date from analytical facility.",
-      "protocol_text": null,
-      "in_protocol": "no",
-      "classification": "acceptable_difference",
-      "description": "Data reconciliation rule missing."
-    },
-    {
-      "component": "Outlier Investigation",
-      "original_sap_text": "Any outliers that are detected during the review of the data will be investigated and discussed during the DRM.",
-      "protocol_text": null,
-      "in_protocol": "no",
-      "classification": "acceptable_difference",
-      "description": "Process rule missing."
-    },
-    {
-      "component": "Outlier Exclusion",
-      "original_sap_text": "In general, outliers will not be excluded unless they are considered to be erroneous values.",
-      "protocol_text": null,
-      "in_protocol": "no",
-      "classification": "acceptable_difference",
-      "description": "Data handling rule missing."
-    },
-    {
-      "component": "Outlier Sensitivity",
-      "original_sap_text": "Sensitivity analyses and exploratory analyses may be conducted using imputation or excluding outliers to ensure robustness of study conclusions.",
-      "protocol_text": null,
-      "in_protocol": "no",
-      "classification": "acceptable_difference",
-      "description": "Analysis rule missing."
-    },
-    {
-      "component": "Tipping Point Analysis (MNAR)",
-      "original_sap_text": "Tipping point analyses will be conducted under Missing Not at Random (MNAR) scenarios.",
-      "protocol_text": null,
-      "in_protocol": "no",
-      "classification": "acceptable_difference",
-      "description": "Specific sensitivity analysis missing."
-    },
-    {
-      "component": "Tipping Point Imputation",
-      "original_sap_text": "Imputation will be done by gradually shifting the number of responders by treatment group to make MNAR scenarios.",
-      "protocol_text": null,
-      "in_protocol": "no",
-      "classification": "acceptable_difference",
-      "description": "Specific sensitivity analysis missing."
-    },
-    {
-      "component": "Tipping Point Estimation",
-      "original_sap_text": "95% CI of the difference between two proportions (CT-P16 and EU-Approved Avastin group) will be estimated by exact binomial approach",
-      "protocol_text": null,
-      "in_protocol": "no",
-      "classification": "acceptable_difference",
-      "description": "Specific sensitivity analysis missing."
-    },
-    {
-      "component": "Tipping Point Display",
-      "original_sap_text": "scenarios will be displayed by shift table.",
-      "protocol_text": null,
-      "in_protocol": "no",
-      "classification": "acceptable_difference",
-      "description": "Specific sensitivity analysis missing."
-    },
-    {
-      "component": "Tipping Point NE Handling",
-      "original_sap_text": "No response evaluation result or inevaluable (NE) result evaluated in best overall response (BOR) will be considered as missing case.",
-      "protocol_text": null,
-      "in_protocol": "no",
-      "classification": "acceptable_difference",
-      "description": "Specific sensitivity analysis missing."
-    },
-    {
-      "component": "Tipping Point Plot",
-      "original_sap_text": "All the scenarios will be also provided using 2-dimensional plot.",
-      "protocol_text": null,
-      "in_protocol": "no",
-      "classification": "acceptable_difference",
-      "description": "Specific sensitivity analysis missing."
-    },
-    {
-      "component": "Medication Stop Date Imputation (Yes)",
-      "original_sap_text": "If \u2018Yes\u2019 is recorded for \u2018If stop date is unknown, was this drug stopped before the first administration of study drug?\u2019... Assume the first administration date \u2013 1.",
-      "protocol_text": null,
-      "in_protocol": "no",
-      "classification": "acceptable_difference",
-      "description": "Imputation rule missing."
-    },
-    {
-      "component": "Medication Stop Date Imputation (No - Day)",
-      "original_sap_text": "If \u2018No\u2019... Missing day: Assume the last day of the month.",
-      "protocol_text": null,
-      "in_protocol": "no",
-      "classification": "acceptable_difference",
-      "description": "Imputation rule missing."
-    },
-    {
-      "component": "Medication Stop Date Imputation (No - Month)",
-      "original_sap_text": "Missing day and month: Assume December 31st.",
-      "protocol_text": null,
-      "in_protocol": "no",
-      "classification": "acceptable_difference",
-      "description": "Imputation rule missing."
-    },
-    {
-      "component": "Medication Stop Date Imputation (No - Year)",
-      "original_sap_text": "Missing day, month and year: Leave it as Missing.",
-      "protocol_text": null,
-      "in_protocol": "no",
-      "classification": "acceptable_difference",
-      "description": "Imputation rule missing."
-    },
-    {
-      "component": "Medication Stop Date Imputation (Death)",
-      "original_sap_text": "In the case of the death of a patient and the imputed end date is after the date of death, the end date will be imputed as the date of death.",
-      "protocol_text": null,
-      "in_protocol": "no",
-      "classification": "acceptable_difference",
-      "description": "Imputation rule missing."
-    },
-    {
-      "component": "Medication Start Date Imputation (Stop Date)",
-      "original_sap_text": "If the stop date is incomplete, imputed end date will be used instead of reported end date",
-      "protocol_text": null,
-      "in_protocol": "no",
-      "classification": "acceptable_difference",
-      "description": "Imputation rule missing."
-    },
-    {
-      "component": "Medication Start Date Imputation (Day - Equal)",
-      "original_sap_text": "Missing day... month and year... equal... start date will be imputed as the earlier date of: (i) the date of the first infusion, or (ii) the recorded/imputed stop date of the medication.",
-      "protocol_text": null,
-      "in_protocol": "no",
-      "classification": "acceptable_difference",
-      "description": "Imputation rule missing."
-    },
-    {
-      "component": "Medication Start Date Imputation (Day - Equal - Missing Stop)",
-      "original_sap_text": "If the recorded/imputed stop date is missing, the start date will be imputed as the first infusion.",
-      "protocol_text": null,
-      "in_protocol": "no",
-      "classification": "acceptable_difference",
-      "description": "Imputation rule missing."
-    },
-    {
-      "component": "Medication Start Date Imputation (Day - Not Equal)",
-      "original_sap_text": "If the month or the year are not equal... start date will be imputed as the first day of the month",
-      "protocol_text": null,
-      "in_protocol": "no",
-      "classification": "acceptable_difference",
-      "description": "Imputation rule missing."
-    },
-    {
-      "component": "Medication Start Date Imputation (Month - Equal)",
-      "original_sap_text": "Missing day and month... year... equal... start date will be imputed as the earlier date of: (i) the date of the first infusion, or (ii) the recorded/imputed stop date...",
-      "protocol_text": null,
-      "in_protocol": "no",
-      "classification": "acceptable_difference",
-      "description": "Imputation rule missing."
-    },
-    {
-      "component": "Medication Start Date Imputation (Month - Equal - Missing Stop)",
-      "original_sap_text": "If... missing, the start date will be imputed as the first infusion.",
-      "protocol_text": null,
-      "in_protocol": "no",
-      "classification": "acceptable_difference",
-      "description": "Imputation rule missing."
-    },
-    {
-      "component": "Medication Start Date Imputation (Month - Not Equal)",
-      "original_sap_text": "If the year are not equal... start date will be imputed as the first day of January of the year",
-      "protocol_text": null,
-      "in_protocol": "no",
-      "classification": "acceptable_difference",
-      "description": "Imputation rule missing."
-    },
-    {
-      "component": "AE Stop Date Imputation (Day)",
-      "original_sap_text": "Missing day: Assume the last day of the month.",
-      "protocol_text": null,
-      "in_protocol": "no",
-      "classification": "acceptable_difference",
-      "description": "Imputation rule missing."
-    },
-    {
-      "component": "AE Stop Date Imputation (Month)",
-      "original_sap_text": "Missing day and month: Assume December 31st.",
-      "protocol_text": null,
-      "in_protocol": "no",
-      "classification": "acceptable_difference",
-      "description": "Imputation rule missing."
-    },
-    {
-      "component": "AE Stop Date Imputation (Year)",
-      "original_sap_text": "Missing day, month and year: Leave it as Missing.",
-      "protocol_text": null,
-      "in_protocol": "no",
-      "classification": "acceptable_difference",
-      "description": "Imputation rule missing."
-    },
-    {
-      "component": "AE Stop Date Imputation (Death)",
-      "original_sap_text": "In the case of the death of a patient and the imputed stop date is after the date of death, the stop date will be imputed as the date of death.",
-      "protocol_text": null,
-      "in_protocol": "no",
-      "classification": "acceptable_difference",
-      "description": "Imputation rule missing."
-    },
-    {
-      "component": "AE Start Date Imputation (Day - Equal)",
-      "original_sap_text": "Missing day... month and year... equal... start date will be imputed as the earlier date of: (i) the date of the first infusion, or (ii) the recorded/imputed stop date of the AE.",
-      "protocol_text": null,
-      "in_protocol": "no",
-      "classification": "acceptable_difference",
-      "description": "Imputation rule missing."
-    },
-    {
-      "component": "AE Start Date Imputation (Day - Equal - Missing Stop)",
-      "original_sap_text": "If the recorded/imputed stop date of the AE is missing, the start date will be imputed as the first infusion.",
-      "protocol_text": null,
-      "in_protocol": "no",
-      "classification": "acceptable_difference",
-      "description": "Imputation rule missing."
-    },
-    {
-      "component": "AE Start Date Imputation (Day - Not Equal)",
-      "original_sap_text": "If the month or the year are not equal... start date will be imputed as the first day of the month",
-      "protocol_text": null,
-      "in_protocol": "no",
-      "classification": "acceptable_difference",
-      "description": "Imputation rule missing."
-    },
-    {
-      "component": "AE Start Date Imputation (Month - Equal)",
-      "original_sap_text": "Missing day and month... year... equal... start date will be imputed as the earlier date of: (i) the date of the first infusion, or (ii) the recorded/imputed stop date of the AE.",
-      "protocol_text": null,
-      "in_protocol": "no",
-      "classification": "acceptable_difference",
-      "description": "Imputation rule missing."
-    },
-    {
-      "component": "AE Start Date Imputation (Month - Equal - Missing Stop)",
-      "original_sap_text": "If the recorded/imputed stop date is missing, the start date will be imputed as the first infusion.",
-      "protocol_text": null,
-      "in_protocol": "no",
-      "classification": "acceptable_difference",
-      "description": "Imputation rule missing."
-    },
-    {
-      "component": "AE Start Date Imputation (Month - Not Equal)",
-      "original_sap_text": "If the year are not equal... start date will be imputed as the first day of January of the year",
-      "protocol_text": null,
-      "in_protocol": "no",
-      "classification": "acceptable_difference",
-      "description": "Imputation rule missing."
-    },
-    {
-      "component": "AE Start Date Imputation (Year)",
-      "original_sap_text": "Missing day, month and year... start date will be imputed as the earlier date of: (i) the date of first infusion, or (ii) the recorded/imputed stop date of the AE.",
-      "protocol_text": null,
-      "in_protocol": "no",
-      "classification": "acceptable_difference",
-      "description": "Imputation rule missing."
-    },
-    {
-      "component": "AE Start Date Imputation (Year - Missing Stop)",
-      "original_sap_text": "If the recorded/imputed stop date is missing, the start date will be imputed as the date of first infusion.",
-      "protocol_text": null,
-      "in_protocol": "no",
-      "classification": "acceptable_difference",
-      "description": "Imputation rule missing."
-    },
-    {
-      "component": "Death Date Imputation (Reason)",
-      "original_sap_text": "If the reason for end of study participation... is \u2018Death\u2019 and the death date is incomplete, then death date will be imputed as the date of end of study participation",
-      "protocol_text": null,
-      "in_protocol": "no",
-      "classification": "acceptable_difference",
-      "description": "Imputation rule missing."
-    },
-    {
-      "component": "Death Date Imputation (Day - Equal)",
-      "original_sap_text": "If the day of death is missing... month and year... equal... death date will be imputed as the last known alive date + 1.",
-      "protocol_text": null,
-      "in_protocol": "no",
-      "classification": "acceptable_difference",
-      "description": "Imputation rule missing."
-    },
-    {
-      "component": "Death Date Imputation (Day - Not Equal)",
-      "original_sap_text": "If the month and year are not equal, the death date will be imputed as the first day of the month... provided partial death date > last known alive date. Otherwise, death date will be imputed as the last known alive date + 1.",
-      "protocol_text": null,
-      "in_protocol": "no",
-      "classification": "acceptable_difference",
-      "description": "Imputation rule missing."
-    },
-    {
-      "component": "Death Date Imputation (Month - Equal)",
-      "original_sap_text": "If the day and month of death date is missing... year... equal... death date will be imputed as the last known alive date + 1.",
-      "protocol_text": null,
-      "in_protocol": "no",
-      "classification": "acceptable_difference",
-      "description": "Imputation rule missing."
-    },
-    {
-      "component": "Death Date Imputation (Month - Not Equal)",
-      "original_sap_text": "If partial year > year of the last known alive date, then death date will be imputed as 1st January of that year... Otherwise, death date will be imputed as the last known alive date + 1.",
-      "protocol_text": null,
-      "in_protocol": "no",
-      "classification": "acceptable_difference",
-      "description": "Imputation rule missing."
-    },
-    {
-      "component": "Randomization Stratification",
-      "original_sap_text": "The randomization will be balanced by using permuted blocks and will be stratified by country, sex (female vs. male), disease status (recurrence vs. metastatic), Eastern Cooperative Oncology Group (ECOG) performance status (0 vs. 1).",
-      "protocol_text": "The randomization will be balanced by using permuted blocks and will be stratified by country, sex (female vs. male), disease status (recurrence vs. metastatic), and ECOG performance score (0 vs. 1).",
+      "component": "Randomization Method (Permuted Blocks)",
+      "original_sap_text": "The randomization will be balanced by using permuted blocks",
+      "protocol_text": "The randomization will be balanced by using permuted blocks",
       "in_protocol": "yes",
       "classification": "missing_required",
-      "description": "Randomization details missing from General Methodology section (though covariates are mentioned in efficacy section)."
+      "description": "Specific randomization method (permuted blocks) is missing."
     },
     {
-      "component": "Blinding",
-      "original_sap_text": "This study will be double-blinded during both the Induction Study Period and the Maintenance Study Period.",
-      "protocol_text": "This study will be double-blind... during the Whole Study Period.",
+      "component": "Randomization System (IWRS)",
+      "original_sap_text": "An Interactive Web Response System (IWRS) will be used for the randomization",
+      "protocol_text": "An interactive voice response system (IVRS) or an interactive web response system (IWRS) will be used",
       "in_protocol": "yes",
       "classification": "missing_required",
-      "description": "Blinding details missing from General Methodology section."
+      "description": "Details about the randomization system are missing."
     },
     {
-      "component": "Unblinding",
-      "original_sap_text": "The database will be unblinded for the 1st CSR for a reporting purpose. However, the study will remain blinded to the investigators and patients until study termination.",
-      "protocol_text": "The study will be unblinded to the pre-defined unblinded personnel... after the completion of Cycle 6... for the reporting purposes.",
-      "in_protocol": "yes",
-      "classification": "missing_required",
-      "description": "Unblinding details missing from General Methodology section."
-    },
-    {
-      "component": "Protocol Deviations",
-      "original_sap_text": "Major protocol deviations will be identified during the DRM. Patients with major protocol deviation could be excluded from PP population",
-      "protocol_text": "A major protocol deviation is one that may affect the interpretation of primary endpoint and it will be defined in the SAP.",
-      "in_protocol": "yes",
-      "classification": "missing_required",
-      "description": "Protocol deviation handling missing from General Methodology section."
-    },
-    {
-      "component": "COVID-19 Deviations",
-      "original_sap_text": "Additionally, if any case of major protocol deviation related to COVID-19 is identified during the DRM, primary analysis will be performed excluding patients with major protocol deviation related to COVID-19 in ITT population as supportive analysis",
+      "component": "General Comments Listing",
+      "original_sap_text": "Data collected on the \u2018General Comments\u2019 eCRF page will be presented in a listing",
       "protocol_text": null,
       "in_protocol": "no",
       "classification": "acceptable_difference",
-      "description": "Specific COVID-19 handling missing."
+      "description": "Instruction to list general comments is missing."
     },
     {
-      "component": "General Comments",
-      "original_sap_text": "Data collected on the \u2018General Comments\u2019 eCRF page will be presented in a listing for the ITT population.",
+      "component": "Outlier Handling",
+      "original_sap_text": "outliers will not be excluded unless they are considered to be erroneous values",
       "protocol_text": null,
       "in_protocol": "no",
       "classification": "acceptable_difference",
-      "description": "Listing rule missing."
+      "description": "General policy on outlier handling is missing."
     },
     {
-      "component": "Patient Disposition",
-      "original_sap_text": "The total number of patients who were screened will be displayed. The number of screening failures and the primary reason for screening failure will also be summarized.",
+      "component": "Date Imputation Rules",
+      "original_sap_text": "Incomplete medications start and stop dates will be imputed as follows...",
       "protocol_text": null,
       "in_protocol": "no",
       "classification": "acceptable_difference",
-      "description": "Disposition summary rule missing."
-    },
-    {
-      "component": "Disposition Categories",
-      "original_sap_text": "The number of patients who have been randomized and the number and percentage of patients who have initiated the study period, have completed the Induction study period, and have discontinued the study period will also be displayed",
-      "protocol_text": null,
-      "in_protocol": "no",
-      "classification": "acceptable_difference",
-      "description": "Disposition summary rule missing."
-    },
-    {
-      "component": "Time on Study Drug",
-      "original_sap_text": "Time on the study drug prior to discontinuation in each study period will be calculated as (Last dose date \u2013 First dose date + 1) and will also be summarized with descriptive statistics.",
-      "protocol_text": null,
-      "in_protocol": "no",
-      "classification": "acceptable_difference",
-      "description": "Calculation rule missing."
-    },
-    {
-      "component": "Reason for Ending Participation",
-      "original_sap_text": "Reason for ending participation in the study will be summarized by reasons on the \u2018End of Study Participation\u2019 eCRF page.",
-      "protocol_text": null,
-      "in_protocol": "no",
-      "classification": "acceptable_difference",
-      "description": "Summary rule missing."
-    },
-    {
-      "component": "Deaths Summary",
-      "original_sap_text": "Deaths will be summarized by reasons using the data reported on \u2018Study Treatment Termination\u2019 or \u2018Survival Status\u2019 eCRF page.",
-      "protocol_text": null,
-      "in_protocol": "no",
-      "classification": "acceptable_difference",
-      "description": "Summary rule missing."
-    },
-    {
-      "component": "Disposition Listing",
-      "original_sap_text": "Patient disposition data will be listed for the ITT population. A listing of patients reported as screening failure will also be provided with reasons for screening failure.",
-      "protocol_text": null,
-      "in_protocol": "no",
-      "classification": "acceptable_difference",
-      "description": "Listing rule missing."
+      "description": "Specific algorithms for imputing partial dates (Meds, AEs, Death) are missing."
     }
   ],
-  "internal_contradictions": [],
+  "internal_contradictions": [
+    {
+      "component": "Major Protocol Deviations Definition",
+      "section_a": "3.3",
+      "section_a_text": "A major protocol deviation... will be defined in the statistical analysis plan (SAP).",
+      "section_b": "Entire Document",
+      "section_b_text": "(No definition found)",
+      "description": "The document refers to itself in the future tense ('will be defined in the SAP') but fails to provide the definitions it promises.",
+      "severity": "critical"
+    }
+  ],
   "issues": [
     {
-      "issue_type": "contradiction_original",
+      "issue_type": "internal_contradiction",
+      "severity": "critical",
+      "component": "Major Protocol Deviations",
+      "original_sap_text": "Major protocol deviations include the following: Mis-randomizations... Non-compliance... GCP non-compliance... Prohibited therapies...",
+      "generated_sap_text": "A major protocol deviation... will be defined in the statistical analysis plan (SAP).",
+      "protocol_text": "A major protocol deviation... will be defined in the statistical analysis plan (SAP).",
+      "why_they_conflict": "The Generated SAP copies the Protocol's instruction to define deviations in the SAP, but fails to actually define them. The Original SAP correctly defines them.",
+      "description": "Failure to define Major Protocol Deviations as required by Protocol.",
+      "reasoning": "The Generated SAP acts as the SAP but fails to contain the content the Protocol assigns to it, instead just repeating the assignment instruction."
+    },
+    {
+      "issue_type": "contradiction_protocol",
       "severity": "minor",
-      "component": "Unscheduled Visit Handling",
-      "original_sap_text": "EOT and unscheduled visit will not be summarized in visit-based tables, unless otherwise indicated.",
-      "generated_sap_text": "Unscheduled laboratory assessments... will be excluded from by-visit summary tables unless they fall within a visit window and are the closest assessment to the target day",
-      "protocol_text": null,
-      "why_they_conflict": "Original SAP excludes unscheduled visits from visit-based tables (implying nominal visits). Generated SAP includes them if they map to a visit window. This is a methodological difference.",
-      "description": "Generated SAP uses a windowing approach for unscheduled visits, while Original SAP uses a nominal visit approach (excluding unscheduled visits from visit tables).",
-      "reasoning": "Original SAP Section 4 explicitly states unscheduled visits will not be summarized in visit-based tables. Generated SAP Section 4.5.4 explicitly states they will be included if they fall within a window. This changes the data included in by-visit summaries."
+      "component": "Sample Size",
+      "original_sap_text": "A sample size of 305 patients per group will provide 80% power...",
+      "generated_sap_text": null,
+      "protocol_text": "A sample size of 305 patients per group will provide 80% power...",
+      "why_they_conflict": "Generated SAP omits the Sample Size section entirely, which is present in both Original SAP and Protocol.",
+      "description": "Missing Sample Size / Power Calculation.",
+      "reasoning": "Standard SAP element missing."
     },
     {
       "issue_type": "contradiction_original",
       "severity": "minor",
-      "component": "Tipping Point Analysis",
-      "original_sap_text": "In order to evaluate the impact of missing data on the primary efficacy endpoint results, additional analyses with tipping point analyses will be conducted",
+      "component": "Sensitivity Analysis",
+      "original_sap_text": "tipping point analyses will be conducted",
+      "generated_sap_text": "Complete Case Analysis... Confirmed vs. Unconfirmed... Alternative Covariate Adjustment",
+      "protocol_text": "Local review result will be used as supportive data (sensitivity analysis).",
+      "why_they_conflict": "Generated SAP proposes different sensitivity analyses than Original SAP.",
+      "description": "Change in sensitivity analysis methodology (Tipping Point vs Complete Case).",
+      "reasoning": "While not contradicting the Protocol, it differs significantly from the Original SAP's approach to missing data."
+    },
+    {
+      "issue_type": "contradiction_original",
+      "severity": "minor",
+      "component": "Sensitivity Analysis - Tipping Point",
+      "original_sap_text": "additional analyses with tipping point analyses will be conducted for the primary efficacy endpoint",
+      "generated_sap_text": "Sensitivity Analysis... Complete Case Analysis... Confirmed vs. Unconfirmed Response... Alternative Covariate Adjustment",
+      "why_they_conflict": "Original SAP specifies Tipping Point analysis. Generated SAP specifies different sensitivity analyses (Complete Case, etc.) and omits Tipping Point. Protocol does not mandate Tipping Point, so this is a deviation from Original SAP methodology but not Protocol.",
+      "description": "Detected conflict between Original and Generated SAP",
+      "reasoning": "Detected by post-processing validation"
+    },
+    {
+      "issue_type": "contradiction_original",
+      "severity": "minor",
+      "component": "Major Protocol Deviations Definition",
+      "original_sap_text": "Major protocol deviations include the following: Mis-randomizations... Non-compliance of Inclusion or Exclusion criteria... Significant GCP non-compliance... Receiving any prohibited therapies",
+      "generated_sap_text": "A major protocol deviation is one that may affect the interpretation of the primary endpoint and it will be defined in the statistical analysis plan (SAP).",
+      "why_they_conflict": "The Generated SAP *is* the SAP, yet it copies the Protocol's future-tense instruction ('will be defined in the SAP') instead of actually defining the deviations. This is a critical failure to fulfill the Protocol's requirement.",
+      "description": "Detected conflict between Original and Generated SAP",
+      "reasoning": "Detected by post-processing validation"
+    },
+    {
+      "issue_type": "contradiction_original",
+      "severity": "minor",
+      "component": "Sample Size Calculation",
+      "original_sap_text": "A sample size of 305 patients per group will provide 80% power to show similarity in efficacy... with an equivalence margin of -12.5 to 12.5",
       "generated_sap_text": null,
-      "why_they_conflict": "Original SAP requires Tipping Point Analysis. Generated SAP omits it. Protocol is silent on Tipping Point Analysis (only mentions Local Review as sensitivity). Therefore, Generated SAP is compliant with Protocol, even though it differs from Original SAP.",
+      "why_they_conflict": "Sample size calculation is present in both Original SAP and Protocol but missing from Generated SAP.",
       "description": "Detected conflict between Original and Generated SAP",
       "reasoning": "Detected by post-processing validation"
     }
   ],
-  "extra_information_flagged": [],
-  "reasoning": "The Generated SAP captures the high-level definitions (Baseline, Descriptive Statistics) correctly but omits a significant amount of detailed general methodology found in the Original SAP, specifically regarding formatting (decimal places), data handling (outliers, discrepancies), and imputation rules (dates). It also introduces a 'Visit Windowing' strategy for unscheduled visits which contradicts the 'Nominal Visit' strategy implied in the Original SAP (where unscheduled visits are excluded from visit tables). However, the Protocol is silent on these specific methodological choices, so the Generated SAP is not non-compliant with the Protocol, just less detailed and methodologically different from the Original SAP in one aspect. The omission of Tipping Point Analysis is notable as it was a specific robustness check in the Original SAP, but since the Protocol does not require it, it is classified as an acceptable difference.",
-  "summary": "The Generated SAP is less detailed than the Original SAP, omitting specific formatting, data handling, and imputation rules. It introduces a visit windowing methodology that differs from the Original SAP's nominal visit approach for unscheduled visits. However, it remains compliant with the Protocol's high-level requirements."
+  "extra_information_flagged": [
+    {
+      "content": "Visit Windows",
+      "generated_sap_text": "Section 4.5 Visit Windows... Cycle 2 | 22 | 2 \u2013 < 33...",
+      "contradicts": "no",
+      "detail": "Generated SAP includes detailed visit windowing rules not present in Original SAP Section 4 (though implied by Appendix).",
+      "reasoning": "Beneficial addition."
+    }
+  ],
+  "reasoning": "The Generated SAP fails in a critical area: it does not define Major Protocol Deviations. The Protocol explicitly states these 'will be defined in the SAP'. The Original SAP fulfills this by listing them (Mis-randomization, etc.). The Generated SAP merely copies the Protocol's text saying they 'will be defined in the SAP', creating a circular reference and failing to provide the required definitions. Additionally, the Generated SAP omits the Sample Size calculation and specific Randomization details (permuted blocks) which are present in the Protocol. It also changes the sensitivity analysis strategy from Tipping Point (Original) to Complete Case (Generated), which is a methodological downgrade.",
+  "summary": "The Generated SAP is rated POOR due to a critical failure to define Major Protocol Deviations, a requirement explicitly deferred to the SAP by the Protocol. Instead of defining them, the document copies the Protocol's instruction that they 'will be defined', leaving them undefined. It also omits the Sample Size calculation and Randomization details found in the Protocol."
 }
