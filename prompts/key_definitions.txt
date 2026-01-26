@@ -68,24 +68,21 @@ For each definition found in Generated SAP:
 | SAP-originated | Original SAP defines this, Protocol does not |
 | Generated addition | Neither Protocol nor Original SAP defines this |
 
-**Step B**: Apply comparison logic based on category
+**Step B**: Apply comparison logic
 
-**For Protocol-defined concepts:**
-- Generated SAP must match Protocol in meaning
-- Wording can vary
-- Contradiction with Protocol = PROBLEM (critical)
+**For all definitions:**
+1. Compare Generated SAP to Original SAP
+2. If same meaning → matches_original_sap: "yes", result: "correct"
+3. If different meaning → check Protocol as tiebreaker
+4. If Generated matches Protocol → matches_original_sap: "no", result: "correct"
+5. If Generated matches neither Original SAP nor Protocol → matches_original_sap: "no", result: "problem", issue_type: "contradiction"
 
-**For SAP-originated definitions:**
-- Compare Generated SAP to Original SAP
-- Must match in meaning (wording can vary)
-- If different, check if Generated aligns with Protocol context
-- Contradiction without Protocol support = PROBLEM
-
-**For Generated additions:**
-- Assess consistency with study design
-- Check for contradiction with Protocol or Original SAP
-- Consistent addition = ACCEPTABLE
-- Contradicting addition = PROBLEM
+**Chain of thought for each definition:**
+- What does Original SAP say?
+- What does Generated SAP say?
+- Can both statements be true at the same time?
+- If no, what does Protocol say?
+- If Generated matches neither → this is a contradiction
 
 ### PHASE 3: MISSING DEFINITIONS CHECK
 
@@ -108,7 +105,7 @@ For each definition in Original SAP not found in Generated SAP:
 Scan the Generated SAP for internal contradictions:
 - Is the same term defined differently in different places?
 - Do calculation formulas conflict with stated definitions?
-- Are reference points (e.g., what constitutes "baseline") consistent throughout?
+- Are reference points consistent throughout?
 
 ---
 
@@ -181,8 +178,8 @@ Provide BOTH markdown (for human review) AND JSON (for programmatic use).
 
 ### Evaluation Summary Table
 
-| Definition | Source Category | Found in Protocol | Found in Original SAP | Matches Source | Result |
-|------------|-----------------|-------------------|----------------------|----------------|--------|
+| Definition | Source Category | Found in Protocol | Found in Original SAP | Matches Original SAP | Result |
+|------------|-----------------|-------------------|----------------------|---------------------|--------|
 | [name] | [protocol-defined/sap-originated/generated-addition] | yes (location) / no | yes (location) / no | yes/no/n/a | correct/acceptable/problem |
 
 ---
@@ -268,7 +265,7 @@ Provide BOTH markdown (for human review) AND JSON (for programmatic use).
       "original_sap_location": "section/location or null",
       "protocol_text": "exact quote or null",
       "protocol_location": "section/location or null",
-      "matches_source": "yes | no | n/a",
+      "matches_original_sap": "yes | no | n/a",
       "result": "correct | acceptable | problem",
       "issue_type": "none | contradiction_protocol | contradiction_original | internal_contradiction",
       "severity": "none | minor | critical",
