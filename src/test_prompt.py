@@ -201,9 +201,7 @@ def json_to_markdown_analysis_populations(result: dict) -> str:
 
 
 def json_to_markdown(result: dict, section_name: str) -> str:
-    """Convert JSON evaluation result to markdown format."""
-
-    # Use standard format for all sections (removed specialized formatter)
+    """Convert JSON evaluation result to markdown format. All fields match JSON — no truncation."""
 
     lines = []
 
@@ -217,104 +215,135 @@ def json_to_markdown(result: dict, section_name: str) -> str:
     lines.append("---")
     lines.append("")
 
-    # Evaluation Summary Table
-    lines.append("### Evaluation Summary Table")
-    lines.append("")
+    # Extraction Validation
+    extraction = result.get('extraction_validation', {})
+    if extraction:
+        lines.append("### Extraction Validation")
+        lines.append("")
+        lines.append(f"- **Sections read:** {', '.join(extraction.get('sections_read', []))}")
+        eps = extraction.get('elements_per_section', {})
+        if eps:
+            lines.append(f"- **Elements per section:** {', '.join(f'{k}: {v}' for k, v in eps.items())}")
+        lines.append(f"- **Elements extracted:** {extraction.get('elements_extracted', 'N/A')}")
+        lines.append(f"- **Elements in evaluation table:** {extraction.get('elements_in_evaluation_table', 'N/A')}")
+        lines.append(f"- **Elements in missing from generated SAP:** {extraction.get('elements_in_missing_from_generated_sap', 'N/A')}")
+        lines.append(f"- **Counts match:** {extraction.get('counts_match', 'N/A')}")
+        lines.append("")
+        lines.append("---")
+        lines.append("")
 
+    # Evaluation Table — one block per item
     eval_table = result.get('evaluation_table', [])
-    if eval_table:
-        # Determine columns based on first item
-        first_item = eval_table[0]
-        if 'category' in first_item:
-            # General methodology format (has category field)
-            lines.append("| Component | Category | Matches Original SAP | Protocol Consulted | Result | Issue Type | Severity |")
-            lines.append("|-----------|----------|---------------------|-------------------|--------|------------|----------|")
-            for row in eval_table:
-                comp = row.get('component', '')
-                cat = row.get('category', '')
-                match_orig = row.get('matches_original_sap', '')
-                proto_cons = row.get('protocol_consulted', '')
-                res = row.get('result', '')
-                issue = row.get('issue_type', '')
-                sev = row.get('severity', '')
-                lines.append(f"| {comp} | {cat} | {match_orig} | {proto_cons} | {res} | {issue} | {sev} |")
-        else:
-            # Objectives/endpoints format
-            lines.append("| Component | Evaluation Type | Matches Original SAP | Protocol Consulted | Result | Issue Type | Severity |")
-            lines.append("|-----------|-----------------|---------------------|-------------------|--------|------------|----------|")
-            for row in eval_table:
-                comp = row.get('component', '')
-                eval_type = row.get('evaluation_type', '')
-                match_orig = row.get('matches_original_sap', '')
-                proto_cons = row.get('protocol_consulted', '')
-                res = row.get('result', '')
-                issue = row.get('issue_type', '')
-                sev = row.get('severity', '')
-                lines.append(f"| {comp} | {eval_type} | {match_orig} | {proto_cons} | {res} | {issue} | {sev} |")
-
+    lines.append(f"### Evaluation Table ({len(eval_table)} items)")
     lines.append("")
+
+    for i, row in enumerate(eval_table, 1):
+        lines.append(f"#### {i}. {row.get('component', '')}")
+        lines.append("")
+        if row.get('category'):
+            lines.append(f"- **Category:** {row['category']}")
+        if row.get('evaluation_type'):
+            lines.append(f"- **Evaluation type:** {row['evaluation_type']}")
+        lines.append(f"- **Matches Original SAP:** {row.get('matches_original_sap', '')}")
+        lines.append(f"- **Protocol consulted:** {row.get('protocol_consulted', '')}")
+        lines.append(f"- **Result:** {row.get('result', '')}")
+        lines.append(f"- **Issue type:** {row.get('issue_type', '')}")
+        lines.append(f"- **Severity:** {row.get('severity', '')}")
+        if row.get('detail_level'):
+            lines.append(f"- **Detail level:** {row['detail_level']}")
+        if row.get('original_sap_text'):
+            lines.append(f"- **Original SAP text:** {row['original_sap_text']}")
+        if row.get('generated_sap_text') and row['generated_sap_text'] != 'null':
+            lines.append(f"- **Generated SAP text:** {row['generated_sap_text']}")
+        if row.get('protocol_text'):
+            lines.append(f"- **Protocol text:** {row['protocol_text']}")
+        if row.get('omitted_content') and row['omitted_content'] != 'none':
+            lines.append(f"- **Omitted content:** {row['omitted_content']}")
+        if row.get('omission_impact') and row['omission_impact'] != 'none':
+            lines.append(f"- **Omission impact:** {row['omission_impact']}")
+        if row.get('reasoning'):
+            lines.append(f"- **Reasoning:** {row['reasoning']}")
+        lines.append("")
+
     lines.append("---")
     lines.append("")
 
     # Issues Found
-    lines.append("### Issues Found")
-    lines.append("")
     issues = result.get('issues', [])
+    lines.append(f"### Issues Found ({len(issues)} items)")
+    lines.append("")
     if issues:
-        lines.append("| Issue Type | Severity | Component | Why They Conflict | Description |")
-        lines.append("|------------|----------|-----------|-------------------|-------------|")
-        for issue in issues:
-            itype = issue.get('issue_type', '')
-            sev = issue.get('severity', '')
-            comp = issue.get('component', '')
-            why_conflict = issue.get('why_they_conflict', '')[:40]
-            desc = issue.get('description', '')[:40]
-            lines.append(f"| {itype} | {sev} | {comp} | {why_conflict} | {desc} |")
+        for i, issue in enumerate(issues, 1):
+            lines.append(f"#### Issue {i}: {issue.get('component', '')}")
+            lines.append("")
+            lines.append(f"- **Issue type:** {issue.get('issue_type', '')}")
+            lines.append(f"- **Severity:** {issue.get('severity', '')}")
+            if issue.get('original_sap_text'):
+                lines.append(f"- **Original SAP text:** {issue['original_sap_text']}")
+            if issue.get('generated_sap_text'):
+                lines.append(f"- **Generated SAP text:** {issue['generated_sap_text']}")
+            if issue.get('protocol_text'):
+                lines.append(f"- **Protocol text:** {issue['protocol_text']}")
+            if issue.get('why_they_conflict'):
+                lines.append(f"- **Why they conflict:** {issue['why_they_conflict']}")
+            if issue.get('description'):
+                lines.append(f"- **Description:** {issue['description']}")
+            if issue.get('reasoning'):
+                lines.append(f"- **Reasoning:** {issue['reasoning']}")
+            lines.append("")
     else:
         lines.append("*No issues found.*")
+        lines.append("")
 
-    lines.append("")
     lines.append("---")
     lines.append("")
 
     # Extra Information Flagged
-    lines.append("### Extra Information Flagged")
-    lines.append("")
     extra = result.get('extra_information_flagged', [])
+    lines.append(f"### Extra Information Flagged ({len(extra)} items)")
+    lines.append("")
     if extra:
-        lines.append("| Content | Contradicts | Detail |")
-        lines.append("|---------|-------------|--------|")
-        for item in extra:
-            content = item.get('content', '')
-            contradicts = item.get('contradicts', '')
-            detail = item.get('detail', '')
-            lines.append(f"| {content} | {contradicts} | {detail} |")
+        for i, item in enumerate(extra, 1):
+            lines.append(f"#### Extra {i}: {item.get('content', '')}")
+            lines.append("")
+            if item.get('generated_sap_text'):
+                lines.append(f"- **Generated SAP text:** {item['generated_sap_text']}")
+            lines.append(f"- **Contradicts:** {item.get('contradicts', '')}")
+            if item.get('detail'):
+                lines.append(f"- **Detail:** {item['detail']}")
+            if item.get('reasoning'):
+                lines.append(f"- **Reasoning:** {item['reasoning']}")
+            lines.append("")
     else:
         lines.append("*No extra information flagged.*")
+        lines.append("")
 
-    lines.append("")
     lines.append("---")
     lines.append("")
 
-    # Missing from Generated SAP - show ALL items
+    # Missing from Generated SAP
     missing = result.get('missing_from_generated_sap', [])
     lines.append(f"### Missing from Generated SAP ({len(missing)} items)")
     lines.append("")
     if missing:
-        lines.append("| Component | Classification | In Protocol | Original SAP Text | Protocol Text | Reasoning |")
-        lines.append("|-----------|----------------|-------------|-------------------|---------------|-----------|")
-        for item in missing:
-            comp = item.get('component', '')
-            classification = item.get('classification', '')
-            in_proto = item.get('in_protocol', '')
-            orig_text = (item.get('original_sap_text') or '')[:60] + "..." if len(item.get('original_sap_text') or '') > 60 else (item.get('original_sap_text') or '')
-            proto_text = (item.get('protocol_text') or '')[:40] + "..." if len(item.get('protocol_text') or '') > 40 else (item.get('protocol_text') or '')
-            reasoning = (item.get('reasoning') or item.get('description') or '')[:50] + "..." if len(item.get('reasoning') or item.get('description') or '') > 50 else (item.get('reasoning') or item.get('description') or '')
-            lines.append(f"| {comp} | {classification} | {in_proto} | {orig_text} | {proto_text} | {reasoning} |")
+        for i, item in enumerate(missing, 1):
+            lines.append(f"#### Missing {i}: {item.get('component', '')}")
+            lines.append("")
+            lines.append(f"- **Classification:** {item.get('classification', '')}")
+            lines.append(f"- **In protocol:** {item.get('in_protocol', '')}")
+            if item.get('original_sap_text'):
+                lines.append(f"- **Original SAP text:** {item['original_sap_text']}")
+            if item.get('protocol_text'):
+                lines.append(f"- **Protocol text:** {item['protocol_text']}")
+            if item.get('description'):
+                lines.append(f"- **Description:** {item['description']}")
+            if item.get('reasoning'):
+                lines.append(f"- **Reasoning:** {item['reasoning']}")
+            lines.append("")
     else:
         lines.append("*No missing content.*")
+        lines.append("")
 
-    lines.append("")
     lines.append("---")
     lines.append("")
 
@@ -324,20 +353,26 @@ def json_to_markdown(result: dict, section_name: str) -> str:
         lines.append(f"### Internal Contradictions ({len(internal_contradictions)} items)")
         lines.append("")
         if internal_contradictions:
-            lines.append("| Component | Section A | Section A Text | Section B | Section B Text | Description |")
-            lines.append("|-----------|-----------|----------------|-----------|----------------|-------------|")
-            for item in internal_contradictions:
-                comp = item.get('component', '')
-                sec_a = item.get('section_a', '')
-                sec_a_text = (item.get('section_a_text') or '')[:30]
-                sec_b = item.get('section_b', '')
-                sec_b_text = (item.get('section_b_text') or '')[:30]
-                desc = item.get('description', '')[:40]
-                lines.append(f"| {comp} | {sec_a} | {sec_a_text} | {sec_b} | {sec_b_text} | {desc} |")
+            for i, item in enumerate(internal_contradictions, 1):
+                lines.append(f"#### Contradiction {i}: {item.get('component', '')}")
+                lines.append("")
+                if item.get('section_a'):
+                    lines.append(f"- **Section A:** {item['section_a']}")
+                if item.get('section_a_text'):
+                    lines.append(f"- **Section A text:** {item['section_a_text']}")
+                if item.get('section_b'):
+                    lines.append(f"- **Section B:** {item['section_b']}")
+                if item.get('section_b_text'):
+                    lines.append(f"- **Section B text:** {item['section_b_text']}")
+                if item.get('description'):
+                    lines.append(f"- **Description:** {item['description']}")
+                if item.get('reasoning'):
+                    lines.append(f"- **Reasoning:** {item['reasoning']}")
+                lines.append("")
         else:
             lines.append("*No internal contradictions found.*")
+            lines.append("")
 
-        lines.append("")
         lines.append("---")
         lines.append("")
 
