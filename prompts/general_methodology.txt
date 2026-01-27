@@ -78,11 +78,11 @@ Every element extracted in Phase 1 MUST appear in either evaluation_table OR mis
 
 | Scenario | Result | JSON Location |
 |----------|--------|---------------|
-| Both statements can be true (matches_original_sap: yes) | ✅ CORRECT | evaluation_table (result: correct) |
-| Generated SAP is less detailed (matches_original_sap: yes) | ✅ CORRECT | evaluation_table (result: correct) |
-| Statements conflict - cannot both be true (matches_original_sap: no) | ❌ PROBLEM | evaluation_table (result: problem, issue_type: contradiction_original) |
-| Element missing from Generated, EXISTS in Protocol | ❌ PROBLEM | missing_from_generated_sap (in_protocol: yes, classification: missing_required) |
-| Element missing from Generated, NOT in Protocol | ✅ ACCEPTABLE | missing_from_generated_sap (in_protocol: no, classification: acceptable_difference) |
+| Both statements can be true (matches_original_sap: yes) | CORRECT | evaluation_table (result: correct) |
+| Generated SAP is less detailed (matches_original_sap: yes) |  CORRECT | evaluation_table (result: correct) |
+| Statements conflict - cannot both be true (matches_original_sap: no) | PROBLEM | evaluation_table (result: problem, issue_type: contradiction_original) |
+| Element missing from Generated, EXISTS in Protocol |  PROBLEM | missing_from_generated_sap (in_protocol: yes, classification: missing_required) |
+| Element missing from Generated, NOT in Protocol | ACCEPTABLE | missing_from_generated_sap (in_protocol: no, classification: acceptable_difference) |
 
 **CONTENT vs EXISTENCE Hierarchy:**
 
@@ -229,7 +229,7 @@ Provide BOTH markdown (for human review) AND JSON (for programmatic use).
 
 ---
 
-### ❌ Missing Required Content (X items)
+###  Missing Required Content (X items)
 
 Content in both Original SAP AND Protocol - should be in Generated SAP.
 
