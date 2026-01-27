@@ -57,10 +57,10 @@ Stop. Do not consult Protocol for content. Do not mention Protocol in reasoning.
 
 | Scenario | Result |
 |----------|--------|
-| Generated SAP content matches Original SAP | ✅ **CORRECT** |
-| Generated SAP is less detailed but does NOT change patients or assignment | ✅ **ACCEPTABLE** |
-| Generated SAP is less detailed AND changes which patients are included/excluded or how assigned | ❌ **PROBLEM** (different meaning) |
-| Generated SAP says something DIFFERENT that contradicts Original SAP | ❌ **PROBLEM** (contradiction) |
+| Generated SAP content matches Original SAP |  **CORRECT** |
+| Generated SAP is less detailed but does NOT change patients or assignment |  **ACCEPTABLE** |
+| Generated SAP is less detailed AND changes which patients are included/excluded or how assigned |  **PROBLEM** (different meaning) |
+| Generated SAP says something DIFFERENT that contradicts Original SAP |  **PROBLEM** (contradiction) |
 
 **How to distinguish "less detailed" from "contradiction":**
 - Less detailed: Generated SAP omits words/clauses but core meaning is preserved
@@ -293,7 +293,7 @@ Provide BOTH markdown (for human review) AND JSON (for programmatic use).
 
 ---
 
-### ❌ Missing Required Content (X items)
+###  Missing Required Content (X items)
 
 Content in both Original SAP AND Protocol - should be in Generated SAP.
 
