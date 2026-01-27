@@ -100,24 +100,26 @@ Your content reasoning must ONLY reference Original SAP and Generated SAP. The i
 
 ## WHAT TO EVALUATE FOR EACH POPULATION
 
-### The 3 Critical Components (MUST match)
+### Critical Components (MUST match)
 
-For each population, evaluate these 3 components:
+For each population, evaluate these components:
 
-1. **Name** - Must match exactly
+- **Name** - Must match exactly
 
-2. **Definition** - Extract the COMPLETE text from Original SAP that describes which patients are in this population. This includes ALL inclusion criteria AND ALL exclusion criteria together as ONE text. Compare to the COMPLETE definition text in Generated SAP. Meaning = which patients are included/excluded. Different meaning = PROBLEM. Less detail with same meaning = ACCEPTABLE.
+- **Definition** - Extract the COMPLETE text from Original SAP that describes which patients are in this population. This includes ALL inclusion criteria AND ALL exclusion criteria together as ONE text. Compare to the COMPLETE definition text in Generated SAP. Meaning = which patients are included/excluded. Different meaning = PROBLEM. Less detail with same meaning = ACCEPTABLE.
 
-3. **Treatment Assignment** - Extract the COMPLETE text from Original SAP that describes how patients are assigned to treatment groups. This includes ALL assignment rules together as ONE text. Compare to the COMPLETE assignment text in Generated SAP. Meaning = how patients are assigned. Different meaning = PROBLEM. Less detail with same meaning = ACCEPTABLE.
+- **Treatment Assignment** - Extract the COMPLETE text from Original SAP that describes how patients are assigned to treatment groups. This includes ALL assignment rules together as ONE text. Compare to the COMPLETE assignment text in Generated SAP. Meaning = how patients are assigned. Different meaning = PROBLEM. Less detail with same meaning = ACCEPTABLE.
 
-**Evaluation logic for these 3 components:**
+- Plus any other content within the population's section
+
+**Evaluation logic for these components:**
 - If Generated SAP matches Original SAP → CORRECT
 - If Generated SAP is less detailed but meaning preserved → ACCEPTABLE
 - If Generated SAP contradicts Original SAP → PROBLEM
 
-### Everything Else in Original SAP
+### All Other Content for Each Population (MUST also be captured)
 
-For any other content in Original SAP (operational details, references, timing, etc.):
+For any other content in Original SAP beyond the critical components:
 
 1. Check if it exists in Generated SAP
 2. If missing from Generated SAP → **Check Protocol**
@@ -136,13 +138,13 @@ For any other content in Original SAP (operational details, references, timing, 
 ### Step 1: Search Protocol
 - Search the entire Protocol document for analysis populations/analysis sets
 - List ALL populations defined
-- Record ALL text related to each population
+- Record ALL text within each population's section
 
 ### Step 2: Search Original SAP
 - Search the entire Original SAP document for analysis populations
 - List ALL populations defined
-- For EACH population, list ALL distinct components found (name, definition, criteria, treatment assignment, timing, subsets, etc.)
-- Record ALL text related to each population—every sentence, clause, phrase, list, reference, and statement
+- For EACH population, list ALL distinct components found
+- Record ALL text within each population's section—every sentence, clause, phrase, list, reference, and statement
 - Do not filter or summarize. Extract the complete text.
 - **Count the total number of distinct components across all populations**
 
@@ -150,7 +152,7 @@ For any other content in Original SAP (operational details, references, timing, 
 - Search the entire Generated SAP document for analysis populations
 - List ALL populations defined
 - For EACH population, list ALL distinct components found
-- Record ALL text related to each population
+- Record ALL text within each population's section
 - **Count the total number of distinct components across all populations**
 
 ### Step 4: Create Component Inventory
