@@ -40,7 +40,10 @@ This evaluation has three phases. Complete each phase fully before the next.
 
 ### PHASE 1: EXHAUSTIVE EXTRACTION
 
-Read the Original SAP document line by line. For each statement, rule, or definition:
+**EXTRACTION GRANULARITY:**
+Each sentence is a separate entry. If a paragraph contains multiple sentences, extract each sentence as its own entry. Do NOT group multiple sentences into one entry.
+
+Read the Original SAP document sentence by sentence. For each statement, rule, or definition:
 1. Extract the EXACT TEXT (word-for-word quote)
 2. Do not paraphrase or summarize
 3. Do not fit into predefined categories
@@ -105,6 +108,17 @@ For EXISTENCE (whether it's there):
 1. Each statement = separate entry (NEVER combine)
 2. "Less detail" ≠ "conflict" → matches_original_sap: yes (both can be true)
 3. If both statements cannot be true at the same time → matches_original_sap: no (CONTRADICTION)
+
+**OUTPUT COMPLETENESS RULE:**
+Your output arrays (evaluation_table + missing_from_generated_sap) must contain exactly the same number of entries as elements_extracted.
+
+Before generating output:
+1. Count your extracted elements
+2. Ensure every single one has a corresponding entry in either evaluation_table OR missing_from_generated_sap
+3. Do NOT consolidate, summarize, or merge entries in the output
+4. One extracted sentence = one output entry
+
+If counts do not match, add the missing entries before proceeding.
 
 ### PHASE 3: INTERNAL CONSISTENCY CHECK
 
