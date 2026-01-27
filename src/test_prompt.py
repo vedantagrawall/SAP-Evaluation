@@ -200,12 +200,51 @@ def json_to_markdown_analysis_populations(result: dict) -> str:
     return "\n".join(lines)
 
 
+def _format_key(key: str) -> str:
+    """Convert snake_case JSON key to readable label."""
+    return key.replace('_', ' ').replace('sap', 'SAP').strip()
+
+
+def _render_dict_item(item: dict, lines: list):
+    """Render all key-value pairs of a dict as markdown bullet points. No truncation."""
+    for key, value in item.items():
+        if value is None or value == '' or value == 'null':
+            continue
+        if key == 'component':
+            continue  # already used as heading
+        label = _format_key(key)
+        lines.append(f"- **{label}:** {value}")
+
+
+def _render_array_section(result: dict, key: str, heading: str, lines: list):
+    """Render a JSON array as a numbered markdown section with all fields."""
+    items = result.get(key, [])
+    lines.append(f"### {heading} ({len(items)} items)")
+    lines.append("")
+    if items:
+        for i, item in enumerate(items, 1):
+            title = item.get('component', item.get('content', f'Item {i}'))
+            lines.append(f"#### {i}. {title}")
+            lines.append("")
+            _render_dict_item(item, lines)
+            lines.append("")
+    else:
+        lines.append(f"*No {heading.lower()}.*")
+        lines.append("")
+    lines.append("---")
+    lines.append("")
+
+
 def json_to_markdown(result: dict, section_name: str) -> str:
-    """Convert JSON evaluation result to markdown format. All fields match JSON — no truncation."""
+    """Convert JSON evaluation result to markdown format. All fields match JSON — no truncation.
+
+    Renders every key in the JSON. Uses generic rendering so non-standard keys
+    (e.g. missing_definitions, additions) are included automatically.
+    """
 
     lines = []
 
-    # Header
+    # Top-level scalar fields
     lines.append(f"## {section_name.replace('_', ' ').title()} Evaluation")
     lines.append("")
     lines.append(f"**Section:** {result.get('section', section_name)}")
@@ -215,166 +254,52 @@ def json_to_markdown(result: dict, section_name: str) -> str:
     lines.append("---")
     lines.append("")
 
-    # Extraction Validation
+    # Extraction Validation — render all keys generically
     extraction = result.get('extraction_validation', {})
     if extraction:
         lines.append("### Extraction Validation")
         lines.append("")
-        lines.append(f"- **Sections read:** {', '.join(extraction.get('sections_read', []))}")
-        eps = extraction.get('elements_per_section', {})
-        if eps:
-            lines.append(f"- **Elements per section:** {', '.join(f'{k}: {v}' for k, v in eps.items())}")
-        lines.append(f"- **Elements extracted:** {extraction.get('elements_extracted', 'N/A')}")
-        lines.append(f"- **Elements in evaluation table:** {extraction.get('elements_in_evaluation_table', 'N/A')}")
-        lines.append(f"- **Elements in missing from generated SAP:** {extraction.get('elements_in_missing_from_generated_sap', 'N/A')}")
-        lines.append(f"- **Counts match:** {extraction.get('counts_match', 'N/A')}")
+        for key, value in extraction.items():
+            label = _format_key(key)
+            if isinstance(value, list):
+                lines.append(f"- **{label}:** {', '.join(str(v) for v in value)}")
+            elif isinstance(value, dict):
+                lines.append(f"- **{label}:** {', '.join(f'{k}: {v}' for k, v in value.items())}")
+            else:
+                lines.append(f"- **{label}:** {value}")
         lines.append("")
         lines.append("---")
         lines.append("")
 
-    # Evaluation Table — one block per item
-    eval_table = result.get('evaluation_table', [])
-    lines.append(f"### Evaluation Table ({len(eval_table)} items)")
-    lines.append("")
+    # Known array sections with preferred headings
+    known_arrays = {
+        'evaluation_table': 'Evaluation Table',
+        'issues': 'Issues Found',
+        'extra_information_flagged': 'Extra Information Flagged',
+        'missing_from_generated_sap': 'Missing from Generated SAP',
+        'internal_contradictions': 'Internal Contradictions',
+        # Non-standard keys from key_definitions
+        'missing_definitions': 'Missing Definitions',
+        'additions': 'Additions',
+    }
 
-    for i, row in enumerate(eval_table, 1):
-        lines.append(f"#### {i}. {row.get('component', '')}")
-        lines.append("")
-        if row.get('category'):
-            lines.append(f"- **Category:** {row['category']}")
-        if row.get('evaluation_type'):
-            lines.append(f"- **Evaluation type:** {row['evaluation_type']}")
-        lines.append(f"- **Matches Original SAP:** {row.get('matches_original_sap', '')}")
-        lines.append(f"- **Protocol consulted:** {row.get('protocol_consulted', '')}")
-        lines.append(f"- **Result:** {row.get('result', '')}")
-        lines.append(f"- **Issue type:** {row.get('issue_type', '')}")
-        lines.append(f"- **Severity:** {row.get('severity', '')}")
-        if row.get('detail_level'):
-            lines.append(f"- **Detail level:** {row['detail_level']}")
-        if row.get('original_sap_text'):
-            lines.append(f"- **Original SAP text:** {row['original_sap_text']}")
-        if row.get('generated_sap_text') and row['generated_sap_text'] != 'null':
-            lines.append(f"- **Generated SAP text:** {row['generated_sap_text']}")
-        if row.get('protocol_text'):
-            lines.append(f"- **Protocol text:** {row['protocol_text']}")
-        if row.get('omitted_content') and row['omitted_content'] != 'none':
-            lines.append(f"- **Omitted content:** {row['omitted_content']}")
-        if row.get('omission_impact') and row['omission_impact'] != 'none':
-            lines.append(f"- **Omission impact:** {row['omission_impact']}")
-        if row.get('reasoning'):
-            lines.append(f"- **Reasoning:** {row['reasoning']}")
-        lines.append("")
+    # Render all array sections — both known and unknown
+    rendered_keys = {'section', 'rating', 'status', 'extraction_validation', 'reasoning', 'summary'}
 
-    lines.append("---")
-    lines.append("")
+    # First render known arrays in order
+    for key, heading in known_arrays.items():
+        if key in result:
+            _render_array_section(result, key, heading, lines)
+            rendered_keys.add(key)
 
-    # Issues Found
-    issues = result.get('issues', [])
-    lines.append(f"### Issues Found ({len(issues)} items)")
-    lines.append("")
-    if issues:
-        for i, issue in enumerate(issues, 1):
-            lines.append(f"#### Issue {i}: {issue.get('component', '')}")
-            lines.append("")
-            lines.append(f"- **Issue type:** {issue.get('issue_type', '')}")
-            lines.append(f"- **Severity:** {issue.get('severity', '')}")
-            if issue.get('original_sap_text'):
-                lines.append(f"- **Original SAP text:** {issue['original_sap_text']}")
-            if issue.get('generated_sap_text'):
-                lines.append(f"- **Generated SAP text:** {issue['generated_sap_text']}")
-            if issue.get('protocol_text'):
-                lines.append(f"- **Protocol text:** {issue['protocol_text']}")
-            if issue.get('why_they_conflict'):
-                lines.append(f"- **Why they conflict:** {issue['why_they_conflict']}")
-            if issue.get('description'):
-                lines.append(f"- **Description:** {issue['description']}")
-            if issue.get('reasoning'):
-                lines.append(f"- **Reasoning:** {issue['reasoning']}")
-            lines.append("")
-    else:
-        lines.append("*No issues found.*")
-        lines.append("")
-
-    lines.append("---")
-    lines.append("")
-
-    # Extra Information Flagged
-    extra = result.get('extra_information_flagged', [])
-    lines.append(f"### Extra Information Flagged ({len(extra)} items)")
-    lines.append("")
-    if extra:
-        for i, item in enumerate(extra, 1):
-            lines.append(f"#### Extra {i}: {item.get('content', '')}")
-            lines.append("")
-            if item.get('generated_sap_text'):
-                lines.append(f"- **Generated SAP text:** {item['generated_sap_text']}")
-            lines.append(f"- **Contradicts:** {item.get('contradicts', '')}")
-            if item.get('detail'):
-                lines.append(f"- **Detail:** {item['detail']}")
-            if item.get('reasoning'):
-                lines.append(f"- **Reasoning:** {item['reasoning']}")
-            lines.append("")
-    else:
-        lines.append("*No extra information flagged.*")
-        lines.append("")
-
-    lines.append("---")
-    lines.append("")
-
-    # Missing from Generated SAP
-    missing = result.get('missing_from_generated_sap', [])
-    lines.append(f"### Missing from Generated SAP ({len(missing)} items)")
-    lines.append("")
-    if missing:
-        for i, item in enumerate(missing, 1):
-            lines.append(f"#### Missing {i}: {item.get('component', '')}")
-            lines.append("")
-            lines.append(f"- **Classification:** {item.get('classification', '')}")
-            lines.append(f"- **In protocol:** {item.get('in_protocol', '')}")
-            if item.get('original_sap_text'):
-                lines.append(f"- **Original SAP text:** {item['original_sap_text']}")
-            if item.get('protocol_text'):
-                lines.append(f"- **Protocol text:** {item['protocol_text']}")
-            if item.get('description'):
-                lines.append(f"- **Description:** {item['description']}")
-            if item.get('reasoning'):
-                lines.append(f"- **Reasoning:** {item['reasoning']}")
-            lines.append("")
-    else:
-        lines.append("*No missing content.*")
-        lines.append("")
-
-    lines.append("---")
-    lines.append("")
-
-    # Internal Contradictions (for general_methodology)
-    internal_contradictions = result.get('internal_contradictions', [])
-    if internal_contradictions or section_name == 'general_methodology':
-        lines.append(f"### Internal Contradictions ({len(internal_contradictions)} items)")
-        lines.append("")
-        if internal_contradictions:
-            for i, item in enumerate(internal_contradictions, 1):
-                lines.append(f"#### Contradiction {i}: {item.get('component', '')}")
-                lines.append("")
-                if item.get('section_a'):
-                    lines.append(f"- **Section A:** {item['section_a']}")
-                if item.get('section_a_text'):
-                    lines.append(f"- **Section A text:** {item['section_a_text']}")
-                if item.get('section_b'):
-                    lines.append(f"- **Section B:** {item['section_b']}")
-                if item.get('section_b_text'):
-                    lines.append(f"- **Section B text:** {item['section_b_text']}")
-                if item.get('description'):
-                    lines.append(f"- **Description:** {item['description']}")
-                if item.get('reasoning'):
-                    lines.append(f"- **Reasoning:** {item['reasoning']}")
-                lines.append("")
-        else:
-            lines.append("*No internal contradictions found.*")
-            lines.append("")
-
-        lines.append("---")
-        lines.append("")
+    # Then render any remaining arrays not in the known list
+    for key, value in result.items():
+        if key in rendered_keys:
+            continue
+        if isinstance(value, list):
+            heading = _format_key(key).title()
+            _render_array_section(result, key, heading, lines)
+            rendered_keys.add(key)
 
     # Reasoning
     lines.append("### Reasoning")
