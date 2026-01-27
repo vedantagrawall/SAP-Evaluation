@@ -60,14 +60,14 @@ For CONTENT (what does it say?):
 
 | Scenario | Result |
 |----------|--------|
-| Generated SAP content matches Original SAP | ✅ CORRECT |
+| Generated SAP content matches Original SAP |  CORRECT |
 | Generated SAP content doesn't match Original SAP | Check if it's a contradiction or just less detailed |
-| Generated SAP is less detailed than Original SAP | ✅ ACCEPTABLE (Generated is abbreviated) |
-| Generated SAP says something DIFFERENT (contradicts) Original SAP | ❌ PROBLEM - contradiction |
+| Generated SAP is less detailed than Original SAP |  ACCEPTABLE (Generated is abbreviated) |
+| Generated SAP says something DIFFERENT (contradicts) Original SAP | PROBLEM - contradiction |
 | Generated SAP missing an element that exists in Original SAP | Check Protocol - does element exist there? |
-| Element exists in Protocol but not in Generated SAP | ❌ PROBLEM - missing element |
-| Element only in Original SAP (not in Protocol), not in Generated SAP | ✅ ACCEPTABLE |
-| Generated SAP has extra content (Original SAP is silent) | Check if it contradicts → if no, ✅ CORRECT (flag as good practice) |
+| Element exists in Protocol but not in Generated SAP | PROBLEM - missing element |
+| Element only in Original SAP (not in Protocol), not in Generated SAP |  ACCEPTABLE |
+| Generated SAP has extra content (Original SAP is silent) | Check if it contradicts → if no,  CORRECT (flag as good practice) |
 | Generated SAP states "no multiplicity" and Original is silent | Check Protocol sample size section → if no indication of multiplicity, ✅ CORRECT |
 
 ---
@@ -83,10 +83,10 @@ If Generated SAP explicitly states "no multiplicity adjustment needed" and Origi
 
 | Original SAP | Protocol Sample Size Section | Generated SAP Says "No Multiplicity" | Result |
 |--------------|------------------------------|--------------------------------------|--------|
-| Silent | No indication of multiplicity | States no multiplicity needed | ✅ CORRECT (good practice) |
-| Silent | HAS indication of multiplicity | States no multiplicity needed | ❌ PROBLEM |
-| Says no multiplicity | Any | States no multiplicity needed | ✅ CORRECT |
-| Says HAS multiplicity | Any | States no multiplicity needed | ❌ CONTRADICTION |
+| Silent | No indication of multiplicity | States no multiplicity needed |  CORRECT (good practice) |
+| Silent | HAS indication of multiplicity | States no multiplicity needed |  PROBLEM |
+| Says no multiplicity | Any | States no multiplicity needed | CORRECT |
+| Says HAS multiplicity | Any | States no multiplicity needed | CONTRADICTION |
 
 ---
 
