@@ -22,11 +22,12 @@ GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 LLAMAPARSE_CONFIG = {
     "result_type": "markdown",
     "verbose": True,
+    "continuous_mode": True,
 }
 
 # Gemini settings
 GEMINI_MODEL = "gemini-3-pro-preview"
 GEMINI_CONFIG = {
     "temperature": 0.1,  # Low temperature for consistent evaluations
-    "max_output_tokens": 32768,
+    "max_output_tokens": 65536,
 }

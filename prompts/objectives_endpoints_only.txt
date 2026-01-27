@@ -1,4 +1,4 @@
-# Objectives, Endpoints, and Efficacy Analysis Evaluation Prompt
+# Objectives and Endpoints Evaluation Prompt
 
 You are evaluating a Generated SAP against an Original SAP for a clinical trial.
 
@@ -14,7 +14,12 @@ You are evaluating a Generated SAP against an Original SAP for a clinical trial.
 
 ## YOUR TASK
 
-Evaluate the Objectives, Endpoints, and Efficacy Analysis content in the Generated SAP.
+Evaluate ONLY the Objectives and Endpoints content in the Generated SAP. This includes:
+- Study objectives (primary and secondary)
+- Endpoint definitions
+- Estimands (if present)
+
+**DO NOT** evaluate efficacy analysis methods, statistical models, or analysis procedures. Those are evaluated in a separate prompt.
 
 **CRITICAL**: Read the Original SAP sentence by sentence. Every sentence that contains a specification is a component to evaluate. Do not skip any sentence. Do not filter by category.
 
@@ -108,7 +113,7 @@ This evaluation has three phases. Complete each phase fully before the next.
 **EXTRACTION GRANULARITY:**
 Each sentence is a separate entry. If a paragraph contains multiple sentences, extract each sentence as its own entry. Do NOT group multiple sentences into one entry.
 
-Read the Original SAP document section by section, then sentence by sentence within each section. For each statement, rule, or definition:
+Read ONLY the sections of the Original SAP that cover objectives, endpoints, and estimands. Read section by section, then sentence by sentence within each section. For each statement, rule, or definition:
 1. Note which section/subsection it comes from
 2. Extract the EXACT TEXT (word-for-word quote)
 3. Do not paraphrase or summarize
@@ -127,7 +132,6 @@ Do not deduplicate. If the same or similar specification appears multiple times 
 
 **COUNT YOUR ELEMENTS:**
 After extraction, count the total number of elements you extracted. Record this number - it will be verified later.
-
 
 ### PHASE 2: COMPARISON AND CLASSIFICATION
 
@@ -367,3 +371,4 @@ Before finalizing your output, verify:
 7. **Extra info is neutral**: Flag but do not penalize extra information unless it contradicts.
 8. **Blocking validation**: Ensure counts_match is true before outputting.
 9. **Full quotes required**: NEVER use "..." to truncate quotes - always include complete text.
+10. **Scope**: ONLY evaluate objectives, endpoints, and estimands. Do NOT evaluate efficacy analysis methods.

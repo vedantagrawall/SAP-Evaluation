@@ -1,4 +1,4 @@
-# Objectives, Endpoints, and Efficacy Analysis Evaluation Prompt
+# Efficacy Analysis Evaluation Prompt
 
 You are evaluating a Generated SAP against an Original SAP for a clinical trial.
 
@@ -14,7 +14,7 @@ You are evaluating a Generated SAP against an Original SAP for a clinical trial.
 
 ## YOUR TASK
 
-Evaluate the Objectives, Endpoints, and Efficacy Analysis content in the Generated SAP.
+Evaluate ONLY the Efficacy Analysis sections of the Generated SAP. Do NOT evaluate study objectives or endpoint definitions — those are evaluated in a separate prompt.
 
 **CRITICAL**: Read the Original SAP sentence by sentence. Every sentence that contains a specification is a component to evaluate. Do not skip any sentence. Do not filter by category.
 
@@ -108,7 +108,7 @@ This evaluation has three phases. Complete each phase fully before the next.
 **EXTRACTION GRANULARITY:**
 Each sentence is a separate entry. If a paragraph contains multiple sentences, extract each sentence as its own entry. Do NOT group multiple sentences into one entry.
 
-Read the Original SAP document section by section, then sentence by sentence within each section. For each statement, rule, or definition:
+Read ONLY the sections of the Original SAP that cover efficacy analysis. Read section by section, then sentence by sentence within each section. For each statement, rule, or definition:
 1. Note which section/subsection it comes from
 2. Extract the EXACT TEXT (word-for-word quote)
 3. Do not paraphrase or summarize
@@ -125,9 +125,11 @@ Before moving to Phase 2, review every extracted element. If any element contain
 **NO DEDUPLICATION:**
 Do not deduplicate. If the same or similar specification appears multiple times in the document, each occurrence is a separate entry. Different locations in the document mean different entries. Specifications that look similar but apply to different items are NOT duplicates.
 
+**SIBLING SUBSECTION CHECK:**
+After extracting from all subsections, compare element counts across subsections at the same level. If sibling subsections cover parallel content but have different element counts, re-read the subsection with fewer elements to check if you missed anything.
+
 **COUNT YOUR ELEMENTS:**
 After extraction, count the total number of elements you extracted. Record this number - it will be verified later.
-
 
 ### PHASE 2: COMPARISON AND CLASSIFICATION
 
@@ -206,9 +208,9 @@ Provide BOTH markdown (for human review) AND JSON (for programmatic use).
 ## MARKDOWN OUTPUT
 
 ```markdown
-## Objectives & Endpoints Evaluation
+## Efficacy Analysis Evaluation
 
-**Section:** objectives_endpoints
+**Section:** efficacy_analysis
 **Rating:** [GREAT | DECENT | POOR]
 **Status:** [pass | pass_with_notes | fail]
 
@@ -269,7 +271,7 @@ Provide BOTH markdown (for human review) AND JSON (for programmatic use).
 
 ```json
 {
-  "section": "objectives_endpoints",
+  "section": "efficacy_analysis",
   "rating": "GREAT | DECENT | POOR",
   "status": "pass | pass_with_notes | fail",
 
@@ -367,3 +369,4 @@ Before finalizing your output, verify:
 7. **Extra info is neutral**: Flag but do not penalize extra information unless it contradicts.
 8. **Blocking validation**: Ensure counts_match is true before outputting.
 9. **Full quotes required**: NEVER use "..." to truncate quotes - always include complete text.
+10. **Scope**: ONLY evaluate efficacy analysis methods and procedures. Do NOT evaluate study objectives or endpoint definitions.
