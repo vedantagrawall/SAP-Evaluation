@@ -16,18 +16,9 @@ You are evaluating a Generated SAP against an Original SAP for a clinical trial.
 
 Evaluate ONLY the General Methods section of the Generated SAP.
 
-**Start from the Generated SAP.** Find its General Methods section. Only evaluate the **introductory content** of that section — the preamble text that appears before any named subsections begin. If the General Methods section contains subsections with their own headings, those subsections are NOT general methodology. They are their own topics and will be evaluated by other prompts.
+**Start from the Generated SAP.** Find its General Methods section. Then find the corresponding content in the Original SAP for comparison.
 
-Then find the corresponding content in the Original SAP for comparison. The Original SAP may place this introductory content in a different location — that is fine.
-
-**Do NOT:**
-- Evaluate any subsection that has its own heading within the General Methods section
-- Search other sections of either document for additional content to evaluate
-- Flag content as "missing" if it comes from a subsection or different section of the Original SAP
-
-**Two key rules for scope:**
-1. **Cannot be endpoint-specific** — if content describes how a particular endpoint is defined or analyzed, skip it.
-2. **Cannot repeat content from other sections** — if content has its own dedicated section in either document, skip it. Each piece of content should only be evaluated once across all prompts.
+For each item, ask: "Does this apply universally across all analyses, or does it belong to its own dedicated section?" If it belongs to its own section, skip it. If the General Methods section contains subsections with their own headings, only evaluate the content that appears before the first subsection heading. Each subsection is a separate topic and will be evaluated by its own prompt.
 
 ---
 
