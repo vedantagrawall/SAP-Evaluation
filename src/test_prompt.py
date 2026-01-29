@@ -7,6 +7,9 @@ Run: python -m src.test_prompt
 import json
 from pathlib import Path
 
+# Prompts that return raw markdown instead of JSON
+MARKDOWN_PROMPTS = {"objectives_endpoints_only"}
+
 
 def json_to_markdown_analysis_populations(result: dict) -> str:
     """Convert analysis_populations JSON to markdown with 3-component focus."""
@@ -620,12 +623,15 @@ Extract ALL statements from ALL sections. Do not summarize or skip any.
         pass  # Keep cache for reuse
 
 
-def test_prompt(prompt_name: str = "objectives_endpoints"):
+def test_prompt(prompt_name: str = "objectives_endpoints", output_name: str = None):
     """Test a prompt against the NCT03676192 documents using persistent Original SAP cache."""
     from src.llm_client import evaluate_sap_with_persistent_cache
 
+    output_name = output_name or prompt_name
+
     print("=" * 60)
     print(f"TESTING PROMPT: {prompt_name}")
+    print(f"OUTPUT NAME: {output_name}")
     print("=" * 60)
 
     # Load documents (Generated SAP + Protocol only, Original SAP is in persistent cache)
@@ -637,35 +643,48 @@ def test_prompt(prompt_name: str = "objectives_endpoints"):
     prompt = load_prompt(prompt_name)
     print(f"   Prompt length: {len(prompt):,} chars")
 
+    # Determine output format based on prompt name
+    is_markdown_prompt = prompt_name in MARKDOWN_PROMPTS
+    output_format = "markdown" if is_markdown_prompt else "json"
+
     # Run evaluation using persistent Original SAP cache
-    print("\n3. Running evaluation with persistent Original SAP cache...")
+    print(f"\n3. Running evaluation with persistent Original SAP cache (format: {output_format})...")
     try:
         result = evaluate_sap_with_persistent_cache(
             generated_sap=docs["generated_sap"],
             protocol=docs["protocol"],
-            instruction=prompt
+            instruction=prompt,
+            output_format=output_format
         )
 
-        # Post-processing validation to enforce contradiction rules
-        result = validate_contradictions(result)
-
-        print("\n4. RESULT:")
-        print("=" * 60)
-        print(json.dumps(result, indent=2))
-
-        # Save JSON result
         results_dir = Path("results/NCT03676192")
         results_dir.mkdir(parents=True, exist_ok=True)
 
-        output_path = results_dir / f"{prompt_name}.json"
-        output_path.write_text(json.dumps(result, indent=2))
-        print(f"\n✓ JSON saved to: {output_path}")
+        if is_markdown_prompt:
+            # Markdown prompt: save raw markdown directly, no JSON
+            print("\n4. RESULT (markdown):")
+            print("=" * 60)
+            print(result)
 
-        # Save Markdown result
-        markdown_content = json_to_markdown(result, prompt_name)
-        md_output_path = results_dir / f"{prompt_name}.md"
-        md_output_path.write_text(markdown_content)
-        print(f"✓ Markdown saved to: {md_output_path}")
+            md_output_path = results_dir / f"{output_name}.md"
+            md_output_path.write_text(result)
+            print(f"\n✓ Markdown saved to: {md_output_path}")
+        else:
+            # JSON prompt: existing behavior
+            result = validate_contradictions(result)
+
+            print("\n4. RESULT:")
+            print("=" * 60)
+            print(json.dumps(result, indent=2))
+
+            output_path = results_dir / f"{output_name}.json"
+            output_path.write_text(json.dumps(result, indent=2))
+            print(f"\n✓ JSON saved to: {output_path}")
+
+            markdown_content = json_to_markdown(result, output_name)
+            md_output_path = results_dir / f"{output_name}.md"
+            md_output_path.write_text(markdown_content)
+            print(f"✓ Markdown saved to: {md_output_path}")
 
     except Exception as e:
         print(f"\n✗ ERROR: {e}")
@@ -684,6 +703,7 @@ if __name__ == "__main__":
         force = "--force" in sys.argv
         extract_statements("NCT03676192", section, force=force)
     else:
-        # Run evaluation: python -m src.test_prompt general_methodology
+        # Run evaluation: python -m src.test_prompt general_methodology [output_name]
         prompt_name = sys.argv[1] if len(sys.argv) > 1 else "objectives_endpoints"
-        test_prompt(prompt_name)
+        output_name = sys.argv[2] if len(sys.argv) > 2 else None
+        test_prompt(prompt_name, output_name=output_name)

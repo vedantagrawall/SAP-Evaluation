@@ -70,7 +70,7 @@ def create_document_cache(documents: dict, ttl_minutes: int = 1440) -> str:
     return cache.name
 
 
-def evaluate_with_cache(cache_name: str, instruction: str, schema: dict = None, max_retries: int = 3) -> dict:
+def evaluate_with_cache(cache_name: str, instruction: str, schema: dict = None, max_retries: int = 3, output_format: str = "json") -> dict:
     """
     Call Gemini using cached documents + new instruction.
 
@@ -79,22 +79,26 @@ def evaluate_with_cache(cache_name: str, instruction: str, schema: dict = None, 
         instruction: The evaluation instruction
         schema: Optional JSON schema for response
         max_retries: Number of retries on failure
+        output_format: "json" (default) or "markdown"
 
     Returns:
-        Parsed JSON response
+        Parsed JSON response (dict) or raw markdown string
     """
     client = get_client()
 
     for attempt in range(max_retries):
         try:
-            config = types.GenerateContentConfig(
+            config_kwargs = dict(
                 temperature=GEMINI_CONFIG["temperature"],
                 max_output_tokens=GEMINI_CONFIG["max_output_tokens"],
-                response_mime_type="application/json",
                 cached_content=cache_name,
             )
+            if output_format == "json":
+                config_kwargs["response_mime_type"] = "application/json"
 
-            if schema:
+            config = types.GenerateContentConfig(**config_kwargs)
+
+            if schema and output_format == "json":
                 config.response_schema = schema
 
             response = client.models.generate_content(
@@ -102,6 +106,9 @@ def evaluate_with_cache(cache_name: str, instruction: str, schema: dict = None, 
                 contents=f"## INSTRUCTION\n\n{instruction}",
                 config=config,
             )
+
+            if output_format == "markdown":
+                return response.text
 
             return json.loads(response.text)
         except json.JSONDecodeError as e:
@@ -222,7 +229,8 @@ def evaluate_sap_with_persistent_cache(
     protocol: str = None,  # No longer needed - Protocol is cached
     instruction: str = None,
     schema: dict = None,
-    max_retries: int = 3
+    max_retries: int = 3,
+    output_format: str = "json"
 ) -> dict:
     """
     Evaluate Generated SAP using the persistent cache (Original SAP + Protocol).
@@ -235,9 +243,10 @@ def evaluate_sap_with_persistent_cache(
         instruction: The evaluation instruction/prompt
         schema: Optional JSON schema for response
         max_retries: Number of retries on failure
+        output_format: "json" (default) or "markdown"
 
     Returns:
-        Parsed JSON response
+        Parsed JSON response (dict) or raw markdown string
     """
     # Get or create the persistent cache (Original SAP + Protocol)
     static_docs_cache = get_or_create_static_docs_cache()
@@ -257,14 +266,17 @@ def evaluate_sap_with_persistent_cache(
 
     for attempt in range(max_retries):
         try:
-            config = types.GenerateContentConfig(
+            config_kwargs = dict(
                 temperature=GEMINI_CONFIG["temperature"],
                 max_output_tokens=GEMINI_CONFIG["max_output_tokens"],
-                response_mime_type="application/json",
                 cached_content=static_docs_cache,
             )
+            if output_format == "json":
+                config_kwargs["response_mime_type"] = "application/json"
 
-            if schema:
+            config = types.GenerateContentConfig(**config_kwargs)
+
+            if schema and output_format == "json":
                 config.response_schema = schema
 
             response = client.models.generate_content(
@@ -272,6 +284,9 @@ def evaluate_sap_with_persistent_cache(
                 contents=full_prompt,
                 config=config,
             )
+
+            if output_format == "markdown":
+                return response.text
 
             return json.loads(response.text)
         except json.JSONDecodeError as e:
