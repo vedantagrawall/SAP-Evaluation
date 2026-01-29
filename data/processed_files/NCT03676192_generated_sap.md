@@ -37,10 +37,8 @@ SAP Date: &#x3C;________________>
 - ORR based on BOR during the Whole Study Period by RECIST v.1.1
 - Response duration: the time between initial response (CR or PR) and PD/recurrence
 - TTP: the time from randomization until PD/recurrence
-
-
-
-
+- PFS: the time from randomization until PD/recurrence or death due to any cause, whichever occurs first
+- OS: the time from randomization until death due to any cause
 
 # Pharmacokinetic Endpoints
 
@@ -62,7 +60,6 @@ SAP Date: &#x3C;________________>
 - Pregnancy testing
 - Clinical laboratory analyses
 - Previous and concomitant medications
-
 # 2.3 Exploratory Objectives
 
 [GAP: No exploratory objectives defined in protocol]
@@ -77,101 +74,115 @@ Intent-to-treat (ITT) Population: The ITT population is defined as all patients 
 
 Per-Protocol (PP) Population: The PP population is defined as all randomly assigned patients who have at least one response evaluation after receiving at least one full dose of study drug (CT-P16 or EU-Approved Avastin) in the Induction Study Period and who do not have any major protocol deviation. A major protocol deviation is one that may affect the interpretation of the primary endpoint and it will be defined in the statistical analysis plan (SAP). Final determinations of the PP population will be made at the blinded data review meeting before unblinding. Patients will be assigned to treatment groups based on randomization.
 
-PK Population: The PK population is defined as all patients who receive at least one full dose of study drug (CT-P16 or EU-Approved Avastin) and who have at least one post treatment PK result.
-
-
-
-
-
-
-If any patients are found to be non-compliant with respect to dosing, a decision will be made on a case-by-case basis at the blinded data review meeting before unblinding. Patients will be assigned to treatment groups based on treatment actually received.
+PK Population: The PK population is defined as all patients who receive at least one full dose of study drug (CT-P16 or EU-Approved Avastin) and who have at least one post treatment PK result. If any patients are found to be non-compliant with respect to dosing, a decision will be made on a case-by-case basis at the blinded data review meeting before unblinding. Patients will be assigned to treatment groups based on treatment actually received.
 
 Safety Population: The safety population is defined as all randomly assigned patients who receive at least one dose (full or partial) of study drug (CT-P16 or EU-Approved Avastin). Patients will be assigned to treatment groups based on treatment actually received.
 
 # 11.1 Schedule of Assessments
 
-Study Period|                              |           |            |           |                  |    |    |    |   |   |   |
-| ---------------------------- | --------- | ---------- | --------- | ---------------- | -- | -- | -- | - | - | - |
-| Screeing                     | Induction | Main Tenan | EOT Visit | Follow-Up Period |    |    |    |   |   |   |
-| Study Period (every 3 weeks) |           | C1         | C2        | C3               | C4 | C5 | C6 |   |   |   |
-|                              |           | D1         |           |                  |    |    |    |   |   |   |
-| -28 to -1                    | X         | X          | X         | X                | X  | X  |    |   |   |   |
-| 3 weeks after last dose      | X         |            |           |                  |    |    |    |   |   |   |
+# Table 11-1 Schedule of Events
 
-Informed Consent
+| Study | Scree     | Induc           |    |                 |    |    |                   |                    |
+| ----- | --------- | --------------- | -- | --------------- | -- | -- | ----------------- | ------------------ |
+| Perio | ning      | tion            |    |                 |    |    |                   |                    |
+| d     |           | Study           |    |                 |    |    |                   |                    |
+|       |           | Perio           |    |                 |    |    |                   |                    |
+|       |           | d               |    |                 |    |    |                   |                    |
+|       |           | (every 3 weeks) |    |                 |    |    |                   |                    |
+| Main  | EOT       | Follo           |    |                 |    |    |                   |                    |
+| tenan | Visit     | w-Up            |    |                 |    |    |                   |                    |
+| ce    |           | Perio           |    |                 |    |    |                   |                    |
+|       |           | Study           |    | d               |    |    |                   |                    |
+|       |           | Perio           |    | (every 9 weeks) |    |    |                   |                    |
+|       |           |                 |    |                 |    |    |                   |                    |
+| Cycle | C1        | C2              | C3 | C4              | C5 | C6 | C1, C2, C3, C4... |                    |
+| Day   | -28 to -1 | D1              | D1 | D1              | D1 | D1 | D1                | 3 weeks after last |
 
-Eligibility (Inc/Exc)
+| dose   | of study drug. |      |
+| ------ | -------------- | ---- |
+| Infor  | X              |      |
+| med    | Conse          | nt   |
+| Eligib | X              | X    |
+| ility  |                |      |
+| Medic  | X              |      |
+| al     | histor         | y    |
+| Smok   | X              |      |
+| ing    | histor         | y    |
+| Diagn  | X              |      |
+| osis   | of             | nsNS |
+| CLC    |                |      |
+| TNM    | X              |      |
+| stagin | g              | (AJC |
+| C 8th) |                |      |
+| EGFR   | X              |      |
+| mutati | on /           | ALK  |
+| rearra | ngem           | ent  |
+| Viral  | X              |      |
+| assess | ment           | (HBV |
 
-Medical history
+| assess ment (HCV) and other relevant tests (if applicable) | Prior treatment history (if any) | Current medications (if any) | Allergies (if any) | Other relevant clinical information |   |   |                |   |
+| ---------------------------------------------------------- | -------------------------------- | ---------------------------- | ------------------ | ----------------------------------- | - | - | -------------- | - |
+| HCV, HIV                                                   | Clinic                           | X                            | X                  | X                                   | X | X | X              | X |
+| Pregnancy                                                  | X                                |                              |                    | X                                   | X |   | (Cycle 1 only) |   |
+| 12-lead ECG                                                | X                                | X                            | X                  | X                                   | X | X | X              | X |
+| Physical examination                                       | X                                | X                            | X                  | X                                   | X | X | X              | X |
+| ECOG performance status                                    | X                                | X                            | X                  | X                                   | X | X | X              | X |
+| Vital signs                                                | X                                | X                            | X                  | X                                   | X | X | X              | X |
+| Height                                                     | X                                |                              |                    |                                     |   |   |                |   |
 
-Smoking history
-
-Diagnosis of
-
-
-
-
-
-
-# Current Page
-
-|                                   | CLC | TNM | staging | (AJCC 8th) | EGFR | mutations / ALK rearrangement | Viral assessment | (HBV, HCV, HIV) |
-| --------------------------------- | --- | --- | ------- | ---------- | ---- | ----------------------------- | ---------------- | --------------- |
-| Clinical laboratory test (8)      | X   | X   | X       | X          | X    | X                             | X                | X               |
-| Pregnancy test (Cycle 1 only) (9) | X   |     |         |            | X    | X                             |                  |                 |
-| 12-lead ECG (10)                  | X   | X   | X       | X          | X    | X                             | X                | X               |
-| Physical examination (11)         | X   | X   | X       | X          | X    | X                             | X                | X               |
-| ECOG performance status (11)      | X   | X   | X       | X          | X    | X                             | X                | X               |
-| Vital signs (11, 12)              | X   | X   | X       | X          | X    | X                             | X                | X               |
-
-
-
-
-
-
-# Heights and Weights
-
-| Heigh            | X           |             |      |   |   |        |             |        |   |   |   |
-| ---------------- | ----------- | ----------- | ---- | - | - | ------ | ----------- | ------ | - | - | - |
-| Weigh            | X           | X           | X    | X | X | X      | X           | X      |   |   |   |
-| Rand             | X           |             |      |   |   |        |             |        |   |   |   |
-| omiza            | X           |             |      |   |   |        |             |        |   |   |   |
-| CT-P1            | X           | X           | X    | X | X | X      |             |        |   |   |   |
-| 6 or             | EU-Approved | Avastin     |      |   |   |        |             |        |   |   |   |
-| Paclit           | X           | X           | X    | X | X | X      |             |        |   |   |   |
-| axel             | and         | Carboplatin | (13) |   |   |        |             |        |   |   |   |
-| Hypersensitivity | X           | X           | X    | X | X | X      |             |        |   |   |   |
-| monitoring       | PK          | X           | X    | X | X | X      | X           | X      |   |   |   |
-| sampling         | (C1,        | C3,         | (14) |   |   | C6...) |             |        |   |   |   |
-| Tumor            | X           | X           | X    | X | X | X      |             |        |   |   |   |
-| response         |             |             |      |   |   | (C3,   | C6,         | C9...) |   |   |   |
-| evaluation       | (15,        | (16)        |      |   |   |        |             |        |   |   |   |
-| Brain            | X           |             |      |   |   |        |             |        |   |   |   |
-| CT or            | MRI         | (17)        |      |   |   |        |             |        |   |   |   |
-| Bone             | X           |             |      |   |   |        |             |        |   |   |   |
-| Scan             | (18)        |             |      |   |   |        |             |        |   |   |   |
-| Immunogenicity   | X           | X           | X    | X | X | X      | (1st visit) |        |   |   |   |
-|                  |             |             |      |   |   | (C3,   | C6,         | C9...) |   |   |   |
-| Quality          | X           | X           | X    | X | X | X      |             |        |   |   |   |
-|                  |             |             |      |   |   | (C3,   |             |        |   |   |   |
+| Weig    | X | X | X | X | X | X | X | X |
+| ------- | - | - | - | - | - | - | - | - |
+| ht      |   |   |   |   |   |   |   |   |
+| Rand    | X |   |   |   |   |   |   |   |
+| omiza   |   |   |   |   |   |   |   |   |
+| CT-     | X | X | X | X | X | X |   |   |
+| P16     |   |   |   |   |   |   |   |   |
+| or      |   |   |   |   |   |   |   |   |
+| EU-     |   |   |   |   |   |   |   |   |
+| Appro   |   |   |   |   |   |   |   |   |
+| ved     |   |   |   |   |   |   |   |   |
+| Avast   |   |   |   |   |   |   |   |   |
+| in      |   |   |   |   |   |   |   |   |
+| Paclit  | X | X | X | X | X |   |   |   |
+| axel    |   |   |   |   |   |   |   |   |
+| and     |   |   |   |   |   |   |   |   |
+| Carbo   | X | X | X | X | X |   |   |   |
+| platin  |   |   |   |   |   |   |   |   |
+| (13)    |   |   |   |   |   |   |   |   |
+| Hyper   | X | X | X | X | X | X | X |   |
+| sensiti |   |   |   |   |   |   |   |   |
+| vity    |   |   |   |   |   |   |   |   |
+| monit   |   |   |   |   |   |   |   |   |
+| oring   |   |   |   |   |   |   |   |   |
+| PK      | X | X | X | X | X | X | X |   |
+| sampl   |   |   |   |   |   |   |   |   |
+| (C1,    |   |   |   |   |   |   |   |   |
+| C3,     |   |   |   |   |   |   |   |   |
+| (14)    |   |   |   |   |   |   |   |   |
+| C6...)  |   |   |   |   |   |   |   |   |
 
 
 
+# Evaluation
 
+| Tumo                      | X           | X    | X      | X    | X      | X |   |   |
+| ------------------------- | ----------- | ---- | ------ | ---- | ------ | - | - | - |
+| Response                  |             |      | (C3,   | C6,  | C9...) |   |   |   |
+| Evaluation                | (15,        | 16)  |        |      |        |   |   |   |
+| Brain                     | X           |      |        |      |        |   |   |   |
+| CT or MRI                 | (17)        |      |        |      |        |   |   |   |
+| Bone Scan                 | X           | (18) |        |      |        |   |   |   |
+| Immunogenicity            | X           | X    | X      | X    | X      | X |   |   |
+|                           | (1st visit) |      | (C3,   | C6,  | C9...) |   |   |   |
+| Quality of Life           | X           | X    | X      | X    | X      | X |   |   |
+|                           | (C3,        | C6,  | C9...) | (20) |        |   |   |   |
+| Prior/Comitant medication | X           | X    | X      | X    | X      | X | X | X |
+|                           | (21)        |      |        |      |        |   |   |   |
+| Adverse Events            | X           | X    | X      | X    | X      | X | X | X |
+|                           | (22)        |      |        |      |        |   |   |   |
+| Serious ADRs              |             |      |        |      | X      |   |   |   |
+| Survival follow-up        |             |      |        |      | X      |   |   |   |
 
-
-# Life
-
-| (20)  |       |      | C9... |       |      |   |   |   |   |
-| ----- | ----- | ---- | ----- | ----- | ---- | - | - | - | - |
-| Prior | X     | X    | X     | X     | X    | X | X | X | X |
-| Conc  | omita | nt   | medic | ation | (21) |   |   |   |   |
-| Adver | X     | X    | X     | X     | X    | X | X | X | X |
-| se    | Event | (22) |       |       |      |   |   |   |   |
-| Serio |       |      |       |       | X    |   |   |   |   |
-| us    | ADRs  | (23) |       |       |      |   |   |   |   |
-| Survi |       |      |       |       | X    |   |   |   |   |
-| val   | follo | w-up |       |       |      |   |   |   |   |
 
 # Footnotes:
 
@@ -179,73 +190,47 @@ Diagnosis of
 2. Viral assessment (HBsAg, HBsAb, HBcAb, HCV antibody, and HIV antibody) will be performed at the Screening visit. If HBsAg is negative, but HBcAb is positive (regardless of HBsAb status), HBV DNA must be negative to allow participation in the study.
 3. Clinical laboratory tests for Cycle 1 will be performed within 14 days prior to Day 1 of Cycle 1. Thereafter, clinical laboratory tests will be performed within 3 days prior to Day 1 of each cycle. Coagulation (prothrombin time and prothrombin time international normalized ratio) test will be performed at Screening, Day 1 of Cycle 1 and Cycle 2 of Induction Study Period and when clinically indicated for the patient who has been administered aspirin. Clinical laboratory test samples will be analyzed at the local laboratory.
 4. Urine pregnancy test should be performed at the Screening visit (within 3 days before Day 1 of Cycle 1), within 3 days before Day 1 of Cycle 1 of the Maintenance Study Period and EOT visit, or at any time if pregnancy is suspected in females of childbearing potential only. If the urine pregnancy test gives equivocal results, a serum pregnancy test will be performed to exclude pregnant women in this study. For the Screening visit, only patients who have confirmed negative pregnancy test results will be included in this study. Pregnancy test samples will be analyzed at the local laboratory.
-
-
-
-
-
-
-# 11.1.5.
-
-12-lead ECG at the Screening visit will be performed within 14 days prior to Day 1 of Cycle 1 of the Induction Study Period. For all other cycles, 12-lead ECG will be performed within 3 days prior to Day 1 of each cycle.
-
-# 11.1.6.
-
-These assessments should be performed prior to study treatment administration.
-
-# 11.1.7.
-
-Vital signs (including blood pressure, heart and respiratory rates, and temperature) will be assessed prior to study drug administration and be measured after 5 minutes of rest (sitting). Height will be assessed at Screening only as a baseline measurement.
-
-# 11.1.8.
-
-Paclitaxel and carboplatin will be administered on Day 1 of each cycle in Induction Study Period.
-
-# 11.1.9.
+5. 12-lead ECG at the Screening visit will be performed within 14 days prior to Day 1 of Cycle 1 of the Induction Study Period. For all other cycles, 12-lead ECG will be performed within 3 days prior to Day 1 of each cycle.
+6. These assessments should be performed prior to study treatment administration.
+7. Vital signs (including blood pressure, heart and respiratory rates, and temperature) will be assessed prior to study drug administration and be measured after 5 minutes of rest (sitting). Height will be assessed at Screening only as a baseline measurement.
+8. Paclitaxel and carboplatin will be administered on Day 1 of each cycle in Induction Study Period.
+# 11.1.9
 
 Pharmacokinetic samples will be collected on Day 1 of each cycle (prior to the beginning of the study drug administration [-3 days as window are allowed]) in the Induction Study Period, on Day 1 (-3 days as window are allowed) of Cycle 1 and every 3 cycles (end of Cycle 3, Cycle 6, and Cycle 9...) in the Maintenance Study Period, and EOT visit. In patients whose dose is delayed from the planned schedule, serum blood samples will be obtained on Day 22 of the last cycle (-3 days as window are allowed). Pharmacokinetic samples will be analyzed at the central laboratory.
 
-# 11.1.10.
+# 11.1.10
 
 Tumor evaluation will be assessed at Screening and every 2 cycles during the Induction Study Period and every 3 cycles during the Maintenance Study Period, and at the EOT visit. During the Follow-Up Period, it will be performed every 9 weeks until PD, death, withdrawal or start of new anti-cancer therapy if PD is not confirmed during the Induction or Maintenance Study Periods.
 
-# 11.1.11.
+# 11.1.11
 
 Tumor assessment will be performed within 4 weeks before the start of study treatment.
 
-# 11.1.12.
+# 11.1.12
 
 Brain CT or MRI will be assessed at Screening as mandatory to assess brain metastasis. During the study, imaging will be performed for patients with brain metastasis at baseline or for any suspected new lesions.
 
-# 11.1.13.
+# 11.1.13
 
 Bone scans will be assessed at Screening as mandatory. During the study, scans will be performed for patients with bone metastasis at baseline or for any suspected new lesions.
 
-# 11.1.14.
+# 11.1.14
 
 Immunogenicity will be assessed on Day 1 of Cycle 1 (predose), every 2 cycles during the Induction Study Period, every 3 cycles during the Maintenance Study Period and EOT visit. In the Follow-Up period, immunogenicity will be assessed once at the first visit of Follow-Up Period (9th week). A window of -3 days before Day 1 of the next cycle are allowed. In patients whose dose is delayed from the planned schedule, serum blood samples will be obtained on Day 22 of the last cycle (-3 days as window are allowed).
 
-# 11.1.15.
+# 11.1.15
 
 Quality of life should be assessed within 7 days before Day 1 of the next cycle, except screening assessment.
 
-# 11.1.16.
+# 11.1.16
 
-All medications used during the study, as well as all medications taken within 30 days of Day 1 of Cycle 1 in the Induction Study Period and until 28 days after the last dose of study treatment. Concomitant medications relevant to serious adverse drug reactions (ADR) occurred.
+All medications used during the study, as well as all medications taken within 30 days of Day 1 of Cycle 1 in the Induction Study Period and until 28 days after the last dose of study treatment. Concomitant medications relevant to serious adverse drug reactions (ADR) occurred after the EOT visit will also be collected. For patients who do not enter the Follow-Up Period, the last assessed concomitant medications will be collected.
 
-
-
-
-
-
-
-after the EOT visit will also be collected. For patients who do not enter the Follow-Up Period, the last assessed concomitant medications will be collected.
-
-# 11.1.17. Adverse Events
+# 11.1.17
 
 Adverse events will be assessed from the date the informed consent form is signed until up to 28 days from last dose of study drug, regardless of the relationship to the study drug. Where an ADR is ongoing at the EOT visit, the ADR will be followed until one of the following: resolution or improvement from baseline, relationship reassessed as unrelated, start of new anti-cancer therapy, confirmation from the investigator that no further improvement can be expected, end of collection of clinical or safety data, or final database closure. For patients who do not enter the Follow-Up Period, the last assessed status of AEs will be collected.
 
-# 11.1.18. Serious ADRs
+# 11.1.18
 
 Serious ADRs occurring during the Follow-Up Period will be reported and followed up.
 
@@ -271,14 +256,7 @@ An additional analysis is planned to be performed for reporting purposes once on
 
 # 3.4.4 Final Analysis
 
-The final analysis will be performed after all patients have completed the study (including the Follow-Up Period) or have discontinued from the study, and the database has been finalized for
-
-
-
-
-
-
-study completion. This is expected to occur approximately 3 years after the enrollment of the last patient.
+The final analysis will be performed after all patients have completed the study (including the Follow-Up Period) or have discontinued from the study, and the database has been finalized for study completion. This is expected to occur approximately 3 years after the enrollment of the last patient.
 
 The final analysis will include the final assessment of all secondary efficacy, pharmacokinetic, quality of life, and safety endpoints. The study will be fully unblinded to all personnel at this stage.
 
@@ -311,21 +289,12 @@ The primary analysis will be performed using the Intent-to-Treat (ITT) and Per-P
 The decision criteria for rejecting the null hypothesis of non-equivalence are:
 
 - The primary analysis will utilize a logistic regression model considering treatment group as a fixed effect and other covariates (to be defined in Section 4.1).
-
-
-
-
-
-
-
-The resulting odds ratio and its 95% CI will be converted into the difference of proportions using the Delta method.
-
-If the entire 95% CI for the difference in ORR falls within the interval (-12.5%, 12.5%), CT-P16 will be declared similar to EU-Approved Avastin.
+- The resulting odds ratio and its 95% CI will be converted into the difference of proportions using the Delta method.
+- If the entire 95% CI for the difference in ORR falls within the interval (-12.5%, 12.5%), CT-P16 will be declared similar to EU-Approved Avastin.
 
 # 3.7.4 Secondary Efficacy Endpoints
 
 No formal hypothesis testing for superiority or equivalence is planned for secondary efficacy endpoints. These endpoints (ORR during the Whole Study Period, Response Duration, TTP, PFS, and OS) will be summarized by treatment group using point estimates (proportions or medians) and their corresponding 95% CIs. Time-to-event endpoints will be estimated using the Kaplan-Meier method (see Section 6 for further details).
-
 # 3.7.5 Multiplicity
 
 As there is only one primary endpoint and one primary comparison for the demonstration of similarity, no multiplicity adjustments are required for the primary analysis. Multiplicity adjustments for secondary endpoints or subgroup analyses are not planned (refer to Section 4.3 for further details).
@@ -345,11 +314,6 @@ The term “descriptive statistics” refers to the number of patients (n), mean
 Unless specified otherwise, summaries will be presented by treatment arm (CT-P16 and EU-Approved Avastin). Where specified in Section 6 or Section 7, certain efficacy and safety endpoints may also be summarized for the overall population.
 
 For the primary efficacy analysis (see Section 3.7.3), a logistic regression model will be utilized. Continuous variables will be summarized by treatment and visit (where applicable) using descriptive statistics as defined above. Categorical variables will be summarized using frequency tables showing the number and percentage of patients within a particular category.
-
-
-
-
-
 
 All data collected will be listed by patient, treatment, and visit where applicable.
 
@@ -371,39 +335,42 @@ The following definitions and rules will be used to establish the temporal bound
 - Last Visit Date: The date of the last study-related contact with the patient, which may be the date of the End of Treatment (EOT) visit or the final Follow-Up Period visit (e.g., date of death or last survival contact).
 - Last Visit Date for the Induction Study Period: For patients who enter the Maintenance Study Period, this is the date of the last assessment performed prior to the start of monotherapy. For patients who do not enter the Maintenance Study Period, this is the date of the EOT visit.
 - Last Visit Date for the Maintenance Study Period: The date of the EOT visit following the completion of monotherapy or premature discontinuation from the Maintenance Study Period.
-- Baseline Value: Defined as the last non-missing observation (including central laboratory results, vital signs, and tumor assessments) recorded prior to the First Dose Date. If an assessment is performed on Study Day 1, it will be considered a baseline measurement only if it is explicitly recorded as being performed prior to the first dose of study treatment.
+Baseline Value: Defined as the last non-missing observation (including central laboratory results, vital signs, and tumor assessments) recorded prior to the First Dose Date. If an assessment is performed on Study Day 1, it will be considered a baseline measurement only if it is explicitly recorded as being performed prior to the first dose of study treatment. If multiple assessments are performed on the same pre-treatment day, the assessment closest to the time of dosing (but before dosing) will be used.
 
+Change from Baseline Value: Calculated as (Post-Baseline Value – Baseline Value). If either the Baseline Value or the Post-Baseline Value is missing, the change from baseline will be missing.
 
+Study Day 1: Defined as the First Dose Date (the date of the first administration of any study treatment component).
 
+Study Day: Defined as the number of days from Study Day 1.
 
+For assessments on or after Study Day 1: Study Day = (Date of Assessment – Study Day 1 Date) + 1.
 
+For assessments prior to Study Day 1: Study Day = (Date of Assessment – Study Day 1 Date).
 
-multiple assessments are performed on the same pre-treatment day, the assessment closest to the time of dosing (but before dosing) will be used.
+There is no Study Day 0.
 
-- Change from Baseline Value: Calculated as (Post-Baseline Value – Baseline Value). If either the Baseline Value or the Post-Baseline Value is missing, the change from baseline will be missing.
-- Study Day 1: Defined as the First Dose Date (the date of the first administration of any study treatment component).
-- Study Day: Defined as the number of days from Study Day 1.
-- For assessments on or after Study Day 1: Study Day = (Date of Assessment – Study Day 1 Date) + 1.
-- For assessments prior to Study Day 1: Study Day = (Date of Assessment – Study Day 1 Date).
-- There is no Study Day 0.
-- Duration of Treatment: Calculated as (Last Dose Date – First Dose Date) + 1.
-- Duration of Treatment for the Induction Study Period: Calculated as (Last Dose Date for the Induction Study Period – First Dose Date for the Induction Study Period) + 1.
-- Duration of Treatment for the Maintenance Study Period: Calculated as (Last Dose Date for the Maintenance Study Period – First Dose Date for the Maintenance Study Period) + 1.
-- Duration of Study: Calculated as (Last Visit Date – Date of Randomization) + 1.
-- Screening Period: Defined as the period from the First Visit Date (ICF signature) to the day before the First Dose Date.
-- Induction Study Period: Defined as the period from Study Day 1 through the day before the first dose of monotherapy in the Maintenance Study Period, or until the EOT visit for patients who do not proceed to maintenance therapy.
-- Maintenance Study Period: Defined as the period from the First Dose Date for the Maintenance Study Period through the date of the EOT visit.
-- Follow-Up Period: Defined as the period beginning the day after the EOT visit until the date of death, withdrawal of consent, or the end of the study, whichever occurs first.
-- Controlled Disease: Defined as a patient achieving a Best Overall Response (BOR) of Complete Response (CR), Partial Response (PR), or Stable Disease (SD) as assessed at the end of Cycle 6 (Induction Study Period) based on RECIST v.1.1. [Note: This determines eligibility for entry into the Maintenance Study Period].
-- Age: Calculated as the integer part of (Date of Informed Consent – Date of Birth) / 365.25. [GAP: If only year of birth is collected, age will be calculated as (Year of Consent – Year of Birth)].
+Duration of Treatment: Calculated as (Last Dose Date – First Dose Date) + 1.
 
+Duration of Treatment for the Induction Study Period: Calculated as (Last Dose Date for the Induction Study Period – First Dose Date for the Induction Study Period) + 1.
+
+Duration of Treatment for the Maintenance Study Period: Calculated as (Last Dose Date for the Maintenance Study Period – First Dose Date for the Maintenance Study Period) + 1.
+
+Duration of Study: Calculated as (Last Visit Date – Date of Randomization) + 1.
+
+Screening Period: Defined as the period from the First Visit Date (ICF signature) to the day before the First Dose Date.
+
+Induction Study Period: Defined as the period from Study Day 1 through the day before the first dose of monotherapy in the Maintenance Study Period, or until the EOT visit for patients who do not proceed to maintenance therapy.
+
+Maintenance Study Period: Defined as the period from the First Dose Date for the Maintenance Study Period through the date of the EOT visit.
+
+Follow-Up Period: Defined as the period beginning the day after the EOT visit until the date of death, withdrawal of consent, or the end of the study, whichever occurs first.
+
+Controlled Disease: Defined as a patient achieving a Best Overall Response (BOR) of Complete Response (CR), Partial Response (PR), or Stable Disease (SD) as assessed at the end of Cycle 6 (Induction Study Period) based on RECIST v.1.1. [Note: This determines eligibility for entry into the Maintenance Study Period].
+
+Age: Calculated as the integer part of (Date of Informed Consent – Date of Birth) / 365.25. [GAP: If only year of birth is collected, age will be calculated as (Year of Consent – Year of Birth)].
 # 4.3 Multiplicity Adjustment
 
 This study is designed to demonstrate therapeutic similarity between CT-P16 and EU-Approved Avastin based on a single primary efficacy endpoint. Consequently, the potential for Type I error inflation due to multiple comparisons is limited.
-
-
-
-
 
 # 4.3.1 Primary Efficacy Analysis
 
@@ -426,14 +393,11 @@ The analysis performed after the completion of the Induction Study Period (as de
 # 4.3.4 Subgroup Analyses
 
 Any subgroup analyses (as described in Section 7.5 of the protocol) are considered exploratory. No adjustments for multiplicity will be performed for subgroup comparisons, and results will be interpreted as hypothesis-generating.
-
 # 4.5 Visit Windows
 
 Visit windowing will be applied for the analyses which use visit categories. The following conventions will be used to define visit windows for assessments performed during the Induction Study Period, Maintenance Study Period, and Follow-Up Period.
 
 Study Day and Study Periods are defined in Section 4.2. Baseline is defined in Section 4.2 as the last non-missing observation prior to the First Dose Date (Study Day 1).
-
-
 
 # 4.5.1 Induction Study Period Windows
 
@@ -472,14 +436,12 @@ The following windows apply to assessments scheduled every cycle during the Main
 
 The following windows apply to assessments scheduled every 3 cycles during the Maintenance Study Period (e.g., Tumor Response Evaluation, PK Sampling, Immunogenicity, and Quality of Life).
 
-| Analysis Visit             | Target Maintenance Day | Maintenance Study Day Range |
-| -------------------------- | ---------------------- | --------------------------- |
-| End of Maintenance Cycle 3 | 63                     | 2 – < 95                    |
-
-
-
-
-
+| Analysis Visit             | Target Maintenance Day | Maintenance Study Day Range    |
+| -------------------------- | ---------------------- | ------------------------------ |
+| End of Maintenance Cycle 3 | 63                     | 2 – < 95                       |
+| End of Maintenance Cycle 6 | 126                    | 95 – < 158                     |
+| End of Maintenance Cycle 9 | 189                    | 158 – < 221                    |
+| ...                        | ...                    | (Incremental steps of 63 days) |
 
 # 4.5.3 Follow-Up Period Windows
 
@@ -509,27 +471,20 @@ The primary objective is to demonstrate therapeutic similarity between CT-P16 an
 
 # 6.1.1.1 Definition of Endpoint(s)
 
-The primary efficacy endpoint is the Objective Response Rate (ORR), defined as the proportion of patients achieving a Best Overall Response (BOR) of either Complete Response (CR) or
-
-
-
-
-
-
-# Partial Response (PR) during the Induction Study Period (up to Cycle 6)
-
-as determined by an Independent Tumor Review Committee (central review) using RECIST v.1.1.
+The primary efficacy endpoint is the Objective Response Rate (ORR), defined as the proportion of patients achieving a Best Overall Response (BOR) of either Complete Response (CR) or Partial Response (PR) during the Induction Study Period (up to Cycle 6), as determined by an Independent Tumor Review Committee (central review) using RECIST v.1.1.
 
 # Estimand Specification:
 
 - Population: Intent-to-Treat (ITT) population and Per-Protocol (PP) population (refer to Section 3.3).
 - Variable: Objective Response (Yes/No).
 - Intercurrent Events (ICE) and Handling:
-- - Premature discontinuation from study drug/period due to any reason (e.g., AE, withdrawal, death) prior to the first post-baseline tumor assessment: These patients will be considered non-responders (Composite strategy).
+-
+- Premature discontinuation from study drug/period due to any reason (e.g., AE, withdrawal, death) prior to the first post-baseline tumor assessment: These patients will be considered non-responders (Composite strategy).
 - Use of prohibited anti-cancer therapy prior to progression: Tumor assessments performed after the start of new anti-cancer therapy will be excluded. If no prior response was achieved, the patient is a non-responder (Hypothetical strategy).
 - Missing Data: Patients with no post-baseline tumor assessment or whose response cannot be evaluated (NE) will be treated as non-responders for the primary analysis.
 
 Population-level Summary: Difference in ORR (%) between CT-P16 and EU-Approved Avastin.
+
 
 # 6.1.1.2 Primary Analysis
 
@@ -546,11 +501,6 @@ Descriptive statistics for the primary endpoint will include the number and perc
 
 The primary analysis methodology described in Section 6.1.1.2 will be repeated using the BOR as determined by the investigator's local review to support the findings of the central review.
 
-
-
-
-
-
 # 6.1.1.4 Sensitivity Analysis/Analyses
 
 To assess the robustness of the primary analysis, the following sensitivity analyses will be performed on the ITT population:
@@ -558,7 +508,6 @@ To assess the robustness of the primary analysis, the following sensitivity anal
 - Complete Case Analysis: Patients with missing or NE responses will be excluded from the denominator to evaluate the impact of the non-responder imputation.
 - Confirmed vs. Unconfirmed Response: While the primary endpoint requires confirmation (as per RECIST 1.1), an analysis including unconfirmed CR/PR will be performed.
 - Alternative Covariate Adjustment: A model including only the treatment effect and no other covariates.
-
 # 6.1.1.5 Subgroup and Supplementary Analysis/Analyses
 
 The primary efficacy endpoint (ORR up to Cycle 6, central review) will be summarized by treatment group for the following subgroups in the ITT population:
@@ -587,39 +536,26 @@ Time-to-event (TTE) endpoints will be analyzed using the ITT and PP populations.
 - Overall Survival (OS): Time from randomization until death due to any cause.
 - Response Duration: Time from the first documented response (CR or PR) until the first documentation of PD or death (among responders only).
 
-Statistical Methodology for TTE:
+# Statistical Methodology for TTE:
 
-
-
-
-
-
-
-● Kaplan-Meier (KM) Method: Used to estimate the survival distributions for each treatment group.
-
-● Summary Statistics: Median TTE and survival rates at specific landmarks (e.g., 6 months, 12 months) will be calculated with 95% CIs. The 95% CI for the median will be calculated using the Brookmeyer-Crowley method.
-
-● Hazard Ratio (HR): A stratified Cox proportional hazards model, including the same stratification factors used in the randomization, will be used to estimate the HR (CT-P16 / EU-Approved Avastin) and its 95% CI.
-
-● Log-Rank Test: A stratified log-rank test will be used to compare the survival distributions between groups for descriptive purposes (refer to Section 4.3.2).
+- Kaplan-Meier (KM) Method: Used to estimate the survival distributions for each treatment group.
+- Summary Statistics: Median TTE and survival rates at specific landmarks (e.g., 6 months, 12 months) will be calculated with 95% CIs. The 95% CI for the median will be calculated using the Brookmeyer-Crowley method.
+- Hazard Ratio (HR): A stratified Cox proportional hazards model, including the same stratification factors used in the randomization, will be used to estimate the HR (CT-P16 / EU-Approved Avastin) and its 95% CI.
+- Log-Rank Test: A stratified log-rank test will be used to compare the survival distributions between groups for descriptive purposes (refer to Section 4.3.2).
 
 # Censoring Rules for PFS and TTP:
 
-● Patients alive and without PD at the time of data cutoff/study completion will be censored at the date of the last adequate tumor assessment.
-
-● Patients starting a new anti-cancer therapy prior to PD will be censored at the date of the last adequate tumor assessment prior to the start of the new therapy.
-
-● If PD or death occurs after missing two or more consecutive scheduled tumor assessments, the patient will be censored at the date of the last adequate tumor assessment prior to the missing visits.
+- Patients alive and without PD at the time of data cutoff/study completion will be censored at the date of the last adequate tumor assessment.
+- Patients starting a new anti-cancer therapy prior to PD will be censored at the date of the last adequate tumor assessment prior to the start of the new therapy.
+- If PD or death occurs after missing two or more consecutive scheduled tumor assessments, the patient will be censored at the date of the last adequate tumor assessment prior to the missing visits.
 
 # 6.2.3 Quality of Life (QoL)
 
 QoL data (EORTC QLQ-C30 and QLQ-LC13) will be analyzed using the ITT population.
 
-● Actual scores and changes from baseline (refer to Section 4.2) will be summarized for each visit using descriptive statistics as described in Section 4.1.
-
-● Summaries will be provided for the global health status/QoL scale, functional scales, and symptom scales.
-
-● Missing items within a scale will be handled according to the EORTC QLQ-C30 Scoring Manual.
+- Actual scores and changes from baseline (refer to Section 4.2) will be summarized for each visit using descriptive statistics as described in Section 4.1.
+- Summaries will be provided for the global health status/QoL scale, functional scales, and symptom scales.
+- Missing items within a scale will be handled according to the EORTC QLQ-C30 Scoring Manual.
 
 # 7 Safety Analyses
 
@@ -629,16 +565,11 @@ The Safety Population (as defined in Section 3.3) will be used for all safety an
 
 # 7.1.3 Clinical Laboratory Panels
 
-Clinical laboratory assessments include hematology, clinical chemistry, coagulation, and urinalysis. As specified in Section 6.5.2.9 and the Schedule of Events (Section 11.1), laboratory tests will be performed at Screening, on Day 1 of each cycle during the Induction Study Period,
+Clinical laboratory assessments include hematology, clinical chemistry, coagulation, and urinalysis. As specified in Section 6.5.2.9 and the Schedule of Events (Section 11.1), laboratory tests will be performed at Screening, on Day 1 of each cycle during the Induction Study Period, on Day 1 of Cycle 1 and every 3 cycles during the Maintenance Study Period, and at the End of Treatment (EOT) visit.
 
-
-
-
-
+All laboratory analyses will be performed by local laboratories. Laboratory data will be summarized and listed based on the standard units provided by the laboratories.
 
 # 7.1.3.1 Laboratory Parameters
-
-The following parameters will be summarized and/or listed:
 
 - Hematology: Hematocrit, hemoglobin, white blood cell count, absolute neutrophil count (ANC), and platelets.
 - Clinical Chemistry: Albumin, alkaline phosphatase, alanine aminotransferase (ALT), aspartate aminotransferase (AST), blood urea nitrogen (BUN), calcium, chloride, creatine phosphokinase, creatine kinase-myocardial band isoenzyme, total cholesterol, creatinine, creatinine clearance (CrCl), gamma-glutamyl transferase, glucose, lactate dehydrogenase, triglyceride, high-density lipoprotein cholesterol, phosphate, potassium, sodium, total bilirubin, direct bilirubin, total protein, and uric acid.
@@ -662,9 +593,6 @@ Shift tables will be used to summarize the change in status from baseline to the
 - For parameters summarized by reference range, shifts will be presented from baseline category (Low, Normal, High) to the worst post-baseline category. Analyses for "High" and "Low" directions will be performed separately where applicable.
 
 
-
-
-
 # 7.1.3.5 Treatment-Emergent Abnormalities
 
 A treatment-emergent abnormality is defined as a post-baseline value that represents a worsening from baseline (either an increase in CTCAE grade or a shift from Normal/Low to High, or Normal/High to Low). The number and percentage of patients with treatment-emergent Grade 3 or 4 abnormalities will be summarized by treatment group.
@@ -682,54 +610,39 @@ Liver function test (LFT) abnormalities of potential clinical concern, including
 Unscheduled laboratory assessments will be included in the determination of the worst post-baseline value and in shift tables. However, they will be excluded from by-visit summary tables unless they fall within a visit window and are the closest assessment to the target day (see Section 4.5.4).
 
 If multiple laboratory values are collected on the same Study Day, the value collected closest to the scheduled assessment time will be used for by-visit summaries. For worst-case analyses, the most extreme value (highest grade or most distant from the reference range) will be used.
-
 # 11.5 Index of Tables, Figures, and Listings
 
 This appendix provides a complete index of all planned Tables, Figures, and Listings (TFLs) for this Statistical Analysis Plan.
 
 # 11.5.1 Index of Tables
 
-| Number | Title                                                                             | Population      |
-| ------ | --------------------------------------------------------------------------------- | --------------- |
-| 14.2.1 | Change from Baseline in EORTC QLQ-C30 Scores by Visit                             | Intent-to-Treat |
-| 14.2.2 | Frequency of Best Overall Response during Induction Study Period (Central Review) | Intent-to-Treat |
-| 14.2.3 | Frequency of Best Overall Response during Induction Study Period (Central Review) | Per-Protocol    |
-| 14.2.4 | Equivalence Analysis of Objective Response Rate                                   | Intent-to-Treat |
+| Number  | Title                                                                                  | Population      |
+| ------- | -------------------------------------------------------------------------------------- | --------------- |
+| 14.2.1  | Change from Baseline in EORTC QLQ-C30 Scores by Visit                                  | Intent-to-Treat |
+| 14.2.2  | Frequency of Best Overall Response during Induction Study Period (Central Review)      | Intent-to-Treat |
+| 14.2.3  | Frequency of Best Overall Response during Induction Study Period (Central Review)      | Per-Protocol    |
+| 14.2.4  | Equivalence Analysis of Objective Response Rate (Delta Method) - Central Review        | Intent-to-Treat |
+| 14.2.5  | Equivalence Analysis of Objective Response Rate (Delta Method) - Central Review        | Per-Protocol    |
+| 14.2.6  | Objective Response Rate during Whole Study Period                                      | Intent-to-Treat |
+| 14.2.7  | Summary of Progression-Free Survival (Kaplan-Meier Estimates and Stratified Cox Model) | Intent-to-Treat |
+| 14.2.8  | Summary of Time to Progression (Kaplan-Meier Estimates)                                | Intent-to-Treat |
+| 14.2.9  | Summary of Overall Survival (Kaplan-Meier Estimates)                                   | Intent-to-Treat |
+| 14.2.10 | Summary of Response Duration                                                           | Intent-to-Treat |
+| 14.2.11 | Subgroup Analysis of Primary Efficacy Endpoint (ORR)                                   | Intent-to-Treat |
 
+# 14.3.1 Summary of Hematology Safety Parameters by Visit - Actual Values and Change from Baseline
 
+# 14.3.2 Summary of Clinical Chemistry Parameters by Visit - Actual Values and Change from Baseline
 
+# 14.3.3 Shift Table of CTCAE Grade from Baseline to Worst Post-Baseline Value - Hematology
 
-# 14.2.5 Equivalence Analysis of Objective Response Rate (Delta Method) - Central Review
+# 14.3.4 Shift Table of CTCAE Grade from Baseline to Worst Post-Baseline Value - Clinical Chemistry
 
-# 14.2.6 Objective Response Rate during Whole Study Period - Intent-to-Treat
+# 14.3.5 Shift Table of Reference Range Category from Baseline to Worst Post-Baseline Value - All Parameters
 
-# 14.2.7 Summary of Progression-Free Survival (Kaplan-Meier Estimates and Stratified Cox Model) - Intent-to-Treat
+# 14.3.6 Incidence of Treatment-Emergent Grade 3 or 4 Laboratory Abnormalities
 
-# 14.2.8 Summary of Time to Progression (Kaplan-Meier Estimates) - Intent-to-Treat
-
-# 14.2.9 Summary of Overall Survival (Kaplan-Meier Estimates) - Intent-to-Treat
-
-# 14.2.10 Summary of Response Duration - Intent-to-Treat
-
-# 14.2.11 Subgroup Analysis of Primary Efficacy Endpoint (ORR) - Intent-to-Treat
-
-# 14.3.1 Summary of Hematology Parameters by Visit - Actual Values and Change from Baseline - Safety
-
-# 14.3.2 Summary of Clinical Chemistry Parameters by Visit - Actual Values and Change from Baseline - Safety
-
-# 14.3.3 Shift Table of CTCAE Grade from Baseline to Worst Post-Baseline Value - Hematology - Safety
-
-# 14.3.4 Shift Table of CTCAE Grade from Baseline to Worst Post-Baseline Value - Clinical Chemistry - Safety
-
-# 14.3.5 Shift Table of Reference Range Category from Baseline to Worst Post-Baseline Value - All Parameters - Safety
-
-# 14.3.6 Incidence of Treatment-Emergent Grade 3 or 4 Laboratory Abnormalities - Safety
-
-# 14.3.7 Summary of Patients with Potential Clinically Important Liver Function Abnormalities - Safety
-
-
-
-
+# 14.3.7 Summary of Patients with Potential Clinically Important Liver Function Abnormalities
 
 # 11.5.2 Index of Figures
 
@@ -745,8 +658,8 @@ This appendix provides a complete index of all planned Tables, Figures, and List
 
 | Number  | Title                                                                  | Population      |
 | ------- | ---------------------------------------------------------------------- | --------------- |
-| 14.2.L1 | Individual Patient Tumor Response Assessments (Central Review)         | Intent-to-Treat |
-| 14.2.L2 | Individual Patient Tumor Response Assessments (Local Review)           | Intent-to-Treat |
+| 14.2.L1 | Individual Patient Tumor Response Assessments                          | Intent-to-Treat |
+| 14.2.L2 | Individual Patient Tumor Response Assessments                          | Intent-to-Treat |
 | 14.2.L3 | Individual Patient Quality of Life Scores                              | Intent-to-Treat |
 | 14.2.L4 | Dates of Progression and Survival Status                               | Intent-to-Treat |
 | 14.3.L1 | Laboratory Results - Hematology                                        | Safety          |
@@ -754,4 +667,3 @@ This appendix provides a complete index of all planned Tables, Figures, and List
 | 14.3.L3 | Laboratory Results - Coagulation and Urinalysis                        | Safety          |
 | 14.3.L4 | Laboratory Results - Pregnancy Testing                                 | Safety          |
 | 14.3.L5 | Patients with Treatment-Emergent Grade 3 or 4 Laboratory Abnormalities | Safety          |
-
