@@ -33,13 +33,9 @@ Extract all objectives and endpoints from ALL THREE documents:
 
 For each objective, extract the full statement. For each endpoint, extract only the endpoint name and its parameter description. Each objective is one element. Each endpoint is one element.
 
-### PHASE 2: COMPARISON TABLE
+### PHASE 2: COMPARISON
 
 Using the three extracted lists, evaluate the Generated SAP:
-create a table with rows being all the extracted elements from all the three documents with overlapping components de-duped (rely to exact match de-duping or the same semantic meaning) but be sure not to miss any unique element.
-columns should be documents. each grid block should indicate whether the given element was present in the given document.
-
-color code the following:
 
 **Missing items:** Any objective or endpoint present in the Original SAP but absent from the Generated SAP.
 - If also present in Protocol → classification = `missing_required`
@@ -57,48 +53,106 @@ Verify that all items from all three extraction lists have been accounted for in
 
 ---
 
-## OUTPUT FORMAT
+## RATING CRITERIA
 
-Output MUST be a markdown document with the following structure:
+### GREAT
+- All objectives and endpoints from Original SAP are listed in Generated SAP
+- No contradictions
+- No missing required items
 
-### 1. Comparison Table
+### DECENT
+- All required objectives and endpoints present
+- Minor wording differences
 
-Use this exact table format:
+### POOR
+- Required objectives or endpoints missing
+- Contradictions found
 
-| # | Type | Objective / Endpoint | Original SAP | Generated SAP | Protocol | Classification |
-|---|------|----------------------|:------------:|:-------------:|:--------:|----------------|
-| 1 | Primary Objective | [description] | ✅ | ✅ | ✅ | Present |
-| 2 | Secondary Endpoint | [description] | ✅ | ❌ | ✅ | missing_required |
-
-Column definitions:
-- **#**: Row number
-- **Type**: One of: Primary Objective, Secondary Objective, Primary Endpoint, Secondary Endpoint, Safety Endpoint, PK Endpoint, QoL Endpoint
-- **Objective / Endpoint**: The de-duped element description
-- **Original SAP / Generated SAP / Protocol**: ✅ if present, ❌ if absent
-- **Classification**: One of:
-  - `Present` — found in Generated SAP
-  - `missing_required` — missing from Generated SAP but in both Original SAP AND Protocol
-  - `acceptable_difference` — missing from Generated SAP but only in Original SAP (not in Protocol)
-  - `extra` — in Generated SAP but not in Original SAP
-  - `contradiction` — Generated SAP contradicts Original SAP or Protocol
-
-### 2. Summary Sections
-
-After the table, include these sections:
-
-#### Missing from Generated SAP
-List any items classified as `missing_required` or `acceptable_difference` with a brief explanation.
-
-#### Contradictions
-List any items where the Generated SAP contradicts the Original SAP or Protocol. Quote the conflicting text from each document.
-
-#### Extra in Generated SAP
-List any items in the Generated SAP not found in the Original SAP.
-
-#### Overall Assessment
-A brief summary of the evaluation result.
+**RATING RULE**: If ANY item has `classification: "missing_required"`, the rating MUST be POOR. If ANY contradiction is found, the rating MUST be POOR.
 
 ---
 
-OUTPUT SHOULD BE THE VERIFIED AND COMPLETE COMPARISON TABLE NOT MISSING A SINGLE UNIQUE ELEMENT.
+## OUTPUT FORMAT
 
+Provide BOTH markdown (for human review) AND JSON (for programmatic use).
+
+---
+
+## JSON OUTPUT
+
+```json
+{
+  "section": "objectives_endpoints",
+  "rating": "GREAT | DECENT | POOR",
+  "status": "pass | pass_with_notes | fail",
+
+  "extraction": {
+    "original_sap": [
+      {"component": "short description", "type": "objective | endpoint", "text": "exact quote"}
+    ],
+    "generated_sap": [
+      {"component": "short description", "type": "objective | endpoint", "text": "exact quote"}
+    ],
+    "protocol": [
+      {"component": "short description", "type": "objective | endpoint", "text": "exact quote"}
+    ]
+  },
+
+  "evaluation_table": [
+    {
+      "component": "short description",
+      "type": "objective | endpoint",
+      "original_sap_text": "exact quote",
+      "generated_sap_text": "exact quote",
+      "protocol_text": "exact quote or null",
+      "matches_original_sap": "yes | no",
+      "result": "correct | acceptable | problem",
+      "reasoning": "Chain-of-thought explanation"
+    }
+  ],
+
+  "missing_from_generated_sap": [
+    {
+      "component": "short description",
+      "type": "objective | endpoint",
+      "original_sap_text": "exact quote",
+      "protocol_text": "exact quote if found, null if not",
+      "in_protocol": "yes | no",
+      "classification": "missing_required | acceptable_difference",
+      "reasoning": "Chain-of-thought explanation"
+    }
+  ],
+
+  "contradictions": [
+    {
+      "component": "short description",
+      "type": "objective | endpoint",
+      "original_sap_text": "exact quote",
+      "generated_sap_text": "exact quote",
+      "protocol_text": "exact quote or null",
+      "description": "explanation of the contradiction",
+      "reasoning": "Chain-of-thought explanation"
+    }
+  ],
+
+  "extra_in_generated_sap": [
+    {
+      "component": "short description",
+      "type": "objective | endpoint",
+      "generated_sap_text": "exact quote",
+      "in_protocol": "yes | no",
+      "contradicts": "yes | no",
+      "reasoning": "Chain-of-thought explanation"
+    }
+  ],
+
+  "reasoning": "Step-by-step chain-of-thought reasoning trace",
+  "summary": "2-3 sentence overall assessment"
+}
+```
+
+---
+
+## BLOCKING VALIDATION
+
+Before finalizing output, verify that every item extracted from all three documents in Phase 1 is accounted for in the Phase 2 output arrays.
