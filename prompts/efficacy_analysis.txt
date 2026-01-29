@@ -14,9 +14,15 @@ You are evaluating a Generated SAP against an Original SAP for a clinical trial.
 
 ## YOUR TASK
 
-Evaluate ONLY the Efficacy Analysis sections of the Generated SAP. Do NOT evaluate study objectives or endpoint definitions — those are evaluated in a separate prompt.
+Evaluate ONLY the first efficacy endpoint that appears in the Generated SAP. The Generated SAP is an abbreviated document designed to contain a single efficacy endpoint. Do NOT evaluate every endpoint or every sentence in the efficacy sections. Focus on the first one only.
 
-**CRITICAL**: Read the Original SAP sentence by sentence. Every sentence that contains a specification is a component to evaluate. Do not skip any sentence. Do not filter by category.
+For that single endpoint, evaluate exactly **3 components**:
+
+1. **Endpoint Name** — What is the endpoint called?
+2. **Endpoint Definition** — How is the endpoint calculated or measured?
+3. **Analysis Method** — What statistical approach is used to analyze it?
+
+Find the corresponding content in the Original SAP for these same 3 components and compare.
 
 ---
 
@@ -26,7 +32,7 @@ There are TWO separate checks. Do not conflate them.
 
 ### CHECK 1: EXISTENCE (Does the element exist?)
 
-Use this hierarchy only when an entire component is absent from Generated SAP:
+Use this hierarchy only when a component is absent from Generated SAP:
 1. Check if element exists in Original SAP
 2. If entirely absent from Generated SAP → Check Protocol
 3. If element exists in Protocol → **PROBLEM** (missing required element) → classification = `missing_required`
@@ -60,21 +66,12 @@ For CONTENT, ask these questions:
 | Original SAP has steps/formulas/values, Generated SAP mentions concept but lacks specifics | **PROBLEM** (missing_specification) |
 | Generated SAP says something DIFFERENT that contradicts Original SAP | **PROBLEM** (contradiction) |
 
-**How to distinguish these categories:**
-- ACCEPTABLE: Only minor wording omitted (adjectives, qualifiers, clarifying phrases). ALL methodology steps, formulas, and specific values are still present.
-- MISSING SPECIFICATION: Original SAP provides HOW (steps, formulas, specific values). Generated SAP only says WHAT (mentions the method/concept but omits the specifics). This is a PROBLEM.
-- CONTRADICTION: Generated SAP states something incompatible with Original SAP (cannot both be true)
-
 **For EVERY contradiction, you MUST provide:**
 1. FULL VERBATIM quote from Original SAP - do NOT truncate with "..." - include the complete sentence or paragraph
 2. FULL VERBATIM quote from Generated SAP - do NOT truncate with "..." - include the complete sentence or paragraph
-3. Chain-of-thought reasoning explaining:
-   - What Original SAP says (with specific section reference)
-   - What Generated SAP says (with specific section reference)
-   - Why both statements cannot be true at the same time
-   - The specific conflict between them
+3. Chain-of-thought reasoning explaining why both statements cannot be true at the same time
 
-**QUOTE REQUIREMENT**: All quotes in issues, evaluation_table, and missing_from_generated_sap MUST be COMPLETE. Never use "..." to abbreviate. If a definition spans multiple sentences, include all of them.
+**QUOTE REQUIREMENT**: All quotes in issues, evaluation_table, and missing_from_generated_sap MUST be COMPLETE. Never use "..." to abbreviate.
 
 ---
 
@@ -103,50 +100,28 @@ Generated SAP may contain information not present in Original SAP.
 
 This evaluation has three phases. Complete each phase fully before the next.
 
-### PHASE 1: EXHAUSTIVE EXTRACTION
+### PHASE 1: IDENTIFY THE FIRST EFFICACY ENDPOINT
 
-**EXTRACTION GRANULARITY:**
-Each sentence is a separate entry. If a paragraph contains multiple sentences, extract each sentence as its own entry. Do NOT group multiple sentences into one entry.
-
-Read ONLY the sections of the Original SAP that cover efficacy analysis. Read section by section, then sentence by sentence within each section. For each statement, rule, or definition:
-1. Note which section/subsection it comes from
-2. Extract the EXACT TEXT (word-for-word quote)
-3. Do not paraphrase or summarize
-4. Do not fit into predefined categories
-5. Create one entry per statement
-6. Count elements per section separately — record in `elements_per_section`
-
-**CONJUNCTION RULE (CRITICAL):**
-When a sentence contains "X and Y" or "X, Y, and Z", split into SEPARATE elements.
-
-**CONJUNCTION VERIFICATION:**
-Before moving to Phase 2, review every extracted element. If any element contains "and" or "or" joining two different items, STOP and split it into separate entries.
-
-**NO DEDUPLICATION:**
-Do not deduplicate. If the same or similar specification appears multiple times in the document, each occurrence is a separate entry. Different locations in the document mean different entries. Specifications that look similar but apply to different items are NOT duplicates.
-
-**SIBLING SUBSECTION CHECK:**
-After extracting from all subsections, compare element counts across subsections at the same level. If sibling subsections cover parallel content but have different element counts, re-read the subsection with fewer elements to check if you missed anything.
-
-**COUNT YOUR ELEMENTS:**
-After extraction, count the total number of elements you extracted. Record this number - it will be verified later.
+1. Read the Generated SAP and find the **first efficacy endpoint** mentioned (whether labeled primary, secondary, or otherwise — just take whatever appears first)
+2. Record its name
+3. In the Original SAP, locate the matching endpoint by name
+4. Extract exactly 3 components from the Original SAP for this endpoint:
+   - **Endpoint Name**: The name/label of the endpoint
+   - **Endpoint Definition**: How the endpoint is defined, calculated, or measured
+   - **Analysis Method**: The statistical method used to analyze the endpoint
 
 ### PHASE 2: COMPARISON AND CLASSIFICATION
 
-**TRACKING RULE:**
-Every element extracted in Phase 1 MUST appear in either evaluation_table OR missing_from_generated_sap. No element can be skipped or lost.
+For each of the 3 components:
 
-**Step A**: For each extracted element, search Generated SAP
-- Identify the key terms from the Original SAP element
-- Search the ENTIRE Generated SAP for those key terms
-- When found, copy the EXACT sentence word-for-word as generated_sap_text
-- Do NOT paraphrase, summarize, or reword what you find
-- Only record null if no content with those key terms exists in the entire document
+**Step A**: Search Generated SAP for the matching content
+- Copy the EXACT text word-for-word as generated_sap_text
+- Only record null if no matching content exists
 
 **Step B**: Compare statements directly
 - Ask: "Can both statements be true at the same time?"
-- If YES → matches_original_sap: "yes" (no conflict, statements are compatible)
-- If NO → matches_original_sap: "no" (contradiction, statements conflict)
+- If YES → matches_original_sap: "yes"
+- If NO → matches_original_sap: "no" (contradiction)
 
 **Step C**: Determine detail_level
 - match: Generated SAP text is equivalent to Original SAP text
@@ -154,116 +129,35 @@ Every element extracted in Phase 1 MUST appear in either evaluation_table OR mis
 - contradiction: Generated SAP states something incompatible with Original SAP
 
 **Step D**: For less_detailed items, document omissions
-- Record exactly what words, clauses, steps, formulas, or values were omitted in `omitted_content`
-- Assess `omission_impact`: none | low | potential (could this omission change meaning?)
+- Record exactly what was omitted in `omitted_content`
+- Assess `omission_impact`: none | low | potential
 
 **Step E**: For missing items, check Protocol
 - Search the ENTIRE Protocol document for the same element
-- Content may be worded differently - look for semantic match
 - Record in_protocol: "yes" if concept exists (even if worded differently)
-- Record in_protocol: "no" ONLY if concept is truly absent after thorough search
+- Record in_protocol: "no" ONLY if concept is truly absent
 
 ### PHASE 3: OUTPUT COMPLETENESS VERIFICATION
 
-**OUTPUT COMPLETENESS RULE:**
-Your output arrays (evaluation_table + missing_from_generated_sap) must contain exactly the same number of entries as elements_extracted.
-
-Before generating output:
-1. Count your extracted elements from Phase 1
-2. Ensure every single one has a corresponding entry in either evaluation_table OR missing_from_generated_sap
-3. Do NOT consolidate, summarize, or merge entries in the output
-4. One extracted sentence = one output entry
-
-If counts do not match, add the missing entries before proceeding.
+Your output arrays (evaluation_table + missing_from_generated_sap) must contain exactly 3 entries total (one per component).
 
 ---
 
 ## RATING CRITERIA
 
 ### GREAT
-- All specifications from Original SAP are present in Generated SAP
-- Content matches Original SAP
+- All 3 components present and match Original SAP
 - No contradictions
 
 ### DECENT
-- All required content present
+- All 3 components present
 - Minor wording differences that do not change meaning
-- Small issues easily correctable
 
 ### POOR
-- Required specifications missing
+- A component is missing and required
 - Content contradicts Original SAP
-- Significant gaps in coverage
 
 **RATING RULE**: If ANY item has `classification: "missing_required"`, the rating MUST be POOR. If ANY item has a contradiction, the rating MUST be POOR.
-
----
-
-## OUTPUT FORMAT
-
-Provide BOTH markdown (for human review) AND JSON (for programmatic use).
-
----
-
-## MARKDOWN OUTPUT
-
-```markdown
-## Efficacy Analysis Evaluation
-
-**Section:** efficacy_analysis
-**Rating:** [GREAT | DECENT | POOR]
-**Status:** [pass | pass_with_notes | fail]
-
----
-
-### Evaluation Summary Table
-
-| Component | Evaluation Type | Matches Original SAP | Protocol Consulted | Result | Issue Type | Severity |
-|-----------|-----------------|---------------------|-------------------|--------|------------|----------|
-| [name] | exact_match / semantic | yes/no | yes/no/n/a | correct/acceptable/problem | none/contradiction | none/minor/critical |
-
----
-
-### Issues Found
-
-| Issue Type | Severity | Component | Original SAP Text | Generated SAP Text | Why They Conflict | Reasoning |
-|------------|----------|-----------|-------------------|--------------------|--------------------|-----------|
-| [type] | [severity] | [name] | "[exact quote]" | "[exact quote]" | [why both cannot be true] | [chain-of-thought] |
-
-(If no issues: "*No issues found.*")
-
----
-
-### Extra Information Flagged
-
-| Content | Generated SAP Text | Contradicts | Detail |
-|---------|-------------------|-------------|--------|
-| [description] | "[quote]" | yes/no | [explanation] |
-
-(If none: "*No extra information flagged.*")
-
----
-
-### Missing from Generated SAP (X items)
-
-| Component | Classification | In Protocol | Original SAP Text | Protocol Text | Reasoning |
-|-----------|----------------|-------------|-------------------|---------------|-----------|
-| [name] | missing_required/acceptable_difference | yes/no | "[quote]" | "[quote]" | [chain-of-thought] |
-
-(If none: "*None - all required content is present.*")
-
----
-
-### Reasoning
-
-[Step-by-step chain-of-thought reasoning trace]
-
----
-
-### Summary
-
-[2-3 sentence overall assessment]
-```
 
 ---
 
@@ -275,10 +169,12 @@ Provide BOTH markdown (for human review) AND JSON (for programmatic use).
   "rating": "GREAT | DECENT | POOR",
   "status": "pass | pass_with_notes | fail",
 
+  "endpoint_evaluated": "the name of the first efficacy endpoint found in Generated SAP",
+
   "extraction_validation": {
-    "sections_read": ["list every section/subsection number read from Original SAP"],
-    "elements_per_section": {"section_number": "count of elements extracted from that section"},
-    "elements_extracted": 0,
+    "sections_read": ["list section/subsection numbers consulted in Original SAP"],
+    "elements_per_section": {"component_name": 1},
+    "elements_extracted": 3,
     "elements_in_evaluation_table": 0,
     "elements_in_missing_from_generated_sap": 0,
     "counts_match": true
@@ -286,7 +182,7 @@ Provide BOTH markdown (for human review) AND JSON (for programmatic use).
 
   "evaluation_table": [
     {
-      "component": "short description",
+      "component": "Endpoint Name | Endpoint Definition | Analysis Method",
       "evaluation_type": "exact_match | semantic",
       "original_sap_text": "exact quote",
       "generated_sap_text": "exact quote or null",
@@ -294,8 +190,8 @@ Provide BOTH markdown (for human review) AND JSON (for programmatic use).
       "protocol_consulted": "yes | no | n/a",
       "matches_original_sap": "yes | no",
       "detail_level": "match | less_detailed | contradiction",
-      "omitted_content": "REQUIRED: list specific words, clauses, steps, formulas, or values from Original SAP that are not in Generated SAP. Write 'none' only if exact match.",
-      "omission_impact": "none | low | potential (could this omission change meaning?)",
+      "omitted_content": "list specific omissions or 'none'",
+      "omission_impact": "none | low | potential",
       "result": "correct | acceptable | problem",
       "issue_type": "none | contradiction_original | contradiction_protocol",
       "severity": "none | minor | critical",
@@ -320,12 +216,12 @@ Provide BOTH markdown (for human review) AND JSON (for programmatic use).
       "issue_type": "contradiction_original | contradiction_protocol",
       "severity": "minor | critical",
       "component": "short description",
-      "original_sap_text": "FULL VERBATIM QUOTE from Original SAP - NO truncation with ... (required)",
-      "generated_sap_text": "FULL VERBATIM QUOTE from Generated SAP - NO truncation with ... (required)",
+      "original_sap_text": "FULL VERBATIM QUOTE - NO truncation",
+      "generated_sap_text": "FULL VERBATIM QUOTE - NO truncation",
       "protocol_text": "exact quote if relevant",
-      "why_they_conflict": "explanation of why both cannot be true at the same time",
+      "why_they_conflict": "explanation of why both cannot be true",
       "description": "explanation of the issue",
-      "reasoning": "Chain-of-thought: 1) What Original SAP says, 2) What Generated SAP says, 3) Why these conflict, 4) Why both cannot be true"
+      "reasoning": "Chain-of-thought"
     }
   ],
 
@@ -353,20 +249,18 @@ Provide BOTH markdown (for human review) AND JSON (for programmatic use).
 
 Before finalizing your output, verify:
 - `elements_extracted` = `elements_in_evaluation_table` + `elements_in_missing_from_generated_sap`
-- `elements_extracted` = sum of all values in `elements_per_section`
-- If the counts do not match, your output is INVALID - go back and find the missing elements
-- If evaluation_table.length + missing_from_generated_sap.length ≠ elements_extracted, your output is INVALID
+- `elements_extracted` must equal 3
+- If counts do not match, your output is INVALID
 
 ---
 
 ## CRITICAL REMINDERS
 
-1. **Sentence by sentence**: Read every sentence in Original SAP. Each specification sentence is a component.
-2. **No filtering**: Do not skip sentences. Do not filter by category. Extract everything.
-3. **EXISTENCE vs CONTENT**: Protocol is ONLY for checking if missing elements are required, NOT for evaluating content differences.
+1. **First endpoint only**: Find the first efficacy endpoint in the Generated SAP. Evaluate only that one.
+2. **Three components**: Endpoint Name, Endpoint Definition, Analysis Method. That is all.
+3. **No assumptions**: Do not assume what the endpoint should be. Read it from the Generated SAP.
+4. **EXISTENCE vs CONTENT**: Protocol is ONLY for checking if missing elements are required, NOT for evaluating content differences.
 5. **Compare to Original SAP first**: For content, always compare Generated SAP to Original SAP.
 6. **Contradiction is a problem**: Generated SAP saying something incompatible with Original SAP is a problem.
 7. **Extra info is neutral**: Flag but do not penalize extra information unless it contradicts.
-8. **Blocking validation**: Ensure counts_match is true before outputting.
-9. **Full quotes required**: NEVER use "..." to truncate quotes - always include complete text.
-10. **Scope**: ONLY evaluate efficacy analysis methods and procedures. Do NOT evaluate study objectives or endpoint definitions.
+8. **Full quotes required**: NEVER use "..." to truncate quotes - always include complete text.
