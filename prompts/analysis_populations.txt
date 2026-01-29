@@ -52,6 +52,7 @@ For CONTENT, ask only these questions:
 1. Does Generated SAP match Original SAP? → **CORRECT**
 2. Is Generated SAP less detailed than Original SAP? → **ACCEPTABLE** only if the missing detail does NOT change which patients are included/excluded or how they are assigned. If it changes the patients or assignment, it is a different meaning → **PROBLEM**
 3. Does Generated SAP contradict Original SAP? → **PROBLEM**
+4. Does Generated SAP contain a GAP statement or deferred-definition language? → **ACCEPTABLE**. A GAP statement signals that certain details require future input and cannot be pre-specified. This is not a problem.
 
 Stop. Do not consult Protocol for content. Do not mention Protocol in reasoning.
 
@@ -61,6 +62,7 @@ Stop. Do not consult Protocol for content. Do not mention Protocol in reasoning.
 | Generated SAP is less detailed but does NOT change patients or assignment |  **ACCEPTABLE** |
 | Generated SAP is less detailed AND changes which patients are included/excluded or how assigned |  **PROBLEM** (different meaning) |
 | Generated SAP says something DIFFERENT that contradicts Original SAP |  **PROBLEM** (contradiction) |
+| Generated SAP contains a GAP statement or deferred-definition language instead of specific criteria |  **ACCEPTABLE** |
 
 **How to distinguish "less detailed" from "contradiction":**
 - Less detailed: Generated SAP omits words/clauses but core meaning is preserved

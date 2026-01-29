@@ -20,7 +20,7 @@ For that single endpoint, evaluate exactly **3 components**:
 
 1. **Endpoint Name** — What is the endpoint called?
 2. **Endpoint Definition** — How is the endpoint calculated or measured?
-3. **Analysis Method** — What statistical approach is used to analyze it?
+3. **Analysis Method** — Everything the Original SAP specifies about how this endpoint is analyzed. Extract the complete analysis methodology, not just the primary statistical model.
 
 Find the corresponding content in the Original SAP for these same 3 components and compare.
 
@@ -108,7 +108,7 @@ This evaluation has three phases. Complete each phase fully before the next.
 4. Extract exactly 3 components from the Original SAP for this endpoint:
    - **Endpoint Name**: The name/label of the endpoint
    - **Endpoint Definition**: How the endpoint is defined, calculated, or measured
-   - **Analysis Method**: The statistical method used to analyze the endpoint
+   - **Analysis Method**: Everything the Original SAP specifies about how this endpoint is analyzed — the complete analysis methodology, not just the primary statistical model
 
 ### PHASE 2: COMPARISON AND CLASSIFICATION
 
