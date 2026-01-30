@@ -18,7 +18,14 @@ Evaluate ONLY the General Methods section of the Generated SAP.
 
 **Start from the Generated SAP.** Find its General Methods section. Then find the corresponding content in the Original SAP for comparison.
 
-For each item, ask: "Does this apply universally across all analyses, or does it belong to its own dedicated section?" If it belongs to its own section, skip it. If the General Methods section contains subsections with their own headings, only evaluate the content that appears before the first subsection heading. Each subsection is a separate topic and will be evaluated by its own prompt.
+Only evaluate content that applies universally across all analyses in the SAP. For each item, ask: "Would this need to be repeated in multiple other sections if it weren't stated here?" If yes, it belongs in General Methods. If it only applies to one specific analysis, endpoint, or topic that has its own section, skip it.
+
+If the General Methods section contains subsections with their own headings, only evaluate the content that appears before the first subsection heading. Each subsection is a separate topic and will be evaluated by its own prompt.
+
+For each statement, apply this filtering hierarchy in order:
+1. If the statement contains the name of any specific endpoint, it is out of scope — no exceptions, even if it also describes a statistical method or convention.
+2. If no specific endpoint, does it reference coding dictionaries, software, or general statistical standards? → Keep. Coding dictionaries are universal conventions that apply across the entire study — they MUST be evaluated here, not filtered out.
+3. Everything else → Apply the "universally applicable" test above.
 
 ---
 
@@ -38,19 +45,26 @@ Follow this order strictly:
 
 This evaluation has three phases. Complete each phase fully before the next.
 
-### PHASE 1: EXTRACTION
+### PHASE 1: EXTRACTION (from Generated SAP only)
 
-1. Find the General Methods section in the Generated SAP
-2. List every distinct convention, rule, or definition stated in that section
-3. For each item, find the corresponding content in the Original SAP (it may be in a different location)
-4. Extract the EXACT TEXT from the Original SAP as the reference
+1. Locate the General Methods section in the Generated SAP
+2. Extract each distinct statement or rule from that section
+3. For each extracted item, determine:
+   a) Is this universally applicable across all analyses?
+   b) Does this have its own dedicated section elsewhere?
+   If (a) = YES and (b) = NO → Include in evaluation
+   If (a) = NO or (b) = YES → Exclude, note as out of scope
+4. Only after filtering, find the corresponding content in the Original SAP for each included item
+
+Do NOT search the Original SAP for additional content to evaluate. Only find Original SAP content that corresponds to what you extracted from the Generated SAP.
+
+After completing the evaluation table, check the Original SAP's corresponding General Methods section for universally applicable content that is present in the Original SAP but absent from the Generated SAP. List these in `missing_from_generated_sap` for informational tracking. Missing items do NOT affect the rating.
 
 **EXTRACTION RULES:**
 - Each sentence is a separate entry
 - If a sentence contains "X and Y" joining two distinct rules, split into separate entries
 - Extract EXACT TEXT (word-for-word quotes)
 - Do not paraphrase or summarize
-- Only extract items that appear in the Generated SAP's General Methods section
 
 ### PHASE 2: COMPARISON AND CLASSIFICATION
 

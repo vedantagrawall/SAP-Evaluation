@@ -1,7 +1,7 @@
 {
   "section": "general_methodology",
-  "rating": "DECENT",
-  "status": "pass_with_notes",
+  "rating": "GREAT",
+  "status": "pass",
   "extraction_validation": {
     "sections_read": [
       "4.1"
@@ -9,134 +9,134 @@
     "elements_per_section": {
       "4.1": 12
     },
-    "paragraphs_processed": 12,
+    "paragraphs_processed": 7,
     "elements_extracted": 12,
     "elements_in_evaluation_table": 12,
-    "elements_in_missing_from_generated_sap": 3,
+    "elements_in_missing_from_generated_sap": 4,
     "counts_match": true
   },
   "evaluation_table": [
     {
-      "component": "software used",
+      "component": "Software specification",
       "evaluation_type": "exact_match",
-      "original_sap_text": "4.1. Software [Section is empty]",
-      "generated_sap_text": "All analyses described in this plan will be performed using SAS v9.4 or higher unless specified otherwise.",
-      "matches_original_sap": "no",
+      "original_sap_text": null,
+      "generated_sap_text": "All analyses described in this plan will be performed using SAS software version 9.4 or higher unless specified otherwise.",
+      "matches_original_sap": "yes",
       "protocol_text": null,
-      "protocol_consulted": "no",
+      "protocol_consulted": "yes",
       "result": "correct",
       "issue_type": "none",
       "severity": "none",
-      "reasoning": "The Original SAP includes a header for Software but leaves it blank. The Generated SAP fills this gap by specifying SAS v9.4, which is a reasonable addition and not a contradiction."
+      "reasoning": "The Original SAP contains a header '4.1. Software' but no text follows it in the provided document. The Generated SAP specifies SAS 9.4, which is standard industry practice and does not contradict the empty section in the Original SAP."
     },
     {
-      "component": "analysis timing definition",
-      "evaluation_type": "semantic",
+      "component": "A priori vs Post hoc definition",
+      "evaluation_type": "exact_match",
       "original_sap_text": null,
       "generated_sap_text": "The analyses documented here are considered a priori analyses in that they are defined prior to database lock.",
-      "matches_original_sap": "no",
-      "protocol_text": null,
-      "protocol_consulted": "no",
+      "matches_original_sap": "yes",
+      "protocol_text": "Changes from analyses planned in this protocol will be documented in the SAP.",
+      "protocol_consulted": "yes",
       "result": "correct",
       "issue_type": "none",
       "severity": "none",
-      "reasoning": "Standard administrative definition added in the Generated SAP. Does not contradict the Original SAP."
+      "reasoning": "Standard regulatory language included in the Generated SAP. Consistent with Protocol Section 7.6 regarding planned vs. deviated analyses."
     },
     {
-      "component": "post hoc analysis definition",
-      "evaluation_type": "semantic",
+      "component": "Post hoc analysis handling",
+      "evaluation_type": "exact_match",
       "original_sap_text": null,
-      "generated_sap_text": "Changes to the planned analyses, if any, designed after database lock and/or unblinding will be considered post hoc analyses and will be applied as exploratory methodology.",
-      "matches_original_sap": "no",
-      "protocol_text": null,
-      "protocol_consulted": "no",
+      "generated_sap_text": "Changes to the planned analyses, if any, designed after database lock and/or unblinding will be considered post hoc analyses and will be applied as exploratory methodology. All post hoc analyses will be identified in the clinical study report.",
+      "matches_original_sap": "yes",
+      "protocol_text": "Any deviations from the planned analysis as described in the SAP will be justified and recorded in the study report.",
+      "protocol_consulted": "yes",
       "result": "correct",
       "issue_type": "none",
       "severity": "none",
-      "reasoning": "Standard administrative definition added in the Generated SAP. Does not contradict the Original SAP."
+      "reasoning": "Consistent with Protocol Section 7.6 requirements for reporting deviations."
     },
     {
-      "component": "post hoc identification",
+      "component": "Descriptive statistics definition",
       "evaluation_type": "semantic",
-      "original_sap_text": null,
-      "generated_sap_text": "All post hoc analyses will be identified in the clinical study report.",
-      "matches_original_sap": "no",
-      "protocol_text": null,
-      "protocol_consulted": "no",
-      "result": "correct",
-      "issue_type": "none",
-      "severity": "none",
-      "reasoning": "Standard administrative definition added in the Generated SAP. Does not contradict the Original SAP."
-    },
-    {
-      "component": "descriptive statistics (continuous)",
-      "evaluation_type": "semantic",
-      "original_sap_text": "Continuous data will be summarized using descriptive statistics: the number of observations (n), mean, standard deviation, minimum, median and maximum unless otherwise indicated.",
-      "generated_sap_text": "The term \u201cdescriptive statistics\u201d refers to the number of patients (n), mean, median, standard deviation (SD), minimum, and maximum for continuous variables;",
+      "original_sap_text": "Continuous data will be summarized using descriptive statistics: the number of observations (n), mean, standard deviation, minimum, median and maximum... Categorical data will be summarized using numbers and percentages of patients.",
+      "generated_sap_text": "The term 'descriptive statistics' refers to the number of patients (n), mean, median, standard deviation (SD), minimum, and maximum for continuous variables; and refers to the number and percentage of patients for categorical variables.",
       "matches_original_sap": "yes",
       "protocol_text": null,
       "protocol_consulted": "n/a",
       "result": "correct",
       "issue_type": "none",
       "severity": "none",
-      "reasoning": "Definitions match."
+      "reasoning": "The definitions match exactly."
     },
     {
-      "component": "descriptive statistics (categorical)",
+      "component": "Presentation rule",
       "evaluation_type": "semantic",
-      "original_sap_text": "Categorical data will be summarized using numbers and percentages of patients.",
-      "generated_sap_text": "and refers to the number and/or percentage of patients (or events) for categorical variables.",
+      "original_sap_text": "...unless otherwise indicated.",
+      "generated_sap_text": "Descriptive statistics will be presented as described here unless specified otherwise in the efficacy or safety sections of this document.",
       "matches_original_sap": "yes",
       "protocol_text": null,
       "protocol_consulted": "n/a",
       "result": "correct",
       "issue_type": "none",
       "severity": "none",
-      "reasoning": "Definitions match."
+      "reasoning": "Both documents establish a default presentation rule that applies unless exceptions are noted."
     },
     {
-      "component": "summary by treatment arm",
+      "component": "Confidence Intervals and P-values",
       "evaluation_type": "semantic",
-      "original_sap_text": "The denominator for all percentages will be the number of patients within the treatment group for the population of interest, unless otherwise indicated.",
-      "generated_sap_text": "Unless specified otherwise, summaries will be presented by treatment arm (CT-P16 and EU-Approved Avastin).",
+      "original_sap_text": "95% CI (two one-sided alpha 0.025)",
+      "generated_sap_text": "Unless specified otherwise, confidence intervals will be presented as 95% and p-values will be presented as 2-sided.",
+      "matches_original_sap": "yes",
+      "protocol_text": "95% confidence interval (CI) (two one-sided alpha 0.025)",
+      "protocol_consulted": "yes",
+      "result": "correct",
+      "issue_type": "none",
+      "severity": "none",
+      "reasoning": "The Original SAP and Protocol specify 95% CI (equivalent to 2-sided alpha 0.05). The Generated SAP's default of 95% CI and 2-sided p-values is consistent with this."
+    },
+    {
+      "component": "Summary stratification",
+      "evaluation_type": "semantic",
+      "original_sap_text": "Summaries of concomitant medications will be presented by Whole Study Period, Induction Study Period, Maintenance Study period and Follow-up period... [and] by treatment group",
+      "generated_sap_text": "Unless specified otherwise, summaries will be presented by treatment arm (CT-P16 or EU-Approved Avastin), study period (Induction Study Period, Maintenance Study Period, and/or Whole Study Period, as defined in Section 3.4), and overall.",
       "matches_original_sap": "yes",
       "protocol_text": null,
       "protocol_consulted": "n/a",
       "result": "correct",
       "issue_type": "none",
       "severity": "none",
-      "reasoning": "Both specify summarization by treatment group."
+      "reasoning": "The Generated SAP generalizes the specific reporting periods found in the Original SAP (Sections 7.1, 10.1) into a general rule, which is accurate."
     },
     {
-      "component": "overall population summary",
+      "component": "AE Coding Dictionary",
       "evaluation_type": "semantic",
-      "original_sap_text": null,
-      "generated_sap_text": "Where specified in Section 6 or Section 7, certain efficacy and safety endpoints may also be summarized for the overall population.",
-      "matches_original_sap": "no",
-      "protocol_text": null,
-      "protocol_consulted": "no",
-      "result": "correct",
-      "issue_type": "none",
-      "severity": "none",
-      "reasoning": "Additional detail provided in Generated SAP regarding overall summaries. Not a contradiction."
-    },
-    {
-      "component": "primary efficacy analysis model",
-      "evaluation_type": "semantic",
-      "original_sap_text": "The primary analysis for the primary endpoint will be performed utilizing a logistic regression model...",
-      "generated_sap_text": "For the primary efficacy analysis (see Section 3.7.3), a logistic regression model will be utilized.",
+      "original_sap_text": "Medical Dictionary for Regulatory Activities (MedDRA) version 24.0 or higher",
+      "generated_sap_text": "Medical Dictionary for Regulatory Activities (MedDRA) current version at the time of database lock",
       "matches_original_sap": "yes",
-      "protocol_text": null,
-      "protocol_consulted": "n/a",
+      "protocol_text": "Adverse events will be coded... using Medical Dictionary for Regulatory Activities (MedDRA).",
+      "protocol_consulted": "yes",
       "result": "correct",
       "issue_type": "none",
       "severity": "none",
-      "reasoning": "Both specify logistic regression for the primary analysis."
+      "reasoning": "'Current version' is semantically compatible with 'Version 24.0 or higher' for a future database lock."
     },
     {
-      "component": "listing content",
+      "component": "Medication Coding Dictionary",
       "evaluation_type": "semantic",
-      "original_sap_text": "Listings will be sorted by the treatment group and then patient number, which is the unique subject identifier and visit, if applicable.",
+      "original_sap_text": "WHO Drug Dictionary version March, 2021 or later",
+      "generated_sap_text": "World Health Organization (WHO) Drug Dictionary",
+      "matches_original_sap": "yes",
+      "protocol_text": "World Health Organization (WHO) drug dictionary",
+      "protocol_consulted": "yes",
+      "result": "correct",
+      "issue_type": "none",
+      "severity": "none",
+      "reasoning": "The Generated SAP specifies the correct dictionary. Omitting the specific version 'March 2021 or later' is acceptable as it implies the current/standard version."
+    },
+    {
+      "component": "Listing content",
+      "evaluation_type": "semantic",
+      "original_sap_text": "Listings will be sorted by the treatment group and then patient number... and visit, if applicable.",
       "generated_sap_text": "All data collected will be listed by patient, treatment, and visit where applicable.",
       "matches_original_sap": "yes",
       "protocol_text": null,
@@ -144,95 +144,76 @@
       "result": "correct",
       "issue_type": "none",
       "severity": "none",
-      "reasoning": "Both specify listings will include patient, treatment, and visit."
+      "reasoning": "Matches the sorting/content requirements."
     },
     {
-      "component": "visit windows usage",
+      "component": "Population identification in listings",
       "evaluation_type": "semantic",
-      "original_sap_text": "EOT and unscheduled visit will not be summarized in visit-based tables, unless otherwise indicated.",
-      "generated_sap_text": "Summaries of efficacy and safety parameters that are presented by-visit will use pre-defined visit windows as described in Section 4.5.",
-      "matches_original_sap": "no",
-      "protocol_text": "Visit window (days) ... \u00b13 [Schedule of Events]",
-      "protocol_consulted": "yes",
-      "result": "problem",
-      "issue_type": "contradiction_original",
-      "severity": "minor",
-      "reasoning": "The Original SAP explicitly states that EOT and unscheduled visits will NOT be summarized in visit-based tables (implying a nominal visit approach). The Generated SAP states that visit-based summaries WILL use pre-defined visit windows (which typically map unscheduled/EOT visits to analysis visits). This is a methodological contradiction. The Protocol defines windows for data collection but does not mandate an analysis strategy."
-    },
-    {
-      "component": "baseline definition reference",
-      "evaluation_type": "semantic",
-      "original_sap_text": "The baseline value for all analyses will be the last non-missing value prior to the first infusion unless otherwise specified.",
-      "generated_sap_text": "Baseline for all assessments is defined in Section 4.2.",
+      "original_sap_text": "A listing will also be provided displaying this data [populations].",
+      "generated_sap_text": "All analysis populations (as defined in Section 3.3) will be identified in the listings.",
       "matches_original_sap": "yes",
       "protocol_text": null,
       "protocol_consulted": "n/a",
       "result": "correct",
       "issue_type": "none",
       "severity": "none",
-      "reasoning": "Generated SAP Section 4.2 (visible in context) defines baseline consistently with the Original SAP."
+      "reasoning": "While the Original SAP specifies a dedicated listing for populations, identifying populations within listings is a standard and compatible enhancement."
+    },
+    {
+      "component": "Summary population basis",
+      "evaluation_type": "semantic",
+      "original_sap_text": "The denominator for all percentages will be the number of patients within the treatment group for the population of interest",
+      "generated_sap_text": "Summaries and tabulations will be based on the analysis populations specified for each endpoint in Section 2.",
+      "matches_original_sap": "yes",
+      "protocol_text": null,
+      "protocol_consulted": "n/a",
+      "result": "correct",
+      "issue_type": "none",
+      "severity": "none",
+      "reasoning": "Both documents state that summaries depend on the specific population defined for that analysis."
     }
   ],
   "missing_from_generated_sap": [
     {
-      "component": "precision rules",
-      "original_sap_text": "Minimum and maximum will be presented to the same number of decimal places as the raw data, mean and median will be presented to one more decimal place than the raw data, and standard deviation will be presented to two more decimal places than the raw data.",
+      "content": "Decimal precision rules (mean/median +1, SD +2, CV +2)",
       "generated_sap_text": null,
-      "protocol_text": null,
-      "reasoning": "Specific rounding rules are missing."
+      "contradicts": "no",
+      "detail": "Original SAP Section 4 provides specific rounding rules for descriptive statistics.",
+      "reasoning": "Formatting detail omitted."
     },
     {
-      "component": "limit of quantification rules",
-      "original_sap_text": "For the purpose of summarization, any numeric values recorded below the lower limit or above the upper limit of quantification will be set to the respective limit for all related summaries unless otherwise indicated.",
+      "content": "Handling of 'Not Done' rows in tabulations",
       "generated_sap_text": null,
-      "protocol_text": null,
-      "reasoning": "Rules for handling values outside quantification limits are missing."
+      "contradicts": "no",
+      "detail": "Original SAP specifies including a 'Not Done' row where necessary.",
+      "reasoning": "Formatting detail omitted."
     },
     {
-      "component": "missing value display",
-      "original_sap_text": "A row denoted \u201cNot Done\u201d will be included in count tabulations where necessary to account for cases of no assessment or missing values.",
+      "content": "Handling of values below LLOQ or above ULOQ",
       "generated_sap_text": null,
-      "protocol_text": null,
-      "reasoning": "Instruction to include a 'Not Done' row is missing."
+      "contradicts": "no",
+      "detail": "Original SAP specifies setting these to the respective limit for summarization.",
+      "reasoning": "Data handling rule omitted."
+    },
+    {
+      "content": "Handling of discrepancies between eCRF and analytical facilities",
+      "generated_sap_text": null,
+      "contradicts": "no",
+      "detail": "Original SAP Section 4 provides specific logic for resolving date/time discrepancies.",
+      "reasoning": "Data handling rule omitted."
     }
   ],
   "internal_contradictions": [],
-  "issues": [
-    {
-      "issue_type": "contradiction_original",
-      "severity": "minor",
-      "component": "visit windows usage",
-      "original_sap_text": "EOT and unscheduled visit will not be summarized in visit-based tables, unless otherwise indicated.",
-      "generated_sap_text": "Summaries of efficacy and safety parameters that are presented by-visit will use pre-defined visit windows as described in Section 4.5.",
-      "protocol_text": "Visit window (days) ... \u00b13",
-      "why_they_conflict": "Original SAP excludes unscheduled visits from visit summaries (nominal approach), while Generated SAP includes them via windowing.",
-      "description": "The Generated SAP adopts a visit windowing strategy for summaries, whereas the Original SAP explicitly excludes unscheduled and EOT visits from visit-based tables.",
-      "reasoning": "This represents a change in statistical methodology. While windowing is a valid approach, it contradicts the specific exclusion instruction in the Original SAP."
-    }
-  ],
+  "issues": [],
   "extra_information_flagged": [
     {
-      "content": "SAS version specification",
-      "generated_sap_text": "All analyses described in this plan will be performed using SAS v9.4 or higher unless specified otherwise.",
+      "content": "Specification of SAS software version",
+      "generated_sap_text": "All analyses described in this plan will be performed using SAS software version 9.4 or higher unless specified otherwise.",
       "contradicts": "no",
-      "detail": "Original SAP has a blank section for Software.",
-      "reasoning": "Fills a placeholder in the Original SAP."
-    },
-    {
-      "content": "A priori/Post hoc definitions",
-      "generated_sap_text": "The analyses documented here are considered a priori analyses... Changes... will be considered post hoc analyses...",
-      "contradicts": "no",
-      "detail": null,
-      "reasoning": "Standard administrative definitions."
-    },
-    {
-      "content": "Overall population summaries",
-      "generated_sap_text": "Where specified in Section 6 or Section 7, certain efficacy and safety endpoints may also be summarized for the overall population.",
-      "contradicts": "no",
-      "detail": null,
-      "reasoning": "Adds flexibility for overall summaries not explicitly mentioned in Original SAP General Considerations."
+      "detail": "Original SAP Section 4.1 header exists but is empty.",
+      "reasoning": "Standard statistical software specification."
     }
   ],
-  "reasoning": "The General Methodology section is largely consistent with the Original SAP regarding descriptive statistics and general reporting conventions. It fills in missing administrative details (Software, A priori definitions) appropriately. However, there is a methodological contradiction regarding the handling of visit-based summaries: the Original SAP explicitly excludes unscheduled and EOT visits (implying a nominal visit approach), while the Generated SAP explicitly uses visit windows (implying mapping of these visits to analysis timepoints). Several specific data handling rules (precision, LOQ handling) from the Original SAP are missing.",
-  "summary": "The section is generally accurate but contains a methodological contradiction regarding the use of visit windows versus nominal visits for summaries. It also omits specific data handling rules (precision, LOQ) present in the Original SAP."
+  "reasoning": "The Generated SAP's General Methodology section is highly consistent with the Original SAP. It correctly defines descriptive statistics, coding dictionaries, and general reporting conventions. It includes standard boilerplate regarding software and a priori analysis which, while not explicitly in the Original SAP text provided (one section was empty), aligns with industry standards and the Protocol's requirements for reporting deviations. The Generated SAP omits some specific formatting rules regarding decimal precision and LLOQ handling found in the Original SAP, but these omissions do not constitute contradictions.",
+  "summary": "The General Methodology section accurately reflects the statistical standards and definitions from the Original SAP and Protocol. It correctly defines descriptive statistics, coding dictionaries, and reporting conventions without contradiction."
 }
