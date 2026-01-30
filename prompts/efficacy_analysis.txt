@@ -119,6 +119,13 @@ For each of the 3 components:
 - Only record null if no matching content exists
 
 **Step B**: Compare statements directly
+
+**FORMULA MATCHING RULE:** When the Original SAP contains multiple formulas for related but distinct concepts, you MUST match the Generated SAP formula to the Original SAP formula that calculates the same thing. Do not compare a Generated SAP formula against a different Original SAP formula just because they share similar keywords. Verify that the two formulas are intended to compute the same quantity before declaring a match or contradiction.
+
+**INTERNAL INCONSISTENCY RULE:** If the Original SAP states a numeric value and also states the mathematical derivation of that value, and the stated value does not equal the derivation, this is an internal inconsistency in the Original SAP. If the Generated SAP uses the mathematically correct result of the derivation, this is NOT a contradiction — the Generated SAP is using the Original SAP's own formula correctly. Do not flag this as a problem.
+
+**CONTRADICTION VS MISSING DISTINCTION:** A contradiction requires the Generated SAP to actively state something incompatible with the Original SAP. If the Generated SAP is silent on a topic — it does not mention it at all — that is a missing item, not a contradiction. Only flag as contradiction when both documents address the same topic and their statements cannot both be true at the same time.
+
 - Ask: "Can both statements be true at the same time?"
 - If YES → matches_original_sap: "yes"
 - If NO → matches_original_sap: "no" (contradiction)
@@ -145,19 +152,26 @@ Your output arrays (evaluation_table + missing_from_generated_sap) must contain 
 
 ## RATING CRITERIA
 
+Rating is based ONLY on contradictions. Missing information does NOT affect the rating under any circumstances. Do not consider omissions, missing items, or level of detail when determining the rating.
+
+A section with 0 contradictions MUST be rated GREAT, regardless of how many items are missing or omitted.
+
 ### GREAT
-- All 3 components present and match Original SAP
-- No contradictions
+- No contradictions between Generated SAP and Original SAP
+- No contradictions with Protocol
+- No internal contradictions
+- This is the correct rating even if many items are missing or less detailed
 
 ### DECENT
-- All 3 components present
-- Minor wording differences that do not change meaning
+- Minor contradictions that do not affect trial integrity
+- Small inconsistencies easily correctable
+- No Protocol contradictions
 
 ### POOR
-- A component is missing and required
-- Content contradicts Original SAP
-
-**RATING RULE**: If ANY item has `classification: "missing_required"`, the rating MUST be POOR. If ANY item has a contradiction, the rating MUST be POOR.
+- Critical contradictions with Protocol
+- Generated SAP states something fundamentally incompatible with Original SAP
+- Multiple contradictions
+- Internal contradictions
 
 ---
 
@@ -264,3 +278,7 @@ Before finalizing your output, verify:
 6. **Contradiction is a problem**: Generated SAP saying something incompatible with Original SAP is a problem.
 7. **Extra info is neutral**: Flag but do not penalize extra information unless it contradicts.
 8. **Full quotes required**: NEVER use "..." to truncate quotes - always include complete text.
+9. **Rating based on contradictions only**: Missing information does NOT affect rating. Track missing items informationally but do not penalize.
+10. **Match formulas correctly**: When the Original SAP has multiple formulas for related concepts, match each Generated SAP formula to the Original SAP formula that computes the same quantity. Do not compare formulas that calculate different things.
+11. **Original SAP internal inconsistencies**: If the Original SAP states a rounded value alongside its mathematical derivation, and the Generated SAP uses the exact result of that derivation, this is not a contradiction.
+12. **Silence is not contradiction**: If the Generated SAP does not mention a topic at all, that is missing — not a contradiction. A contradiction requires both documents to address the same topic with incompatible statements.
