@@ -14,7 +14,7 @@ You are evaluating a Generated SAP against an Original SAP for a clinical trial.
 
 ## YOUR TASK
 
-Evaluate ONLY the first efficacy endpoint that appears in the Generated SAP. The Generated SAP is an abbreviated document designed to contain a single efficacy endpoint. Do NOT evaluate every endpoint or every sentence in the efficacy sections. Focus on the first one only.
+Find the single endpoint with the most complete and detailed analysis methodology in the Generated SAP. The most detailed endpoint will have full model details, covariates, sensitivity analyses, missing data rules, etc.
 
 For that single endpoint, evaluate exactly **3 components**:
 
@@ -56,7 +56,7 @@ Compare to Original SAP ONLY.
 For CONTENT, ask these questions:
 1. Does Generated SAP match Original SAP? → **CORRECT**
 2. Does Generated SAP omit only minor wording but preserve ALL specifics? → **ACCEPTABLE**
-3. Does Generated SAP omit methodological steps, formulas, specific values, or procedural details? → **PROBLEM** (missing_specification)
+3. Does Generated SAP omit methodological steps, formulas, specific values, or procedural details? → **PROBLEM** (missing_specification). Each distinct omitted element must be listed separately in `missing_from_generated_sap`. Do NOT dismiss omissions because they are absent from the Protocol — this is a content comparison against the Original SAP only.
 4. Does Generated SAP contradict Original SAP? → **PROBLEM** (contradiction)
 
 | Scenario | Result |
@@ -100,9 +100,9 @@ Generated SAP may contain information not present in Original SAP.
 
 This evaluation has three phases. Complete each phase fully before the next.
 
-### PHASE 1: IDENTIFY THE FIRST EFFICACY ENDPOINT
+### PHASE 1: IDENTIFY THE MOST DETAILED ENDPOINT
 
-1. Read the Generated SAP and find the **first efficacy endpoint** mentioned (whether labeled primary, secondary, or otherwise — just take whatever appears first)
+1. Read the Generated SAP and find the single endpoint with the most complete and detailed analysis methodology
 2. Record its name
 3. In the Original SAP, locate the matching endpoint by name
 4. Extract exactly 3 components from the Original SAP for this endpoint:
@@ -256,7 +256,7 @@ Before finalizing your output, verify:
 
 ## CRITICAL REMINDERS
 
-1. **First endpoint only**: Find the first efficacy endpoint in the Generated SAP. Evaluate only that one.
+1. **Most detailed endpoint only**: Find the endpoint with the most complete and detailed analysis methodology in the Generated SAP. Evaluate only that one.
 2. **Three components**: Endpoint Name, Endpoint Definition, Analysis Method. That is all.
 3. **No assumptions**: Do not assume what the endpoint should be. Read it from the Generated SAP.
 4. **EXISTENCE vs CONTENT**: Protocol is ONLY for checking if missing elements are required, NOT for evaluating content differences.

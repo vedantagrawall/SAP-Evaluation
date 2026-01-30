@@ -1,14 +1,14 @@
 ## Efficacy Analysis Evaluation
 
 **Section:** efficacy_analysis
-**Rating:** GREAT
-**Status:** pass
+**Rating:** POOR
+**Status:** fail
 
 ---
 
 ### Extraction Validation
 
-- **sections read:** 8.1, 4.9
+- **sections read:** 8.2.2, 8.2.2.3
 - **elements per section:** component_name: 1
 - **elements extracted:** 3
 - **elements in evaluation table:** 3
@@ -22,9 +22,9 @@
 #### 1. Endpoint Name
 
 - **evaluation type:** exact_match
-- **original SAP text:** ORR based on BOR during the Induction Study Period
-- **generated SAP text:** Objective response rate (ORR, %) based on BOR during the Induction Study Period by RECIST v.1.1
-- **protocol text:** objective response rate (ORR) up to Cycle 6 during the Induction Study Period
+- **original SAP text:** Progression-free Survival
+- **generated SAP text:** Progression-Free Survival (PFS)
+- **protocol text:** progression-free survival (PFS)
 - **protocol consulted:** yes
 - **matches original SAP:** yes
 - **detail level:** match
@@ -33,57 +33,96 @@
 - **result:** correct
 - **issue type:** none
 - **severity:** none
-- **reasoning:** The Generated SAP correctly identifies the primary endpoint name, matching the Original SAP and Protocol.
+- **reasoning:** The endpoint name matches the Original SAP.
 
 #### 2. Endpoint Definition
 
 - **evaluation type:** semantic
-- **original SAP text:** The ORR is defined as the proportion of patients with a confirmed BOR of CR or PR (the ‘responder’). All other patients in the ITT or PP population except responders will be considered as non-responder including patients without post-baseline tumor assessment. ... Missing values in ORR will be considered as ‘Non-responder’
-- **generated SAP text:** defined as the proportion of patients achieving a Best Overall Response (BOR) of either Complete Response (CR) or Partial Response (PR) during the Induction Study Period (up to Cycle 6)... Patients with no post-baseline tumor assessment or whose response cannot be evaluated (NE) will be treated as non-responders
-- **protocol text:** Objective response rate (ORR, %) based on BOR during the Induction Study Period by RECIST v.1.1
+- **original SAP text:** PFS is defined as time from randomization to determined PD/recurrence or death from any cause (whichever occurs first). PD/recurrence or death that occurred on or before beginning another new anticancer therapy will be regarded as an event.
+...
+PFS (months) = (Date of Event/Censoring – Date of Randomization +1)/30.4
+- **generated SAP text:** Progression-Free Survival (PFS) is defined as the time from the date of randomization until the date of the first documented occurrence of progressive disease (PD)... or death from any cause, whichever occurs first.
+...
+PFS (days) = [Date of Event or Censoring] – [Date of Randomization] + 1.
+For analysis in months, days will be converted as: PFS (months) = PFS (days) / 30.4375.
+- **protocol text:** PFS: the time from randomization until PD/recurrence or death due to any cause, whichever occurs first
 - **protocol consulted:** yes
-- **matches original SAP:** yes
-- **detail level:** match
+- **matches original SAP:** no
+- **detail level:** contradiction
 - **omitted content:** none
-- **omission impact:** none
-- **result:** correct
-- **issue type:** none
-- **severity:** none
-- **reasoning:** The definition in the Generated SAP accurately reflects the Original SAP, including the handling of non-responders and missing data.
+- **omission impact:** potential
+- **result:** problem
+- **issue type:** contradiction_original
+- **severity:** minor
+- **reasoning:** The Original SAP explicitly specifies a conversion factor of 30.4 for months. The Generated SAP uses 30.4375. While 30.4375 is the exact result of 365.25/12 (which appears in a parenthetical in the Original SAP), the Original SAP explicitly mandates dividing by 30.4 in the formula.
 
 #### 3. Analysis Method
 
 - **evaluation type:** semantic
-- **original SAP text:** The similarity criterion has been set such that the confidence limits of the 95% CI of the difference in ORR from each treatment group will be entirely bounded by the interval (-12.5, 12.5). The primary analysis for the primary endpoint will be performed utilizing a logistic regression model considering country, sex (female vs. male), disease status at baseline (recurrence vs. metastatic), and ECOG performance status at baseline (0 vs. 1) as covariates with treatment groups (CT-P16 and EU-Approved Avastin) as a fixed effect. Country can be pooled into region (EMEA vs. America vs. Asia) for statistical analysis when there are not enough patients within each country. ... The Delta Method for estimating difference of proportion is explained... Tipping point analysis will also be conducted using central review data based on exact binomial approach in the ITT population for a sensitivity analysis.
-- **generated SAP text:** The primary analysis will compare the ORR between the CT-P16 and EU-Approved Avastin groups... Equivalence will be assessed using a logistic regression model... Covariates will include the stratification factors: sex... disease status... and ECOG... Country will be included... pooled by region... The resulting odds ratio and its 95% confidence interval (CI) will be converted into a difference in proportions... using the Delta method. ... Therapeutic similarity will be concluded if the 2-sided 95% CI for the difference in ORR is entirely contained within the equivalence margin of (-12.5%, 12.5%).
-- **protocol text:** The similarity criterion has been set such that the confidence limits of the 95% CI of the difference in ORR will be entirely bounded by the interval (-12.5, 12.5). The primary analysis for the primary endpoint will be performed utilizing a logistic regression model considering covariates with treatment groups... as a fixed effect... The resulting odds ratio and 95% CI will be converted into difference of proportions using the Delta method
+- **original SAP text:** The median survival time and its corresponding 95% CI for each treatment group will be estimated using the Kaplan-Meier method. The 25th percentile and 75th percentile for the Survival times along with the corresponding 95% CI for the percentiles will also be displayed. The Brookmeyer-Crowley methodology will be used to construct the 95% CI for each percentile... In addition, the estimate of survival rates (at 6, 12, 24, 36 months for response duration, TTP, PFS and at 12, 24, 36 months for OS) will be displayed along with their corresponding 95% CI... In PFS and OS analyses, an adjusted stratified cox regression model will be used to estimate the hazard ratio and its 95% CI... using country, sex (female vs. male), disease status at baseline (recurrence vs. metastatic), and ECOG performance score at baseline (0 vs. 1) as stratification factors.
+- **generated SAP text:** The distribution of PFS will be estimated for each treatment group using the Kaplan-Meier (KM) method. The following statistics will be presented:
+- Median PFS time with two-sided 95% confidence intervals (CIs) calculated using the Brookmeyer-Crowley method.
+- PFS rates at landmark time points (e.g., 6, 9, and 12 months) with corresponding 95% CIs.
+...
+The hazard ratio (HR) and its associated 95% CI will be estimated using a stratified Cox proportional hazards model. The model will include treatment group as a fixed effect and will be stratified by... Country, Sex (Female vs. Male), Disease Status (Recurrence vs. Metastatic), ECOG performance score (0 vs. 1)
+- **protocol text:** A time-to-event analysis will be undertaken for each of the response duration, TTP, PFS, and OS in the ITT and PP population; the median time and its corresponding 95% CI for each treatment group for each secondary endpoint of time-to-event analysis will be estimated using the Kaplan-Meier method.
 - **protocol consulted:** yes
-- **matches original SAP:** yes
-- **detail level:** less_detailed
-- **omitted content:** Tipping point analysis; specific region definitions (EMEA vs America vs Asia)
-- **omission impact:** none
-- **result:** acceptable
-- **issue type:** none
-- **severity:** none
-- **reasoning:** The Generated SAP correctly captures the primary statistical model (logistic regression), covariates, Delta method, and equivalence margins. It omits the 'Tipping point analysis' and the specific region names (EMEA/America/Asia), but neither of these details is present in the Protocol, making their omission acceptable.
+- **matches original SAP:** no
+- **detail level:** contradiction
+- **omitted content:** 25th and 75th percentiles; specific landmark timepoints (24, 36 months)
+- **omission impact:** low
+- **result:** problem
+- **issue type:** contradiction_original
+- **severity:** minor
+- **reasoning:** The Generated SAP contradicts the Original SAP regarding landmark timepoints (Original: 6, 12, 24, 36 months; Generated: 6, 9, 12 months). Additionally, the Generated SAP omits the requirement to display the 25th and 75th percentiles with their 95% CIs.
 
 ---
 
-### Issues Found (0 items)
+### Issues Found (3 items)
 
-*No issues found.*
+#### 1. Endpoint Definition (Month Conversion)
+
+- **issue type:** contradiction_original
+- **severity:** minor
+- **original SAP text:** Time-to-event in days will be converted to months by dividing the number of days by 30.4 (365.25 days/12 months).
+...
+PFS (months) = (Date of Event/Censoring – Date of Randomization +1)/30.4
+- **generated SAP text:** For analysis in months, days will be converted as: PFS (months) = PFS (days) / 30.4375.
+- **why they conflict:** The Original SAP explicitly defines the divisor as 30.4, whereas the Generated SAP uses 30.4375.
+- **description:** The Generated SAP uses a different conversion factor for days to months than the Original SAP.
+- **reasoning:** The Original SAP provides the exact formula using 30.4. Although 365.25/12 equals 30.4375, the explicit instruction is to divide by 30.4.
+
+#### 2. Analysis Method (Landmark Timepoints)
+
+- **issue type:** contradiction_original
+- **severity:** minor
+- **original SAP text:** In addition, the estimate of survival rates (at 6, 12, 24, 36 months for response duration, TTP, PFS and at 12, 24, 36 months for OS) will be displayed along with their corresponding 95% CI.
+- **generated SAP text:** PFS rates at landmark time points (e.g., 6, 9, and 12 months) with corresponding 95% CIs.
+- **why they conflict:** Original SAP requires 6, 12, 24, and 36 months. Generated SAP lists 6, 9, and 12 months.
+- **description:** The Generated SAP specifies different landmark timepoints for PFS analysis than the Original SAP.
+- **reasoning:** The Original SAP has a specific list of timepoints including 24 and 36 months which are absent in the Generated SAP, while the Generated SAP adds 9 months which is not in the Original.
+
+#### 3. Analysis Method (Percentiles)
+
+- **issue type:** contradiction_original
+- **severity:** minor
+- **original SAP text:** The 25th percentile and 75th percentile for the Survival times along with the corresponding 95% CI for the percentiles will also be displayed.
+- **generated SAP text:** Median PFS time with two-sided 95% confidence intervals (CIs) calculated using the Brookmeyer-Crowley method.
+- **why they conflict:** Original SAP explicitly requires 25th and 75th percentiles. Generated SAP omits them.
+- **description:** The Generated SAP omits the requirement to analyze and display the 25th and 75th percentiles.
+- **reasoning:** This is a specific analysis requirement in the Original SAP that is missing from the Generated SAP.
 
 ---
 
 ### Extra Information Flagged (1 items)
 
-#### 1. Specific sensitivity analyses (Complete Case, Confirmed vs Unconfirmed, Alternative Covariate)
+#### 1. Stratified Log-rank Test
 
-- **content:** Specific sensitivity analyses (Complete Case, Confirmed vs Unconfirmed, Alternative Covariate)
-- **generated SAP text:** Sensitivity Analysis/Analyses... Complete Case Analysis... Confirmed vs. Unconfirmed Response... Alternative Covariate Adjustment
+- **content:** Stratified Log-rank Test
+- **generated SAP text:** A two-sided stratified log-rank test will be used to compare the PFS distributions between the two treatment groups.
 - **contradicts:** no
-- **detail:** The Generated SAP lists specific sensitivity analyses not explicitly detailed in the Original SAP (which only specifies Tipping Point and Local Review). However, the Original SAP allows for 'Sensitivity analyses... using imputation or excluding outliers', so these additions are not contradictions.
-- **reasoning:** The Generated SAP includes standard sensitivity analyses that are not explicitly mandated in the Original SAP but do not contradict the general allowance for sensitivity analyses.
+- **detail:** Original SAP does not explicitly mention a log-rank test for secondary endpoints (only Cox model and KM), but does not forbid it.
+- **reasoning:** The addition of a log-rank test is a standard statistical practice and does not contradict the requirement to perform Cox regression and KM analysis.
 
 ---
 
@@ -95,10 +134,10 @@
 
 ### Reasoning
 
-The Generated SAP accurately captures the primary efficacy endpoint (ORR), its definition, and the primary analysis methodology (logistic regression, covariates, Delta method, equivalence margins). It omits the 'Tipping point analysis' and specific region definitions found in the Original SAP, but since these are not present in the Protocol, their omission is acceptable. The Generated SAP also includes some standard sensitivity analyses not explicitly in the Original SAP, which is flagged as extra information but does not negatively impact the rating.
+The Generated SAP correctly identifies the endpoint and the primary analysis methods (KM, Stratified Cox). However, it introduces contradictions in the calculation details (month conversion factor) and specific reporting requirements (landmark timepoints). It also omits the requirement for 25th and 75th percentiles. While the Protocol does not specify these details (making the omissions acceptable in a vacuum), the Generated SAP contradicts the specific instructions provided in the Original SAP.
 
 ---
 
 ### Summary
 
-The Generated SAP provides a high-quality representation of the primary efficacy endpoint and its analysis. The primary statistical model and decision criteria match the Original SAP perfectly. Minor omissions regarding specific sensitivity analyses and region definitions are acceptable as they are not required by the Protocol.
+The Generated SAP accurately captures the high-level analysis strategy for PFS but fails on specific details defined in the Original SAP. It uses a different month conversion factor (30.4375 vs 30.4), lists different landmark timepoints, and omits required percentile statistics.
