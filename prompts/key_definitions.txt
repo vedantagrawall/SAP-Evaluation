@@ -18,7 +18,7 @@ Evaluate ONLY the Key Definitions content in the Generated SAP. This includes va
 
 Do NOT evaluate analysis population definitions, study objectives, endpoint definitions, efficacy analysis methods, or general statistical methodology — those are evaluated in separate prompts.
 
-**CRITICAL**: Read the Original SAP sentence by sentence. Every sentence that contains a specification is a component to evaluate. Do not skip any sentence. Do not filter by category.
+**Start from the Generated SAP.** Find its Key Definitions section. Then find the corresponding content in the Original SAP for comparison. The Original SAP may have key definitions scattered across multiple sections rather than in a single dedicated section — search the entire Original SAP for corresponding content.
 
 ---
 
@@ -105,30 +105,16 @@ Generated SAP may contain definitions not present in Original SAP.
 
 This evaluation has three phases. Complete each phase fully before the next.
 
-### PHASE 1: EXHAUSTIVE EXTRACTION
+### PHASE 1: EXTRACTION (from Generated SAP only)
+
+1. Locate the Key Definitions section in the Generated SAP
+2. Extract each distinct definition, formula, or variable definition from that section
+3. For each extracted item, record the EXACT TEXT (word-for-word quote)
+4. Do not paraphrase or summarize
+5. Create one entry per definition
 
 **EXTRACTION GRANULARITY:**
-Each sentence is a separate entry. If a paragraph contains multiple sentences, extract each sentence as its own entry. Do NOT group multiple sentences into one entry.
-
-Read ONLY the sections of the Original SAP that cover key definitions, variable definitions, calculation formulas, study period definitions, and operational definitions. Read section by section, then sentence by sentence within each section. For each statement, rule, or definition:
-1. Note which section/subsection it comes from
-2. Extract the EXACT TEXT (word-for-word quote)
-3. Do not paraphrase or summarize
-4. Do not fit into predefined categories
-5. Create one entry per statement
-6. Count elements per section separately — record in `elements_per_section`
-
-**CONJUNCTION RULE (CRITICAL):**
-When a sentence contains "X and Y" or "X, Y, and Z", split into SEPARATE elements.
-
-**CONJUNCTION VERIFICATION:**
-Before moving to Phase 2, review every extracted element. If any element contains "and" or "or" joining two different items, STOP and split it into separate entries.
-
-**NO DEDUPLICATION:**
-Do not deduplicate. If the same or similar specification appears multiple times in the document, each occurrence is a separate entry. Different locations in the document mean different entries. Specifications that look similar but apply to different items are NOT duplicates.
-
-**SIBLING SUBSECTION CHECK:**
-After extracting from all subsections, compare element counts across subsections at the same level. If sibling subsections cover parallel content but have different element counts, re-read the subsection with fewer elements to check if you missed anything.
+Each definition or formula is a separate entry.
 
 **COUNT YOUR ELEMENTS:**
 After extraction, count the total number of elements you extracted. Record this number - it will be verified later.
@@ -136,16 +122,23 @@ After extraction, count the total number of elements you extracted. Record this 
 ### PHASE 2: COMPARISON AND CLASSIFICATION
 
 **TRACKING RULE:**
-Every element extracted in Phase 1 MUST appear in either evaluation_table OR missing_from_generated_sap. No element can be skipped or lost.
+Every element extracted in Phase 1 MUST appear in the evaluation_table. No element can be skipped or lost.
 
-**Step A**: For each extracted element, search Generated SAP
-- Identify the key terms from the Original SAP element
-- Search the ENTIRE Generated SAP for those key terms
-- When found, copy the EXACT sentence word-for-word as generated_sap_text
+**Step A**: For each extracted element from the Generated SAP, search the ENTIRE Original SAP for corresponding content
+- Identify the key terms from the Generated SAP element
+- Search the ENTIRE Original SAP for those key terms — key definitions may be scattered across multiple sections, not in a single dedicated section
+- When found, copy the EXACT sentence word-for-word as original_sap_text
 - Do NOT paraphrase, summarize, or reword what you find
-- Only record null if no content with those key terms exists in the entire document
+- If no corresponding content exists anywhere in the Original SAP, record original_sap_text as null
+
+**MISSING FROM ORIGINAL SAP RULE:** If a definition exists in the Generated SAP but has no corresponding content anywhere in the Original SAP, assume the Generated SAP is correct. Place this item in the evaluation_table with original_sap_text: null, result: "correct", and note it as extra information. Do not penalize.
 
 **Step B**: Compare statements directly
+
+**FORMULA MATCHING RULE:** When the Original SAP contains multiple formulas for related but distinct concepts, you MUST match the Generated SAP formula to the Original SAP formula that calculates the same thing. Do not compare a Generated SAP formula against a different Original SAP formula just because they share similar keywords. Verify that the two formulas are intended to compute the same quantity before declaring a match or contradiction.
+
+**INTERNAL INCONSISTENCY RULE:** If the Original SAP states a numeric value and also states the mathematical derivation of that value, and the stated value does not equal the derivation, this is an internal inconsistency in the Original SAP. If the Generated SAP uses the mathematically correct result of the derivation, this is NOT a contradiction — the Generated SAP is using the Original SAP's own formula correctly. Do not flag this as a problem.
+
 - Ask: "Can both statements be true at the same time?"
 - If YES → matches_original_sap: "yes" (no conflict, statements are compatible)
 - If NO → matches_original_sap: "no" (contradiction, statements conflict)
@@ -159,7 +152,9 @@ Every element extracted in Phase 1 MUST appear in either evaluation_table OR mis
 - Record exactly what words, clauses, steps, formulas, or values were omitted in `omitted_content`
 - Assess `omission_impact`: none | low | potential (could this omission change meaning?)
 
-**Step E**: For missing items, check Protocol
+**Step E**: After completing the evaluation table, check the Original SAP for key definitions that are present in the Original SAP but absent from the Generated SAP. List these in `missing_from_generated_sap` for informational tracking. Missing items do NOT affect the rating.
+
+For each missing item, check Protocol:
 - Search the ENTIRE Protocol document for the same element
 - Content may be worded differently - look for semantic match
 - Record in_protocol: "yes" if concept exists (even if worded differently)
@@ -168,13 +163,13 @@ Every element extracted in Phase 1 MUST appear in either evaluation_table OR mis
 ### PHASE 3: OUTPUT COMPLETENESS VERIFICATION
 
 **OUTPUT COMPLETENESS RULE:**
-Your output arrays (evaluation_table + missing_from_generated_sap) must contain exactly the same number of entries as elements_extracted.
+Your evaluation_table must contain exactly the same number of entries as elements_extracted (from Phase 1). The missing_from_generated_sap array is separate and tracks Original SAP content not found in the Generated SAP.
 
 Before generating output:
 1. Count your extracted elements from Phase 1
-2. Ensure every single one has a corresponding entry in either evaluation_table OR missing_from_generated_sap
-3. Do NOT consolidate, summarize, or merge entries in the output
-4. One extracted sentence = one output entry
+2. Ensure every single one has a corresponding entry in evaluation_table
+3. elements_extracted = elements_in_evaluation_table
+4. Do NOT consolidate, summarize, or merge entries in the output
 
 If counts do not match, add the missing entries before proceeding.
 
@@ -182,22 +177,26 @@ If counts do not match, add the missing entries before proceeding.
 
 ## RATING CRITERIA
 
+Rating is based ONLY on contradictions. Missing information does NOT affect the rating under any circumstances. Missing items are tracked informationally in `missing_from_generated_sap` but do not influence the rating. Do not consider omissions, missing items, or level of detail when determining the rating.
+
+A section with 0 contradictions MUST be rated GREAT, regardless of how many items are missing or omitted.
+
 ### GREAT
-- All specifications from Original SAP are present in Generated SAP
-- Content matches Original SAP
-- No contradictions
+- No contradictions between Generated SAP and Original SAP
+- No contradictions with Protocol
+- No internal contradictions
+- This is the correct rating even if many items are missing or less detailed
 
 ### DECENT
-- All required content present
-- Minor wording differences that do not change meaning
-- Small issues easily correctable
+- Minor contradictions that do not affect trial integrity
+- Small inconsistencies easily correctable
+- No Protocol contradictions
 
 ### POOR
-- Required specifications missing
-- Content contradicts Original SAP
-- Significant gaps in coverage
-
-**RATING RULE**: If ANY item has `classification: "missing_required"`, the rating MUST be POOR. If ANY item has a contradiction, the rating MUST be POOR.
+- Critical contradictions with Protocol
+- Generated SAP states something fundamentally incompatible with Original SAP
+- Multiple contradictions
+- Internal contradictions
 
 ---
 
@@ -278,8 +277,8 @@ Provide BOTH markdown (for human review) AND JSON (for programmatic use).
   "status": "pass | pass_with_notes | fail",
 
   "extraction_validation": {
-    "sections_read": ["list every section/subsection number read from Original SAP"],
-    "elements_per_section": {"section_number": "count of elements extracted from that section"},
+    "sections_read": ["list every section/subsection number read from Generated SAP"],
+    "elements_per_section": {"section_number": "count of elements extracted from that section of the Generated SAP"},
     "elements_extracted": 0,
     "elements_in_evaluation_table": 0,
     "elements_in_missing_from_generated_sap": 0,
@@ -354,21 +353,24 @@ Provide BOTH markdown (for human review) AND JSON (for programmatic use).
 **counts_match MUST be true for valid output.**
 
 Before finalizing your output, verify:
-- `elements_extracted` = `elements_in_evaluation_table` + `elements_in_missing_from_generated_sap`
+- `elements_extracted` = `elements_in_evaluation_table` (every element extracted from the Generated SAP must have an evaluation_table entry)
 - `elements_extracted` = sum of all values in `elements_per_section`
+- `missing_from_generated_sap` is a SEPARATE count — it tracks Original SAP content not found in the Generated SAP and does NOT factor into the extraction count
 - If the counts do not match, your output is INVALID - go back and find the missing elements
-- If evaluation_table.length + missing_from_generated_sap.length ≠ elements_extracted, your output is INVALID
 
 ---
 
 ## CRITICAL REMINDERS
 
-1. **Sentence by sentence**: Read every sentence in Original SAP. Each specification sentence is a component.
-2. **No filtering**: Do not skip sentences. Do not filter by category. Extract everything.
+1. **Extract from Generated SAP**: Locate the Key Definitions section in the Generated SAP and extract every definition, formula, and variable definition from it.
+2. **Search entire Original SAP**: For each extracted element, search the ENTIRE Original SAP for corresponding content — key definitions may be scattered across multiple sections.
 3. **EXISTENCE vs CONTENT**: Protocol is ONLY for checking if missing elements are required, NOT for evaluating content differences.
-5. **Compare to Original SAP first**: For content, always compare Generated SAP to Original SAP.
-6. **Contradiction is a problem**: Generated SAP saying something incompatible with Original SAP is a problem.
-7. **Extra info is neutral**: Flag but do not penalize extra information unless it contradicts.
-8. **Blocking validation**: Ensure counts_match is true before outputting.
-9. **Full quotes required**: NEVER use "..." to truncate quotes - always include complete text.
-10. **Scope**: ONLY evaluate key definitions, variable definitions, calculation formulas, study period definitions, and operational definitions. Do NOT evaluate analysis populations, study objectives, endpoint definitions, efficacy analysis methods, or general statistical methodology.
+4. **Compare to Original SAP first**: For content, always compare Generated SAP to Original SAP.
+5. **Contradiction is a problem**: Generated SAP saying something incompatible with Original SAP is a problem.
+6. **Extra info is neutral**: Flag but do not penalize extra information unless it contradicts.
+7. **Blocking validation**: Ensure counts_match is true before outputting.
+8. **Full quotes required**: NEVER use "..." to truncate quotes - always include complete text.
+9. **Scope**: ONLY evaluate key definitions, variable definitions, calculation formulas, study period definitions, and operational definitions. Do NOT evaluate analysis populations, study objectives, endpoint definitions, efficacy analysis methods, or general statistical methodology.
+10. **Rating based on contradictions only**: Missing information does NOT affect rating. Track missing items informationally but do not penalize.
+11. **Match formulas correctly**: When the Original SAP has multiple formulas for related concepts, match each Generated SAP formula to the Original SAP formula that computes the same quantity. Do not compare formulas that calculate different things.
+12. **Original SAP internal inconsistencies**: If the Original SAP states a rounded value alongside its mathematical derivation, and the Generated SAP uses the exact result of that derivation, this is not a contradiction.
