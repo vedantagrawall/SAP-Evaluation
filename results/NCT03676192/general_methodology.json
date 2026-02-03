@@ -218,5 +218,11 @@
   ],
   "extra_information_flagged": [],
   "reasoning": "The Generated SAP's General Methodology section was evaluated against the Original SAP and Protocol. While standard definitions for descriptive statistics and confidence intervals were correct, the Generated SAP failed on three critical points regarding unverifiable assumptions. First, it specified 'SAS version 9.4' when the Original SAP's software section was empty and the Protocol was silent. Second, it replaced the Original SAP's specific MedDRA version requirement ('24.0 or higher') with deferral language ('current version at lock'). Third, it omitted the Original SAP's specific WHO Drug version requirement ('March, 2021 or later'). Additionally, several specific data handling rules (precision, LLOQ/ULOQ, discrepancies) present in the Original SAP were missing. Due to the presence of critical unverifiable assumptions regarding software and dictionary versions, the rating is POOR.",
-  "summary": "The Generated SAP contains critical unverifiable assumptions by specifying a software version where source documents are silent and by omitting or deferring specific dictionary version requirements defined in the Original SAP. Additionally, it lacks detailed rules for decimal precision and data discrepancy handling found in the Original SAP."
+  "summary": "The Generated SAP contains critical unverifiable assumptions by specifying a software version where source documents are silent and by omitting or deferring specific dictionary version requirements defined in the Original SAP. Additionally, it lacks detailed rules for decimal precision and data discrepancy handling found in the Original SAP.",
+  "reconciliation": {
+    "performed": true,
+    "items_checked": 4,
+    "items_removed": 0,
+    "removed_items": []
+  }
 }

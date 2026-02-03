@@ -457,19 +457,16 @@
       "classification": "acceptable_difference",
       "description": "Specific formulas for dose intensity calculations found in Original SAP Section 7.2 are missing from the Key Definitions section of the Generated SAP.",
       "reasoning": "The Generated SAP defines 'Duration of Treatment' generally (matching Section 5), but omits the specific 'Actual duration of dose' formulas required for the Exposure analysis in Section 7.2. This is an omission of a specific analysis rule rather than a contradiction."
-    },
-    {
-      "component": "Baseline Weight Definition",
-      "original_sap_text": "Weight at Induction cycle 1 will be considered as the baseline value since weight is collected for kit number dispensation prior to the infusion, if study drug is administered at Induction cycle 1.",
-      "protocol_text": null,
-      "in_protocol": "no",
-      "classification": "acceptable_difference",
-      "description": "Specific rule for weight baseline is missing.",
-      "reasoning": "The Generated SAP has a general baseline definition that covers this, but the specific nuance about weight collection timing is useful context found in the Original SAP."
     }
   ],
   "issues": [],
   "extra_information_flagged": [],
   "reasoning": "The Generated SAP provides a comprehensive set of key definitions in Section 4.2 that align well with the Original SAP. Definitions for study dates, periods, and durations are consistent with the logic described in the Original SAP's disposition and concomitant medication sections. The Generated SAP explicitly defines terms like 'First Dose Date' and 'Last Dose Date' which are used implicitly in the Original SAP. There are no contradictions. The Generated SAP is missing specific formulas for 'Actual duration of dose' used for exposure analysis (Original SAP Section 7.2) and specific date imputation rules (though a placeholder exists), but these are acceptable omissions for a summary definitions section.",
-  "summary": "The Key Definitions section is well-constructed and consistent with the Original SAP. It accurately defines study periods, dates, and general calculation rules. Minor omissions regarding specific exposure formulas do not impact the overall validity of the definitions provided."
+  "summary": "The Key Definitions section is well-constructed and consistent with the Original SAP. It accurately defines study periods, dates, and general calculation rules. Minor omissions regarding specific exposure formulas do not impact the overall validity of the definitions provided.",
+  "reconciliation": {
+    "performed": true,
+    "items_checked": 1,
+    "items_removed": 0,
+    "removed_items": []
+  }
 }

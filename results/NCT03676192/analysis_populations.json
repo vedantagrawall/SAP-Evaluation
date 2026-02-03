@@ -115,5 +115,11 @@
   ],
   "extra_information_flagged": [],
   "reasoning": "Step-by-step chain-of-thought reasoning trace: 1) Found ITT, PP, PK, Safety populations in Protocol. 2) Found ITT, PP, PK, PK Maintenance, Safety populations in Original SAP. 3) Found ITT, PP, PK, Safety populations in Generated SAP. 4) Compared content: Generated SAP definitions are largely verbatim copies of the Protocol text, whereas Original SAP contains significant operational details (eCRF references, specific dose definitions, mixed treatment handling). 5) Checked existence: PK Maintenance Subset is missing from Generated SAP; checked Protocol and it is not explicitly defined in Section 7.4, so this omission is acceptable. 6) Identified issue: PP definition in Generated SAP contains a circular reference ('defined in the SAP'), likely copied from Protocol. 7) Rating: DECENT because all required populations are present and definitions are consistent with Protocol, despite missing the operational precision of the Original SAP.",
-  "summary": "The Generated SAP includes all Protocol-required analysis populations. However, it lacks the specific operational details found in the Original SAP (such as eCRF page references and specific dose definitions) and contains a circular reference in the Per-Protocol definition where it defers criteria to 'the SAP' instead of defining them."
+  "summary": "The Generated SAP includes all Protocol-required analysis populations. However, it lacks the specific operational details found in the Original SAP (such as eCRF page references and specific dose definitions) and contains a circular reference in the Per-Protocol definition where it defers criteria to 'the SAP' instead of defining them.",
+  "reconciliation": {
+    "performed": true,
+    "items_checked": 1,
+    "items_removed": 0,
+    "removed_items": []
+  }
 }

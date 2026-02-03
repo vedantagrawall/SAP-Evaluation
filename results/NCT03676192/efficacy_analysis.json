@@ -133,15 +133,6 @@
       "reasoning": "The Generated SAP explicitly skips the primary endpoint details, which is a critical omission for an SAP."
     },
     {
-      "component": "Secondary Endpoint Methodology (OS, TTP, Response Duration)",
-      "original_sap_text": "A time-to-event analysis will be undertaken for each of the response duration, TTP, PFS, and OS... [Specific definitions and censoring rules for each]",
-      "protocol_text": "A time-to-event analysis will be undertaken for each of the response duration, TTP, PFS, and OS...",
-      "in_protocol": "yes",
-      "classification": "missing_required",
-      "description": "The Generated SAP lists these endpoints but does not provide dedicated analysis subsections or methodology for them, unlike the Original SAP.",
-      "reasoning": "The Original SAP provides detailed definitions and censoring rules for TTP, Response Duration, and OS, which are absent in the Generated SAP."
-    },
-    {
       "component": "Pooling of Country into Region",
       "original_sap_text": "Country can be pooled into region (EMEA vs. America vs. Asia) for statistical analysis when there are not enough patients within each country.",
       "protocol_text": "Country can be pooled into region (EMEA vs. America vs. Asia) for statistical analysis when there are not enough patients within each country.",
@@ -203,5 +194,11 @@
     }
   ],
   "reasoning": "The Generated SAP fails to provide methodology for the primary endpoint (ORR) and several secondary endpoints (OS, TTP), which are present in the Original SAP. For the one endpoint it does detail (PFS), it contradicts the Original SAP on the calculation formula (using 30.4375 instead of the explicit 30.4) and the reporting landmarks. These contradictions and significant omissions result in a POOR rating.",
-  "summary": "The Generated SAP omits the analysis methodology for the primary endpoint and most secondary endpoints. For the single detailed endpoint (PFS), it contradicts the Original SAP's explicit calculation formula and reporting timepoints."
+  "summary": "The Generated SAP omits the analysis methodology for the primary endpoint and most secondary endpoints. For the single detailed endpoint (PFS), it contradicts the Original SAP's explicit calculation formula and reporting timepoints.",
+  "reconciliation": {
+    "performed": true,
+    "items_checked": 4,
+    "items_removed": 0,
+    "removed_items": []
+  }
 }

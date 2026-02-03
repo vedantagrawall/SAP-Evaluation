@@ -406,5 +406,11 @@
   "contradictions": [],
   "extra_in_generated_sap": [],
   "reasoning": "The Generated SAP accurately captures all objectives and endpoints. It aligns perfectly with the Protocol text, which is the source of truth, even where the Original SAP had minor variations in wording (e.g., adding 'up to Cycle 6' to the primary objective). Safety endpoints are listed according to the Protocol's specific list rather than the Original SAP's section headers, which is a correct approach as it captures the same data requirements.",
-  "summary": "The Generated SAP successfully lists all required objectives and endpoints. It adheres strictly to the Protocol definitions, ensuring accuracy and completeness."
+  "summary": "The Generated SAP successfully lists all required objectives and endpoints. It adheres strictly to the Protocol definitions, ensuring accuracy and completeness.",
+  "reconciliation": {
+    "performed": true,
+    "items_checked": 0,
+    "items_removed": 0,
+    "removed_items": []
+  }
 }

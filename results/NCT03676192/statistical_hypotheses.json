@@ -66,5 +66,11 @@
     }
   ],
   "reasoning": "The Generated SAP accurately captures the primary objective and equivalence criteria from the Original SAP. It includes explicit statements regarding multiplicity and interim analyses which, while not present in the Original SAP text, are confirmed by the Protocol and the study design (single primary endpoint, no stopping boundaries). These additions represent good statistical reporting practice.",
-  "summary": "The Generated SAP correctly defines the primary hypothesis and equivalence margins (-12.5%, 12.5%) matching the Original SAP. It appropriately adds clarification regarding the absence of multiplicity adjustments and interim analyses for early termination, which is consistent with the Protocol."
+  "summary": "The Generated SAP correctly defines the primary hypothesis and equivalence margins (-12.5%, 12.5%) matching the Original SAP. It appropriately adds clarification regarding the absence of multiplicity adjustments and interim analyses for early termination, which is consistent with the Protocol.",
+  "reconciliation": {
+    "performed": true,
+    "items_checked": 0,
+    "items_removed": 0,
+    "removed_items": []
+  }
 }
