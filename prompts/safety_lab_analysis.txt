@@ -170,9 +170,11 @@ When comparing against the Original SAP: if the Original SAP specifies that anal
 
 **CONTRADICTION VS MISSING DISTINCTION:** A contradiction requires the Generated SAP to actively state something incompatible with the Original SAP. If the Generated SAP is silent on a topic — it does not mention it at all — that is a missing item, not a contradiction. Only flag as contradiction when both documents address the same topic and their statements cannot both be true at the same time.
 
-- Ask: "Can both statements be true at the same time?"
-- If YES → matches_original_sap: "yes" (no conflict, statements are compatible)
-- If NO → matches_original_sap: "no" (contradiction, statements conflict)
+**DISPLAY STRATEGY VS CONTRADICTION - CRITICAL CHECK:** Before flagging as contradiction, verify this is a true methodological conflict, not a display difference. If the Generated SAP states that data will be categorized or assigned using specific groupings, and those groupings are defined anywhere in the Generated SAP, then the underlying analysis method is satisfied. The fact that the Generated SAP may also present data using alternative or additional display formats does not contradict the underlying categorization method. Only flag as contradiction if: (1) the Generated SAP fails to use the required categorizations at all, OR (2) the Generated SAP's assignment mechanism actively conflicts with how the Original SAP specifies data should be assigned. Differences in table organization, column structure, or presentation format are NOT methodological contradictions if the underlying categorizations are defined and being used.
+
+- Ask: "Can both statements be true at the same time?" AND "Is this just a difference in display/presentation format?"
+- If YES to either question → matches_original_sap: "yes" (no conflict, statements are compatible)
+- If NO to both → matches_original_sap: "no" (contradiction, statements conflict)
 
 **Step C**: Determine detail_level
 - match: Generated SAP text is equivalent to Original SAP text
@@ -230,13 +232,15 @@ A section with 0 contradictions MUST be rated GREAT, regardless of how many item
 
 **SEVERITY CLASSIFICATION GUIDE:**
 
-A contradiction's severity depends on its impact on the trial's statistical conclusions and regulatory integrity, not merely on whether the statements differ.
+A contradiction's severity depends ONLY on its impact on the trial's statistical conclusions and regulatory integrity, NOT on clinical knowledge about the study drug or disease.
+
+**CRITICAL RULE: Do NOT use clinical knowledge or therapeutic area expertise to determine severity. Base severity classification ONLY on the structural criteria below.**
 
 **Critical** — A contradiction is critical ONLY when it would change the statistical conclusions of the trial, affect primary endpoint analysis, hypothesis testing, or alpha control, alter analysis population definitions, contradict a regulatory requirement stated in the Protocol, remove an entire required analysis for a primary or key secondary endpoint, or make the Generated SAP internally inconsistent in a way that prevents execution.
 
 **Minor** — A contradiction is minor when it reduces the scope of summary or display tables without affecting statistical conclusions, changes the presentation format of results for supportive or ancillary parameters, omits or changes analysis details for ancillary, exploratory, or non-primary parameters, differs on the breadth of reporting without contradicting the core methodology, or affects completeness of reporting without changing the statistical approach.
 
-When in doubt, ask: "Would this contradiction change the regulatory reviewer's ability to assess the primary and key secondary endpoints?" If no, it is minor.
+When in doubt, ask: "Would this contradiction change the regulatory reviewer's ability to assess the primary and key secondary endpoints?" If no, it is minor. Do NOT consider clinical significance of specific parameters or drug-specific safety profiles.
 
 ### GREAT
 - No contradictions between Generated SAP and Original SAP
