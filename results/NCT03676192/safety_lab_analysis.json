@@ -1,7 +1,7 @@
 {
   "section": "safety_lab_analysis",
-  "rating": "DECENT",
-  "status": "pass_with_notes",
+  "rating": "POOR",
+  "status": "fail",
   "original_sap_section_used": {
     "section_heading": "10.2. Clinical Laboratory Evaluations",
     "starts_at": "10.2. Clinical Laboratory Evaluations",
@@ -21,21 +21,21 @@
       "7.1.3": 3,
       "7.1.3.1": 5,
       "7.1.3.2": 5,
-      "7.1.3.3": 4,
+      "7.1.3.3": 3,
       "7.1.3.4": 5,
       "7.1.3.5": 2,
       "7.1.3.6": 3
     },
-    "elements_extracted": 27,
-    "elements_in_evaluation_table": 27,
-    "elements_in_missing_from_generated_sap": 3,
+    "elements_extracted": 26,
+    "elements_in_evaluation_table": 26,
+    "elements_in_missing_from_generated_sap": 4,
     "counts_match": true
   },
   "evaluation_table": [
     {
       "component": "Clinical laboratory assessments scope",
       "evaluation_type": "exact_match",
-      "original_sap_text": "Actual result and change from baseline of all numeric laboratory parameters including clinical chemistry, hematology, numeric urinalysis and coagulation will be summarized using descriptive statistics",
+      "original_sap_text": "Actual result and change from baseline of all numeric laboratory parameters including clinical chemistry, hematology, numeric urinalysis and coagulation will be summarized",
       "generated_sap_text": "Clinical laboratory assessments include hematology, clinical chemistry, urinalysis, and coagulation.",
       "protocol_text": "Clinical laboratory tests: hematology, clinical chemistry, urinalysis",
       "protocol_consulted": "yes",
@@ -46,14 +46,14 @@
       "result": "correct",
       "issue_type": "none",
       "severity": "none",
-      "reasoning": "Both documents list the same high-level categories."
+      "reasoning": "Generated SAP correctly identifies the scope of assessments."
     },
     {
-      "component": "Sample collection schedule",
+      "component": "Sample collection reference",
       "evaluation_type": "semantic",
       "original_sap_text": "Clinical laboratory test samples will be analyzed at the local laboratory.",
       "generated_sap_text": "Laboratory samples will be collected according to the Schedule of Assessments (Section 11.1).",
-      "protocol_text": "Clinical laboratory tests... will be performed within 3 days prior to Day 1 of each cycle.",
+      "protocol_text": "Clinical laboratory test samples will be analyzed at the local laboratory.",
       "protocol_consulted": "yes",
       "matches_original_sap": "yes",
       "detail_level": "match",
@@ -65,7 +65,7 @@
       "reasoning": "Standard reference to schedule."
     },
     {
-      "component": "Analysis location and units",
+      "component": "Local laboratory and SI units",
       "evaluation_type": "semantic",
       "original_sap_text": "Clinical laboratory test samples will be analyzed at the local laboratory. Reported units and normal ranges are various among sites. Reported units will be converted to standard units, if applicable.",
       "generated_sap_text": "Clinical laboratory test samples will be analyzed at the local laboratory for routine monitoring; however, data will be standardized to International System (SI) units for reporting and analysis.",
@@ -78,7 +78,7 @@
       "result": "correct",
       "issue_type": "none",
       "severity": "none",
-      "reasoning": "Both specify local laboratory analysis and unit standardization."
+      "reasoning": "Both specify local lab analysis and unit standardization."
     },
     {
       "component": "Hematology parameters",
@@ -94,14 +94,14 @@
       "result": "correct",
       "issue_type": "none",
       "severity": "none",
-      "reasoning": "Generated SAP lists specific parameters which match the Protocol. Original SAP refers to categories generally."
+      "reasoning": "Generated SAP lists specific parameters consistent with Protocol and Original SAP's general requirement."
     },
     {
       "component": "Clinical Chemistry parameters",
       "evaluation_type": "semantic",
       "original_sap_text": "Actual result and change from baseline of all numeric laboratory parameters including clinical chemistry... will be summarized",
       "generated_sap_text": "Clinical Chemistry: Albumin, alkaline phosphatase (ALP), alanine aminotransferase (ALT), aspartate aminotransferase (AST), blood urea nitrogen (BUN), calcium, chloride, creatine phosphokinase (CPK), creatine kinase-myocardial band (CK-MB) isoenzyme, total cholesterol, creatinine, creatinine clearance (CrCl) (estimated by Cockcroft-Gault formula, see Section 11.6), gamma-glutamyl transferase (GGT), glucose, lactate dehydrogenase (LDH), triglyceride, high-density lipoprotein (HDL) cholesterol, phosphate, potassium, sodium, total bilirubin, direct bilirubin, total protein, and uric acid.",
-      "protocol_text": "Clinical chemistry: albumin, alkaline phosphatase... [list matches Generated SAP]",
+      "protocol_text": "Clinical chemistry: albumin, alkaline phosphatase, alanine aminotransferase, aspartate aminotransferase, blood urea nitrogen, calcium, chloride, creatine phosphokinase, creatine kinase-myocardial band isoenzyme, total cholesterol, creatinine, CrCl... gamma-glutamyl transferase, glucose, lactate dehydrogenase, triglyceride, high-density lipoprotein cholesterol, phosphate, potassium, sodium, total bilirubin, direct bilirubin, total protein, uric acid",
       "protocol_consulted": "yes",
       "matches_original_sap": "yes",
       "detail_level": "match",
@@ -110,14 +110,14 @@
       "result": "correct",
       "issue_type": "none",
       "severity": "none",
-      "reasoning": "Generated SAP lists specific parameters which match the Protocol. Original SAP refers to categories generally."
+      "reasoning": "Generated SAP lists specific parameters consistent with Protocol and Original SAP's general requirement."
     },
     {
       "component": "Urinalysis parameters",
       "evaluation_type": "semantic",
-      "original_sap_text": "Actual result and change from baseline of all numeric laboratory parameters including... numeric urinalysis... will be summarized... The results for all non-numeric urinalysis parameters... will be categorized into normal and abnormal",
+      "original_sap_text": "Actual result and change from baseline of all numeric laboratory parameters including... numeric urinalysis... will be summarized... The results for all non-numeric urinalysis parameters including microscopic urinalysis... will be categorized into normal and abnormal... and will be summarized in a shift table.",
       "generated_sap_text": "Urinalysis: Bilirubin, blood, glucose, ketones, leukocytes, nitrite, pH, protein, specific gravity, and urobilinogen via dipstick.",
-      "protocol_text": "Urinalysis: bilirubin, blood, glucose... [list matches Generated SAP]",
+      "protocol_text": "Urinalysis: bilirubin, blood, glucose, ketones, leukocytes (white blood cells), nitrite, pH, protein, specific gravity, urobilinogen and microscopic examination",
       "protocol_consulted": "yes",
       "matches_original_sap": "yes",
       "detail_level": "match",
@@ -126,14 +126,14 @@
       "result": "correct",
       "issue_type": "none",
       "severity": "none",
-      "reasoning": "Generated SAP lists specific parameters which match the Protocol."
+      "reasoning": "Parameter list matches Protocol."
     },
     {
-      "component": "Additional urinalysis",
+      "component": "Microscopic urinalysis and 24-hour collection",
       "evaluation_type": "semantic",
-      "original_sap_text": "The results for all non-numeric urinalysis parameters including microscopic urinalysis collected as qualitative format will be categorized into normal and abnormal",
+      "original_sap_text": "The results for all non-numeric urinalysis parameters including microscopic urinalysis... will be categorized into normal and abnormal... and will be summarized in a shift table.",
       "generated_sap_text": "Microscopic examination and 24-hour urine collection (for protein) will be performed if indicated.",
-      "protocol_text": "microscopic examination... 24 hour urine collection if indicated at Screening",
+      "protocol_text": "24 hour urine collection if indicated at Screening",
       "protocol_consulted": "yes",
       "matches_original_sap": "yes",
       "detail_level": "match",
@@ -142,14 +142,14 @@
       "result": "correct",
       "issue_type": "none",
       "severity": "none",
-      "reasoning": "Consistent with Original SAP and Protocol."
+      "reasoning": "Matches Protocol requirement for indicated performance."
     },
     {
       "component": "Coagulation parameters",
       "evaluation_type": "semantic",
       "original_sap_text": "Actual result and change from baseline of all numeric laboratory parameters including... coagulation will be summarized",
       "generated_sap_text": "Coagulation: Prothrombin time (PT) and prothrombin time international normalized ratio (INR) (for patients receiving aspirin).",
-      "protocol_text": "Coagulation: ... prothrombin time and prothrombin time international normalized ratio tests",
+      "protocol_text": "Coagulation: Any patients who continue with low dose aspirin... should perform prothrombin time and prothrombin time international normalized ratio tests.",
       "protocol_consulted": "yes",
       "matches_original_sap": "yes",
       "detail_level": "match",
@@ -158,14 +158,14 @@
       "result": "correct",
       "issue_type": "none",
       "severity": "none",
-      "reasoning": "Generated SAP lists specific parameters which match the Protocol."
+      "reasoning": "Matches Protocol requirement."
     },
     {
-      "component": "Baseline definition",
+      "component": "Baseline definition reference",
       "evaluation_type": "semantic",
       "original_sap_text": "The baseline value for all analyses will be the last non-missing value prior to the first infusion unless otherwise specified.",
       "generated_sap_text": "Baseline is defined in Section 4.2.",
-      "protocol_text": "n/a",
+      "protocol_text": "null",
       "protocol_consulted": "n/a",
       "matches_original_sap": "yes",
       "detail_level": "match",
@@ -174,78 +174,30 @@
       "result": "correct",
       "issue_type": "none",
       "severity": "none",
-      "reasoning": "Cross-reference to general baseline definition is acceptable."
+      "reasoning": "Cross-reference to baseline definition is acceptable."
     },
     {
-      "component": "Post-baseline summary scope",
+      "component": "Post-baseline summary visits",
       "evaluation_type": "semantic",
-      "original_sap_text": "If visit names are \u2018Unscheduled\u2019 or \u2018EOT\u2019, the post-baseline result of laboratory data will be presented by period, defined as follows... [detailed logic for Induction, Maintenance, Follow-Up]",
+      "original_sap_text": "If visit names are \u2018Unscheduled\u2019 or \u2018EOT\u2019, the post-baseline result of laboratory data will be presented by period... Laboratory data will be summarized in the Induction Study Period if... Laboratory data will be summarized in the Maintenance Study Period if... Laboratory data will be summarized in Follow-Up Period if...",
       "generated_sap_text": "Post-baseline summaries will include all scheduled visits during the Induction Study Period (Cycles 1 through 6), Maintenance Study Period (Cycles 1 and every 3 cycles thereafter), and the End of Treatment (EOT) visit.",
-      "protocol_text": "n/a",
-      "protocol_consulted": "n/a",
-      "matches_original_sap": "yes",
-      "detail_level": "less_detailed",
-      "omitted_content": "Detailed logic for assigning EOT and unscheduled visits to specific study periods based on dates relative to infusion.",
-      "omission_impact": "potential",
-      "result": "problem",
-      "issue_type": "none",
-      "severity": "minor",
-      "reasoning": "Generated SAP omits the specific logic found in the Original SAP for assigning data to study periods, which is important for a study with distinct phases."
-    },
-    {
-      "component": "Data listings",
-      "evaluation_type": "exact_match",
-      "original_sap_text": "Clinical chemistry, hematology, urinalysis and coagulation data will be presented in separate listings",
-      "generated_sap_text": "All laboratory data will be included in the data listings.",
-      "protocol_text": "n/a",
-      "protocol_consulted": "n/a",
-      "matches_original_sap": "yes",
-      "detail_level": "match",
-      "omitted_content": "none",
-      "omission_impact": "none",
-      "result": "correct",
-      "issue_type": "none",
-      "severity": "none",
-      "reasoning": "Both require listings for all data."
-    },
-    {
-      "component": "Descriptive statistics scope (Hematology/Chemistry)",
-      "evaluation_type": "exact_match",
-      "original_sap_text": "Actual result and change from baseline of all numeric laboratory parameters including clinical chemistry, hematology... will be summarized using descriptive statistics",
-      "generated_sap_text": "Summaries of actual values and change from baseline will be provided for hematology and clinical chemistry.",
-      "protocol_text": "n/a",
-      "protocol_consulted": "n/a",
-      "matches_original_sap": "yes",
-      "detail_level": "match",
-      "omitted_content": "none",
-      "omission_impact": "none",
-      "result": "correct",
-      "issue_type": "none",
-      "severity": "none",
-      "reasoning": "Matches Original SAP for these categories."
-    },
-    {
-      "component": "Descriptive statistics scope (Coagulation/Urinalysis)",
-      "evaluation_type": "semantic",
-      "original_sap_text": "Actual result and change from baseline of all numeric laboratory parameters including... numeric urinalysis and coagulation will be summarized using descriptive statistics",
-      "generated_sap_text": "Coagulation and urinalysis results will be presented in data listings only.",
-      "protocol_text": "n/a",
+      "protocol_text": "null",
       "protocol_consulted": "n/a",
       "matches_original_sap": "no",
       "detail_level": "contradiction",
-      "omitted_content": "Descriptive statistics for coagulation and numeric urinalysis.",
+      "omitted_content": "Original SAP maps EOT to periods for summarization logic. Generated SAP includes EOT as a visit column.",
       "omission_impact": "low",
       "result": "problem",
       "issue_type": "contradiction_original",
       "severity": "minor",
-      "reasoning": "Original SAP requires descriptive summaries for coagulation and numeric urinalysis; Generated SAP explicitly restricts them to listings only."
+      "reasoning": "Original SAP defines logic to map EOT visits to specific study periods for summarization. Generated SAP treats EOT as a distinct visit column in the summary tables. This is a difference in display strategy."
     },
     {
-      "component": "Descriptive statistics methodology",
+      "component": "Data listings inclusion",
       "evaluation_type": "exact_match",
-      "original_sap_text": "Actual result and change from baseline... will be summarized using descriptive statistics by treatment group, laboratory category, test parameter and visit.",
-      "generated_sap_text": "Laboratory parameters will be summarized by treatment group and visit using descriptive statistics.",
-      "protocol_text": "n/a",
+      "original_sap_text": "Clinical chemistry, hematology, urinalysis and coagulation data will be presented in separate listings",
+      "generated_sap_text": "All laboratory data will be included in the data listings.",
+      "protocol_text": "null",
       "protocol_consulted": "n/a",
       "matches_original_sap": "yes",
       "detail_level": "match",
@@ -254,14 +206,62 @@
       "result": "correct",
       "issue_type": "none",
       "severity": "none",
-      "reasoning": "Standard descriptive statistics methodology."
+      "reasoning": "Consistent requirement."
     },
     {
-      "component": "Summary content",
+      "component": "Hematology and Chemistry summaries",
+      "evaluation_type": "semantic",
+      "original_sap_text": "Actual result and change from baseline of all numeric laboratory parameters including clinical chemistry, hematology... will be summarized",
+      "generated_sap_text": "Summaries of actual values and change from baseline will be provided for hematology and clinical chemistry.",
+      "protocol_text": "null",
+      "protocol_consulted": "n/a",
+      "matches_original_sap": "yes",
+      "detail_level": "match",
+      "omitted_content": "none",
+      "omission_impact": "none",
+      "result": "correct",
+      "issue_type": "none",
+      "severity": "none",
+      "reasoning": "Matches requirement for these parameters."
+    },
+    {
+      "component": "Coagulation and Urinalysis analysis method",
+      "evaluation_type": "semantic",
+      "original_sap_text": "Actual result and change from baseline of all numeric laboratory parameters including... numeric urinalysis and coagulation will be summarized... The results for all non-numeric urinalysis parameters... will be summarized in a shift table.",
+      "generated_sap_text": "Coagulation and urinalysis results will be presented in data listings only.",
+      "protocol_text": "null",
+      "protocol_consulted": "n/a",
+      "matches_original_sap": "no",
+      "detail_level": "contradiction",
+      "omitted_content": "Summaries for numeric urinalysis/coagulation and shift tables for non-numeric urinalysis.",
+      "omission_impact": "potential",
+      "result": "problem",
+      "issue_type": "contradiction_original",
+      "severity": "critical",
+      "reasoning": "Original SAP explicitly requires summaries for numeric urinalysis and coagulation, and shift tables for non-numeric urinalysis. Generated SAP restricts these to listings only. This is critical because Proteinuria (urinalysis) is a key safety risk for Bevacizumab."
+    },
+    {
+      "component": "Descriptive statistics summary",
+      "evaluation_type": "semantic",
+      "original_sap_text": "Actual result and change from baseline... will be summarized using descriptive statistics by treatment group, laboratory category, test parameter and visit.",
+      "generated_sap_text": "Laboratory parameters will be summarized by treatment group and visit using descriptive statistics.",
+      "protocol_text": "null",
+      "protocol_consulted": "n/a",
+      "matches_original_sap": "yes",
+      "detail_level": "match",
+      "omitted_content": "none",
+      "omission_impact": "none",
+      "result": "correct",
+      "issue_type": "none",
+      "severity": "none",
+      "reasoning": "Matches general summary requirement."
+    },
+    {
+      "component": "Actual and change from baseline",
       "evaluation_type": "exact_match",
       "original_sap_text": "Actual result and change from baseline... will be summarized",
       "generated_sap_text": "Summaries will include both actual values and change from baseline values.",
-      "protocol_text": "n/a",
+      "protocol_text": "null",
       "protocol_consulted": "n/a",
       "matches_original_sap": "yes",
       "detail_level": "match",
@@ -270,30 +270,14 @@
       "result": "correct",
       "issue_type": "none",
       "severity": "none",
-      "reasoning": "Matches Original SAP."
-    },
-    {
-      "component": "Nominal visits",
-      "evaluation_type": "semantic",
-      "original_sap_text": "Actual result and change from baseline... will be summarized... by... visit",
-      "generated_sap_text": "As established in Section 4.5, nominal visits will be used for these summaries.",
-      "protocol_text": "n/a",
-      "protocol_consulted": "n/a",
-      "matches_original_sap": "yes",
-      "detail_level": "match",
-      "omitted_content": "none",
-      "omission_impact": "none",
-      "result": "correct",
-      "issue_type": "none",
-      "severity": "none",
-      "reasoning": "Consistent with Original SAP's visit-based summary approach."
+      "reasoning": "Matches requirement."
     },
     {
       "component": "Scheduled visits only",
       "evaluation_type": "semantic",
-      "original_sap_text": "Only the most severe case during unscheduled and scheduled visits will be included for the post-baseline result in the shift table. [Implies by-visit summaries are scheduled only]",
-      "generated_sap_text": "Only scheduled visits will be included in by-visit summaries.",
-      "protocol_text": "n/a",
+      "original_sap_text": "Only the most severe case during unscheduled and scheduled visits will be included for the post-baseline result in the shift table. (Implies unscheduled are excluded from by-visit summaries)",
+      "generated_sap_text": "As established in Section 4.5, nominal visits will be used for these summaries. Only scheduled visits will be included in by-visit summaries.",
+      "protocol_text": "null",
       "protocol_consulted": "n/a",
       "matches_original_sap": "yes",
       "detail_level": "match",
@@ -302,14 +286,14 @@
       "result": "correct",
       "issue_type": "none",
       "severity": "none",
-      "reasoning": "Consistent with standard practice and Original SAP's handling of unscheduled visits."
+      "reasoning": "Consistent with standard practice and Original SAP implication."
     },
     {
-      "component": "CTCAE Grading",
+      "component": "CTCAE grading version",
       "evaluation_type": "exact_match",
-      "original_sap_text": "Clinical laboratory parameters... will be labeled with a CTCAE term and grading will be applied... according to CTCAE version 5.0.",
+      "original_sap_text": "according to CTCAE version 5.0.",
       "generated_sap_text": "Laboratory abnormalities will be graded according to the National Cancer Institute (NCI) Common Terminology Criteria for Adverse Events (CTCAE) version 5.0, where applicable.",
-      "protocol_text": "Adverse events will be reported for term and grade according to the Common Terminology Criteria for Adverse Events (CTCAE) v.5.0.",
+      "protocol_text": "according to the Common Terminology Criteria for Adverse Events (CTCAE) v.5.0.",
       "protocol_consulted": "yes",
       "matches_original_sap": "yes",
       "detail_level": "match",
@@ -318,30 +302,30 @@
       "result": "correct",
       "issue_type": "none",
       "severity": "none",
-      "reasoning": "Matches Original SAP and Protocol."
+      "reasoning": "Matches version."
     },
     {
-      "component": "Shift tables (Graded)",
+      "component": "Shift table definition",
       "evaluation_type": "semantic",
-      "original_sap_text": "A shift table will be also produced... Only the most severe case during unscheduled and scheduled visits will be included for the post-baseline result in the shift table.",
+      "original_sap_text": "A shift table will be also produced by the Whole Study Period and each study period.",
       "generated_sap_text": "Shift tables will be used to summarize the number and percentage of patients by baseline category (Grade 0 through 4) versus the worst post-baseline category.",
-      "protocol_text": "n/a",
+      "protocol_text": "null",
       "protocol_consulted": "n/a",
       "matches_original_sap": "yes",
-      "detail_level": "match",
-      "omitted_content": "none",
-      "omission_impact": "none",
-      "result": "correct",
+      "detail_level": "less_detailed",
+      "omitted_content": "Requirement for shift tables for 'each study period' (Induction, Maintenance, Follow-up).",
+      "omission_impact": "low",
+      "result": "acceptable",
       "issue_type": "none",
       "severity": "none",
-      "reasoning": "Matches Original SAP's requirement for shift tables using worst/most severe post-baseline value."
+      "reasoning": "Generated SAP defines shift tables but omits the specific requirement to produce them for each study period separately, only mentioning Whole Study Period."
     },
     {
       "component": "Worst post-baseline definition",
-      "evaluation_type": "exact_match",
+      "evaluation_type": "semantic",
       "original_sap_text": "Only the most severe case during unscheduled and scheduled visits will be included for the post-baseline result in the shift table.",
       "generated_sap_text": "Worst post-baseline value is defined as the most extreme CTCAE grade observed during the Whole Study Period (as defined in Section 4.2), including results from unscheduled assessments.",
-      "protocol_text": "n/a",
+      "protocol_text": "null",
       "protocol_consulted": "n/a",
       "matches_original_sap": "yes",
       "detail_level": "match",
@@ -350,30 +334,30 @@
       "result": "correct",
       "issue_type": "none",
       "severity": "none",
-      "reasoning": "Matches Original SAP."
+      "reasoning": "Matches logic of using most severe case including unscheduled."
     },
     {
-      "component": "Shift tables (Non-graded)",
+      "component": "Non-CTCAE shift tables",
       "evaluation_type": "semantic",
       "original_sap_text": "The results for all non-numeric urinalysis parameters... will be categorized into normal and abnormal... and will be summarized in a shift table.",
       "generated_sap_text": "For parameters not covered by CTCAE grading, shift tables will cross-classify patients by baseline category (Low, Normal, High) relative to the laboratory reference range versus the worst post-baseline category.",
-      "protocol_text": "n/a",
+      "protocol_text": "null",
       "protocol_consulted": "n/a",
-      "matches_original_sap": "yes",
-      "detail_level": "match",
-      "omitted_content": "none",
-      "omission_impact": "none",
-      "result": "correct",
-      "issue_type": "none",
-      "severity": "none",
-      "reasoning": "Generated SAP generalizes the shift table requirement to all non-graded parameters (L/N/H), which covers the intent of the Original SAP."
+      "matches_original_sap": "no",
+      "detail_level": "contradiction",
+      "omitted_content": "Specific requirement for Normal/Abnormal shift tables for non-numeric urinalysis.",
+      "omission_impact": "potential",
+      "result": "problem",
+      "issue_type": "contradiction_original",
+      "severity": "minor",
+      "reasoning": "Generated SAP adds Low/Normal/High shift tables (acceptable extra) but omits the specific Normal/Abnormal shift tables for non-numeric urinalysis required by Original SAP."
     },
     {
-      "component": "Directional analysis",
+      "component": "High/Low direction analysis",
       "evaluation_type": "semantic",
       "original_sap_text": "null",
       "generated_sap_text": "Analyses will be performed separately for the \"High\" and \"Low\" directions when both are clinically relevant (e.g., potassium).",
-      "protocol_text": "n/a",
+      "protocol_text": "null",
       "protocol_consulted": "n/a",
       "matches_original_sap": "yes",
       "detail_level": "match",
@@ -382,30 +366,30 @@
       "result": "correct",
       "issue_type": "none",
       "severity": "none",
-      "reasoning": "Extra detail consistent with standard practice."
+      "reasoning": "Standard practice, not contradictory."
     },
     {
-      "component": "Treatment-emergent abnormalities",
+      "component": "Treatment-emergent abnormalities summary",
       "evaluation_type": "semantic",
       "original_sap_text": "The number and percentage of patients with a result for each grade will be summarized by laboratory category, CTCAE term, visit and CTCAE grade.",
       "generated_sap_text": "The number and percentage of patients with treatment-emergent laboratory abnormalities (defined as an increase in CTCAE grade from baseline) will be summarized by treatment group.",
-      "protocol_text": "n/a",
+      "protocol_text": "null",
       "protocol_consulted": "n/a",
-      "matches_original_sap": "yes",
-      "detail_level": "match",
-      "omitted_content": "none",
-      "omission_impact": "none",
-      "result": "correct",
-      "issue_type": "none",
-      "severity": "none",
-      "reasoning": "Generated SAP specifies 'treatment-emergent' (increase from baseline) while Original SAP asks for summaries by grade. These are compatible safety summaries."
+      "matches_original_sap": "no",
+      "detail_level": "contradiction",
+      "omitted_content": "Summary of patients with a result for each grade by visit.",
+      "omission_impact": "low",
+      "result": "problem",
+      "issue_type": "contradiction_original",
+      "severity": "minor",
+      "reasoning": "Original SAP asks for prevalence of grades by visit. Generated SAP replaces this with incidence of treatment-emergent worsening."
     },
     {
       "component": "Grade 3/4 focus",
       "evaluation_type": "semantic",
       "original_sap_text": "null",
       "generated_sap_text": "Particular focus will be placed on Grade 3 or 4 abnormalities.",
-      "protocol_text": "n/a",
+      "protocol_text": "null",
       "protocol_consulted": "n/a",
       "matches_original_sap": "yes",
       "detail_level": "match",
@@ -414,14 +398,14 @@
       "result": "correct",
       "issue_type": "none",
       "severity": "none",
-      "reasoning": "Standard safety focus."
+      "reasoning": "Standard practice."
     },
     {
-      "component": "Unscheduled assessment handling",
-      "evaluation_type": "exact_match",
-      "original_sap_text": "Only the most severe case during unscheduled and scheduled visits will be included for the post-baseline result in the shift table.",
+      "component": "Unscheduled visits exclusion",
+      "evaluation_type": "semantic",
+      "original_sap_text": "Only the most severe case during unscheduled and scheduled visits will be included for the post-baseline result in the shift table. (Implies exclusion from by-visit)",
       "generated_sap_text": "Unscheduled laboratory assessments will be excluded from by-visit summaries but will be included in the determination of the worst post-baseline values and in all listings.",
-      "protocol_text": "n/a",
+      "protocol_text": "null",
       "protocol_consulted": "n/a",
       "matches_original_sap": "yes",
       "detail_level": "match",
@@ -430,14 +414,14 @@
       "result": "correct",
       "issue_type": "none",
       "severity": "none",
-      "reasoning": "Matches Original SAP."
+      "reasoning": "Matches logic."
     },
     {
-      "component": "Duplicate assessment handling",
+      "component": "Multiple values same day handling",
       "evaluation_type": "semantic",
       "original_sap_text": "null",
       "generated_sap_text": "If multiple laboratory values are collected on the same study day, the value collected closest to the scheduled assessment time will be used for by-visit summaries.",
-      "protocol_text": "n/a",
+      "protocol_text": "null",
       "protocol_consulted": "n/a",
       "matches_original_sap": "yes",
       "detail_level": "match",
@@ -446,14 +430,14 @@
       "result": "correct",
       "issue_type": "none",
       "severity": "none",
-      "reasoning": "Standard data handling rule."
+      "reasoning": "Standard rule, not contradictory."
     },
     {
-      "component": "Worst value determination",
+      "component": "Worst value same day handling",
       "evaluation_type": "semantic",
       "original_sap_text": "Only the most severe case during unscheduled and scheduled visits will be included for the post-baseline result in the shift table.",
       "generated_sap_text": "For the determination of the worst post-baseline value, the most extreme value among all results (scheduled or unscheduled) for that day will be used.",
-      "protocol_text": "n/a",
+      "protocol_text": "null",
       "protocol_consulted": "n/a",
       "matches_original_sap": "yes",
       "detail_level": "match",
@@ -462,120 +446,123 @@
       "result": "correct",
       "issue_type": "none",
       "severity": "none",
-      "reasoning": "Matches Original SAP."
+      "reasoning": "Matches logic."
     }
   ],
   "missing_from_generated_sap": [
     {
-      "component": "Period assignment logic",
-      "original_sap_text": "If visit names are \u2018Unscheduled\u2019 or \u2018EOT\u2019, the post-baseline result of laboratory data will be presented by period, defined as follows... [detailed logic for Induction, Maintenance, Follow-Up]",
-      "protocol_text": "n/a",
+      "component": "Shift tables for each study period",
+      "original_sap_text": "A shift table will be also produced by the Whole Study Period and each study period.",
+      "protocol_text": "null",
       "in_protocol": "no",
       "classification": "acceptable_difference",
-      "description": "Detailed logic for assigning EOT and unscheduled visits to specific study periods based on dates relative to infusion.",
-      "reasoning": "Original SAP provides complex logic for assigning data to study periods. Generated SAP omits this logic, which is a missing specification."
+      "description": "Generated SAP only defines shift tables for Whole Study Period, omitting the requirement for separate tables for Induction, Maintenance, and Follow-up.",
+      "reasoning": "Original SAP explicitly requires shift tables for each period."
     },
     {
-      "component": "Clinical input grading rule",
-      "original_sap_text": "Grades that require clinical input only will not be assigned to these parameters. Grades which are part numeric and part clinical input will be assigned based on the numeric portion only.",
-      "protocol_text": "n/a",
+      "component": "Summary of grades by visit",
+      "original_sap_text": "The number and percentage of patients with a result for each grade will be summarized by laboratory category, CTCAE term, visit and CTCAE grade.",
+      "protocol_text": "null",
       "in_protocol": "no",
       "classification": "acceptable_difference",
-      "description": "Specific rule about handling CTCAE grades requiring clinical input.",
-      "reasoning": "Specific grading rule missing from Generated SAP."
+      "description": "Generated SAP replaces this with a summary of treatment-emergent abnormalities.",
+      "reasoning": "Original SAP requires prevalence summary by grade."
     },
     {
-      "component": "Grade 5 exclusion",
-      "original_sap_text": "The CTCAE Grade 5 (Death) will not be applied in this analysis since death cannot be determined from a laboratory result.",
-      "protocol_text": "n/a",
+      "component": "EOT mapping logic",
+      "original_sap_text": "If visit names are \u2018Unscheduled\u2019 or \u2018EOT\u2019, the post-baseline result of laboratory data will be presented by period, defined as follows...",
+      "protocol_text": "null",
       "in_protocol": "no",
       "classification": "acceptable_difference",
-      "description": "Explicit exclusion of Grade 5 from laboratory grading.",
-      "reasoning": "Specific exclusion rule missing from Generated SAP."
+      "description": "Original SAP provides specific logic for mapping EOT visits to study periods for summarization. Generated SAP treats EOT as a visit column.",
+      "reasoning": "Difference in display strategy."
+    },
+    {
+      "component": "Non-convertible units handling",
+      "original_sap_text": "Reported parameters with units that cannot be converted to standard units will be summarized separately using the original units.",
+      "protocol_text": "null",
+      "in_protocol": "no",
+      "classification": "acceptable_difference",
+      "description": "Generated SAP omits the rule for handling parameters that cannot be converted to SI units.",
+      "reasoning": "Minor omission."
     }
   ],
   "issues": [
     {
       "issue_type": "contradiction_original",
-      "severity": "minor",
-      "component": "Coagulation analysis scope",
-      "original_sap_text": "Actual result and change from baseline of all numeric laboratory parameters including... coagulation will be summarized using descriptive statistics",
-      "generated_sap_text": "Coagulation... results will be presented in data listings only.",
-      "protocol_text": "n/a",
-      "why_they_conflict": "Original SAP requires descriptive summaries for coagulation; Generated SAP explicitly restricts them to listings only.",
-      "description": "Generated SAP removes the requirement for descriptive statistics for coagulation parameters.",
-      "reasoning": "Chain-of-thought: 1) Original SAP explicitly includes coagulation in the list of parameters to be summarized with descriptive statistics. 2) Generated SAP explicitly states coagulation results will be presented in data listings only. 3) These statements are mutually exclusive. 4) This is a contradiction reducing the scope of analysis."
-    },
-    {
-      "issue_type": "contradiction_original",
-      "severity": "minor",
-      "component": "Urinalysis analysis scope",
-      "original_sap_text": "Actual result and change from baseline of all numeric laboratory parameters including... numeric urinalysis... will be summarized... The results for all non-numeric urinalysis parameters... will be summarized in a shift table.",
-      "generated_sap_text": "Urinalysis results will be presented in data listings only.",
-      "protocol_text": "n/a",
-      "why_they_conflict": "Original SAP requires descriptive summaries for numeric urinalysis and shift tables for non-numeric urinalysis; Generated SAP explicitly restricts all urinalysis to listings only.",
-      "description": "Generated SAP removes the requirement for descriptive statistics and shift tables for urinalysis parameters.",
-      "reasoning": "Chain-of-thought: 1) Original SAP explicitly requires summaries for numeric urinalysis and shift tables for non-numeric urinalysis. 2) Generated SAP explicitly states urinalysis results will be presented in data listings only. 3) These statements are mutually exclusive. 4) This is a contradiction reducing the scope of analysis."
+      "severity": "critical",
+      "component": "Urinalysis and Coagulation analysis",
+      "original_sap_text": "Actual result and change from baseline of all numeric laboratory parameters including... numeric urinalysis and coagulation will be summarized... The results for all non-numeric urinalysis parameters... will be summarized in a shift table.",
+      "generated_sap_text": "Coagulation and urinalysis results will be presented in data listings only.",
+      "protocol_text": "null",
+      "why_they_conflict": "Original SAP requires summaries and shift tables for these parameters. Generated SAP explicitly restricts them to listings only.",
+      "description": "Generated SAP removes required safety analyses for Urinalysis and Coagulation. This is critical because Proteinuria (urinalysis) is a key safety risk for Bevacizumab.",
+      "reasoning": "Chain-of-thought: 1) Original SAP explicitly requires summaries for numeric urinalysis/coagulation and shift tables for non-numeric urinalysis. 2) Generated SAP states these will be 'listings only'. 3) These statements contradict. 4) Proteinuria is a known risk for the study drug, making the removal of urinalysis summaries a critical safety analysis gap."
     }
   ],
   "reverse_check": [
     {
       "original_sap_statement": "The CTCAE Grade 5 (Death) will not be applied in this analysis since death cannot be determined from a laboratory result.",
       "checked_against_elements": [
-        "CTCAE Grading",
-        "Shift tables (Graded)"
+        "Shift table definition"
       ],
       "contradiction_found": "no",
-      "contradicting_element": null,
-      "explanation": "Generated SAP does not mention Grade 5, so no contradiction."
+      "contradicting_element": "null",
+      "explanation": "Generated SAP defines baseline category as Grade 0 through 4, implicitly excluding Grade 5."
     },
     {
       "original_sap_statement": "Grades that require clinical input only will not be assigned to these parameters.",
       "checked_against_elements": [
-        "CTCAE Grading"
+        "CTCAE grading version"
       ],
       "contradiction_found": "no",
-      "contradicting_element": null,
-      "explanation": "Generated SAP does not mention clinical input grades, so no contradiction."
+      "contradicting_element": "null",
+      "explanation": "Generated SAP does not mention this exclusion but does not contradict it."
     },
     {
       "original_sap_statement": "Only the most severe case during unscheduled and scheduled visits will be included for the post-baseline result in the shift table.",
       "checked_against_elements": [
-        "Shift tables (Graded)",
         "Worst post-baseline definition"
       ],
       "contradiction_found": "no",
-      "contradicting_element": null,
-      "explanation": "Generated SAP matches this requirement."
+      "contradicting_element": "null",
+      "explanation": "Generated SAP matches this logic."
     },
     {
-      "original_sap_statement": "Actual result and change from baseline of all numeric laboratory parameters including... coagulation will be summarized",
+      "original_sap_statement": "EOT and unscheduled visit will not be summarized in visit-based tables, unless otherwise indicated.",
       "checked_against_elements": [
-        "Descriptive statistics scope (Coagulation/Urinalysis)"
+        "Post-baseline summary visits"
       ],
       "contradiction_found": "yes",
-      "contradicting_element": "Descriptive statistics scope (Coagulation/Urinalysis)",
-      "explanation": "Generated SAP restricts coagulation to listings only."
+      "contradicting_element": "Post-baseline summary visits",
+      "explanation": "Generated SAP explicitly includes EOT in post-baseline summaries, whereas Original SAP maps EOT to periods."
     },
     {
-      "original_sap_statement": "The results for all non-numeric urinalysis parameters... will be summarized in a shift table.",
+      "original_sap_statement": "Reported parameters with units that cannot be converted to standard units will be summarized separately using the original units.",
       "checked_against_elements": [
-        "Descriptive statistics scope (Coagulation/Urinalysis)"
+        "Local laboratory and SI units"
       ],
-      "contradiction_found": "yes",
-      "contradicting_element": "Descriptive statistics scope (Coagulation/Urinalysis)",
-      "explanation": "Generated SAP restricts urinalysis to listings only."
+      "contradiction_found": "no",
+      "contradicting_element": "null",
+      "explanation": "Generated SAP omits this rule but does not contradict it."
     }
   ],
   "extra_information_flagged": [
     {
-      "content": "Duplicate assessment handling",
-      "generated_sap_text": "If multiple laboratory values are collected on the same study day, the value collected closest to the scheduled assessment time will be used for by-visit summaries.",
+      "content": "Low/Normal/High shift tables for non-CTCAE parameters",
+      "generated_sap_text": "For parameters not covered by CTCAE grading, shift tables will cross-classify patients by baseline category (Low, Normal, High)...",
       "contradicts": "no",
-      "detail": "Standard data handling rule not explicit in Original SAP Section 10.2.",
-      "reasoning": "Beneficial clarification."
+      "detail": "Original SAP does not explicitly require this but does not forbid it.",
+      "reasoning": "Acceptable addition."
+    },
+    {
+      "content": "Treatment-emergent abnormality summary",
+      "generated_sap_text": "The number and percentage of patients with treatment-emergent laboratory abnormalities... will be summarized",
+      "contradicts": "no",
+      "detail": "Original SAP asks for grade prevalence. This is a different summary but acceptable as an addition or substitution.",
+      "reasoning": "Standard safety analysis."
     }
   ],
-  "reasoning": "The Generated SAP is largely consistent with the Original SAP regarding the core laboratory analysis (hematology and clinical chemistry). It correctly identifies the parameters, the use of local laboratories, unit standardization, and the use of CTCAE v5.0 for grading. It also correctly handles unscheduled visits and worst post-baseline values for shift tables. However, there are two clear contradictions regarding the scope of analysis for ancillary parameters: the Original SAP requires descriptive statistics for coagulation and numeric urinalysis, and shift tables for non-numeric urinalysis, whereas the Generated SAP explicitly restricts these to data listings only. Additionally, the Generated SAP omits the detailed logic for assigning data to study periods (Induction vs Maintenance) and specific grading rules (clinical input, Grade 5 exclusion). These omissions and contradictions are minor in the context of the overall safety analysis but represent a reduction in reporting scope.",
-  "summary": "The Generated SAP accurately captures the primary laboratory analysis methodology but contradicts the Original SAP by restricting coagulation and urinalysis to listings only, whereas the Original SAP required summaries. It also omits detailed logic for assigning data to study periods and specific grading rules found in the Original SAP."
+  "reasoning": "The Generated SAP accurately captures the parameter lists and general analysis approach for hematology and clinical chemistry. However, it contains a critical contradiction regarding Urinalysis and Coagulation. The Original SAP explicitly requires descriptive summaries for numeric urinalysis and coagulation, and shift tables for non-numeric urinalysis. The Generated SAP restricts these parameters to 'listings only'. Since Proteinuria (detected via urinalysis) is a key safety risk for Bevacizumab (listed as an Adverse Event of Special Interest in the Original SAP), removing the summary analysis for urinalysis is a critical failure that impacts safety monitoring. Additionally, the Generated SAP omits the requirement for shift tables for 'each study period', only defining the 'Whole Study Period' analysis.",
+  "summary": "The Generated SAP fails to meet requirements due to a critical contradiction in safety analysis scope. It restricts Urinalysis and Coagulation to 'listings only', whereas the Original SAP requires summaries and shift tables. This is critical because Proteinuria is a known risk for the study drug."
 }
