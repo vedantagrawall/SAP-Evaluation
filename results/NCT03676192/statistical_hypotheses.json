@@ -69,8 +69,11 @@
   "summary": "The Generated SAP correctly defines the primary hypothesis and equivalence margins (-12.5%, 12.5%) matching the Original SAP. It appropriately adds clarification regarding the absence of multiplicity adjustments and interim analyses for early termination, which is consistent with the Protocol.",
   "reconciliation": {
     "performed": true,
-    "items_checked": 0,
-    "items_removed": 0,
-    "removed_items": []
+    "missing_items_checked": 0,
+    "missing_items_removed": 0,
+    "removed_items": [],
+    "evaluation_problems_checked": 0,
+    "evaluation_problems_fixed": 0,
+    "fixed_evaluation_items": []
   }
 }

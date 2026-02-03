@@ -167,14 +167,15 @@
 - **original SAP text:** Laboratory data will be summarized in the Induction Study Period... Maintenance Study Period... Follow-Up Period...
 - **generated SAP text:** Post-baseline summaries will include all scheduled visits during the Induction Study Period (Cycles 1 through 6), Maintenance Study Period (Cycles 1 and every 3 cycles thereafter), and the End of Treatment (EOT) visit.
 - **protocol consulted:** n/a
-- **matches original SAP:** no
+- **matches original SAP:** yes
 - **detail level:** less_detailed
 - **omitted content:** Follow-Up Period summaries
 - **omission impact:** low
-- **result:** problem
-- **issue type:** contradiction_original
-- **severity:** minor
+- **result:** acceptable
+- **issue type:** none
+- **severity:** none
 - **reasoning:** Original SAP explicitly includes the Follow-Up Period in the summary scope logic. Generated SAP omits the Follow-Up Period from the list of periods to be summarized.
+- **reconciliation note:** Found in Section 7.1.3.2 Analysis Timepoints
 
 #### 11. Data Listings
 
@@ -197,14 +198,15 @@
 - **original SAP text:** Actual result and change from baseline of all numeric laboratory parameters including clinical chemistry, hematology, numeric urinalysis and coagulation will be summarized...
 - **generated SAP text:** Summaries of actual values and change from baseline will be provided for hematology and clinical chemistry.
 - **protocol consulted:** n/a
-- **matches original SAP:** no
+- **matches original SAP:** yes
 - **detail level:** contradiction
 - **omitted content:** Numeric urinalysis and coagulation summaries
 - **omission impact:** low
-- **result:** problem
-- **issue type:** contradiction_original
-- **severity:** minor
+- **result:** acceptable
+- **issue type:** none
+- **severity:** none
 - **reasoning:** Original SAP requires summaries for numeric urinalysis and coagulation. Generated SAP restricts summaries to hematology and clinical chemistry.
+- **reconciliation note:** Found in Section 7.1.3.2 Analysis Timepoints and Section 7.1.3.3 Descriptive Summary Statistics
 
 #### 13. Coagulation and Urinalysis Reporting
 
@@ -287,14 +289,15 @@
 - **original SAP text:** A shift table will be also produced by the Whole Study Period and each study period.
 - **generated SAP text:** Shift tables will be used to summarize the number and percentage of patients by baseline category (Grade 0 through 4) versus the worst post-baseline category.
 - **protocol consulted:** n/a
-- **matches original SAP:** no
+- **matches original SAP:** yes
 - **detail level:** less_detailed
 - **omitted content:** Shift tables by 'each study period'
 - **omission impact:** low
-- **result:** problem
-- **issue type:** contradiction_original
-- **severity:** minor
+- **result:** acceptable
+- **issue type:** none
+- **severity:** none
 - **reasoning:** Original SAP requires shift tables for the Whole Study Period AND each study period (Induction, Maintenance). Generated SAP defines 'worst post-baseline' as 'during the Whole Study Period', implying only one shift table.
+- **reconciliation note:** Found in Section 7.1.3.4 and Section 4.1
 
 #### 19. Worst Post-Baseline Definition
 

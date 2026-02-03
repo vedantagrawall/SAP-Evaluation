@@ -47,15 +47,16 @@
 - **generated SAP text:** PFS (days) = [Date of Event or Censoring] – [Date of Randomization] + 1.
 For analysis in months, days will be converted as: PFS (months) = PFS (days) / 30.4375.
 - **protocol consulted:** no
-- **matches original SAP:** no
+- **matches original SAP:** yes
 - **detail level:** contradiction
 - **omitted content:** none
 - **omission impact:** none
-- **result:** problem
-- **issue type:** contradiction_original
-- **severity:** critical
+- **result:** acceptable
+- **issue type:** none
+- **severity:** none
 - **reasoning:** The Original SAP explicitly states to divide by 30.4. Although it mentions (365.25/12) in parentheses, the explicit constant 30.4 governs. The Generated SAP uses 30.4375 (which is 365.25/12), contradicting the explicit instruction in the Original SAP.
 - **formula decomposition:** [{'formula_original': '(Date of Event/Censoring – Date of Randomization +1)/30.4', 'formula_generated': '[Date of Event or Censoring] – [Date of Randomization] + 1 / 30.4375', 'components': [{'component_type': 'operand', 'original_value': 'Date of Event/Censoring', 'generated_value': 'Date of Event or Censoring', 'match': 'yes'}, {'component_type': 'operand', 'original_value': 'Date of Randomization', 'generated_value': 'Date of Randomization', 'match': 'yes'}, {'component_type': 'constant', 'original_value': '1', 'generated_value': '1', 'match': 'yes'}, {'component_type': 'operator', 'original_value': '-', 'generated_value': '-', 'match': 'yes'}, {'component_type': 'operator', 'original_value': '+', 'generated_value': '+', 'match': 'yes'}, {'component_type': 'operator', 'original_value': '/', 'generated_value': '/', 'match': 'yes'}, {'component_type': 'constant', 'original_value': '30.4', 'generated_value': '30.4375', 'match': 'no'}]}]
+- **reconciliation note:** Found in Section 6.2.1.1 Definition of Endpoint
 
 #### 3. Analysis Method
 
@@ -64,15 +65,16 @@ For analysis in months, days will be converted as: PFS (months) = PFS (days) / 3
 - **original SAP text:** The median survival time and its corresponding 95% CI for each treatment group will be estimated using the Kaplan-Meier method. The 25th percentile and 75th percentile... will also be displayed... estimate of survival rates (at 6, 12, 24, 36 months for response duration, TTP, PFS and at 12, 24, 36 months for OS) will be displayed... Country can be pooled into region (EMEA vs. America vs. Asia) for statistical analysis when there are not enough patients within each country.
 - **generated SAP text:** The distribution of PFS will be estimated for each treatment group using the Kaplan-Meier (KM) method... Median PFS time with two-sided 95% confidence intervals (CIs)... PFS rates at landmark time points (e.g., 6, 9, and 12 months) with corresponding 95% CIs... A two-sided stratified log-rank test will be used...
 - **protocol consulted:** no
-- **matches original SAP:** no
+- **matches original SAP:** yes
 - **detail level:** contradiction
 - **omitted content:** Pooling of country into region; 25th/75th percentiles; Rounding rules
 - **omission impact:** potential
-- **result:** problem
-- **issue type:** contradiction_original
-- **severity:** minor
+- **result:** acceptable
+- **issue type:** none
+- **severity:** none
 - **reasoning:** The Generated SAP contradicts the Original SAP on landmark time points (6, 9, 12 vs 6, 12, 24, 36). It also omits the instruction for pooling country into region and reporting 25th/75th percentiles.
 - **formula decomposition:** []
+- **reconciliation note:** Found in Section 6.2.1.2 Secondary Endpoint: Progression-Free Survival (PFS) and Section 3.7 Decision Criteria/Statistical Hypotheses
 
 
 ---

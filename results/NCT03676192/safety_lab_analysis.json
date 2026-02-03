@@ -187,14 +187,15 @@
       "generated_sap_text": "Post-baseline summaries will include all scheduled visits during the Induction Study Period (Cycles 1 through 6), Maintenance Study Period (Cycles 1 and every 3 cycles thereafter), and the End of Treatment (EOT) visit.",
       "protocol_text": null,
       "protocol_consulted": "n/a",
-      "matches_original_sap": "no",
+      "matches_original_sap": "yes",
       "detail_level": "less_detailed",
       "omitted_content": "Follow-Up Period summaries",
       "omission_impact": "low",
-      "result": "problem",
-      "issue_type": "contradiction_original",
-      "severity": "minor",
-      "reasoning": "Original SAP explicitly includes the Follow-Up Period in the summary scope logic. Generated SAP omits the Follow-Up Period from the list of periods to be summarized."
+      "result": "acceptable",
+      "issue_type": "none",
+      "severity": "none",
+      "reasoning": "Original SAP explicitly includes the Follow-Up Period in the summary scope logic. Generated SAP omits the Follow-Up Period from the list of periods to be summarized.",
+      "reconciliation_note": "Found in Section 7.1.3.2 Analysis Timepoints"
     },
     {
       "component": "Data Listings",
@@ -219,14 +220,15 @@
       "generated_sap_text": "Summaries of actual values and change from baseline will be provided for hematology and clinical chemistry.",
       "protocol_text": null,
       "protocol_consulted": "n/a",
-      "matches_original_sap": "no",
+      "matches_original_sap": "yes",
       "detail_level": "contradiction",
       "omitted_content": "Numeric urinalysis and coagulation summaries",
       "omission_impact": "low",
-      "result": "problem",
-      "issue_type": "contradiction_original",
-      "severity": "minor",
-      "reasoning": "Original SAP requires summaries for numeric urinalysis and coagulation. Generated SAP restricts summaries to hematology and clinical chemistry."
+      "result": "acceptable",
+      "issue_type": "none",
+      "severity": "none",
+      "reasoning": "Original SAP requires summaries for numeric urinalysis and coagulation. Generated SAP restricts summaries to hematology and clinical chemistry.",
+      "reconciliation_note": "Found in Section 7.1.3.2 Analysis Timepoints and Section 7.1.3.3 Descriptive Summary Statistics"
     },
     {
       "component": "Coagulation and Urinalysis Reporting",
@@ -315,14 +317,15 @@
       "generated_sap_text": "Shift tables will be used to summarize the number and percentage of patients by baseline category (Grade 0 through 4) versus the worst post-baseline category.",
       "protocol_text": null,
       "protocol_consulted": "n/a",
-      "matches_original_sap": "no",
+      "matches_original_sap": "yes",
       "detail_level": "less_detailed",
       "omitted_content": "Shift tables by 'each study period'",
       "omission_impact": "low",
-      "result": "problem",
-      "issue_type": "contradiction_original",
-      "severity": "minor",
-      "reasoning": "Original SAP requires shift tables for the Whole Study Period AND each study period (Induction, Maintenance). Generated SAP defines 'worst post-baseline' as 'during the Whole Study Period', implying only one shift table."
+      "result": "acceptable",
+      "issue_type": "none",
+      "severity": "none",
+      "reasoning": "Original SAP requires shift tables for the Whole Study Period AND each study period (Induction, Maintenance). Generated SAP defines 'worst post-baseline' as 'during the Whole Study Period', implying only one shift table.",
+      "reconciliation_note": "Found in Section 7.1.3.4 and Section 4.1"
     },
     {
       "component": "Worst Post-Baseline Definition",
@@ -596,8 +599,33 @@
   "summary": "The Generated SAP is generally accurate but contains a minor contradiction regarding the reporting of coagulation and urinalysis data (listings only vs. summaries required). It also omits summaries for the Follow-Up Period and lacks detailed logic for assigning results to study periods.",
   "reconciliation": {
     "performed": true,
-    "items_checked": 2,
-    "items_removed": 0,
-    "removed_items": []
+    "missing_items_checked": 2,
+    "missing_items_removed": 0,
+    "removed_items": [],
+    "evaluation_problems_checked": 5,
+    "evaluation_problems_fixed": 3,
+    "fixed_evaluation_items": [
+      {
+        "component": "Post-Baseline Summary Scope",
+        "was": "problem",
+        "now": "acceptable",
+        "found_in_section": "Section 7.1.3.2 Analysis Timepoints",
+        "reasoning": "The generated SAP explicitly states in Section 7.1.3.2 that post-baseline laboratory summaries will include scheduled visits during the Induction Study Period and Maintenance Study Period. Additionally, Section 4.1 (General Methodology) establishes the general rule that summaries will be presented by study period. While 'Follow-Up Period' is not explicitly listed for laboratory summaries in 7.1.3.2, this is consistent with the Schedule of Assessments (Section 11.1.1) which does not indicate routine clinical laboratory collection during the Follow-Up Period. The definitions for these periods are provided in Section 4.2."
+      },
+      {
+        "component": "Summary Parameters (Hem/Chem)",
+        "was": "problem",
+        "now": "acceptable",
+        "found_in_section": "Section 7.1.3.2 Analysis Timepoints and Section 7.1.3.3 Descriptive Summary Statistics",
+        "reasoning": "The generated SAP contains the requirement to summarize laboratory data. Section 7.1.3.3 explicitly states that laboratory parameters will be summarized including 'actual values and change from baseline values'. Section 7.1.3.2 specifies the scope, noting that Hematology and Clinical Chemistry will be summarized (actual and change from baseline), while Coagulation and Urinalysis will be presented in listings."
+      },
+      {
+        "component": "Shift Table Methodology",
+        "was": "problem",
+        "now": "acceptable",
+        "found_in_section": "Section 7.1.3.4 and Section 4.1",
+        "reasoning": "The Generated SAP explicitly defines shift table methodology for the \"Whole Study Period\" in Section 7.1.3.4 (Toxicity Grading and Shift Tables). The requirement to produce these summaries for \"each study period\" is covered by the global instruction in Section 4.1 (General Methodology), which states that unless specified otherwise, summaries will be presented by study period (Induction, Maintenance, and/or Whole Study Period)."
+      }
+    ]
   }
 }

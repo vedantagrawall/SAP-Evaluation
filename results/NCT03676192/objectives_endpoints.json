@@ -1582,8 +1582,11 @@
   "summary": "The Generated SAP correctly identifies all primary and secondary objectives and endpoints. It accurately describes the statistical methods for the primary analysis (logistic regression, Delta method) and secondary time-to-event analyses (Kaplan-Meier, Cox regression). It omits the specific 'Tipping Point Analysis' for sensitivity and detailed date imputation logic found in the Original SAP, but these are not explicitly required by the Protocol.",
   "reconciliation": {
     "performed": true,
-    "items_checked": 8,
-    "items_removed": 0,
-    "removed_items": []
+    "missing_items_checked": 8,
+    "missing_items_removed": 0,
+    "removed_items": [],
+    "evaluation_problems_checked": 0,
+    "evaluation_problems_fixed": 0,
+    "fixed_evaluation_items": []
   }
 }

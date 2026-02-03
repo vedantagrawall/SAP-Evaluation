@@ -221,8 +221,11 @@
   "summary": "The Generated SAP contains critical unverifiable assumptions by specifying a software version where source documents are silent and by omitting or deferring specific dictionary version requirements defined in the Original SAP. Additionally, it lacks detailed rules for decimal precision and data discrepancy handling found in the Original SAP.",
   "reconciliation": {
     "performed": true,
-    "items_checked": 4,
-    "items_removed": 0,
-    "removed_items": []
+    "missing_items_checked": 4,
+    "missing_items_removed": 0,
+    "removed_items": [],
+    "evaluation_problems_checked": 3,
+    "evaluation_problems_fixed": 0,
+    "fixed_evaluation_items": []
   }
 }

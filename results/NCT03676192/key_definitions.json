@@ -465,8 +465,11 @@
   "summary": "The Key Definitions section is well-constructed and consistent with the Original SAP. It accurately defines study periods, dates, and general calculation rules. Minor omissions regarding specific exposure formulas do not impact the overall validity of the definitions provided.",
   "reconciliation": {
     "performed": true,
-    "items_checked": 1,
-    "items_removed": 0,
-    "removed_items": []
+    "missing_items_checked": 1,
+    "missing_items_removed": 0,
+    "removed_items": [],
+    "evaluation_problems_checked": 0,
+    "evaluation_problems_fixed": 0,
+    "fixed_evaluation_items": []
   }
 }

@@ -409,8 +409,11 @@
   "summary": "The Generated SAP successfully lists all required objectives and endpoints. It adheres strictly to the Protocol definitions, ensuring accuracy and completeness.",
   "reconciliation": {
     "performed": true,
-    "items_checked": 0,
-    "items_removed": 0,
-    "removed_items": []
+    "missing_items_checked": 0,
+    "missing_items_removed": 0,
+    "removed_items": [],
+    "evaluation_problems_checked": 0,
+    "evaluation_problems_fixed": 0,
+    "fixed_evaluation_items": []
   }
 }

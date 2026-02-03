@@ -136,53 +136,112 @@ If BOTH conditions are met, the core requirement is satisfied even if the detail
         }
 
 
-def reconcile_section(section_name: str, section_data: dict, generated_sap: str) -> dict:
+def reconcile_evaluation_table(evaluation_table: list, generated_sap: str, section_name: str) -> dict:
     """
-    Reconcile missing items for a single section.
+    Check evaluation_table items marked as 'problem' and fix if content exists elsewhere.
 
-    Returns updated section data with reconciliation metadata.
+    Returns dict with counts and fixed items.
     """
-    missing_items = section_data.get('missing_from_generated_sap', [])
+    problem_items = [e for e in evaluation_table if e.get('result') == 'problem']
 
-    if not missing_items:
-        section_data['reconciliation'] = {
-            'performed': True,
-            'items_checked': 0,
-            'items_removed': 0,
-            'removed_items': []
-        }
-        return section_data
+    if not problem_items:
+        return {'items_checked': 0, 'items_fixed': 0, 'fixed_items': []}
 
-    kept_items = []
-    removed_items = []
+    fixed_items = []
+    print(f"\n  Checking {len(problem_items)} problem items in evaluation_table...")
 
-    print(f"\n  Checking {len(missing_items)} missing items...")
-
-    for item in missing_items:
+    for item in problem_items:
         component = item.get('component', 'Unknown')
+        omitted_content = item.get('omitted_content')
+
+        # Only check items that have omitted_content (organizational differences)
+        if not omitted_content:
+            continue
+
         print(f"    - {component}...", end=' ')
 
-        check_result = check_content_exists_elsewhere(item, generated_sap, section_name)
+        # Create a temporary item structure for checking
+        check_item = {
+            'component': component,
+            'original_sap_text': item.get('original_sap_text', ''),
+            'description': f"Omitted: {omitted_content}"
+        }
+
+        check_result = check_content_exists_elsewhere(check_item, generated_sap, section_name)
 
         if check_result['exists_elsewhere']:
             print(f"✓ Found in {check_result['found_in_section']}")
-            removed_items.append({
-                **item,
-                'removed_by_reconciliation': True,
+            # Change from problem to acceptable
+            item['result'] = 'acceptable'
+            item['severity'] = 'none'
+            item['issue_type'] = 'none'
+            item['matches_original_sap'] = 'yes'
+            item['reconciliation_note'] = f"Found in {check_result['found_in_section']}"
+
+            fixed_items.append({
+                'component': component,
+                'was': 'problem',
+                'now': 'acceptable',
                 'found_in_section': check_result['found_in_section'],
-                'reconciliation_reasoning': check_result['reasoning']
+                'reasoning': check_result['reasoning']
             })
         else:
             print(f"✗ Not found elsewhere")
-            kept_items.append(item)
 
-    # Update section data
-    section_data['missing_from_generated_sap'] = kept_items
+    return {
+        'items_checked': len(problem_items),
+        'items_fixed': len(fixed_items),
+        'fixed_items': fixed_items
+    }
+
+
+def reconcile_section(section_name: str, section_data: dict, generated_sap: str) -> dict:
+    """
+    Reconcile missing items and evaluation_table problems for a single section.
+
+    Returns updated section data with reconciliation metadata.
+    """
+    # Part 1: Reconcile missing_from_generated_sap
+    missing_items = section_data.get('missing_from_generated_sap', [])
+    kept_items = []
+    removed_items = []
+
+    if missing_items:
+        print(f"\n  Checking {len(missing_items)} missing items...")
+
+        for item in missing_items:
+            component = item.get('component', 'Unknown')
+            print(f"    - {component}...", end=' ')
+
+            check_result = check_content_exists_elsewhere(item, generated_sap, section_name)
+
+            if check_result['exists_elsewhere']:
+                print(f"✓ Found in {check_result['found_in_section']}")
+                removed_items.append({
+                    **item,
+                    'removed_by_reconciliation': True,
+                    'found_in_section': check_result['found_in_section'],
+                    'reconciliation_reasoning': check_result['reasoning']
+                })
+            else:
+                print(f"✗ Not found elsewhere")
+                kept_items.append(item)
+
+        section_data['missing_from_generated_sap'] = kept_items
+
+    # Part 2: Reconcile evaluation_table problem items
+    evaluation_table = section_data.get('evaluation_table', [])
+    eval_reconciliation = reconcile_evaluation_table(evaluation_table, generated_sap, section_name)
+
+    # Update section data with reconciliation metadata
     section_data['reconciliation'] = {
         'performed': True,
-        'items_checked': len(missing_items),
-        'items_removed': len(removed_items),
-        'removed_items': removed_items
+        'missing_items_checked': len(missing_items),
+        'missing_items_removed': len(removed_items),
+        'removed_items': removed_items,
+        'evaluation_problems_checked': eval_reconciliation['items_checked'],
+        'evaluation_problems_fixed': eval_reconciliation['items_fixed'],
+        'fixed_evaluation_items': eval_reconciliation['fixed_items']
     }
 
     return section_data

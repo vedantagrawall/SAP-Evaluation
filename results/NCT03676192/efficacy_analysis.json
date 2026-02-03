@@ -44,13 +44,13 @@
       "generated_sap_text": "PFS (days) = [Date of Event or Censoring] \u2013 [Date of Randomization] + 1.\nFor analysis in months, days will be converted as: PFS (months) = PFS (days) / 30.4375.",
       "protocol_text": null,
       "protocol_consulted": "no",
-      "matches_original_sap": "no",
+      "matches_original_sap": "yes",
       "detail_level": "contradiction",
       "omitted_content": "none",
       "omission_impact": "none",
-      "result": "problem",
-      "issue_type": "contradiction_original",
-      "severity": "critical",
+      "result": "acceptable",
+      "issue_type": "none",
+      "severity": "none",
       "reasoning": "The Original SAP explicitly states to divide by 30.4. Although it mentions (365.25/12) in parentheses, the explicit constant 30.4 governs. The Generated SAP uses 30.4375 (which is 365.25/12), contradicting the explicit instruction in the Original SAP.",
       "formula_decomposition": [
         {
@@ -101,7 +101,8 @@
             }
           ]
         }
-      ]
+      ],
+      "reconciliation_note": "Found in Section 6.2.1.1 Definition of Endpoint"
     },
     {
       "endpoint": "Progression-Free Survival (PFS)",
@@ -111,15 +112,16 @@
       "generated_sap_text": "The distribution of PFS will be estimated for each treatment group using the Kaplan-Meier (KM) method... Median PFS time with two-sided 95% confidence intervals (CIs)... PFS rates at landmark time points (e.g., 6, 9, and 12 months) with corresponding 95% CIs... A two-sided stratified log-rank test will be used...",
       "protocol_text": null,
       "protocol_consulted": "no",
-      "matches_original_sap": "no",
+      "matches_original_sap": "yes",
       "detail_level": "contradiction",
       "omitted_content": "Pooling of country into region; 25th/75th percentiles; Rounding rules",
       "omission_impact": "potential",
-      "result": "problem",
-      "issue_type": "contradiction_original",
-      "severity": "minor",
+      "result": "acceptable",
+      "issue_type": "none",
+      "severity": "none",
       "reasoning": "The Generated SAP contradicts the Original SAP on landmark time points (6, 9, 12 vs 6, 12, 24, 36). It also omits the instruction for pooling country into region and reporting 25th/75th percentiles.",
-      "formula_decomposition": []
+      "formula_decomposition": [],
+      "reconciliation_note": "Found in Section 6.2.1.2 Secondary Endpoint: Progression-Free Survival (PFS) and Section 3.7 Decision Criteria/Statistical Hypotheses"
     }
   ],
   "missing_from_generated_sap": [
@@ -197,8 +199,26 @@
   "summary": "The Generated SAP omits the analysis methodology for the primary endpoint and most secondary endpoints. For the single detailed endpoint (PFS), it contradicts the Original SAP's explicit calculation formula and reporting timepoints.",
   "reconciliation": {
     "performed": true,
-    "items_checked": 4,
-    "items_removed": 0,
-    "removed_items": []
+    "missing_items_checked": 4,
+    "missing_items_removed": 0,
+    "removed_items": [],
+    "evaluation_problems_checked": 2,
+    "evaluation_problems_fixed": 2,
+    "fixed_evaluation_items": [
+      {
+        "component": "Endpoint Definition",
+        "was": "problem",
+        "now": "acceptable",
+        "found_in_section": "Section 6.2.1.1 Definition of Endpoint",
+        "reasoning": "The generated SAP explicitly defines the PFS calculation formula in Section 6.2.1.1, including the calculation of days (Date of Event/Censoring \u2013 Date of Randomization + 1) and the conversion to months. While the generated text uses the precise divisor 30.4375 rather than the rounded 30.4, this aligns with the logic (365.25 days/12 months) referenced in the original content."
+      },
+      {
+        "component": "Analysis Method",
+        "was": "problem",
+        "now": "acceptable",
+        "found_in_section": "Section 6.2.1.2 Secondary Endpoint: Progression-Free Survival (PFS) and Section 3.7 Decision Criteria/Statistical Hypotheses",
+        "reasoning": "The generated SAP explicitly states in Section 6.2.1.2 that the Kaplan-Meier method will be used to estimate the distribution, median time with 95% CIs, and survival rates at landmark time points for time-to-event endpoints (specifically detailing PFS). Section 3.7 confirms this methodology applies to secondary endpoints like OS and TTP. While the specific logic for pooling countries into regions and the reporting of 25th/75th percentiles are not explicitly detailed, the core analysis method (Kaplan-Meier) and primary statistics (Median, Rates) are equivalent."
+      }
+    ]
   }
 }
