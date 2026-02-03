@@ -39,9 +39,18 @@ Follow this order strictly:
 4. **If Generated SAP matches Protocol** → CORRECT (do not penalize, even if Original SAP differs)
 5. **If Generated SAP matches neither Original SAP nor Protocol** → PROBLEM
 
-**UNVERIFIABLE SPECIFICS RULE:** When the Generated SAP makes a decision about a study-specific item — such as which version of a coding dictionary to use, which edition of a grading standard to apply, or which specific software release to require — and neither the Original SAP nor the Protocol specify that item, the Generated SAP is making an **unverifiable assumption**. This applies whether the Generated SAP states a concrete value OR uses deferral language (such as "the version available at the time of database lock" or "current version"). Both are decisions about how to handle an unspecified item. The Generated SAP should not decide on behalf of the statistician. Instead, it should explicitly flag the gap and recommend consultation (with the data manager, sponsor, or relevant party) to confirm. Flag these as an issue with issue_type `unverifiable_assumption` and severity `critical`, because they mask a gap that the statistician needs to resolve.
+**UNVERIFIABLE SPECIFICS RULE:** When comparing specifications between Original SAP and Generated SAP, check if the Generated SAP makes concrete decisions about study-specific parameters that were left flexible or unspecified in the Original SAP or Protocol.
 
-**What is NOT an unverifiable assumption:** Standard statistical boilerplate that does not vary between studies (definitions of descriptive statistics, general statements about a priori vs post hoc analyses, general listing conventions). These are universally applicable conventions, not study-specific decisions.
+**Flag as unverifiable_assumption with severity critical when:**
+1. Original SAP or Protocol is completely silent on a parameter, and Generated SAP provides a specific value
+2. Original SAP or Protocol provides a minimum requirement or open-ended requirement, and Generated SAP resolves this by either stating a specific value OR using deferral language that defers the decision to a future time point
+3. Original SAP or Protocol provides a specific value, and Generated SAP omits it or replaces it with deferral language
+
+**The key principle:** If the Original SAP or Protocol leaves ANY flexibility or ambiguity about which specific value will be used, and the Generated SAP resolves that flexibility through any means, this is an unverifiable assumption. The Generated SAP must not make decisions that should be made by the statistician in consultation with the data manager or sponsor. Flag these issues because they mask gaps that require human decision-making.
+
+**Critical check for versioned specifications:** When Original SAP states a minimum threshold with language indicating multiple versions are acceptable, and Generated SAP either omits the version OR uses language deferring the version selection to a future decision point, you MUST flag this as unverifiable_assumption with severity critical. The Generated SAP has made a choice to defer the decision rather than specifying which version will be used. This is still a decision that masks the need for statistician consultation.
+
+**What is NOT an unverifiable assumption:** Standard statistical boilerplate that does not vary between studies. These are universally applicable conventions, not study-specific decisions.
 
 ---
 

@@ -1,103 +1,77 @@
 {
   "section": "general_methodology",
-  "rating": "GREAT",
-  "status": "pass",
+  "rating": "POOR",
+  "status": "fail",
   "extraction_validation": {
     "sections_read": [
       "4.1"
     ],
     "elements_per_section": {
-      "4.1": 12
+      "4.1": 14
     },
-    "paragraphs_processed": 7,
-    "elements_extracted": 12,
-    "elements_in_evaluation_table": 12,
+    "paragraphs_processed": 14,
+    "elements_extracted": 13,
+    "elements_in_evaluation_table": 9,
     "elements_in_missing_from_generated_sap": 4,
     "counts_match": true
   },
   "evaluation_table": [
     {
-      "component": "Software specification",
+      "component": "Software version",
       "evaluation_type": "exact_match",
       "original_sap_text": null,
       "generated_sap_text": "All analyses described in this plan will be performed using SAS software version 9.4 or higher unless specified otherwise.",
-      "matches_original_sap": "yes",
+      "matches_original_sap": "no",
       "protocol_text": null,
       "protocol_consulted": "yes",
-      "result": "correct",
-      "issue_type": "none",
-      "severity": "none",
-      "reasoning": "The Original SAP contains a header '4.1. Software' but no text follows it in the provided document. The Generated SAP specifies SAS 9.4, which is standard industry practice and does not contradict the empty section in the Original SAP."
+      "result": "problem",
+      "issue_type": "unverifiable_assumption",
+      "severity": "critical",
+      "reasoning": "The Original SAP contains the header '4.1. Software' but provides no text/specification. The Protocol is also silent on software. The Generated SAP specifies 'SAS software version 9.4 or higher'. This constitutes a critical unverifiable assumption as the Generated SAP provides a specific value where the source documents are completely silent."
     },
     {
-      "component": "A priori vs Post hoc definition",
-      "evaluation_type": "exact_match",
+      "component": "Analysis timing definitions",
+      "evaluation_type": "semantic",
       "original_sap_text": null,
-      "generated_sap_text": "The analyses documented here are considered a priori analyses in that they are defined prior to database lock.",
+      "generated_sap_text": "The analyses documented here are considered a priori analyses in that they are defined prior to database lock. Changes to the planned analyses, if any, designed after database lock and/or unblinding will be considered post hoc analyses and will be applied as exploratory methodology. All post hoc analyses will be identified in the clinical study report.",
       "matches_original_sap": "yes",
-      "protocol_text": "Changes from analyses planned in this protocol will be documented in the SAP.",
-      "protocol_consulted": "yes",
+      "protocol_text": null,
+      "protocol_consulted": "n/a",
       "result": "correct",
       "issue_type": "none",
       "severity": "none",
-      "reasoning": "Standard regulatory language included in the Generated SAP. Consistent with Protocol Section 7.6 regarding planned vs. deviated analyses."
-    },
-    {
-      "component": "Post hoc analysis handling",
-      "evaluation_type": "exact_match",
-      "original_sap_text": null,
-      "generated_sap_text": "Changes to the planned analyses, if any, designed after database lock and/or unblinding will be considered post hoc analyses and will be applied as exploratory methodology. All post hoc analyses will be identified in the clinical study report.",
-      "matches_original_sap": "yes",
-      "protocol_text": "Any deviations from the planned analysis as described in the SAP will be justified and recorded in the study report.",
-      "protocol_consulted": "yes",
-      "result": "correct",
-      "issue_type": "none",
-      "severity": "none",
-      "reasoning": "Consistent with Protocol Section 7.6 requirements for reporting deviations."
+      "reasoning": "Standard statistical boilerplate defining a priori vs post hoc analyses. While not explicitly in the Original SAP, it is consistent with standard practice and does not contradict the study design."
     },
     {
       "component": "Descriptive statistics definition",
       "evaluation_type": "semantic",
-      "original_sap_text": "Continuous data will be summarized using descriptive statistics: the number of observations (n), mean, standard deviation, minimum, median and maximum... Categorical data will be summarized using numbers and percentages of patients.",
-      "generated_sap_text": "The term 'descriptive statistics' refers to the number of patients (n), mean, median, standard deviation (SD), minimum, and maximum for continuous variables; and refers to the number and percentage of patients for categorical variables.",
+      "original_sap_text": "Continuous data will be summarized using descriptive statistics: the number of observations (n), mean, standard deviation, minimum, median and maximum unless otherwise indicated. ... Categorical data will be summarized using numbers and percentages of patients.",
+      "generated_sap_text": "The term \"descriptive statistics\" refers to the number of patients (n), mean, median, standard deviation (SD), minimum, and maximum for continuous variables; and refers to the number and percentage of patients for categorical variables.",
       "matches_original_sap": "yes",
       "protocol_text": null,
       "protocol_consulted": "n/a",
       "result": "correct",
       "issue_type": "none",
       "severity": "none",
-      "reasoning": "The definitions match exactly."
+      "reasoning": "The definitions of descriptive statistics for continuous and categorical variables match the Original SAP."
     },
     {
-      "component": "Presentation rule",
-      "evaluation_type": "semantic",
-      "original_sap_text": "...unless otherwise indicated.",
-      "generated_sap_text": "Descriptive statistics will be presented as described here unless specified otherwise in the efficacy or safety sections of this document.",
-      "matches_original_sap": "yes",
-      "protocol_text": null,
-      "protocol_consulted": "n/a",
-      "result": "correct",
-      "issue_type": "none",
-      "severity": "none",
-      "reasoning": "Both documents establish a default presentation rule that applies unless exceptions are noted."
-    },
-    {
-      "component": "Confidence Intervals and P-values",
+      "component": "Confidence intervals and p-values",
       "evaluation_type": "semantic",
       "original_sap_text": "95% CI (two one-sided alpha 0.025)",
       "generated_sap_text": "Unless specified otherwise, confidence intervals will be presented as 95% and p-values will be presented as 2-sided.",
       "matches_original_sap": "yes",
-      "protocol_text": "95% confidence interval (CI) (two one-sided alpha 0.025)",
-      "protocol_consulted": "yes",
+      "protocol_text": null,
+      "protocol_consulted": "n/a",
       "result": "correct",
       "issue_type": "none",
       "severity": "none",
-      "reasoning": "The Original SAP and Protocol specify 95% CI (equivalent to 2-sided alpha 0.05). The Generated SAP's default of 95% CI and 2-sided p-values is consistent with this."
+      "reasoning": "Consistent with the specific alpha levels mentioned in the Sample Size section of the Original SAP."
     },
     {
       "component": "Summary stratification",
       "evaluation_type": "semantic",
-      "original_sap_text": "Summaries of concomitant medications will be presented by Whole Study Period, Induction Study Period, Maintenance Study period and Follow-up period... [and] by treatment group",
+      "original_sap_text": "Categorical data will be summarized using numbers and percentages of patients. ... The denominator for all percentages will be the number of patients within the treatment group for the population of interest",
       "generated_sap_text": "Unless specified otherwise, summaries will be presented by treatment arm (CT-P16 or EU-Approved Avastin), study period (Induction Study Period, Maintenance Study Period, and/or Whole Study Period, as defined in Section 3.4), and overall.",
       "matches_original_sap": "yes",
       "protocol_text": null,
@@ -105,38 +79,38 @@
       "result": "correct",
       "issue_type": "none",
       "severity": "none",
-      "reasoning": "The Generated SAP generalizes the specific reporting periods found in the Original SAP (Sections 7.1, 10.1) into a general rule, which is accurate."
+      "reasoning": "Consistent with the Original SAP's instruction to summarize by treatment group. The addition of study period and overall is consistent with the study design."
     },
     {
-      "component": "AE Coding Dictionary",
+      "component": "MedDRA coding version",
       "evaluation_type": "semantic",
-      "original_sap_text": "Medical Dictionary for Regulatory Activities (MedDRA) version 24.0 or higher",
-      "generated_sap_text": "Medical Dictionary for Regulatory Activities (MedDRA) current version at the time of database lock",
-      "matches_original_sap": "yes",
-      "protocol_text": "Adverse events will be coded... using Medical Dictionary for Regulatory Activities (MedDRA).",
+      "original_sap_text": "Medical history... will be coded using Medical Dictionary for Regulatory Activities (MedDRA) version 24.0 or higher. ... All AEs will be classified by SOC and PT according to the MedDRA version 24.0 or higher.",
+      "generated_sap_text": "Adverse events (AEs) will be coded to system organ class (SOC) and preferred term (PT) using the Medical Dictionary for Regulatory Activities (MedDRA) current version at the time of database lock.",
+      "matches_original_sap": "no",
+      "protocol_text": "Adverse events will be coded to system organ class (SOC) and preferred term (PT) using Medical Dictionary for Regulatory Activities (MedDRA).",
       "protocol_consulted": "yes",
-      "result": "correct",
-      "issue_type": "none",
-      "severity": "none",
-      "reasoning": "'Current version' is semantically compatible with 'Version 24.0 or higher' for a future database lock."
+      "result": "problem",
+      "issue_type": "unverifiable_assumption",
+      "severity": "critical",
+      "reasoning": "The Original SAP specifies a minimum version ('24.0 or higher'). The Generated SAP uses deferral language ('current version at the time of database lock'). According to the evaluation rules, replacing a minimum threshold with deferral language must be flagged as a critical unverifiable assumption."
     },
     {
-      "component": "Medication Coding Dictionary",
+      "component": "WHO Drug coding version",
       "evaluation_type": "semantic",
-      "original_sap_text": "WHO Drug Dictionary version March, 2021 or later",
-      "generated_sap_text": "World Health Organization (WHO) Drug Dictionary",
-      "matches_original_sap": "yes",
-      "protocol_text": "World Health Organization (WHO) drug dictionary",
+      "original_sap_text": "All medications will be coded using WHO Drug Dictionary version March, 2021 or later.",
+      "generated_sap_text": "Prior and concomitant medications will be coded to drug class and PT using the World Health Organization (WHO) Drug Dictionary.",
+      "matches_original_sap": "no",
+      "protocol_text": "Prior and concomitant medication will be coded to drug class and PT using the World Health Organization (WHO) drug dictionary.",
       "protocol_consulted": "yes",
-      "result": "correct",
-      "issue_type": "none",
-      "severity": "none",
-      "reasoning": "The Generated SAP specifies the correct dictionary. Omitting the specific version 'March 2021 or later' is acceptable as it implies the current/standard version."
+      "result": "problem",
+      "issue_type": "unverifiable_assumption",
+      "severity": "critical",
+      "reasoning": "The Original SAP specifies a minimum version ('March, 2021 or later'). The Generated SAP omits the version entirely. According to the evaluation rules, omitting a specific version requirement provided in the Original SAP must be flagged as a critical unverifiable assumption."
     },
     {
       "component": "Listing content",
       "evaluation_type": "semantic",
-      "original_sap_text": "Listings will be sorted by the treatment group and then patient number... and visit, if applicable.",
+      "original_sap_text": "Listings will be sorted by the treatment group and then patient number, which is the unique subject identifier and visit, if applicable.",
       "generated_sap_text": "All data collected will be listed by patient, treatment, and visit where applicable.",
       "matches_original_sap": "yes",
       "protocol_text": null,
@@ -144,12 +118,12 @@
       "result": "correct",
       "issue_type": "none",
       "severity": "none",
-      "reasoning": "Matches the sorting/content requirements."
+      "reasoning": "Matches the sorting/content requirements of the Original SAP."
     },
     {
-      "component": "Population identification in listings",
+      "component": "Analysis populations in listings",
       "evaluation_type": "semantic",
-      "original_sap_text": "A listing will also be provided displaying this data [populations].",
+      "original_sap_text": "The number of patients in each population will be tabulated by treatment group for the ITT population. A listing will also be provided displaying this data.",
       "generated_sap_text": "All analysis populations (as defined in Section 3.3) will be identified in the listings.",
       "matches_original_sap": "yes",
       "protocol_text": null,
@@ -157,63 +131,92 @@
       "result": "correct",
       "issue_type": "none",
       "severity": "none",
-      "reasoning": "While the Original SAP specifies a dedicated listing for populations, identifying populations within listings is a standard and compatible enhancement."
-    },
-    {
-      "component": "Summary population basis",
-      "evaluation_type": "semantic",
-      "original_sap_text": "The denominator for all percentages will be the number of patients within the treatment group for the population of interest",
-      "generated_sap_text": "Summaries and tabulations will be based on the analysis populations specified for each endpoint in Section 2.",
-      "matches_original_sap": "yes",
-      "protocol_text": null,
-      "protocol_consulted": "n/a",
-      "result": "correct",
-      "issue_type": "none",
-      "severity": "none",
-      "reasoning": "Both documents state that summaries depend on the specific population defined for that analysis."
+      "reasoning": "Consistent with the requirement to list population data."
     }
   ],
   "missing_from_generated_sap": [
     {
-      "content": "Decimal precision rules (mean/median +1, SD +2, CV +2)",
+      "component": "Decimal precision rules",
+      "original_sap_text": "Minimum and maximum will be presented to the same number of decimal places as the raw data, mean and median will be presented to one more decimal place than the raw data, and standard deviation will be presented to two more decimal places than the raw data. If the geometric mean is to be presented, it will be set to the same precision as the mean. Percent coefficient of variation (CV) will be presented to two more decimal places than the raw data.",
       "generated_sap_text": null,
-      "contradicts": "no",
-      "detail": "Original SAP Section 4 provides specific rounding rules for descriptive statistics.",
-      "reasoning": "Formatting detail omitted."
+      "protocol_text": null,
+      "why_they_conflict": "Generated SAP omits specific rounding rules present in Original SAP.",
+      "description": "Specific rules for decimal precision of descriptive statistics are missing.",
+      "severity": "minor",
+      "issue_type": "contradiction_original",
+      "reasoning": "The Original SAP provides detailed instructions on decimal precision which are absent in the Generated SAP."
     },
     {
-      "content": "Handling of 'Not Done' rows in tabulations",
+      "component": "Handling of values outside quantification limits",
+      "original_sap_text": "For the purpose of summarization, any numeric values recorded below the lower limit or above the upper limit of quantification will be set to the respective limit for all related summaries unless otherwise indicated.",
       "generated_sap_text": null,
-      "contradicts": "no",
-      "detail": "Original SAP specifies including a 'Not Done' row where necessary.",
-      "reasoning": "Formatting detail omitted."
+      "protocol_text": null,
+      "why_they_conflict": "Generated SAP omits rules for handling LLOQ/ULOQ values.",
+      "description": "Rules for handling values below/above quantification limits are missing.",
+      "severity": "minor",
+      "issue_type": "contradiction_original",
+      "reasoning": "The Original SAP specifies how to handle values outside quantification limits, which is missing in the Generated SAP."
     },
     {
-      "content": "Handling of values below LLOQ or above ULOQ",
+      "component": "Handling of 'Not Done'",
+      "original_sap_text": "A row denoted \u201cNot Done\u201d will be included in count tabulations where necessary to account for cases of no assessment or missing values.",
       "generated_sap_text": null,
-      "contradicts": "no",
-      "detail": "Original SAP specifies setting these to the respective limit for summarization.",
-      "reasoning": "Data handling rule omitted."
+      "protocol_text": null,
+      "why_they_conflict": "Generated SAP omits instruction for 'Not Done' category.",
+      "description": "Instruction to include a 'Not Done' row in tabulations is missing.",
+      "severity": "minor",
+      "issue_type": "contradiction_original",
+      "reasoning": "The Original SAP specifies handling of missing assessments in tabulations, which is missing in the Generated SAP."
     },
     {
-      "content": "Handling of discrepancies between eCRF and analytical facilities",
+      "component": "Data discrepancy handling",
+      "original_sap_text": "When combining data from eCRF and analytical facilities discrepancy will be handled as following: 1. Recorded as collected sample in eCRF but no corresponding results from analytical facility... 2. No corresponding records in eCRF for results from analytical facility... 3. Discrepancy in sample collection date...",
       "generated_sap_text": null,
-      "contradicts": "no",
-      "detail": "Original SAP Section 4 provides specific logic for resolving date/time discrepancies.",
-      "reasoning": "Data handling rule omitted."
+      "protocol_text": null,
+      "why_they_conflict": "Generated SAP omits detailed discrepancy handling rules.",
+      "description": "Detailed rules for handling discrepancies between eCRF and analytical data are missing.",
+      "severity": "minor",
+      "issue_type": "contradiction_original",
+      "reasoning": "The Original SAP provides specific logic for data reconciliation which is absent in the Generated SAP."
     }
   ],
   "internal_contradictions": [],
-  "issues": [],
-  "extra_information_flagged": [
+  "issues": [
     {
-      "content": "Specification of SAS software version",
-      "generated_sap_text": "All analyses described in this plan will be performed using SAS software version 9.4 or higher unless specified otherwise.",
-      "contradicts": "no",
-      "detail": "Original SAP Section 4.1 header exists but is empty.",
-      "reasoning": "Standard statistical software specification."
+      "issue_type": "unverifiable_assumption",
+      "severity": "critical",
+      "component": "Software version",
+      "original_sap_text": null,
+      "generated_sap_text": "SAS software version 9.4 or higher",
+      "protocol_text": null,
+      "why_they_conflict": "Generated SAP specifies a software version where Original SAP and Protocol are silent.",
+      "description": "The Generated SAP specifies 'SAS software version 9.4 or higher' while the Original SAP's software section is empty and the Protocol is silent. This is a critical unverifiable assumption.",
+      "reasoning": "Specifying a software version when the source documents are completely silent constitutes a critical unverifiable assumption according to the evaluation rules."
+    },
+    {
+      "issue_type": "unverifiable_assumption",
+      "severity": "critical",
+      "component": "MedDRA coding version",
+      "original_sap_text": "MedDRA version 24.0 or higher",
+      "generated_sap_text": "MedDRA current version at the time of database lock",
+      "protocol_text": "Medical Dictionary for Regulatory Activities (MedDRA)",
+      "why_they_conflict": "Generated SAP replaces specific minimum version with deferral language.",
+      "description": "The Original SAP specifies 'version 24.0 or higher', but the Generated SAP defers this to 'current version at the time of database lock'.",
+      "reasoning": "Replacing a specific minimum version threshold with language that defers the decision to a future time point is a critical unverifiable assumption."
+    },
+    {
+      "issue_type": "unverifiable_assumption",
+      "severity": "critical",
+      "component": "WHO Drug coding version",
+      "original_sap_text": "WHO Drug Dictionary version March, 2021 or later",
+      "generated_sap_text": "World Health Organization (WHO) Drug Dictionary",
+      "protocol_text": "World Health Organization (WHO) drug dictionary",
+      "why_they_conflict": "Generated SAP omits the specific minimum version requirement.",
+      "description": "The Original SAP specifies 'version March, 2021 or later', but the Generated SAP omits this version requirement entirely.",
+      "reasoning": "Omitting a specific version requirement provided in the Original SAP is a critical unverifiable assumption."
     }
   ],
-  "reasoning": "The Generated SAP's General Methodology section is highly consistent with the Original SAP. It correctly defines descriptive statistics, coding dictionaries, and general reporting conventions. It includes standard boilerplate regarding software and a priori analysis which, while not explicitly in the Original SAP text provided (one section was empty), aligns with industry standards and the Protocol's requirements for reporting deviations. The Generated SAP omits some specific formatting rules regarding decimal precision and LLOQ handling found in the Original SAP, but these omissions do not constitute contradictions.",
-  "summary": "The General Methodology section accurately reflects the statistical standards and definitions from the Original SAP and Protocol. It correctly defines descriptive statistics, coding dictionaries, and reporting conventions without contradiction."
+  "extra_information_flagged": [],
+  "reasoning": "The Generated SAP's General Methodology section was evaluated against the Original SAP and Protocol. While standard definitions for descriptive statistics and confidence intervals were correct, the Generated SAP failed on three critical points regarding unverifiable assumptions. First, it specified 'SAS version 9.4' when the Original SAP's software section was empty and the Protocol was silent. Second, it replaced the Original SAP's specific MedDRA version requirement ('24.0 or higher') with deferral language ('current version at lock'). Third, it omitted the Original SAP's specific WHO Drug version requirement ('March, 2021 or later'). Additionally, several specific data handling rules (precision, LLOQ/ULOQ, discrepancies) present in the Original SAP were missing. Due to the presence of critical unverifiable assumptions regarding software and dictionary versions, the rating is POOR.",
+  "summary": "The Generated SAP contains critical unverifiable assumptions by specifying a software version where source documents are silent and by omitting or deferring specific dictionary version requirements defined in the Original SAP. Additionally, it lacks detailed rules for decimal precision and data discrepancy handling found in the Original SAP."
 }

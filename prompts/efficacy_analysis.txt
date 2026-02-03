@@ -127,17 +127,17 @@ For each component:
 **FORMULA DECOMPOSITION RULE:** When the Endpoint Definition or Analysis Method component contains a formula in either the Original SAP or Generated SAP, you MUST produce a `formula_decomposition` array in the corresponding evaluation_table entry. This is a mandatory structured output — do not skip it. If no formula is present, set `formula_decomposition` to an empty array.
 
 For each formula found, create one object in the `formula_decomposition` array with these fields:
-- `formula_original`: The verbatim formula from the Original SAP (or null if absent)
-- `formula_generated`: The verbatim formula from the Generated SAP (or null if absent)
+- `formula_original`: The verbatim formula from the Original SAP or null if absent
+- `formula_generated`: The verbatim formula from the Generated SAP or null if absent
 - `components`: An array of objects, one per structural component, each with:
-  - `component_type`: One of "operand", "operator", "constant", "adjustment"
-  - `original_value`: The value in the Original SAP formula (or null)
-  - `generated_value`: The value in the Generated SAP formula (or null)
-  - `match`: "yes" if identical, "no" if different or missing
+  - `component_type`: operand, operator, constant, or adjustment
+  - `original_value`: The value in the Original SAP formula or null
+  - `generated_value`: The value in the Generated SAP formula or null
+  - `match`: yes if identical, no if different or missing
 
 Every operand, every operator, every numeric constant, and every additive or subtractive offset must have its own entry. After producing this decomposition, check every row where `match` is "no" — each one is a separate contradiction that must appear in the issues array.
 
-**EXPLICIT CONSTANT RULE:** When the Original SAP states an explicit numeric constant to use in a formula, that stated constant is the governing instruction — even if the Original SAP also provides a parenthetical derivation, rationale, or approximation alongside it. The parenthetical is explanatory context, not an alternative value. If the Generated SAP uses a different number than the explicitly stated constant (whether derived from the parenthetical or from any other source), this is a contradiction with the Original SAP's explicit instruction. Do not invoke any other rule to override this. The stated constant always governs.
+**EXPLICIT CONSTANT RULE:** When the Original SAP states an explicit numeric constant to use in a formula, that stated constant is the governing instruction. Any parenthetical derivation, rationale, or approximation is explanatory context, not an alternative value. If the Generated SAP uses a different number than the explicitly stated constant, this is a contradiction with the Original SAP's explicit instruction. The stated constant always governs.
 
 **CONTRADICTION VS MISSING DISTINCTION:** A contradiction requires the Generated SAP to actively state something incompatible with the Original SAP. If the Generated SAP is silent on a topic — it does not mention it at all — that is a missing item, not a contradiction. Only flag as contradiction when both documents address the same topic and their statements cannot both be true at the same time.
 

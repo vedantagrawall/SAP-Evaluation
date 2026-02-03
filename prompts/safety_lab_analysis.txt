@@ -154,15 +154,17 @@ For each extracted element from the Generated SAP:
 
 **MISSING FROM ORIGINAL SAP RULE:** If a specification exists in the Generated SAP but has no corresponding content anywhere in the Original SAP, assume the Generated SAP is correct. Place this item in the evaluation_table with original_sap_text: null, result: "correct", and note it as extra information. Do not penalize.
 
-**CROSS-REFERENCE RULE:** When the Generated SAP references another section of itself for a definition or specification (study period definitions, baseline definitions, analysis populations, visit schedules, etc.), accept the cross-reference as satisfying the requirement. Do not flag content as missing from the Generated SAP if it explicitly cross-references a section where that content is defined.
+**CROSS-REFERENCE RULE:** When the Generated SAP references another section of itself for a definition or specification, accept the cross-reference as satisfying the requirement. When evaluating content that appears to be missing from the section being evaluated, you MUST first verify that the concept is truly absent from ALL sections of the Generated SAP before flagging it as missing. If the Generated SAP addresses a requirement through content defined in a different section, and the mechanism is consistent with the Original SAP's approach, do NOT flag it as missing - this is proper document organization.
 
-When comparing against the Original SAP: if the Original SAP specifies that analyses will be performed by study period and the Generated SAP defines those study periods in a referenced section, this is not a contradiction — the mechanism is consistent as long as the referenced definitions do not contradict the Original SAP's stated approach. Only flag a contradiction if the Generated SAP's approach to how data is assigned or grouped actively conflicts with the Original SAP's stated method. A difference in where a definition lives (local vs cross-referenced) is not a contradiction.
+**Critical instruction for missing_from_generated_sap:** Before adding any item to this array, confirm the content does not exist anywhere else in the Generated SAP. If the Generated SAP defines grouping categories or specifications in a separate section and references or uses those definitions in the current section, this is NOT missing content.
+
+When comparing against the Original SAP: if the Original SAP specifies that analyses will be performed using certain groupings or categories, and the Generated SAP defines those groupings or categories in a referenced section, this FULLY satisfies the requirement as long as the referenced definitions do not contradict the Original SAP's stated approach. Only flag a contradiction if the Generated SAP's approach to how data is assigned or grouped actively conflicts with the Original SAP's stated method. A difference in where a definition is located is NOT a contradiction and NOT a missing item.
 
 **Step B**: Compare statements directly
 
 **MULTI-RULE CHECK:** For each Generated SAP element, do not only compare it to its matched Original SAP statement from Step A. Also check it against ALL OTHER statements within the Original SAP's clinical laboratory section. A Generated SAP element about visit scope must be checked against all clinical laboratory section statements about visit inclusion/exclusion. A Generated SAP element about analysis types must be checked against all clinical laboratory section statements about which parameters receive which analyses. If any statement within the clinical laboratory section contradicts the Generated SAP element, flag it as a contradiction — even if a different statement was the primary match. Remember: only use statements from within the clinical laboratory section boundaries.
 
-**EXPLICIT CONSTANT RULE:** When the Original SAP states an explicit numeric constant to use in a formula, that stated constant is the governing instruction — even if the Original SAP also provides a parenthetical derivation, rationale, or approximation alongside it. The parenthetical is explanatory context, not an alternative value. If the Generated SAP uses a different number than the explicitly stated constant, this is a contradiction.
+**EXPLICIT CONSTANT RULE:** When the Original SAP states an explicit numeric constant to use in a formula, that stated constant is the governing instruction. Any parenthetical derivation, rationale, or approximation is explanatory context, not an alternative value. If the Generated SAP uses a different number than the explicitly stated constant, this is a contradiction.
 
 **CONTRADICTION VS MISSING DISTINCTION:** A contradiction requires the Generated SAP to actively state something incompatible with the Original SAP. If the Generated SAP is silent on a topic — it does not mention it at all — that is a missing item, not a contradiction. Only flag as contradiction when both documents address the same topic and their statements cannot both be true at the same time.
 
@@ -226,20 +228,9 @@ A section with 0 contradictions MUST be rated GREAT, regardless of how many item
 
 A contradiction's severity depends on its impact on the trial's statistical conclusions and regulatory integrity, not merely on whether the statements differ.
 
-**Critical** — A contradiction is critical ONLY when it would:
-- Change the statistical conclusions of the trial
-- Affect primary endpoint analysis, hypothesis testing, or alpha control
-- Alter analysis population definitions in a way that changes who is included or excluded
-- Contradict a regulatory requirement stated in the Protocol
-- Remove an entire required analysis for a primary or key secondary endpoint
-- Make the Generated SAP internally inconsistent in a way that prevents execution
+**Critical** — A contradiction is critical ONLY when it would change the statistical conclusions of the trial, affect primary endpoint analysis, hypothesis testing, or alpha control, alter analysis population definitions, contradict a regulatory requirement stated in the Protocol, remove an entire required analysis for a primary or key secondary endpoint, or make the Generated SAP internally inconsistent in a way that prevents execution.
 
-**Minor** — A contradiction is minor when it:
-- Reduces the scope of summary or display tables without affecting statistical conclusions
-- Changes the presentation format of results (summaries vs listings) for supportive or ancillary parameters
-- Omits or changes analysis details for ancillary, exploratory, or non-primary parameters
-- Differs on the breadth of reporting (fewer timepoints, fewer table types) without contradicting the core methodology
-- Affects completeness of reporting without changing the statistical approach
+**Minor** — A contradiction is minor when it reduces the scope of summary or display tables without affecting statistical conclusions, changes the presentation format of results for supportive or ancillary parameters, omits or changes analysis details for ancillary, exploratory, or non-primary parameters, differs on the breadth of reporting without contradicting the core methodology, or affects completeness of reporting without changing the statistical approach.
 
 When in doubt, ask: "Would this contradiction change the regulatory reviewer's ability to assess the primary and key secondary endpoints?" If no, it is minor.
 
