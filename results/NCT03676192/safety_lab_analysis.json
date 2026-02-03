@@ -596,33 +596,8 @@
   "summary": "The Generated SAP is generally accurate but contains a minor contradiction regarding the reporting of coagulation and urinalysis data (listings only vs. summaries required). It also omits summaries for the Follow-Up Period and lacks detailed logic for assigning results to study periods.",
   "reconciliation": {
     "performed": true,
-    "items_checked": 4,
-    "items_removed": 2,
-    "removed_items": [
-      {
-        "component": "Period Assignment Logic",
-        "original_sap_text": "Laboratory data will be summarized in the Induction Study Period if patients: entered the Maintenance Study Period and have an assessment date prior to the date of the first infusion... [detailed logic for Induction, Maintenance, Follow-up]",
-        "protocol_text": null,
-        "in_protocol": "no",
-        "classification": "acceptable_difference",
-        "description": "Detailed logic for assigning laboratory results to specific study periods (Induction vs Maintenance vs Follow-up) based on infusion dates is missing.",
-        "reasoning": "Original SAP provides precise rules for period assignment. Generated SAP lists the periods but omits the assignment logic.",
-        "removed_by_reconciliation": true,
-        "found_in_section": "Section 4.2: Key Definitions and Section 7.1.3.2: Analysis Timepoints",
-        "reconciliation_reasoning": "The generated SAP defines the specific temporal boundaries for the 'Induction Study Period', 'Maintenance Study Period', and 'Follow-Up Period' in Section 4.2. Additionally, Section 7.1.3.2 explicitly states that laboratory data will be summarized according to these periods. Together, these sections establish the logic for assigning data points to specific study periods based on assessment dates relative to treatment milestones, satisfying the core requirement."
-      },
-      {
-        "component": "Shift Tables by Period",
-        "original_sap_text": "A shift table will be also produced by the Whole Study Period and each study period.",
-        "protocol_text": null,
-        "in_protocol": "no",
-        "classification": "acceptable_difference",
-        "description": "Requirement for shift tables by 'each study period' (Induction, Maintenance) is missing.",
-        "reasoning": "Generated SAP only specifies shift tables for the Whole Study Period (Baseline vs Worst Post-Baseline).",
-        "removed_by_reconciliation": true,
-        "found_in_section": "Section 4.1 and Section 7.1.3.4",
-        "reconciliation_reasoning": "Section 4.1 (General Methodology) establishes the general rule that all summaries will be presented by study period (Induction, Maintenance, and Whole Study Period) unless specified otherwise. Section 7.1.3.4 (Toxicity Grading and Shift Tables) explicitly describes the creation of shift tables and defines the worst post-baseline value for the Whole Study Period. The combination of the general methodology requiring summaries by period and the specific section defining the shift table construct satisfies the requirement."
-      }
-    ]
+    "items_checked": 2,
+    "items_removed": 0,
+    "removed_items": []
   }
 }

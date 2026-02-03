@@ -219,12 +219,23 @@ def reconcile_all_sections(nct_id: str, save: bool = True):
     # Save updated results
     if save:
         print("\n4. Saving updated results...")
+        # Import markdown converter
+        from src.test_prompt import json_to_markdown
+
         results_dir = Path(f"results/{nct_id}")
         for section_name, section_data in sections.items():
+            # Save JSON
             json_path = results_dir / f"{section_name}.json"
             with open(json_path, 'w') as f:
                 json.dump(section_data, f, indent=2)
-            print(f"   ✓ {section_name}.json")
+
+            # Regenerate markdown
+            markdown_content = json_to_markdown(section_data, section_name)
+            md_path = results_dir / f"{section_name}.md"
+            with open(md_path, 'w') as f:
+                f.write(markdown_content)
+
+            print(f"   ✓ {section_name}.json + .md")
 
     # Summary
     print("\n5. Summary:")

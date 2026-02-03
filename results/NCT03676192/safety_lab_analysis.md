@@ -495,17 +495,9 @@
 
 ---
 
-### Missing from Generated SAP (6 items)
+### Missing from Generated SAP (2 items)
 
-#### 1. Period Assignment Logic
-
-- **original SAP text:** Laboratory data will be summarized in the Induction Study Period if patients: entered the Maintenance Study Period and have an assessment date prior to the date of the first infusion... [detailed logic for Induction, Maintenance, Follow-up]
-- **in protocol:** no
-- **classification:** acceptable_difference
-- **description:** Detailed logic for assigning laboratory results to specific study periods (Induction vs Maintenance vs Follow-up) based on infusion dates is missing.
-- **reasoning:** Original SAP provides precise rules for period assignment. Generated SAP lists the periods but omits the assignment logic.
-
-#### 2. CTCAE Grading Rules
+#### 1. CTCAE Grading Rules
 
 - **original SAP text:** Grades that require clinical input only will not be assigned to these parameters. Grades which are part numeric and part clinical input will be assigned based on the numeric portion only.
 - **in protocol:** no
@@ -513,37 +505,13 @@
 - **description:** Specific rules for handling CTCAE grades requiring clinical input are missing.
 - **reasoning:** Original SAP specifies how to handle mixed numeric/clinical grades. Generated SAP omits this detail.
 
-#### 3. Grade 5 Exclusion
-
-- **original SAP text:** The CTCAE Grade 5 (Death) will not be applied in this analysis since death cannot be determined from a laboratory result.
-- **in protocol:** no
-- **classification:** acceptable_difference
-- **description:** Explicit exclusion of Grade 5 from laboratory analysis is missing.
-- **reasoning:** Original SAP clarifies that death is not a lab grade. Generated SAP omits this clarification.
-
-#### 4. No Grade Definition
-
-- **original SAP text:** If the post-baseline result for a patient does not satisfy any CTCAE grade, it will be classified as ‘No grade’.
-- **in protocol:** no
-- **classification:** acceptable_difference
-- **description:** Definition for results not meeting any CTCAE grade is missing.
-- **reasoning:** Original SAP defines 'No grade'. Generated SAP omits this definition.
-
-#### 5. Non-Convertible Units
+#### 2. Non-Convertible Units
 
 - **original SAP text:** Reported parameters with units that cannot be converted to standard units will be summarized separately using the original units.
 - **in protocol:** no
 - **classification:** acceptable_difference
 - **description:** Handling of parameters with non-convertible units is missing.
 - **reasoning:** Original SAP specifies separate summary for non-standard units. Generated SAP omits this.
-
-#### 6. Shift Tables by Period
-
-- **original SAP text:** A shift table will be also produced by the Whole Study Period and each study period.
-- **in protocol:** no
-- **classification:** acceptable_difference
-- **description:** Requirement for shift tables by 'each study period' (Induction, Maintenance) is missing.
-- **reasoning:** Generated SAP only specifies shift tables for the Whole Study Period (Baseline vs Worst Post-Baseline).
 
 
 ---

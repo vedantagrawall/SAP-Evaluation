@@ -45,6 +45,7 @@
 - **severity:** none
 - **reasoning:** The Generated SAP correctly identifies the equivalence margin (-12.5%, 12.5%) and the statistical method (95% CI of the difference) found in Original SAP Section 8.1.
 
+
 ---
 
 ### Issues Found (0 items)
@@ -72,6 +73,7 @@
 - **contradicts:** no
 - **detail:** Original SAP outlines a reporting schedule (1st, 2nd, 3rd CSR) but is silent on 'interim analyses for early termination'. Protocol Section 7.6.7 explicitly states no interim analyses are planned. Generated SAP matches Protocol.
 - **reasoning:** While the Original SAP mentions multiple reporting points (CSRs), it does not describe them as interim analyses with stopping boundaries. The Protocol explicitly negates planned interim analyses. The Generated SAP correctly captures this distinction.
+
 
 ---
 

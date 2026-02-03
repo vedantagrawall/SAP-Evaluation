@@ -1429,6 +1429,7 @@
 - **severity:** none
 - **reasoning:** Data source details.
 
+
 ---
 
 ### Issues Found (0 items)
@@ -1446,6 +1447,7 @@
 - **contradicts:** no
 - **detail:** Generated SAP adds sensitivity analyses not present in Original SAP.
 - **reasoning:** Beneficial additions, not contradictions.
+
 
 ---
 
@@ -1516,6 +1518,7 @@
 - **classification:** acceptable_difference
 - **description:** Detailed logic for handling incomplete dates of new anticancer therapy for event determination missing.
 - **reasoning:** Specific data handling rules not in protocol.
+
 
 ---
 

@@ -115,7 +115,7 @@ For analysis in months, days will be converted as: PFS (months) = PFS (days) / 3
 
 ---
 
-### Missing from Generated SAP (5 items)
+### Missing from Generated SAP (4 items)
 
 #### 1. Primary Endpoint (ORR) Analysis Methodology
 
@@ -126,16 +126,7 @@ For analysis in months, days will be converted as: PFS (months) = PFS (days) / 3
 - **description:** The Generated SAP contains a placeholder note acknowledging the primary endpoint but omits the actual analysis methodology, which is present in the Original SAP and Protocol.
 - **reasoning:** The Generated SAP explicitly skips the primary endpoint details, which is a critical omission for an SAP.
 
-#### 2. Secondary Endpoint Methodology (OS, TTP, Response Duration)
-
-- **original SAP text:** A time-to-event analysis will be undertaken for each of the response duration, TTP, PFS, and OS... [Specific definitions and censoring rules for each]
-- **protocol text:** A time-to-event analysis will be undertaken for each of the response duration, TTP, PFS, and OS...
-- **in protocol:** yes
-- **classification:** missing_required
-- **description:** The Generated SAP lists these endpoints but does not provide dedicated analysis subsections or methodology for them, unlike the Original SAP.
-- **reasoning:** The Original SAP provides detailed definitions and censoring rules for TTP, Response Duration, and OS, which are absent in the Generated SAP.
-
-#### 3. Pooling of Country into Region
+#### 2. Pooling of Country into Region
 
 - **original SAP text:** Country can be pooled into region (EMEA vs. America vs. Asia) for statistical analysis when there are not enough patients within each country.
 - **protocol text:** Country can be pooled into region (EMEA vs. America vs. Asia) for statistical analysis when there are not enough patients within each country.
@@ -144,7 +135,7 @@ For analysis in months, days will be converted as: PFS (months) = PFS (days) / 3
 - **description:** The Generated SAP omits the specific instruction regarding pooling countries into regions for stratified analyses.
 - **reasoning:** This is a specific statistical handling rule present in both Original SAP and Protocol.
 
-#### 4. Percentile Reporting
+#### 3. Percentile Reporting
 
 - **original SAP text:** The 25th percentile and 75th percentile for the Survival times along with the corresponding 95% CI for the percentiles will also be displayed.
 - **in protocol:** no
@@ -152,7 +143,7 @@ For analysis in months, days will be converted as: PFS (months) = PFS (days) / 3
 - **description:** The Generated SAP omits the requirement to report 25th and 75th percentiles.
 - **reasoning:** This is a reporting detail present in the Original SAP but not the Protocol.
 
-#### 5. Rounding Rules
+#### 4. Rounding Rules
 
 - **original SAP text:** Survival times and their corresponding 95% CIs will be presented to one decimal place... estimates of survival rates... to two decimal places.
 - **in protocol:** no

@@ -451,6 +451,7 @@
 - **severity:** none
 - **reasoning:** Consistent with Original SAP Section 4.4.5.
 
+
 ---
 
 ### Issues Found (0 items)
@@ -465,7 +466,7 @@
 
 ---
 
-### Missing from Generated SAP (2 items)
+### Missing from Generated SAP (1 items)
 
 #### 1. Actual duration of dose (Exposure)
 
@@ -475,13 +476,6 @@
 - **description:** Specific formulas for dose intensity calculations found in Original SAP Section 7.2 are missing from the Key Definitions section of the Generated SAP.
 - **reasoning:** The Generated SAP defines 'Duration of Treatment' generally (matching Section 5), but omits the specific 'Actual duration of dose' formulas required for the Exposure analysis in Section 7.2. This is an omission of a specific analysis rule rather than a contradiction.
 
-#### 2. Baseline Weight Definition
-
-- **original SAP text:** Weight at Induction cycle 1 will be considered as the baseline value since weight is collected for kit number dispensation prior to the infusion, if study drug is administered at Induction cycle 1.
-- **in protocol:** no
-- **classification:** acceptable_difference
-- **description:** Specific rule for weight baseline is missing.
-- **reasoning:** The Generated SAP has a general baseline definition that covers this, but the specific nuance about weight collection timing is useful context found in the Original SAP.
 
 ---
 
