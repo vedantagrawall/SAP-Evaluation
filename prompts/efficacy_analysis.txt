@@ -14,15 +14,15 @@ You are evaluating a Generated SAP against an Original SAP for a clinical trial.
 
 ## YOUR TASK
 
-Find the single endpoint with the most complete and detailed analysis methodology in the Generated SAP. The most detailed endpoint will have full model details, covariates, sensitivity analyses, missing data rules, etc.
+Identify every efficacy endpoint in the Generated SAP that has its own dedicated analysis subsection with methodology details (model specification, covariates, sensitivity analyses, missing data handling, etc.). Do not include endpoints that are merely listed or named without analysis methodology.
 
-For that single endpoint, evaluate exactly **3 components**:
+For **each** such endpoint, evaluate exactly **3 components**:
 
 1. **Endpoint Name** — What is the endpoint called?
 2. **Endpoint Definition** — How is the endpoint calculated or measured?
 3. **Analysis Method** — Everything the Original SAP specifies about how this endpoint is analyzed. Extract the complete analysis methodology, not just the primary statistical model.
 
-Find the corresponding content in the Original SAP for these same 3 components and compare.
+Find the corresponding content in the Original SAP for these same 3 components per endpoint and compare.
 
 ---
 
@@ -100,19 +100,21 @@ Generated SAP may contain information not present in Original SAP.
 
 This evaluation has three phases. Complete each phase fully before the next.
 
-### PHASE 1: IDENTIFY THE MOST DETAILED ENDPOINT
+### PHASE 1: IDENTIFY ALL ENDPOINTS WITH ANALYSIS METHODOLOGY
 
-1. Read the Generated SAP and find the single endpoint with the most complete and detailed analysis methodology
-2. Record its name
-3. In the Original SAP, locate the matching endpoint by name
-4. Extract exactly 3 components from the Original SAP for this endpoint:
+1. Read the Generated SAP's efficacy section and identify every endpoint that has a dedicated analysis subsection containing methodology details (not just a name or one-line mention)
+2. Record each endpoint's name and its section/subsection number in the Generated SAP
+3. For each identified endpoint, locate the matching endpoint by name in the Original SAP
+4. For each endpoint, extract exactly 3 components from the Original SAP:
    - **Endpoint Name**: The name/label of the endpoint
    - **Endpoint Definition**: How the endpoint is defined, calculated, or measured
    - **Analysis Method**: Everything the Original SAP specifies about how this endpoint is analyzed — the complete analysis methodology, not just the primary statistical model
 
 ### PHASE 2: COMPARISON AND CLASSIFICATION
 
-For each of the 3 components:
+For each endpoint identified in Phase 1, evaluate its 3 components. Tag every evaluation_table entry with the endpoint name so results are grouped by endpoint.
+
+For each component:
 
 **Step A**: Search Generated SAP for the matching content
 - Copy the EXACT text word-for-word as generated_sap_text
@@ -122,7 +124,20 @@ For each of the 3 components:
 
 **FORMULA MATCHING RULE:** When the Original SAP contains multiple formulas for related but distinct concepts, you MUST match the Generated SAP formula to the Original SAP formula that calculates the same thing. Do not compare a Generated SAP formula against a different Original SAP formula just because they share similar keywords. Verify that the two formulas are intended to compute the same quantity before declaring a match or contradiction.
 
-**INTERNAL INCONSISTENCY RULE:** If the Original SAP states a numeric value and also states the mathematical derivation of that value, and the stated value does not equal the derivation, this is an internal inconsistency in the Original SAP. If the Generated SAP uses the mathematically correct result of the derivation, this is NOT a contradiction — the Generated SAP is using the Original SAP's own formula correctly. Do not flag this as a problem.
+**FORMULA DECOMPOSITION RULE:** When the Endpoint Definition or Analysis Method component contains a formula in either the Original SAP or Generated SAP, you MUST produce a `formula_decomposition` array in the corresponding evaluation_table entry. This is a mandatory structured output — do not skip it. If no formula is present, set `formula_decomposition` to an empty array.
+
+For each formula found, create one object in the `formula_decomposition` array with these fields:
+- `formula_original`: The verbatim formula from the Original SAP (or null if absent)
+- `formula_generated`: The verbatim formula from the Generated SAP (or null if absent)
+- `components`: An array of objects, one per structural component, each with:
+  - `component_type`: One of "operand", "operator", "constant", "adjustment"
+  - `original_value`: The value in the Original SAP formula (or null)
+  - `generated_value`: The value in the Generated SAP formula (or null)
+  - `match`: "yes" if identical, "no" if different or missing
+
+Every operand, every operator, every numeric constant, and every additive or subtractive offset must have its own entry. After producing this decomposition, check every row where `match` is "no" — each one is a separate contradiction that must appear in the issues array.
+
+**EXPLICIT CONSTANT RULE:** When the Original SAP states an explicit numeric constant to use in a formula, that stated constant is the governing instruction — even if the Original SAP also provides a parenthetical derivation, rationale, or approximation alongside it. The parenthetical is explanatory context, not an alternative value. If the Generated SAP uses a different number than the explicitly stated constant (whether derived from the parenthetical or from any other source), this is a contradiction with the Original SAP's explicit instruction. Do not invoke any other rule to override this. The stated constant always governs.
 
 **CONTRADICTION VS MISSING DISTINCTION:** A contradiction requires the Generated SAP to actively state something incompatible with the Original SAP. If the Generated SAP is silent on a topic — it does not mention it at all — that is a missing item, not a contradiction. Only flag as contradiction when both documents address the same topic and their statements cannot both be true at the same time.
 
@@ -146,7 +161,7 @@ For each of the 3 components:
 
 ### PHASE 3: OUTPUT COMPLETENESS VERIFICATION
 
-Your output arrays (evaluation_table + missing_from_generated_sap) must contain exactly 3 entries total (one per component).
+Your evaluation_table must contain exactly (number of endpoints identified) × 3 entries — 3 components per endpoint. The missing_from_generated_sap array is separate and tracks Original SAP content not found in the Generated SAP.
 
 ---
 
@@ -183,12 +198,13 @@ A section with 0 contradictions MUST be rated GREAT, regardless of how many item
   "rating": "GREAT | DECENT | POOR",
   "status": "pass | pass_with_notes | fail",
 
-  "endpoint_evaluated": "the name of the first efficacy endpoint found in Generated SAP",
+  "endpoints_evaluated": ["list of all endpoint names evaluated"],
 
   "extraction_validation": {
     "sections_read": ["list section/subsection numbers consulted in Original SAP"],
-    "elements_per_section": {"component_name": 1},
-    "elements_extracted": 3,
+    "endpoints_found": 0,
+    "elements_per_endpoint": 3,
+    "elements_extracted": 0,
     "elements_in_evaluation_table": 0,
     "elements_in_missing_from_generated_sap": 0,
     "counts_match": true
@@ -196,6 +212,7 @@ A section with 0 contradictions MUST be rated GREAT, regardless of how many item
 
   "evaluation_table": [
     {
+      "endpoint": "name of the endpoint this entry belongs to",
       "component": "Endpoint Name | Endpoint Definition | Analysis Method",
       "evaluation_type": "exact_match | semantic",
       "original_sap_text": "exact quote",
@@ -209,7 +226,21 @@ A section with 0 contradictions MUST be rated GREAT, regardless of how many item
       "result": "correct | acceptable | problem",
       "issue_type": "none | contradiction_original | contradiction_protocol",
       "severity": "none | minor | critical",
-      "reasoning": "Chain-of-thought explanation"
+      "reasoning": "Chain-of-thought explanation",
+      "formula_decomposition": [
+        {
+          "formula_original": "verbatim formula from Original SAP or null",
+          "formula_generated": "verbatim formula from Generated SAP or null",
+          "components": [
+            {
+              "component_type": "operand | operator | constant | adjustment",
+              "original_value": "value in Original SAP formula or null",
+              "generated_value": "value in Generated SAP formula or null",
+              "match": "yes | no"
+            }
+          ]
+        }
+      ]
     }
   ],
 
@@ -262,17 +293,18 @@ A section with 0 contradictions MUST be rated GREAT, regardless of how many item
 **counts_match MUST be true for valid output.**
 
 Before finalizing your output, verify:
+- `elements_extracted` = `endpoints_found` × 3
 - `elements_extracted` = `elements_in_evaluation_table` + `elements_in_missing_from_generated_sap`
-- `elements_extracted` must equal 3
+- Every endpoint in `endpoints_evaluated` must have exactly 3 entries across evaluation_table and missing_from_generated_sap
 - If counts do not match, your output is INVALID
 
 ---
 
 ## CRITICAL REMINDERS
 
-1. **Most detailed endpoint only**: Find the endpoint with the most complete and detailed analysis methodology in the Generated SAP. Evaluate only that one.
-2. **Three components**: Endpoint Name, Endpoint Definition, Analysis Method. That is all.
-3. **No assumptions**: Do not assume what the endpoint should be. Read it from the Generated SAP.
+1. **All endpoints with methodology**: Identify every endpoint in the Generated SAP that has a dedicated analysis subsection with methodology details. Evaluate all of them, not just one.
+2. **Three components per endpoint**: Endpoint Name, Endpoint Definition, Analysis Method — for each endpoint.
+3. **No assumptions**: Do not assume what the endpoints should be. Read them from the Generated SAP. Only include endpoints that have actual analysis methodology written out, not endpoints that are merely listed by name.
 4. **EXISTENCE vs CONTENT**: Protocol is ONLY for checking if missing elements are required, NOT for evaluating content differences.
 5. **Compare to Original SAP first**: For content, always compare Generated SAP to Original SAP.
 6. **Contradiction is a problem**: Generated SAP saying something incompatible with Original SAP is a problem.
@@ -280,5 +312,6 @@ Before finalizing your output, verify:
 8. **Full quotes required**: NEVER use "..." to truncate quotes - always include complete text.
 9. **Rating based on contradictions only**: Missing information does NOT affect rating. Track missing items informationally but do not penalize.
 10. **Match formulas correctly**: When the Original SAP has multiple formulas for related concepts, match each Generated SAP formula to the Original SAP formula that computes the same quantity. Do not compare formulas that calculate different things.
-11. **Original SAP internal inconsistencies**: If the Original SAP states a rounded value alongside its mathematical derivation, and the Generated SAP uses the exact result of that derivation, this is not a contradiction.
-12. **Silence is not contradiction**: If the Generated SAP does not mention a topic at all, that is missing — not a contradiction. A contradiction requires both documents to address the same topic with incompatible statements.
+11. **Explicit constants govern**: When the Original SAP states an explicit numeric constant in a formula, that constant is the instruction. A parenthetical derivation or rationale does not override it. If the Generated SAP uses a different number, it is a contradiction.
+12. **Decompose formulas**: You must list out every operand, operator, constant, and adjustment in each formula before comparing. Flag each differing component separately.
+13. **Silence is not contradiction**: If the Generated SAP does not mention a topic at all, that is missing — not a contradiction. A contradiction requires both documents to address the same topic with incompatible statements.

@@ -226,11 +226,16 @@ def _render_array_section(result: dict, key: str, heading: str, lines: list):
     lines.append("")
     if items:
         for i, item in enumerate(items, 1):
-            title = item.get('component', item.get('content', f'Item {i}'))
-            lines.append(f"#### {i}. {title}")
-            lines.append("")
-            _render_dict_item(item, lines)
-            lines.append("")
+            if isinstance(item, dict):
+                title = item.get('component', item.get('content', f'Item {i}'))
+                lines.append(f"#### {i}. {title}")
+                lines.append("")
+                _render_dict_item(item, lines)
+                lines.append("")
+            else:
+                # Scalar item (string, number)
+                lines.append(f"- {item}")
+        lines.append("")
     else:
         lines.append(f"*No {heading.lower()}.*")
         lines.append("")
@@ -300,6 +305,19 @@ def json_to_markdown(result: dict, section_name: str) -> str:
         if key in rendered_keys:
             continue
         if isinstance(value, list):
+            # Skip arrays of scalars (strings, numbers) — only render arrays of dicts
+            if value and not isinstance(value[0], dict):
+                # Render scalar arrays as a simple bullet list
+                heading = _format_key(key).title()
+                lines.append(f"### {heading}")
+                lines.append("")
+                for item in value:
+                    lines.append(f"- {item}")
+                lines.append("")
+                lines.append("---")
+                lines.append("")
+                rendered_keys.add(key)
+                continue
             heading = _format_key(key).title()
             _render_array_section(result, key, heading, lines)
             rendered_keys.add(key)

@@ -137,7 +137,7 @@ Every element extracted in Phase 1 MUST appear in the evaluation_table. No eleme
 
 **FORMULA MATCHING RULE:** When the Original SAP contains multiple formulas for related but distinct concepts, you MUST match the Generated SAP formula to the Original SAP formula that calculates the same thing. Do not compare a Generated SAP formula against a different Original SAP formula just because they share similar keywords. Verify that the two formulas are intended to compute the same quantity before declaring a match or contradiction.
 
-**INTERNAL INCONSISTENCY RULE:** If the Original SAP states a numeric value and also states the mathematical derivation of that value, and the stated value does not equal the derivation, this is an internal inconsistency in the Original SAP. If the Generated SAP uses the mathematically correct result of the derivation, this is NOT a contradiction — the Generated SAP is using the Original SAP's own formula correctly. Do not flag this as a problem.
+**EXPLICIT CONSTANT RULE:** When the Original SAP states an explicit numeric constant to use in a formula, that stated constant is the governing instruction — even if the Original SAP also provides a parenthetical derivation, rationale, or approximation alongside it. The parenthetical is explanatory context, not an alternative value. If the Generated SAP uses a different number than the explicitly stated constant, this is a contradiction.
 
 - Ask: "Can both statements be true at the same time?"
 - If YES → matches_original_sap: "yes" (no conflict, statements are compatible)
@@ -275,7 +275,6 @@ Provide BOTH markdown (for human review) AND JSON (for programmatic use).
   "section": "key_definitions",
   "rating": "GREAT | DECENT | POOR",
   "status": "pass | pass_with_notes | fail",
-
   "extraction_validation": {
     "sections_read": ["list every section/subsection number read from Generated SAP"],
     "elements_per_section": {"section_number": "count of elements extracted from that section of the Generated SAP"},
@@ -373,4 +372,4 @@ Before finalizing your output, verify:
 9. **Scope**: ONLY evaluate key definitions, variable definitions, calculation formulas, study period definitions, and operational definitions. Do NOT evaluate analysis populations, study objectives, endpoint definitions, efficacy analysis methods, or general statistical methodology.
 10. **Rating based on contradictions only**: Missing information does NOT affect rating. Track missing items informationally but do not penalize.
 11. **Match formulas correctly**: When the Original SAP has multiple formulas for related concepts, match each Generated SAP formula to the Original SAP formula that computes the same quantity. Do not compare formulas that calculate different things.
-12. **Original SAP internal inconsistencies**: If the Original SAP states a rounded value alongside its mathematical derivation, and the Generated SAP uses the exact result of that derivation, this is not a contradiction.
+12. **Explicit constants govern**: When the Original SAP states an explicit numeric constant in a formula, that constant is the instruction. A parenthetical derivation or rationale does not override it. If the Generated SAP uses a different number, it is a contradiction.
